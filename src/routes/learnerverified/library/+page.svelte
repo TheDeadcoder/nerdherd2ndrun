@@ -8,6 +8,11 @@
 
     let currentTile: number = 1;
 
+    export let data;
+	
+	let { session, supabase, book } = data;
+	$: ({ session, supabase, book } = data);
+
 
     let categoryName = ["Children Book", "Science" , "Art", "Finance"]
     let url="";
@@ -78,76 +83,82 @@
         </ul>
     </nav>
 
-    <div class="m-8 "> 
-        <AppRail class="w-fit overflow-hidden">
-			<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
-				<a
-					href="/trainerverified/home/recent"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Recent
-				</a>
-			</AppRailTile>
-			<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
-				<a
-					href="/trainerverified/home/my"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/personal-account-account-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					My Articles
-				</a>
-			</AppRailTile>
-			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
-				<a
-					href="/trainerverified/home/popular"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Popular
-				</a>
-			</AppRailTile>
-
-			<AppRailTile bind:group={currentTile} name="tile-5" value={4} title="tile-5">
-				<a
-					href="/trainerverified/home/saved"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Saved
-				</a>
-			</AppRailTile>
-
-			<!-- --- -->
-			<svelte:fragment slot="trail">
-				<div class="mb-24 flex flex-col items-center justify-center" on:click={handleSignOut}>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/power-button-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Logout
-				</div>
-			</svelte:fragment>
-		</AppRail>
-        <BookCategory categoryName="Childrean" bind:url></BookCategory>
-        <BookCategory categoryName="Science" bind:url></BookCategory>
+    <div class="grid grid-cols-[8%_auto]"> 
+        <div class="">
+            <AppRail class="h-screen w-fit overflow-hidden">
+                <AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
+                    <a
+                        href="/trainerverified/home/recent"
+                        class="flex flex-col items-center justify-center p-3 font-bold"
+                        ><img
+                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
+                            alt="Dashboard Icon"
+                            class="h-10 w-10 hover:rotate-12 hover:scale-105"
+                        />
+                        Recent
+                    </a>
+                </AppRailTile>
+                <AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
+                    <a
+                        href="/trainerverified/home/my"
+                        class="flex flex-col items-center justify-center p-3 font-bold"
+                        ><img
+                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/personal-account-account-svgrepo-com.svg"
+                            alt="Dashboard Icon"
+                            class="h-10 w-10 hover:rotate-12 hover:scale-105"
+                        />
+                        My Articles
+                    </a>
+                </AppRailTile>
+                <AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
+                    <a
+                        href="/trainerverified/home/popular"
+                        class="flex flex-col items-center justify-center p-3 font-bold"
+                        ><img
+                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
+                            alt="Dashboard Icon"
+                            class="h-10 w-10 hover:rotate-12 hover:scale-105"
+                        />
+                        Popular
+                    </a>
+                </AppRailTile>
+    
+                <AppRailTile bind:group={currentTile} name="tile-5" value={4} title="tile-5">
+                    <a
+                        href="/trainerverified/home/saved"
+                        class="flex flex-col items-center justify-center p-3 font-bold"
+                        ><img
+                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
+                            alt="Dashboard Icon"
+                            class="h-10 w-10 hover:rotate-12 hover:scale-105"
+                        />
+                        Saved
+                    </a>
+                </AppRailTile>
+    
+                <!-- --- -->
+                <svelte:fragment slot="trail">
+                    <div class="mb-24 flex flex-col items-center justify-center" on:click={handleSignOut}>
+                        <img
+                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/power-button-svgrepo-com.svg"
+                            alt="Dashboard Icon"
+                            class="h-10 w-10 hover:rotate-12 hover:scale-105"
+                        />
+                        Logout
+                    </div>
+                </svelte:fragment>
+            </AppRail>
+        </div>
+        <div>
+            <BookCategory categoryName="Childrean" books={book} bind:url></BookCategory>
+            <BookCategory categoryName="Science" books={book} bind:url></BookCategory>
+        </div>
+        
     
         <Footer/>
 
     </div>
+    <pre>{JSON.stringify(book, null, 2)}</pre>
 
     {#if $isOverlayPdf}
         <OverlayPdf url ={url}/>

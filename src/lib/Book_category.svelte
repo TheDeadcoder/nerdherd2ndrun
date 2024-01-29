@@ -3,6 +3,7 @@
     import Book from '$lib/Book.svelte';
     export let categoryName;
     export let url;
+    export let books;
 
     let slider, currentSlidePosition = 0;
     $: nextDisabled = slider? (currentSlidePosition >= slider.scrollWidth -slider.clientWidth):false;
@@ -20,70 +21,70 @@
         
     }
 
-    let books = [
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
-                    "bookName": "Book 1",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "John Smith",
-                    "edition": 1
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
-                    "bookName": "Book 2",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Jane Doe",
-                    "edition": 2
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
-                    "bookName": "Book 3",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Alice Johnson",
-                    "edition": 3
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
-                    "bookName": "Book 1",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "John Smith",
-                    "edition": 1
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
-                    "bookName": "Book 2",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Jane Doe",
-                    "edition": 2
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
-                    "bookName": "Book 3",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Alice Johnson",
-                    "edition": 3
-                },{
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
-                    "bookName": "Book 1",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "John Smith",
-                    "edition": 1
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
-                    "bookName": "Book 2",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Jane Doe",
-                    "edition": 2
-                },
-                {
-                    "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
-                    "bookName": "Book 3",
-                    "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "writer": "Alice Johnson",
-                    "edition": 3
-                }
-            ]
+    // let books = [
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
+    //                 "bookName": "Book 1",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "John Smith",
+    //                 "edition": 1
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
+    //                 "bookName": "Book 2",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "Jane Doe",
+    //                 "edition": 2
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
+    //                 "bookName": "Book 3",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "Alice Johnson",
+    //                 "edition": 3
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
+    //                 "bookName": "Book 1",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "John Smith",
+    //                 "edition": 1
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
+    //                 "bookName": "Book 2",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "Jane Doe",
+    //                 "edition": 2
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
+    //                 "bookName": "Book 3",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "Alice Johnson",
+    //                 "edition": 3
+    //             },{
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/download.jpg",
+    //                 "bookName": "Book 1",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "John Smith",
+    //                 "edition": 1
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images%20(1).jpg",
+    //                 "bookName": "Book 2",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "author": "Jane Doe",
+    //                 "edition": 2
+    //             },
+    //             {
+    //                 "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
+    //                 "bookName": "Book 3",
+    //                 "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
+    //                 "writer": "Alice Johnson",
+    //                 "edition": 3
+    //             }
+    //         ]
    
 </script>
 

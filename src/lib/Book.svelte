@@ -19,14 +19,14 @@
 </script>
 
 <div class="w-[250px] min-w-[200px]">
-    <button on:click={()=>sendDataToParent(book.url)}>
+    <button on:click={()=>sendDataToParent(book.content)}>
         <div class="grid grid-rows-[300px_75px] border-1 ">
             <div class='w-100%'>
-                <img style="width: 100%; height : 100%;" src={book.frontCover}  alt=""/>
+                <img style="width: 100%; height : 100%;" src={book.coverimg}  alt=""/>
             </div>
             <div>
-                <h1>{book.bookName}</h1>
-                <h2>{book.writer}</h2>
+                <h1>{book.title}</h1>
+                <h2>{book.author}</h2>
             </div>  
         </div>
     </button>
