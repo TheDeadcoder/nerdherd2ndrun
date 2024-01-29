@@ -80,7 +80,7 @@
                     "frontCover" : "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/images.jpg",
                     "bookName": "Book 3",
                     "url": "https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/NerDHerd.pdf",
-                    "author": "Alice Johnson",
+                    "writer": "Alice Johnson",
                     "edition": 3
                 }
             ]
