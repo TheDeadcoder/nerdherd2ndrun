@@ -63,7 +63,7 @@
 			return await response.text();
 		} catch (e) {
 			console.error('Failed to fetch content:', e);
-			return '';
+			return 'Failed to load content';
 		}
 	}
 	let contents = [];
@@ -77,8 +77,12 @@
 		await data.supabase.auth.signOut();
 		window.open('/trainerlogin', '_self');
 	};
-	onMount(() => {
-		blog.forEach((b) => updateContent(b));
+	onMount(async () => {
+		for (let i = 0; i < blog.length; i++) {
+			blog[i].fetchedContent = await fetchContent(blog[i].content);
+			console.log(`Content for blog ${i}:`, blog[i].fetchedContent); // Log fetched content
+		}
+		blog = blog.slice(); // Trigger reactivity
 	});
 </script>
 
@@ -306,7 +310,11 @@
 									{currblog.description}
 								</p>
 								<p>
-									{@html contents[i]}
+									{#if currblog.fetchedContent}
+										{@html currblog.fetchedContent}
+									{:else}
+										Loading...
+									{/if}
 								</p>
 							</div>
 						</div>
