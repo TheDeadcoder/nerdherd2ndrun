@@ -31,40 +31,44 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 export const actions = {
     upload: async ({ request, locals: { supabase, getSession } }) => {
         console.log("ami blog form e asi");
-        const formData = await request.formData()
-        // const title = formData.get('fullName') as string
-        // const description = formData.get('username') as string
-        // const content = formData.get('website') as string
-        // const timetoread = formData.get('avatarUrl') as string
-        // const tags = formData.get('avatarUrl') as string
+        const formData = await request.formData();
+        const title = formData.get('title') as string;
+        const description = formData.get('description') as string;
+        const content1 = formData.get('content');
+
+        const timetoread = formData.get('timetoread') as string;
+        const tags = formData.get('tags') as string;
+        let timestamp = new Date();
 
         // const session = await getSession()
-        console.log(formData);
+        console.log(title, description, content1, timetoread, tags);
 
-        // const { error } = await supabase.from('profiles').upsert({
-        //     id: session?.user.id,
-        //     full_name: fullName,
-        //     username,
-        //     website,
-        //     avatar_url: avatarUrl,
-        //     updated_at: new Date()
-        // })
 
-        // if (error) {
-        //     return fail(500, {
-        //         fullName,
-        //         username,
-        //         website,
-        //         avatarUrl
-        //     })
-        // }
+        const { data, error } = await supabase
+            .from('blog')
+            .insert([
+                { some_column: 'someValue', other_column: 'otherValue' },
+            ])
+            .select()
 
-        // return {
-        //     fullName,
-        //     username,
-        //     website,
-        //     avatarUrl
-        // }
+        const {
+            data: { user }
+        } = await supabase.auth.getUser();
+
+        let { data: teacher, error: err } = await supabase
+            .from('teacher')
+            .select("*")
+            .eq('email', user.email)
+
+
+        const { data: dtt, error: err1 } = await supabase
+            .from('blog')
+            .insert([
+                { teacherid: teacher[0].id, createdat: timestamp, title: title, description: description, content: content1, timetoread: timetoread, tags: tags },
+            ])
+
+        console.log(err1);
+
 
         throw redirect(303, '/trainerverified/home/my');
     },

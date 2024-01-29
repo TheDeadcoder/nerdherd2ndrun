@@ -2,14 +2,13 @@
 	import { onMount } from 'svelte';
 	import 'quill/dist/quill.snow.css';
 	import type { SupabaseClient } from '@supabase/supabase-js';
-	import { createEventDispatcher } from 'svelte';
 
 	export let url;
 	export let supabase: SupabaseClient;
-	const dispatch = createEventDispatcher();
 
 	let quill;
 	let editor;
+	let content;
 	let showEditor = true; // Reactive variable to control editor display
 	let savedContent = ''; // Variable to store saved content
 
@@ -41,8 +40,8 @@
 		const filePath = `content_${currentTime}.html`;
 		console.log('ami upload er age asi');
 		console.log(supabase);
-		const { error: err } = await supabase.storage
-			.from('okk') // Replace with your actual storage name
+		const { data: dtt, error: err } = await supabase.storage
+			.from('finl') // Replace with your actual storage name
 			.upload(filePath, contentBlob, {
 				cacheControl: '3600',
 				upsert: false // Set to true if you want to overwrite existing files with the same name
@@ -53,17 +52,14 @@
 			// Handle the error appropriately
 			return;
 		}
-		setTimeout(() => {
-			dispatch('upload');
-		}, 100);
 
 		let { data: res2 } = await supabase.storage
-			.from('okk')
+			.from('finl')
 			.getPublicUrl(`content_${currentTime}.html`);
 
-		url = res2;
-
-		// console.log(savedContent);
+		url = res2.publicUrl;
+		console.log(url);
+		console.log('Upload done');
 	}
 
 	function editPost() {
@@ -73,8 +69,9 @@
 
 {#if showEditor}
 	<div bind:this={editor} class="editor"></div>
-	<button class="btn variant-filled-success text-xl font-semibold" on:click={savePost}
-		>Save Post</button
+	<input type="hidden" name="content" value={url} />
+	<button type="submit" class="btn variant-filled-success text-xl font-semibold" on:click={savePost}
+		>Done with Editing</button
 	>
 {:else}
 	<div class="saved-content">{@html savedContent}</div>

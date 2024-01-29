@@ -54,11 +54,32 @@
 		];
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
+	async function fetchContent(url) {
+		try {
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return await response.text();
+		} catch (e) {
+			console.error('Failed to fetch content:', e);
+			return '';
+		}
+	}
+	let contents = [];
+	// Function to update the blog content after fetching
+	async function updateContent(blog) {
+		let currcontent = await fetchContent(blog.content);
+		contents.push(currcontent);
+	}
 
 	const handleSignOut = async () => {
 		await data.supabase.auth.signOut();
 		window.open('/trainerlogin', '_self');
 	};
+	onMount(() => {
+		blog.forEach((b) => updateContent(b));
+	});
 </script>
 
 <main>
@@ -255,7 +276,7 @@
 					</div>
 				</div>
 				<div class="h-screen flex flex-col mt-6 p-6 w-full">
-					{#each blog as currblog}
+					{#each blog as currblog, i}
 						<div class="flex flex-row space-x-4">
 							<div class="mr-24 hover:scale-105 w-1/2">
 								<img
@@ -284,6 +305,9 @@
 								<p class="text-sm font-semibold mr-10">
 									{currblog.description}
 								</p>
+								<p>
+									{@html contents[i]}
+								</p>
 							</div>
 						</div>
 					{/each}
@@ -308,13 +332,23 @@
 					<label for="tags">Tags of the Article</label>
 					<input id="tags" name="tags" type="text" value={tags} />
 				</div>
-				<QuillEd
-					{supabase}
-					url={content}
-					on:upload={() => {
-						profileForm.requestSubmit();
-					}}
-				/>
+				<div>
+					<input type="hidden" name="content" value={content} />
+				</div>
+				<div>
+					<QuillEd
+						{supabase}
+						bind:url={content}
+						on:upload={() => {
+							profileForm.requestSubmit();
+						}}
+					/>
+				</div>
+				<div>
+					<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						⚡Upload Blog⚡
+					</button>
+				</div>
 			</form>
 		{/if}
 	</div>
