@@ -1,37 +1,30 @@
 <script lang="ts">
 	import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
-	import Quill from '$lib/QuillEditor.svelte';
+	import Quill from './QuillEd.svelte';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { InputChip } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-
-	export let data;
+	import QuillEd from './QuillEd.svelte';
 
 	let list: string[] = [];
-	let tagsofPost: string[] = ['web development', 'javascript'];
-	let tagsofPost1: string[] = ['web development', 'mobile app development', 'framework comparison'];
+
 	let currentTile: number = 1;
 
-	$: calculateCountdown();
+	export let data;
+	export let form;
+	let { session, supabase, teacher, blog } = data;
+	$: ({ session, supabase, teacher, blog } = data);
 
-	let nextDonationDate: Date = new Date('2024-1-23');
-	let daysLeft: number = 0;
-	let hoursLeft: number = 0;
-	let minutesLeft: number = 0;
-	let secondsLeft: number = 0;
+	let profileForm: HTMLFormElement;
+	let title;
+	let description;
+	let content;
+	let timetoread;
+	let tags;
 
-	function calculateCountdown() {
-		const now: Date = new Date();
-		const timeDifference: number = nextDonationDate - now; // Difference in milliseconds
-
-		daysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-		hoursLeft = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-		secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
-	}
 	let isEditing = false;
 	function handleopeneditor() {
 		isEditing = true;
@@ -43,16 +36,50 @@
 		placement: 'top'
 	};
 
-	let currentDate = new Date().toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric'
-	});
+	function formatDate(dateString) {
+		const dateObj = new Date(dateString);
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
+		];
+		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+	}
+	async function fetchContent(url) {
+		try {
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return await response.text();
+		} catch (e) {
+			console.error('Failed to fetch content:', e);
+			return '';
+		}
+	}
+	let contents = [];
+	// Function to update the blog content after fetching
+	async function updateContent(blog) {
+		let currcontent = await fetchContent(blog.content);
+		contents.push(currcontent);
+	}
 
 	const handleSignOut = async () => {
 		await data.supabase.auth.signOut();
 		window.open('/trainerlogin', '_self');
 	};
+	onMount(() => {
+		blog.forEach((b) => updateContent(b));
+	});
 </script>
 
 <main>
@@ -113,11 +140,7 @@
 
 				<LightSwitch class="mr-3" />
 				<div use:popup={popupClick}>
-					<Avatar
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
-						width="w-10"
-						rounded="rounded-full"
-					/>
+					<Avatar src={teacher[0].image} width="w-10" rounded="rounded-full" />
 				</div>
 
 				<div data-popup="popupClick">
@@ -130,16 +153,6 @@
 									class="h-7 mr-1 hover:rotate-12"
 								/>
 								Profile</a
-							>
-						</li>
-						<li class="mb-2">
-							<a href="/library" class="flex items-center font-bold"
-								><img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-7 mr-1 hover:rotate-12"
-								/>
-								Logout</a
 							>
 						</li>
 					</ul>
@@ -262,11 +275,81 @@
 						<h1 class="font-bold">Add New Post</h1>
 					</div>
 				</div>
+				<div class="h-screen flex flex-col mt-6 p-6 w-full">
+					{#each blog as currblog, i}
+						<div class="flex flex-row space-x-4">
+							<div class="mr-24 hover:scale-105 w-1/2">
+								<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blog5.png"
+									alt="User Image"
+									class="w-1/2 h-1/2 items-center justify-center object-contain object-center"
+								/>
+
+								<div class="flex flex-row">
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+										alt="User Image"
+										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									/>
+									<p class="text-sm mr-6">{formatDate(currblog.createdat)}</p>
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
+										alt="User Image"
+										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
+									/>
+									<p class="text-sm">{currblog.timetoread} minutes read</p>
+								</div>
+								<h1 class="text-xl font-semibold mr-10">
+									{currblog.title}
+								</h1>
+								<p class="text-sm font-semibold mr-10">
+									{currblog.description}
+								</p>
+								<p>
+									{@html contents[i]}
+								</p>
+							</div>
+						</div>
+					{/each}
+				</div>
 			</div>
 		{:else}
-			<div class="w-4/5 p-6">
-				<Quill />
-			</div>
+			<form class="w-4/5 p-6 space-y-3" method="POST" action="?/upload">
+				<div>
+					<label for="title">Title of the Article</label>
+					<input id="title" name="title" type="text" value={title} />
+				</div>
+				<div>
+					<label for="description">Short Description of the Article within 30 words</label>
+					<input id="description" name="description" type="text" value={description} />
+				</div>
+				<div>
+					<label for="timetoread">Time Required to Read</label>
+					<input id="timetoread" name="timetoread" type="text" value={timetoread} />
+				</div>
+
+				<div>
+					<label for="tags">Tags of the Article</label>
+					<input id="tags" name="tags" type="text" value={tags} />
+				</div>
+				<div>
+					<input type="hidden" name="content" value={content} />
+				</div>
+				<div>
+					<QuillEd
+						{supabase}
+						bind:url={content}
+						on:upload={() => {
+							profileForm.requestSubmit();
+						}}
+					/>
+				</div>
+				<div>
+					<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						⚡Upload Blog⚡
+					</button>
+				</div>
+			</form>
 		{/if}
 	</div>
 </main>
