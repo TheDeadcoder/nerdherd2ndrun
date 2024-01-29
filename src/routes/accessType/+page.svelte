@@ -65,8 +65,8 @@
 
 							<!-- Previous Card Content -->
 							<div class="w-full p-8 flex flex-col items-center relative">
-								<div class="absolute right-3 ">
-									<Switch bind:value={isLearner} fontSize={12} design="slider" />
+								<div class="absolute right-2 ">
+									<Switch bind:value={isLearner} fontSize={12} label="Switch to Learner" design="slider" />
 								</div>
 								<div class="flex justify-center w-1/2">
 									<img
@@ -114,9 +114,9 @@
 
 							<!-- Previous Card Content -->
 							<div class="w-full p-8 flex flex-col items-center relative">
-								<div class="absolute right-3 ">
-									
-									<Switch bind:value={isLearner} fontSize={12} design="slider" />
+								<div class="absolute right-2 ">
+									<!-- <span>Switch To Trainer</span> -->
+									<Switch bind:value={isLearner} fontSize={12} label="Switch to Trainer" design="slider" />
 								</div>
 								<div class="flex justify-center w-1/2">
 									<img
