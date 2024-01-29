@@ -63,7 +63,8 @@
 	});
 
 	async function savePost() {
-		savedContent = quill.root.innerHTML; // Save the content
+		// savedContent = quill.root.innerHTML; // Save the content
+		savedContent = quill.root.innerHTML;
 		showEditor = false; // Hide the editor
 		// TODO: Send savedContent to your backend service
 		console.log(savedContent); // For testing purposes
