@@ -66,7 +66,7 @@ export const actions = {
             })
         }
 
-        throw redirect(303, '/learnerverified');
+        throw redirect(303, '/learnerverified/home/recent');
 
         //return { form }
     }
