@@ -254,11 +254,11 @@
 						</label>
 					</div>
 				</div>
-				<div class="w-1/6 mt-6">
-					<button class="btn font-semibold bg-emerald-300 hover:bg-emerald-500">
+				<div class="w-1/6 mt-6 border-2 h-11">
+					<button class=" btn font-bold text-[18px] py-4 bg-[#45d588] rounded-sm shadow-md hover:bg-[#15b141] hover:text-[19px] hover:shadow-lg w-[100%] h-[100%] ">
 						<img
 							src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/search-new.svg"
-							class="transform transition duration-300 hover:rotate-12 hover:scale-110 mr-2"
+							class="transform transition duration-300 hover:rotate-12 hover:scale-110 "
 							alt="Search Icon"
 							width="20"
 							height="20"
@@ -284,7 +284,7 @@
 									alt="User Image"
 									class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
 								/>
-								<p class="text-sm mr-6">{formatDate(currblog.createdat)}</p>
+								<p class="text-sm mr-6 text-justify">{formatDate(currblog.createdat)}</p>
 								<img
 									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
 									alt="User Image"
@@ -295,7 +295,7 @@
 							<h1 class="text-xl font-semibold mr-10">
 								{currblog.title}
 							</h1>
-							<p class="text-sm font-semibold mr-10">
+							<p class="text-sm text-justify mr-10">
 								{currblog.description}
 							</p>
 						</div>
