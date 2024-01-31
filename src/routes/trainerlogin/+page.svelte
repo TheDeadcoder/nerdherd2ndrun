@@ -48,7 +48,8 @@
 		</div>
 	</div>
 </nav>
-<div class="container h-full mx-auto flex justify-center items-center">
+
+<div class="container h-full mx-auto flex justify-center items-center mt-6">
 	<div class="max-h-screen text-center flex flex-col items-center">
 		<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
 			<!-- Photo on the left side of the card -->
@@ -57,12 +58,12 @@
 			<div class="w-full p-8">
 				<div class="flex flex-col space-y-9">
 					<div class="company-name">
-						<span class="company-name text-xl font-extrabold">NerD</span><span
-							class="company-name white-text text-xl font-extrabold">Herd</span
+						<span class="company-name text-2xl font-extrabold">NerD</span><span
+							class="company-name white-text text-2xl font-extrabold">Herd</span
 						>
 					</div>
-
-					<h2 class="mt-3 text-center text-3xl font-extrabold">Sign in to your account</h2>
+					<hr>
+					<h2 class=" text-center text-[20px] font-bold">Welcome Back</h2>
 				</div>
 				{#if $message}
 					<div
@@ -77,7 +78,7 @@
 							<label class="label text-left">
 								<span class="text-left">Email</span>
 								<input
-									class="input"
+									class="input border-0 rounded-sm hover:border-b-2"
 									id="email"
 									name="email"
 									bind:value={$form.email}
@@ -95,7 +96,7 @@
 							<label class="label text-left">
 								<span class="text-left">Password</span>
 								<input
-									class="input"
+									class="input border-0 rounded-sm hover:border-b-2"
 									type="password"
 									id="password"
 									name="password"
@@ -123,18 +124,19 @@
 							<label for="remember_me" class="ml-2 block text-sm"> Remember me </label>
 						</div>
 						<div class="text-sm">
-							<a href="#/usersignup" class="font-medium"> Forgot Password? </a>
+							<a href="#/usersignup" class="font-medium hover:font-bold" > Forgot Password? </a>
 						</div>
 					</div>
 
 					<div>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button type="submit" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-2xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
 							Sign In
 						</button>
 					</div>
 				</form>
-				<div class="flex flex-col">
-					<button type="button" class="btn variant-filled mt-4">
+
+				<div class="flex flex-col mt-2">
+					<button type="button" class="btn font-bold text-white text-xl p-4 bg-[#000000] rounded-2xl shadow-md hover:bg-[#0d0e0e] hover:text-[21px] hover:shadow-lg w-[100%]">
 						<span
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
