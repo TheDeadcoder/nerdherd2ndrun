@@ -7,7 +7,7 @@
 	import Footer from '$lib/footer.svelte';
 
 	function typeText() {
-		const messages = ['Be a Nerd'];
+		const messages = ['Value Your Time', 'Minimize Abstraction'];
 
 		let currentIndex = 0;
 
@@ -76,31 +76,33 @@
 		</div>
 	</div>
 </nav>
-<div class="flex justify-center mt-28 mb-28">
+<!-- <div class="flex justify-center mt-28 mb-153">
 	<div class="space-y-10 text-center flex flex-col">
 		<div class="flex typing-text">{typingText}</div>
 	</div>
-</div>
-<section class="mt-4 mb-32">
-	<div class="flex justify-between mx-auto space-x-40 max-w-7xl">
+</div> -->
+<section class="mt-[15%] mb-32">
+	<div class="flex justify-center mx-auto space-x-40 max-w-7xl">
 		<div class="flex flex-col w-1/2">
-			<h1 class="text-6xl font-bold font-heading mb-10">Reimagine your study life with us</h1>
-
-			<p class="text-xl font-semibold mb-9">
-				The NerDHerd ecosystem is designed to help you quench your thirst for knowledge, keep you up
+			<h1 class="text-5xl font-bold font-heading mb-1">Reimagine your study life with us</h1>
+			
+			<p class="text-l font-semibold mb-9">
+				<!-- The NerDHerd ecosystem is designed to help you quench your thirst for knowledge, keep you up
 				to date, saving you from distractions. Engage yourself in class activities in a way you have
 				never seen before. Avail your mentor from anywhere. Read the blogs. Visualize with our
-				interactive playground. Chat with your personal AI assistant
+				interactive playground. Chat with your personal AI assistant -->
+
+				Stay with NerDHerd ecosystem and save you precious time. Get everything in one platform to reduce time in browsing to find your solution
 			</p>
-			<a href="/accessType" target="_blank" class="btn variant-filled-primary font-bold text-xl"
-				>Get Started For Free</a
-			>
+			<a href="/accessType" target="_blank" class="font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/2 text-center">
+				Get Started For Free
+			</a>
 		</div>
 		<div class="relative flex items-center justify-center w-1/2">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Gradient%20Ball.png"
-				width={448}
-				height={448}
+				width="40%"
+				height="40%"
 				alt="Pixi Logo"
 			/>
 			<img
@@ -135,26 +137,12 @@
 	</div>
 </section>
 <section class="py-20 max-w-screen-lg mx-auto">
-	<div class="flex flex-col justify-center text-center">
+	<div class="flex justify-center text-center">
 		<div class="flex flex-col space-y-3">
 			<h2 class="text-4xl font-bold font-heading">All-in-one platform</h2>
 			<p>A complete Learning environment in your hand</p>
 		</div>
-		<div class="flex justify-center mt-12 space-x-8">
-			<a
-				href="https://www.youtube.com/playlist?list=PLW5antMpb-_N__eq2wEo27CQ-e64B8QhP"
-				class="w-1/5 flex items-center btn variant-filled-primary rounded-xl font-bold text-2xl"
-			>
-				Get Demo
-			</a>
-			<a
-				href="/accessType"
-				target="_blank"
-				class="w-1/5 flex items-center btn variant-filled-success rounded-xl font-bold text-2xl"
-			>
-				Get Started
-			</a>
-		</div>
+		
 	</div>
 	<div class="grid grid-cols-3 gap-12 mt-20">
 		<div
@@ -233,6 +221,7 @@
 			</div>
 			<p>Exercise your Brain with our mind-boggling quiz</p>
 		</div>
+
 		<div
 			class="flex flex-col p-4 space-y-3 hover:shadow-2xl transition duration-300 cursor-pointer"
 		>
@@ -249,186 +238,244 @@
 			<p>Analyse your Progress & Take steps from Recommendations</p>
 		</div>
 	</div>
+	<div class="flex justify-center mt-12 space-x-8">
+		<a
+			href="https://www.youtube.com/playlist?list=PLW5antMpb-_N__eq2wEo27CQ-e64B8QhP"
+			class="font-bold text-xl  p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center"
+		>
+			Get Demo
+		</a>
+		<a
+			href="/accessType"
+			target="_blank"
+			class="text-xl p-4 hover:text-[21px] hover:shadow-lg w-1/3 text-center flex items-center btn variant-filled-success rounded-xl font-bold"
+		>
+			Get Started
+		</a>
+	</div>
 </section>
-<section class="relative py-20">
-	<div class="mx-auto max-w-7xl">
-		<div class="relative flex justify-between">
-			<div
-				class="bg-secondary w-[263px] h-[263px] rounded-full flex items-center justify-center absolute -left-[5%]"
-			>
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2007.png"
-					width={182}
-					height={182}
-					alt="Other 07"
-				/>
-			</div>
-			<div
-				class="absolute w-[51px] h-[51px] rounded-full flex items-center justify-center bottom-0 left-[15%] bg-secondary"
-			>
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Ball.png"
-					width={33}
-					height={33}
-					alt="Ball"
-				/>
-			</div>
-			<div />
-			<div class="flex flex-col items-center w-3/4 z-[2]">
-				<div class="relative">
-					<div
-						class="absolute w-[43px] h-[43px] bg-secondary rounded-full left-[35%] top-[65%] z-[1]"
-					/>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2002.png"
-						width={124}
-						height={124}
-						alt="Other 02"
-						class="relative z-10"
-					/>
-				</div>
-				<div class="flex flex-col">
-					<h1 class="text-4xl font-bold leading-[84px] mb-6">
-						Discover the Most Up-to-date contents
-					</h1>
-					<p class="leading-9 mb-6">
-						We believe you should have access to the most qualitative educational contents. Quench
-						your thirst for knowledge with our advanced educational blogs. You can see and share any
-						useful content.
-					</p>
-
-					<button type="button" class="btn bg-gradient-to-br variant-gradient-secondary-tertiary">
-						<span class="text-xl font-bold">Try now</span>
-						<span>
+<section class="py-20">
+	<div class="">
+		<div class="grid grid-cols-[40%_60%]  justify-center ">
+			
+			<div class="flex flex-col items-end pr-[2%] z-[2] ">
+					<div class=" h-[100%] w-[50%] flex items-center">
+						<div
+							class="bg-secondary  flex justify-center  p-12"
+						>
 							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
-								width={20}
-								height={10}
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2007.png"
+								
+								alt="Other 07"
 							/>
-						</span>
+						</div>
+
+						<!-- <div
+							class="w-[51px] h-[51px] rounded-full flex items-center justify-center bottom-0 left-[15%] bg-secondary"
+						>
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Ball.png"
+								width={33}
+								height={33}
+								alt="Ball"
+							/>
+						</div> -->
+					</div>
+			</div>
+			<!-- <div /> -->
+
+			<div class="flex flex-col items-center z-[2] pl-20">
+				<div class="">
+					<!-- <div
+						class="absolute w-[43px] h-[43px] bg-secondary rounded-full left-[35%] top-[65%] z-[1]"
+					/> -->
+					<div class="flex items-start">
+						<img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2002.png"
+							width={124}
+							height={124}
+							alt="Other 02"
+							class="relative z-10"
+						/>
+					</div>
+					<!-- </div> -->
+
+					<div class="flex flex-col w-3/5">
+						<div>
+							<p class="text-[48px] font-bold leading-[0px] mb-6 ">
+								Discover
+							</p>
+							<p class="text-[40px] leading-8 mb-2"> the Most Up-to-date contents</p>
+							<p class="leading-9 mb-6 text-justify">
+								We believe you should have access to the most qualitative educational contents. Quench
+								your thirst for knowledge with our advanced educational blogs. You can see and share any
+								useful content.
+							</p>
+		
+						</div>
+						
+						<div>
+							<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+							<span>Try now</span>
+							<span>
+								<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
+									width={20}
+									height={10}
+									alt=""
+								/>
+							</span>
+							</button>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="rectangle" /> -->
+</section>
+
+<section class="py-40">
+	<div class="grid grid-cols-[65%_35%] justify-center  w-4/5">
+		
+		<div class="flex justify-end  pr-[10%] items-center ">
+			<div class="w-3/5">
+				<div class="mb-5">
+					<h1 class="text-[40px] font-bold leading-[40px]">Communicate & Collaborate</h1>
+					<p class="text-justify">
+						Our goal is to provide you with a platform where you can achieve your goal via active
+						communicaition & collaboration. We also try to make sure you have minimum possible
+						distraction.
+					</p>
+				</div>
+				<div>
+					<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+					<span>Try now</span>
+					<span>
+						<img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
+							width={20}
+							height={10}
+							alt=""
+						/>
+					</span>
 					</button>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="rectangle" />
-</section>
-
-<section class="relative py-40">
-	<div class="flex justify-between mx-auto space-x-24 max-w-7xl">
-		<div class="relative w-1/2">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Gradient%20Ball.png"
-				width={448}
-				height={448}
-				alt="Gradient Ball"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2019.png"
-				width={177}
-				height={177}
-				alt="Other 19"
-				class="absolute -top-20 -left-12"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2010.png"
-				width={120}
-				height={120}
-				alt="Other 10"
-				class="absolute -top-20 right-40"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Ikbal%205.png"
-				width={413}
-				height={413}
-				alt="Ikbal 5"
-				class="absolute -left-4 top-32"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2018.png"
-				width={232}
-				height={232}
-				alt="Other 18"
-				class="absolute top-32 right-16"
-			/>
-		</div>
-		<div class="flex flex-col space-y-10 w-1/2 z-[2]">
-			<h1 class="text-4xl font-bold leading-[84px]">Communicate & Collaborate</h1>
-			<p class="leading-9">
-				Our goal is to provide you with a platform where you can achieve your goal via active
-				communicaition & collaboration. We also try to make sure you have minimum possible
-				distraction.
-			</p>
-			<button type="button" class="btn bg-gradient-to-br variant-gradient-secondary-tertiary">
-				<span class="text-xl font-bold">Try now</span>
-				<span>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
-						width={20}
-						height={10}
-					/>
-				</span>
-			</button>
+		<div class="flex justify-center items-center ">
+			<div class="relative item-center">
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Gradient%20Ball.png"
+					width=60%
+					height=auto
+					alt="Gradient Ball"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2019.png"
+					width=35%
+					height=auto
+					alt="Other 19"
+					class="absolute -top-20 -left-12"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2010.png"
+					width=30%
+					height=auto
+					alt="Other 10"
+					class="absolute -top-20 right-40"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Ikbal%205.png"
+					width=70%
+					height=auto
+					alt="Ikbal 5"
+					class="absolute -left-4 top-32"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2018.png"
+					width=40%
+					height=auto
+					alt="Other 18"
+					class="absolute top-32 right-16"
+				/>
+			</div>
 		</div>
 	</div>
 </section>
 
-<section class="relative py-32">
-	<div class="flex justify-between mx-auto space-x-24 max-w-7xl">
-		<div class="flex flex-col space-y-10 w-1/2 z-[2]">
-			<h1 class="text-4xl font-bold leading-[84px]">Meet Mr. Ashraful</h1>
-			<p class="leading-9">
-				He is a nice guy. He is happy to help your with your any quest. He is an Artifical
-				Intelligence.<span class="font-bold"> Oh oh... Not BORING ChatGPT.</span> But updated version
-				with a mega brain🔥👈👉🔥
-			</p>
-			<button type="button" class="btn bg-gradient-to-br variant-gradient-secondary-tertiary">
-				<span class="text-xl font-bold">Try now</span>
-				<span>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
-						width={20}
-						height={10}
-					/>
-				</span>
-			</button>
+<section class="py-40 ">
+	<div class="grid lg:grid-cols-[44%_auto] sm:grid-flow-row ">
+		<div class="flex justify-end lg:mr-[-20%]">
+			<div class="relative ">
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Gradient%20Ball.png"
+					width=70%
+					height=auto
+					alt="Gradient Ball"
+					class=""
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2020.png"
+					width=30%
+					height=auto
+					alt="Other 20"
+					class="absolute top-[45%] left-[45%]"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2019.png"
+					width=35%
+					height=auto
+					alt="Other 19"
+					class="absolute top-[-5%] left-[-15%]"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Marni%203.png"
+					width=70%
+					height=auto
+					alt="Marni 3"
+					class="absolute top-[20%]"
+				/>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2005.png"
+					width=35%
+					height=auto
+					alt="Other 05"
+					class="absolute top-[60%] left-[-10%]"
+				/>
+			</div>
 		</div>
-		<div class="relative flex justify-end w-1/2">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Gradient%20Ball.png"
-				width={448}
-				height={448}
-				alt="Gradient Ball"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2020.png"
-				width={169}
-				height={169}
-				alt="Other 20"
-				class="absolute left-32 -top-10"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2019.png"
-				width={158}
-				height={158}
-				alt="Other 19"
-				class="absolute bottom-0 left-20"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Marni%203.png"
-				width={537}
-				height={537}
-				alt="Marni 3"
-				class="absolute -bottom-1/3 left-28"
-			/>
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/Other%2005.png"
-				width={179}
-				height={179}
-				alt="Other 05"
-				class="absolute -right-20 top-[30%]"
-			/>
+		
+		<div class=" pl-8  ">
+			<div class="flex items-center  h-[100%]">
+				<div class="flex flex-col w-3/5">
+					<div class="mb-8">
+						<p class="text-[45px] leading-[40px]">Meet<p>
+						<p class="text-[45px] leading-[40px] font-bold mb-4">Mr. Ashraful</p>
+						<p class="leading-6 text-justify ">
+							He is a nice guy. He is happy to help your with your any quest. He is an Artifical
+							Intelligence.<span class="font-bold"> Oh oh... Not BORING ChatGPT.</span> But updated version
+							with a mega brain🔥👈👉🔥
+						</p>
+					</div>
+					<div>
+						<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+							<span class="text-xl font-bold">Try now</span>
+							<span>
+								<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-svgrepo-com%20(1).svg"
+									width={20}
+									height={10}
+									alt=""
+								/>
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
+		
 	</div>
 </section>
 <footer class="py-20 mt-12">
