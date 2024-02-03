@@ -179,71 +179,73 @@
 			</ul>
 		</nav>
 	</div>
-	<div class="w-full h-screen flex flex-row">
-		<AppRail class="w-fit overflow-hidden">
-			<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
-				<a
-					href="/trainerverified/home/recent"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Recent
-				</a>
-			</AppRailTile>
-			<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
-				<a
-					href="/trainerverified/home/my"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/personal-account-account-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					My Articles
-				</a>
-			</AppRailTile>
-			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
-				<a
-					href="/trainerverified/home/popular"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Popular
-				</a>
-			</AppRailTile>
-
-			<AppRailTile bind:group={currentTile} name="tile-5" value={4} title="tile-5">
-				<a
-					href="/trainerverified/home/saved"
-					class="flex flex-col items-center justify-center p-3 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Saved
-				</a>
-			</AppRailTile>
-
-			<!-- --- -->
-			<svelte:fragment slot="trail">
-				<div class="mb-24 flex flex-col items-center justify-center" on:click={handleSignOut}>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/power-button-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-10 w-10 hover:rotate-12 hover:scale-105"
-					/>
-					Logout
-				</div>
-			</svelte:fragment>
-		</AppRail>
-		<div class="w-3/4 p-6">
+	<div class="w-full h-screen flex flex-row ">
+		<div>
+			<AppRail class="w-fit overflow-hidden ">
+				<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
+					<a
+						href="/trainerverified/home/recent"
+						class="flex flex-col items-center justify-center p-3 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-10 w-10 hover:rotate-12 hover:scale-105"
+						/>
+						Recent
+					</a>
+				</AppRailTile>
+				<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
+					<a
+						href="/trainerverified/home/my"
+						class="flex flex-col items-center justify-center p-3 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/personal-account-account-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-10 w-10 hover:rotate-12 hover:scale-105"
+						/>
+						My Articles
+					</a>
+				</AppRailTile>
+				<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
+					<a
+						href="/trainerverified/home/popular"
+						class="flex flex-col items-center justify-center p-3 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-10 w-10 hover:rotate-12 hover:scale-105"
+						/>
+						Popular
+					</a>
+				</AppRailTile>
+	
+				<AppRailTile bind:group={currentTile} name="tile-5" value={4} title="tile-5">
+					<a
+						href="/trainerverified/home/saved"
+						class="flex flex-col items-center justify-center p-3 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-10 w-10 hover:rotate-12 hover:scale-105"
+						/>
+						Saved
+					</a>
+				</AppRailTile>
+	
+				<!-- --- -->
+				<svelte:fragment slot="trail">
+					<div class="mb-24 flex flex-col items-center justify-center" on:click={handleSignOut}>
+						<img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/power-button-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-10 w-10 hover:rotate-12 hover:scale-105"
+						/>
+						Logout
+					</div>
+				</svelte:fragment>
+			</AppRail>
+		</div>
+		<div class="p-6">
 			<div class=" flex flex-row mb-10">
 				<div class="flex flex-row">
 					<div class="md:w-1/3 lg:w-1/3 mr-3">
@@ -279,36 +281,44 @@
 					</button>
 				</div>
 			</div>
-			<div class="h-screen flex flex-col mt-6 p-6 w-full">
+			<div class="grid grid-cols-3 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
-					<div class="flex flex-row space-x-4">
-						<div class="mr-24 hover:scale-105 w-1/2">
-							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blog5.png"
-								alt="User Image"
-								class="w-1/2 h-1/2 items-center justify-center object-contain object-center"
-							/>
-
-							<div class="flex flex-row">
+					<div class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer ">
+						<div class="hover:scale-105">
+							<div class="mb-3 ">
 								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
-									alt="User Image"
-									class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									src="https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/thumbnail.jpg"
+									alt="User "
+									class=" w-[100%] items-center justify-center object-contain object-center"
 								/>
-								<p class="text-sm mr-6 text-justify">{formatDate(currblog.createdat)}</p>
-								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
-									alt="User Image"
-									class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
-								/>
-								<p class="text-sm">{currblog.timetoread} minutes read</p>
 							</div>
-							<h1 class="text-xl font-semibold mr-10">
-								{currblog.title}
-							</h1>
-							<p class="text-sm text-justify mr-10">
-								{currblog.description}
-							</p>
+							<div class="px-4">
+								<div>
+									<h1 class="text-2xl font-semibold mb-2">
+										{currblog.title}
+									</h1>
+								</div>
+								<div class="flex flex-row">
+									<!-- <img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+										alt="User "
+										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									/> -->
+									<p class="text-sm text-justify font-light">{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read</p>
+									<!-- <img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
+										alt="User "
+										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
+									/> -->
+									<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
+								</div>
+								
+								<div>
+									<p class="text-md text-justify ">
+										{currblog.description.slice(0, 100)} ...
+									</p>
+								</div>  
+							</div>
 						</div>
 					</div>
 				{/each}
