@@ -132,13 +132,23 @@
 					>
 				</li>
 				<li>
-					<a href="/library" class="flex items-center p-1 font-bold mr-3"
+					<a href="/library" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
 							alt="Dashboard Icon"
 							class="h-5 mr-1 hover:rotate-12"
 						/>
 						Compete</a
+					>
+				</li>
+				<li>
+					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold mr-3"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Chatbot</a
 					>
 				</li>
 
