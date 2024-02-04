@@ -133,13 +133,24 @@
 				</li>
 
 				<li>
-					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold mr-3"
+					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
 							alt="Dashboard Icon"
 							class="h-5 mr-1 hover:rotate-12"
 						/>
 						Chatbot</a
+					>
+				</li>
+
+				<li>
+					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Planner</a
 					>
 				</li>
 
@@ -266,10 +277,12 @@
 					</div>
 				</div>
 				<div class="w-1/6 mt-6 border-2 h-11">
-					<button class=" btn font-bold text-[18px] py-4 bg-[#45d588] rounded-sm shadow-md hover:bg-[#15b141] hover:text-[19px] hover:shadow-lg w-[100%] h-[100%] ">
+					<button
+						class=" btn font-bold text-[18px] py-4 bg-[#45d588] rounded-sm shadow-md hover:bg-[#15b141] hover:text-[19px] hover:shadow-lg w-[100%] h-[100%]"
+					>
 						<img
 							src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/search-new.svg"
-							class="transform transition duration-300 hover:rotate-12 hover:scale-110 "
+							class="transform transition duration-300 hover:rotate-12 hover:scale-110"
 							alt="Search Icon"
 							width="20"
 							height="20"
