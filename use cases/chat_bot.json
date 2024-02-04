@@ -1,0 +1,38 @@
+[
+    {
+        "usecase": {
+            "name": "Chat with AI bot",
+            "description": "Every user can chat with an AI bot and take help from it", 
+            "preconditions": "User should be logged in",
+            "steps": [
+                "User should be logged in",
+                "User should be on the chat page",
+                "User can type in the chat box and get the response from the bot"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Empty text submit",
+                "description": "Verify the response when user submits empty text",
+                "input": {
+                    "chatText": ""
+                },
+                "expected": {
+                    "outcome":"Won't send the empty text",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Text more than 1000 characters",
+                "description": "Check the response when user submits text more than 1000 characters",
+                "input": {
+                    "value": " 'a' * 1001"
+                },
+                "expected": {
+                    "outcome":"First 1000 characters will be sent and the user will be notified about the limit",
+                    "status": "Incomplete response"
+                }
+            }
+        ]
+    }
+]

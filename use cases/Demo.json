@@ -1,0 +1,365 @@
+[
+    {
+        "usecase": {
+            "name": "Course Registration",
+            "scenario": "Student registers for several courses in a semester, his/her advisor approves the registration.",
+            "actors": "Student, Advisor",
+            "preconditions": "Student is enrolled in the university and has an advisor",
+            "steps": [
+                "Student selects courses to register in a semester",
+                "Student submits the registration",
+                "Advisor approves the registration"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Course Selection",
+                "description": "Verify that a student can successfully select and register for valid courses in a semester.",
+                "input": {
+                    "selectedCourses": [
+                        "Math101",
+                        "English202",
+                        "History150"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Registration successful",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Empty Course Selection",
+                "description": "Verify that the system handles the case where a student tries to submit an empty course selection.",
+                "input": {
+                    "selectedCourses": []
+                },
+                "expected": {
+                    "outcome": "Registration failed",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Advisor Approval",
+                "description": "Verify that the advisor can successfully approve a student's registration.",
+                "input": {
+                    "advisorApproval": true
+                },
+                "expected": {
+                    "outcome": "Registration approved",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Advisor Rejection",
+                "description": "Verify that the advisor can reject a student's registration.",
+                "input": {
+                    "advisorApproval": false
+                },
+                "expected": {
+                    "outcome": "Registration rejected",
+                    "status": "Rejected"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Payment for Registration",
+            "scenario": "Student pays the registration fee for the courses he/she has registered. The system calculates the total amount of the fee to be paid by the student. After the payment is made, the system updates the student's payment status.",
+            "actors": "Student",
+            "preconditions": "The student is enrolled in the university and has registered for courses in a semester.",
+            "steps": [
+                "Student selects the courses for registration",
+                "System calculates the total amount of the fee to be paid by the student",
+                "Student makes the payment",
+                "System updates the student's payment status"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Payment",
+                "description": "Verify that the student can successfully make a valid payment for the registration fee.",
+                "input": {
+                    "selectedCourses": [
+                        "Math101",
+                        "HUM202"
+                    ],
+                    "systemCalculatedFee": 200,
+                    "paymentAmount": 200
+                },
+                "expected": {
+                    "outcome": "Payment successful",
+                    "status": "Paid"
+                }
+            },
+            {
+                "name": "Zero Payment",
+                "description": "Verify that the system handles the case where the student tries to make a payment with an amount of zero.",
+                "input": {
+                    "selectedCourses": [
+                        "HUM150"
+                    ],
+                    "systemCalculatedFee": 100,
+                    "paymentAmount": 0
+                },
+                "expected": {
+                    "outcome": "Payment failed",
+                    "status": "Not Paid"
+                }
+            },
+            {
+                "name": "Insufficient Payment",
+                "description": "Verify that the system handles the case where the student tries to make a payment with an amount less than the calculated fee.",
+                "input": {
+                    "selectedCourses": [
+                        "PHY301"
+                    ],
+                    "systemCalculatedFee": 100,
+                    "paymentAmount": 50
+                },
+                "expected": {
+                    "outcome": "Payment failed",
+                    "status": "Not Paid"
+                }
+            },
+            {
+                "name": "Overpayment",
+                "description": "Verify that the system handles the case where the student tries to make an overpayment.",
+                "input": {
+                    "selectedCourses": [
+                        "CHEM201"
+                    ],
+                    "systemCalculatedFee": 100,
+                    "paymentAmount": 300
+                },
+                "expected": {
+                    "outcome": "Payment failed",
+                    "status": "Not Paid"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Exam Marks Entry",
+            "scenario": "Course teacher enters the exam marks of the students. Alternatively, a course teacher may upload a CSV or Excel-formatted file containing the exam marks of the students.",
+            "actors": "Teacher",
+            "preconditions": "The teacher should be assigned to that course, and the students whose marks have been added by the teacher should be enrolled in that course.",
+            "steps": [
+                "Teacher enters the exam marks of the students",
+                "Alternatively, the course teacher uploads a CSV or Excel-formatted file containing the exam marks of the students"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Marks Entry",
+                "description": "Verify that the teacher can successfully enter valid exam marks for the students.",
+                "input": {
+                    "studentMarks": {
+                        "student1": 85,
+                        "student2": 92,
+                        "student3": 78
+                    }
+                },
+                "expected": {
+                    "outcome": "Marks entry successful",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Invalid Marks Entry",
+                "description": "Verify that the system handles the case where the teacher tries to enter invalid exam marks (e.g., negative marks or marks exceeding the maximum limit).",
+                "input": {
+                    "studentMarks": {
+                        "student1": -5,
+                        "student2": 105,
+                        "student3": 88
+                    }
+                },
+                "expected": {
+                    "outcome": "Marks entry failed",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "File Upload",
+                "description": "Verify that the teacher can successfully upload a CSV or Excel-formatted file containing the exam marks of the students.",
+                "input": {
+                    "file": "test_marks.csv"
+                },
+                "expected": {
+                    "outcome": "File upload successful",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Incorrect File Format",
+                "description": "Verify that the system handles the case where the teacher tries to upload a file in an incorrect format (e.g., non-CSV or non-Excel file).",
+                "input": {
+                    "file": "marks.txt"
+                },
+                "expected": {
+                    "outcome": "File upload failed",
+                    "status": "Rejected"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Prepare Exam Result",
+            "scenario": "After the marks have been uploaded by the course teacher, the department head forwards the marks to the exam controller. The exam controller prepares the exam result.",
+            "actors": "Course Teacher, Department Head, Exam Controller",
+            "preconditions": "The course teacher should be assigned to that course, and the students whose marks have been added by the teacher should be enrolled in that course.",
+            "steps": [
+                "Department head forwards the marks to the exam controller",
+                "Exam controller prepares the exam result"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Marks Forwarding",
+                "description": "Verify that the department head can successfully forward valid marks to the exam controller for result preparation.",
+                "input": {
+                    "course": "Math101",
+                    "teacherID": "T12345"
+                },
+                "expected": {
+                    "outcome": "Marks forwarded successfully",
+                    "status": "Forwarded"
+                }
+            },
+            {
+                "name": "Invalid Course Marks Forwarding",
+                "description": "Verify that the system handles the case where the department head tries to forward marks for a course that the teacher is not assigned to.",
+                "input": {
+                    "course": "InvalidCourse",
+                    "teacherID": "T12345"
+                },
+                "expected": {
+                    "outcome": "Marks forwarding failed",
+                    "status": "Not Forwarded"
+                }
+            },
+            {
+                "name": "Invalid Teacher ID in Marks Forwarding",
+                "description": "Verify that the system handles the case where the department head tries to forward marks for a course with an invalid teacher ID.",
+                "input": {
+                    "course": "Math101",
+                    "teacherID": "InvalidTeacherID"
+                },
+                "expected": {
+                    "outcome": "Marks forwarding failed",
+                    "status": "Not Forwarded"
+                }
+            },
+            {
+                "name": "Exam Result Preparation",
+                "description": "Verify that the exam controller can successfully prepare the exam result after receiving forwarded marks.",
+                "input": {
+                    "course": "Math101"
+                },
+                "expected": {
+                    "outcome": "Exam result prepared successfully",
+                    "status": "Prepared"
+                }
+            },
+            {
+                "name": "Invalid Course Result Preparation",
+                "description": "Verify that the system handles the case where the exam controller tries to prepare the result for an invalid course.",
+                "input": {
+                    "course": "InvalidCourse"
+                },
+                "expected": {
+                    "outcome": "Result preparation failed",
+                    "status": "Not Prepared"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "View Exam Result",
+            "scenario": "Student attempts to see his/her exam result after the result has been published. The department head and advisor may also view the exam result of the students.",
+            "actors": "Student, Advisor, Department Head",
+            "preconditions": "The student should be enrolled in the semester. Marks of the exam should be uploaded by the course teachers. The result should be published by the exam controller.",
+            "steps": [
+                "Student attempts to see his/her exam result",
+                "Advisor attempts to see the exam result of the student",
+                "Department head attempts to see the exam result of the student"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Student Views Own Result",
+                "description": "Verify that a student can successfully view his/her own exam result.",
+                "input": {
+                    "studentID": "S12345"
+                },
+                "expected": {
+                    "outcome": "Result viewed successfully",
+                    "access": "Allowed"
+                }
+            },
+            {
+                "name": "Advisor Views Student's Result",
+                "description": "Verify that an advisor can successfully view the exam result of a student assigned to them.",
+                "input": {
+                    "advisorID": "A98765",
+                    "studentID": "S56789"
+                },
+                "expected": {
+                    "outcome": "Result viewed successfully",
+                    "access": "Allowed"
+                }
+            },
+            {
+                "name": "Department Head Views Student's Result",
+                "description": "Verify that a department head can successfully view the exam result of a student in their department.",
+                "input": {
+                    "departmentHeadID": "D45678",
+                    "studentID": "S67890"
+                },
+                "expected": {
+                    "outcome": "Result viewed successfully",
+                    "access": "Allowed"
+                }
+            },
+            {
+                "name": "Invalid Student ID",
+                "description": "Verify that the system handles the case where an invalid student ID is provided for result viewing.",
+                "input": {
+                    "studentID": "InvalidID"
+                },
+                "expected": {
+                    "outcome": "Result viewing failed",
+                    "access": "Denied"
+                }
+            },
+            {
+                "name": "Unauthorized Advisor",
+                "description": "Verify that the system restricts unauthorized advisors from viewing a student's exam result.",
+                "input": {
+                    "advisorID": "UnauthorizedAdvisor",
+                    "studentID": "S12345"
+                },
+                "expected": {
+                    "outcome": "Result viewing failed",
+                    "access": "Denied"
+                }
+            },
+            {
+                "name": "Unauthorized Department Head",
+                "description": "Verify that the system restricts unauthorized department heads from viewing a student's exam result.",
+                "input": {
+                    "departmentHeadID": "UnauthorizedHead",
+                    "studentID": "S12345"
+                },
+                "expected": {
+                    "outcome": "Result viewing failed",
+                    "access": "Denied"
+                }
+            }
+        ]
+    }
+]

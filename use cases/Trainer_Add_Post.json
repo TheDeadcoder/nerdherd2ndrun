@@ -1,0 +1,32 @@
+[
+    {
+        "usecase": {
+            "name": "Trainer Add Blogs",
+            "description": "Trainer should be able to add blogs", 
+            "preconditions": "Trainer should be logged in",
+            "steps": [
+                "Trainer will click My Articles from the left menu",
+                "Trainer will click Add New Post",
+                "Trainer will fill the required fields",
+                "Trainer will click Done With Editing"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Adding a blog post",
+                "description": "Trainer should be able to add blogs",
+                "input": {
+                    "title": "Test Blog",
+                    "short description": "This is a test blog",
+                    "time to read": "5",
+                    "tags": "test, blog",
+                    "content": "This is a test blog"
+                },
+                "expected": {
+                    "outcome":"Blog added successfully",
+                    "status": "Pass"
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "usecase": {
+            "name": "",
+            "description": "", 
+            "preconditions": "",
+            "steps": ""
+        },
+        "testcases": [
+            {
+                "name": "",
+                "description": "",
+                "input": {
+                    "value": ""
+                },
+                "expected": {
+                    "outcome":"",
+                    "status": ""
+                }
+            },
+            {
+                "name": "",
+                "description": "",
+                "input": {
+                    "value": ""
+                },
+                "expected": {
+                    "outcome":"",
+                    "status": ""
+                }
+            }
+        ]
+    }
+]
