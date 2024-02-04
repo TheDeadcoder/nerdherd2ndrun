@@ -33,10 +33,10 @@
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 				class="transform transition duration-300 hover:rotate-12"
 				alt="title"
-				width={60}
+				width={55}
 			/>
-			<span class="company-name text-2xl font-extrabold">NerD</span><span
-				class="company-name white-text text-2xl font-extrabold">Herd</span
+			<span class="company-name text-xl font-extrabold">NerD</span><span
+				class="company-name white-text text-xl font-extrabold">Herd</span
 			>
 		</div>
 
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 </nav>
-<div class="container h-full mx-auto flex justify-center items-center">
+<div class="container h-full mx-auto flex justify-center items-center mt-7">
 	<div class="max-h-screen text-center flex flex-col items-center">
 		<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
 			<!-- Photo on the left side of the card -->
@@ -62,20 +62,24 @@
 						>
 					</div>
 
-					<h2 class="mt-3 text-center text-3xl font-extrabold">🔥Ready to join the Nerds?🔥</h2>
+					<h2 class="mt-3 text-center text-2xl font-extrabold">🔥Ready to join the Nerds?🔥</h2>
 				</div>
 				<form class="mt-6 space-y-6" method="POST" use:enhance>
 					<div class="rounded-md shadow-sm space-y-2">
 						<div>
 							<label class="label text-left">
-								<span class="text-left">Email</span>
-								<input
-									class="input"
-									id="email"
-									name="email"
-									bind:value={$form.email}
-									placeholder="name@domain.com"
-								/>
+								<div class="text-left font-semibold">Email :</div>
+								<div class="input-name">
+									<input
+										class="input border-0 rounded-md shadow-sm hover-underline-animation"
+										id="email"
+										name="email"
+										type="text"
+										bind:value={$form.email}
+										placeholder="name@domain.com"
+									/>
+									<span class="underline-animation"></span>
+								</div>
 							</label>
 
 							{#if $errors.email}
@@ -84,17 +88,21 @@
 								</div>
 							{/if}
 						</div>
+						
 						<div>
 							<label class="label text-left">
-								<span class="text-left">Password</span>
-								<input
-									class="input"
+								<div class="text-left font-semibold">Password</div>
+								<div class="input-name ">
+									<input
+									class="input border-0 rounded-md shadow-sm hover-underline-animation"
 									type="password"
 									id="password"
 									name="password"
 									bind:value={$form.password}
 									placeholder="type your password here"
 								/>
+								<span class="underline-animation"></span>
+								</div>
 							</label>
 
 							{#if $errors.password}
@@ -106,13 +114,19 @@
 					</div>
 
 					<div>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button type="submit" class=" btn font-bold text-xl p-3 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[20px] hover:shadow-lg w-[100%] "
+						>
 							⚡Sign Up⚡
 						</button>
 					</div>
 				</form>
-				<div class="flex flex-col">
-					<button type="button" class="btn variant-filled mt-4">
+				<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-3 pt-3">
+					<span style="font-size: 16px; background-color: #F3F5F6; padding: 0 10px; ">
+					  Or Continue with <!--Padding is optional-->
+					</span>
+				  </div>
+				<div class="flex justify-center">
+					<!-- <button type="button" class="btn variant-filled mt-4">
 						<span
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
@@ -122,11 +136,11 @@
 								height={25}
 							/>
 						</span>
-						<span class="text-xl font-semibold">Sign up with Google</span>
+						<span class="text-xl font-semibold">Continue with Google</span>
 					</button>
 					<button type="button" class="btn variant-filled mt-4">
-						<span
-							><img
+						<span>
+							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
 								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
 								alt="title"
@@ -134,8 +148,26 @@
 								height={25}
 							/>
 						</span>
-						<span class="text-xl font-semibold">Sign up with Discord</span>
-					</button>
+						<span class="text-xl font-semibold">Continue with Discord</span>
+					</button> -->
+					<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+						<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
+								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+								alt="title"
+								width={25}
+								height={25}
+						/>
+					</div>
+					<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+						<img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
+							class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+							alt="title"
+							width={25}
+							height={25}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -151,5 +183,30 @@
 		font-size: 2rem; /* Adjust font size as needed */
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.input-name{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		width: 100%;
+	}
+	.input-name > input{
+		border: none;
+		border-bottom: 1px solid rgb(255, 255, 255);
+		outline: none;
+	}
+
+	.underline-animation{
+		transition: all 0.5s;
+		display: inline-block;
+		bottom: 0;
+		left: -100%;
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		background-color: #000000;
+	}
+	.input-name > input:focus + .underline-animation{
+	    left: 0;
 	}
 </style>
