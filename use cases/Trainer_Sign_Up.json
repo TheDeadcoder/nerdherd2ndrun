@@ -1,0 +1,152 @@
+[
+    {
+        "usecase": {
+            "name": "Sign Up as a Trainer",
+            "scenario": "A trainer has to give his details to sign up",
+            "actors": "Trainer",
+            "preconditions": [
+                "The trainer is not signed in.",
+                "The trainer should have access to the internet.",
+                "The trainer should have a valid email id and a contact number", 
+                "The learner has not used the same email or account to sign up before"
+            ],
+            "steps": [
+                "The trainer has to go to the sign up page",
+                "The trainer has to fill in the details",
+                "The trainer has to verify the email",
+                "The trainer has to wait for the approval"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Name Check",
+                "description": "Verify that the name is of at least 3 characters",
+                "input": {
+                    "Name": "AB"
+                },
+                "expected": {
+                    "outcome": "Name is required and at least of length 3",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Date of Birth Selection",
+                "description": "Verify that the date of birth is in the past",
+                "input": {
+                    "Date of Birth ": [
+                        "01/01/2025"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth must be in the past",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty Gender Selection",
+                "description": "Verify that the trainer has selected his/her gender",
+                "input": {
+                    "Gender": [
+                        "Not Selected"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Contact number format",
+                "description": "Verify the format of the contact number, it should be of 11 digits and should start with 01",
+                "input": {
+                    "Contact Number": [
+                        "1234567"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Phone number must be exactly 11 digits and start with 01",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty or Invalid Email",
+                "description": "Verify that the email is not empty and is in the correct format",
+                "input": {
+                    "Email": [
+                        "abc.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Invalid email address, email address is required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty or Invalid Password",
+                "description": "Verify that the password is not empty and is of at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number",
+                "input": {
+                    "Password": [
+                        "abc"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password must be at least 7 characters long and contain at least 1 uppercase letter, 1 special character, 1 number",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty or Invalid Confirm Password",
+                "description": "Verify that the confirm password is not empty and is same as the password",
+                "input": {
+                    "Confirm Password": [
+                        "abc"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password and confirm password must match",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Verify teaching information",
+                "description": "The reasoning should be of at least 15 characters",
+                "input": {
+                    "Reason": [
+                        "abc"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Reason must be at least 15 characters long",
+                    "status": "Rejected"
+                }
+            }, 
+            {
+                "name": "Verify the mail ",
+                "description": "Verify that the email is not previously used",
+                "input": {
+                    "Email": [
+                        "raihan@gmail.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Email already exists",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Verify All Details",
+                "description": "Verify that all the details are correct and the email is verified",
+                "input": {
+                    "Details": [
+                        "Correct"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Details are correct and email is verified",
+                    "status": "Approved"
+                }
+            }
+
+        ]
+    }
+]
