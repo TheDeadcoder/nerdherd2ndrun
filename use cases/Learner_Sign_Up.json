@@ -23,7 +23,7 @@
         },
         "testcases": [
             {
-                "name": "Learner Sign Up by Email and Password",
+                "name": "Sign Up by previously used email id",
                 "description": "A learner has to use a email id that is not used before to sign up",
                 "input": {
                     "email": "raihan@gmail.com",
@@ -35,10 +35,22 @@
                 }
             },
             {
-                "name": "Learner Sign Up by Google",
+                "name": "Learner Sign Up unique email id",
+                "description": "A learner has to use a email id that is not used before to sign up",
+                "input": {
+                    "email": "random12@gmail.com", 
+                    "password": "123456"
+                },
+                "expected": {
+                    "outcome": "The email was not used before",
+                    "status": "Accepted"
+                }
+            },
+            {
+                "name": "Learner Sign Up by previously used Google account",
                 "description": "A learner has to use a Google account that is not used before to sign up",
                 "input": {
-                    "gmail": "random@gmail.com"
+                    "gmail": "raihan@gmail.com"
                 },  
                 "expected": {
                     "outcome": "The gmail was used before",
@@ -46,7 +58,18 @@
                 }
             },
             {
-                "name": "Learner Sign Up by Discord",
+                "name": "Learner Sign Up by unique Google Account",
+                "description": "A learner has to use a Google account that is not used before to sign up",
+                "input": {
+                    "gmail": "random1234@gmail.com"
+                }, 
+                "expected": {
+                    "outcome": "The gmail was not used before",
+                    "status": "Accepted"
+                }
+            },
+            {
+                "name": "Learner Sign Up by previously used Google account",
                 "description": "A learner has to use a Discord account that is not used before to sign up",
                 "input": {
                     "discord account": "random#1234"
@@ -54,6 +77,17 @@
                 "expected": {
                     "outcome": "The discord account was used before",
                     "status": "Rejected"
+                }
+            },
+            {
+                "name": "Learner Sign Up by unique Discord Account",
+                "description": "A learner has to use a Discord account that is not used before to sign up",
+                "input": {
+                    "discord account": "random#12345"
+                },
+                "expected": {
+                    "outcome": "The discord account was not used before",
+                    "status": "Accepted"
                 }
             }
         ]

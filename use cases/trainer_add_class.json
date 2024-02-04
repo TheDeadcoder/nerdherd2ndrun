@@ -12,13 +12,13 @@
         },
         "testcases": [
             {
-                "name": "Verifyging valid details",
+                "name": "Added with valid start and end time",
                 "description": "This test case is used to verify a new class with valid details",
                 "input": {
                     "class_name": "Java_01",
                     "class_description": "Java programming language, phase 1",
-                    "class_start_date": "2023-01-01",
-                    "class_end_date": "2023-2-28",
+                    "class_start_date": "2025-01-01",
+                    "class_end_date": "2025-2-28",
                     "class_start_time": "10:00",
                     "class_end_time": "12:00",
                     "class_days": "Monday, Wednesday, Friday",
@@ -30,7 +30,7 @@
                 }
             },
             {
-                "name": "Check the start time and end time is valid",
+                "name": "Both The start time and end time is in the past",
                 "description": "The start and end time should be in the future",
                 "input": {
                     "class_name": "Java_01",
@@ -48,7 +48,62 @@
                 }
             },
             {
-                "name": "Check the class name is unique",
+                "name": "The start time is in the past",
+                "description": "The start time should be in the future",
+                "input": {
+                    "class_name": "Java_01",
+                    "class_description": "Java programming language, phase 1",
+                    "class_start_date": "2023-01-01",
+                    "class_end_date": "2025-2-28",
+                    "class_start_time": "10:00",
+                    "class_end_time": "12:00",
+                    "class_days": "Monday, Wednesday, Friday",
+                    "class_trainer": "Nazmus Sakib"
+                },
+                "expected": {
+                    "outcome":"The start time is not in the future",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The end time is not in the future",
+                "description": "The end time should be in the future",
+                "input": {
+                    "class_name": "Java_01",
+                    "class_description": "Java programming language, phase 1",
+                    "class_start_date": "2025-01-01",
+                    "class_end_date": "2023-2-28",
+                    "class_start_time": "10:00",
+                    "class_end_time": "12:00",
+                    "class_days": "Monday, Wednesday, Friday",
+                    "class_trainer": "Nazmus Sakib"
+                },
+                "expected": {
+                    "outcome":"The end time is not in the future",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Inconsistent start and end time",
+                "description": "The end time should be greater than the start time",
+                "input": {
+                    "class_name": "Java_01",
+                    "class_description": "Java programming language, phase 1",
+                    "class_start_date": "2025-03-01",
+                    "class_end_date": "2025-2-28",
+                    "class_start_time": "12:00",
+                    "class_end_time": "10:00",
+                    "class_days": "Monday, Wednesday, Friday",
+                    "class_trainer": "Nazmus Sakib"
+                },
+                "expected": {
+                    "outcome":"The end time is not greater than the start time",
+                    "status": "Fail"
+                }
+            },
+
+            {
+                "name": "Old class name given",
                 "description": "The class name should be unique",
                 "input": {
                     "class_name": "Java_01",
@@ -63,6 +118,24 @@
                 "expected": {
                     "outcome":"The class name is not unique",
                     "status": "Fail"
+                }
+            }, 
+            {
+                "name": "Given class name is unique",
+                "description": "The class name should be unique",
+                "input": {
+                    "class_name": "Java_02",
+                    "class_description": "Java programming language, phase 1",
+                    "class_start_date": "2023-01-01",
+                    "class_end_date": "2023-2-28",
+                    "class_start_time": "10:00",
+                    "class_end_time": "12:00",
+                    "class_days": "Monday, Wednesday, Friday",
+                    "class_trainer": "Nazmus Sakib"
+                },
+                "expected": {
+                    "outcome":"The class name is unique",
+                    "status": "Pass"
                 }
             }
         ]

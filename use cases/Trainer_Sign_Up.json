@@ -19,7 +19,7 @@
         },
         "testcases": [
             {
-                "name": "Valid Name Check",
+                "name": "Extremely Short name given",
                 "description": "Verify that the name is of at least 3 characters",
                 "input": {
                     "Name": "AB"
@@ -30,7 +30,18 @@
                 }
             },
             {
-                "name": "Date of Birth Selection",
+                "name": "Name given correclty",
+                "description": "Verify that the name is of at least 3 characters",
+                "input": {
+                    "Name": "Raihan"
+                },
+                "expected": {
+                    "outcome": "Name is of correct length",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Date of Birth is in the future",
                 "description": "Verify that the date of birth is in the past",
                 "input": {
                     "Date of Birth ": [
@@ -40,6 +51,45 @@
                 "expected": {
                     "outcome": "Date of birth must be in the past",
                     "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty Date of Birth",
+                "description": "Verify that the date of birth is not empty",
+                "input": {
+                    "Date of Birth": [
+                        "Not Selected"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth is required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Date of birth is in the past and not 18 years ago", 
+                "description": "Verify that the date of birth is in the past and the trainer is at least 18 years old",
+                "input": {
+                    "Date of Birth": [
+                        "01/01/2021"
+                    ]
+                },
+                "expected": {
+                    "outcome": "The trainer is less than 18 years old",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Date of birth is in the past and 18 years ago", 
+                "description": "Verify that the date of birth is in the past and the trainer is at least 18 years old",
+                "input": {
+                    "Date of Birth": [
+                        "01/01/2003"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth is in the past and the trainer is at least 18 years old",
+                    "status": "Approved"
                 }
             },
             {
@@ -56,7 +106,18 @@
                 }
             },
             {
-                "name": "Contact number format",
+                "name": "Correct gender selection", 
+                "description": "Verify that the trainer has selected his/her gender",
+                "input": {
+                    "Gender": "male"
+                },
+                "expected": {
+                    "outcome": "Correct",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Contact number format invalid",
                 "description": "Verify the format of the contact number, it should be of 11 digits and should start with 01",
                 "input": {
                     "Contact Number": [
@@ -68,6 +129,20 @@
                     "status": "Rejected"
                 }
             },
+            {
+                "name": "Contact number format valid",
+                "description": "Verify the format of the contact number, it should be of 11 digits and should start with 01",
+                "input": {
+                    "Contact Number": [
+                        "01853320911"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Phone number is exactly 11 digits and start with 01",
+                    "status": "Approved"
+                }
+            },
+
             {
                 "name": "Empty or Invalid Email",
                 "description": "Verify that the email is not empty and is in the correct format",
@@ -82,6 +157,20 @@
                 }
             },
             {
+                "name": "Valid Email",
+                "description": "Verify that the email is not empty and is in the correct format",
+                "input": {
+                    "Email": [
+                        "abc@gmail.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Valid email address",
+                    "status": "Approved"
+                }
+            },
+
+            {
                 "name": "Empty or Invalid Password",
                 "description": "Verify that the password is not empty and is of at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number",
                 "input": {
@@ -92,6 +181,19 @@
                 "expected": {
                     "outcome": "Password must be at least 7 characters long and contain at least 1 uppercase letter, 1 special character, 1 number",
                     "status": "Rejected"
+                }
+            },
+            {
+                "name": "Valid Password",
+                "description": "Verify that the password is not empty and is of at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number",
+                "input": {
+                    "Password": [
+                        "xxx@xx2342Ax"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password is valid",
+                    "status": "Approved"
                 }
             },
             {
@@ -108,20 +210,20 @@
                 }
             },
             {
-                "name": "Verify teaching information",
-                "description": "The reasoning should be of at least 15 characters",
+                "name": "Valid Confirm Password",
+                "description": "Verify that the confirm password is not empty and is same as the password",
                 "input": {
-                    "Reason": [
-                        "abc"
+                    "Confirm Password": [
+                        "xxx@xx2342Ax"
                     ]
                 },
                 "expected": {
-                    "outcome": "Reason must be at least 15 characters long",
-                    "status": "Rejected"
+                    "outcome": "Password and confirm password match",
+                    "status": "Approved"
                 }
-            }, 
+            },
             {
-                "name": "Verify the mail ",
+                "name": "old mail given ",
                 "description": "Verify that the email is not previously used",
                 "input": {
                     "Email": [
@@ -134,18 +236,19 @@
                 }
             },
             {
-                "name": "Verify All Details",
-                "description": "Verify that all the details are correct and the email is verified",
+                "name": "new mail given",
+                "description": "Verify that the email is not previously used",
                 "input": {
-                    "Details": [
-                        "Correct"
+                    "Email": [
+                        "raihsssan@gmail.com"
                     ]
                 },
                 "expected": {
-                    "outcome": "Details are correct and email is verified",
+                    "outcome": "Email valid",
                     "status": "Approved"
                 }
             }
+
 
         ]
     }

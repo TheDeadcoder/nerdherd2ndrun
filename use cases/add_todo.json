@@ -16,7 +16,21 @@
         },
         "testcases": [
             {
-                "name": "Verify the Deadline is in the future",
+                "name": "Correctly add a new task",
+                "description": "User should be able to add a new task",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-31",
+                    "importance": "5"
+                },
+                "expected": {
+                    "outcome":"The task is added to the list",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "Given Deadline is in the past",
                 "description": "User should not be able to set the deadline in the past",
                 "input": {
                     "taskName": "Task 1",
@@ -25,21 +39,63 @@
                     "importance": "5"
                 },
                 "expected": {
-                    "outcome":"User should not be able to set the deadline in the past",
+                    "outcome":"The deadline is in the past",
                     "status": "Fail"
                 }
             },
             {
-                "name": "Verify the task is added to the list",
-                "description": "User should be able to see the task in the list",
+                "name": "The Deadline is in the future",
+                "description": "User should be able to set the deadline in the future",
                 "input": {
                     "taskName": "Task 1",
                     "taskDescription": "Task 1 description",
-                    "deadline": "2021-12-31",
+                    "deadline": "2024-12-12",
                     "importance": "5"
                 },
                 "expected": {
-                    "outcome":"The task is shown in the list",
+                    "outcome":"The task is added to the list",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "The Importance is set to negative",
+                "description": "User should not be able to set the importance to a negative value",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "-5"
+                },
+                "expected": {
+                    "outcome":"The importance is set to a negative value",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The Importance is set to 0",
+                "description": "User should not be able to set the importance to 0",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "0"
+                },
+                "expected": {
+                    "outcome":"The importance is set to 0",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The Importance is set to 1 to 10",
+                "description": "User should be able to set the importance to a value between 1 to 10",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "10"
+                },
+                "expected": {
+                    "outcome":"The task is added to the list",
                     "status": "Pass"
                 }
             }

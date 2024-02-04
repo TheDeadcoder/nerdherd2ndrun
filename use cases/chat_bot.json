@@ -29,8 +29,19 @@
                     "value": " 'a' * 1001"
                 },
                 "expected": {
-                    "outcome":"First 1000 characters will be sent and the user will be notified about the limit",
-                    "status": "Incomplete response"
+                    "outcome":"Incomplete Response. First 1000 characters will be sent and the user will be notified about the limit",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Text less than 1000 characters",
+                "description": "Check the response when user submits text less than 1000 characters",
+                "input": {
+                    "value": " 'a' * 999"
+                },
+                "expected": {
+                    "outcome":"Complete Response",
+                    "status": "Pass"
                 }
             }
         ]
