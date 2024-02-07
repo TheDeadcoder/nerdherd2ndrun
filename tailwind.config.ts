@@ -14,18 +14,18 @@ export default {
 		forms,
 		typography,
 		skeleton({
-			themes: {
-				preset: [
-					{
-						name: 'wintry',
-						enhancements: true,
-					},
-					{
-						name: 'skeleton',
-						enhancements: true,
-					},
-				],
-			},
+			// themes: {
+			// 	preset: [
+			// 		{
+			// 			name: 'wintry',
+			// 			enhancements: true,
+			// 		},
+			// 		{
+			// 			name: 'skeleton',
+			// 			enhancements: true,
+			// 		},
+			// 	],
+			// },
 		}),
 	],
 } satisfies Config;

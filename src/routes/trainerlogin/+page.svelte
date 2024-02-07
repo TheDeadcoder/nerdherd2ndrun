@@ -41,7 +41,7 @@
 		</div>
 
 		<div class="flex space-x-3">
-			<LightSwitch />
+			<!-- <LightSwitch /> -->
 			<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
 				About us
 			</a>
@@ -49,26 +49,25 @@
 	</div>
 </nav>
 
-<div class="container h-full mx-auto flex justify-center items-center mt-6">
+<div class="container h-full flex justify-center items-center mt-6">
 	<div class="max-h-screen text-center flex flex-col items-center">
-		<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
+		<div class="flex  shadow-2xl rounded-xl overflow-hidden max-w-4xl">
 			<!-- Photo on the left side of the card -->
 
 			<!-- Previous Card Content -->
 			<div class="w-full p-8">
-				<div class="flex flex-col space-y-9">
-					<div class="company-name">
+				<div class="flex flex-col ">
+					<!-- <div class="company-name">
 						<span class="company-name text-2xl font-extrabold">NerD</span><span
 							class="company-name white-text text-2xl font-extrabold">Herd</span
 						>
-					</div>
-					<hr>
-					<h2 class=" text-center text-[20px] font-bold">Welcome Back</h2>
+					</div> -->
+					
+					<h2 class=" text-center text-[20px] font-bold my-3">Welcome Back</h2>
+					<hr class="">
 				</div>
 				{#if $message}
-					<div
-						class="text-red-500 border-red-500 border-2 bg-red-100 py-2 px-2 rounded-sm text-base"
-					>
+					<div class="text-red-500 border-red-500 border-2 bg-red-100 py-2 px-2 rounded-sm text-base">
 						{$message}
 					</div>
 				{/if}
@@ -95,7 +94,7 @@
 									<small class="text-red-500">{$errors.email}</small>
 								</div>
 							{/if}
-						</div>
+					  	</div>
 						<div>
 							<label class="label text-left">
 								<span class="text-left">Password</span>
@@ -136,9 +135,6 @@
 							</div>
 						</div>
 					</div>
-
-					
-
 					<div>
 						<button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
 							Sign In
@@ -147,8 +143,8 @@
 				</form>
 
 				<div class="flex flex-col mt-2">
-					<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-3 pt-3">
-						<span style="font-size: 16px; background-color: #F3F5F6; padding: 0 10px; ">
+					<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-5 pt-3">
+						<span class="text-[16px] bg-[#ffffff] px-2 py-[10px]">
 						  Or Continue with <!--Padding is optional-->
 						</span>
 					</div>
@@ -174,6 +170,7 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
