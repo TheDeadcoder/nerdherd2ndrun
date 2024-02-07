@@ -73,17 +73,21 @@
 					</div>
 				{/if}
 				<form class="mt-6 space-y-6" method="POST" use:enhance>
-					<div class="rounded-md shadow-sm space-y-2">
+					<div class="rounded-md shadow-sm ">
 						<div>
 							<label class="label text-left">
 								<span class="text-left">Email</span>
-								<input
-									class="input border-0 rounded-sm hover:border-b-2"
-									id="email"
-									name="email"
-									bind:value={$form.email}
-									placeholder="name@domain.com"
-								/>
+								<div class="input-name">
+									<input
+										class="input border-0 rounded-sm hover:border-b-2"
+										id="email"
+										name="email"
+										bind:value={$form.email}
+										placeholder="name@domain.com"
+									/>
+									<span class="underline-animation"></span>
+								</div>
+								
 							</label>
 
 							{#if $errors.email}
@@ -95,14 +99,19 @@
 						<div>
 							<label class="label text-left">
 								<span class="text-left">Password</span>
-								<input
-									class="input border-0 rounded-sm hover:border-b-2"
-									type="password"
-									id="password"
-									name="password"
-									bind:value={$form.password}
-									placeholder="type your password here"
-								/>
+								<div class="input-name">
+									<input
+										class="input border-0 rounded-sm hover:border-b-2"
+										type="password"
+										id="password"
+										name="password"
+										bind:value={$form.password}
+										placeholder="type your password here"
+									/>
+									<span class="underline-animation"></span>
+
+								</div>
+								
 							</label>
 
 							{#if $errors.password}
@@ -111,43 +120,59 @@
 								</div>
 							{/if}
 						</div>
+
+						<div class="flex items-center justify-between">
+							<div class="flex items-center">
+								<input
+									id="remember_me"
+									name="remember_me"
+									type="checkbox"
+									class="h-4 w-4 border-gray-300 rounded outline-none"
+								/>
+								<label for="remember_me" class="ml-2 block text-sm"> Remember me </label>
+							</div>
+							<div class="text-sm">
+								<a href="#/usersignup" class="font-medium hover:font-bold" > Forgot Password? </a>
+							</div>
+						</div>
 					</div>
 
-					<div class="flex items-center justify-between">
-						<div class="flex items-center">
-							<input
-								id="remember_me"
-								name="remember_me"
-								type="checkbox"
-								class="h-4 w-4 border-gray-300 rounded"
-							/>
-							<label for="remember_me" class="ml-2 block text-sm"> Remember me </label>
-						</div>
-						<div class="text-sm">
-							<a href="#/usersignup" class="font-medium hover:font-bold" > Forgot Password? </a>
-						</div>
-					</div>
+					
 
 					<div>
-						<button type="submit" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-2xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
+						<button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
 							Sign In
 						</button>
 					</div>
 				</form>
 
 				<div class="flex flex-col mt-2">
-					<button type="button" class="btn font-bold text-white text-xl p-4 bg-[#000000] rounded-2xl shadow-md hover:bg-[#0d0e0e] hover:text-[21px] hover:shadow-lg w-[100%]">
-						<span
-							><img
+					<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-3 pt-3">
+						<span style="font-size: 16px; background-color: #F3F5F6; padding: 0 10px; ">
+						  Or Continue with <!--Padding is optional-->
+						</span>
+					</div>
+					<div class="flex justify-center">
+						
+						<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+							<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
+									class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+									alt="title"
+									width={25}
+									height={25}
+							/>
+						</div>
+						<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
 								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
 								alt="title"
 								width={25}
 								height={25}
 							/>
-						</span>
-						<span class="text-xl font-semibold">Sign in with Google</span>
-					</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -165,5 +190,30 @@
 	/* Style "Herd" in red */
 	.white-text {
 		color: red;
+	}
+	.input-name{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		width: 100%;
+	}
+	.input-name > input{
+		border: none;
+		border-bottom: 1px solid rgb(255, 255, 255);
+		outline: none;
+	}
+
+	.underline-animation{
+		transition: all 0.5s;
+		display: inline-block;
+		bottom: 0;
+		left: -100%;
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		background-color: #000000;
+	}
+	.input-name > input:focus + .underline-animation{
+	    left: 0;
 	}
 </style>

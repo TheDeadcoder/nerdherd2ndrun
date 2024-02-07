@@ -132,7 +132,7 @@
 			{/if}
 		{/if}
 		<form class="mt-6 space-y-6" method="POST" use:enhance>
-			<div class="space-y-6">
+			<div class="space-y-1">
 				<legend class="flex items-center font-bold text-xl mb-4"
 					><img
 						src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/information-icon.svg?t=2023-11-02T10%3A55%3A30.544Z"
@@ -142,15 +142,19 @@
 					Personal Information</legend
 				>
 				<label class="label text-left">
-					<span>Name*</span>
-					<input
-						class="input"
-						type="text"
-						id="name"
-						name="name"
-						bind:value={$form.name}
-						placeholder="Enter Your Name"
-					/>
+					<span class="font-semibold">Name*</span>
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							type="text"
+							id="name"
+							name="name"
+							bind:value={$form.name}
+							placeholder="Enter Your Name"
+						/>
+						<span class="underline-animation"></span>
+					</div>
+					
 					{#if $errors.name}
 						<div>
 							<small class="text-red-500">{$errors.name}</small>
@@ -158,8 +162,12 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Date of Birth*</span>
-					<input class="input" type="date" id="dob" name="dob" bind:value={$form.dob} />
+					<span class="font-semibold">Date of Birth*</span>
+					<div class="input-name">
+						<input 	class="input border-0 rounded-sm hover:border-b-2"
+								type="date" id="dob" name="dob" bind:value={$form.dob} 
+						/>
+						<span class="underline-animation"></span></div>
 					{#if $errors.dob}
 						<div>
 							<small class="text-red-500">{$errors.dob}</small>
@@ -167,15 +175,19 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Address</span>
-					<input
-						class="input"
-						type="text"
-						id="address"
-						name="address"
-						bind:value={$form.address}
-						placeholder="Enter Your Current Address"
-					/>
+					<span class="font-semibold">Address</span>
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							type="text"
+							id="address"
+							name="address"
+							bind:value={$form.address}
+							placeholder="Enter Your Current Address"
+						/>
+						<span class="underline-animation"></span>
+					</div>
+					
 					{#if $errors.address}
 						<div>
 							<small class="text-red-500">{$errors.address}</small>
@@ -184,8 +196,8 @@
 				</label>
 
 				<label class="label text-left">
-					<span>Gender*</span>
-					<div class="space-y-2">
+					<span class="font-semibold">Gender*</span>
+					<div class="flex justify-between leading-3">
 						<label class="label flex items-center space-x-2">
 							<input
 								class="radio"
@@ -196,7 +208,7 @@
 								id="Male"
 								bind:group={$form.gender}
 							/>
-							<p>Male</p>
+							<p class="pb-2">Male</p>
 						</label>
 						<label class="label flex items-center space-x-2">
 							<input
@@ -207,7 +219,7 @@
 								id="Female"
 								bind:group={$form.gender}
 							/>
-							<p>Female</p>
+							<p class="pb-2">Female</p>
 						</label>
 						<label class="label flex items-center space-x-2">
 							<input
@@ -218,7 +230,7 @@
 								id="Rather Not Say"
 								bind:group={$form.gender}
 							/>
-							<p>Rather Not Say</p>
+							<p class="pb-2">Rather Not Say</p>
 						</label>
 					</div>
 					{#if $errors.gender}
@@ -228,7 +240,7 @@
 					{/if}
 				</label>
 			</div>
-			<div class="space-y-6 mt-11">
+			<div class="space-y-1 mt-11">
 				<legend class="flex items-center font-bold text-xl mb-4"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/internet-education-graduation-svgrepo-com.svg"
@@ -238,7 +250,7 @@
 					Educational Information</legend
 				>
 				<label class="label text-left">
-					<span>Current Status*</span>
+					<span class="font-semibold">Current Status*</span>
 					<select bind:value={$form.currstatus} class="select" id="currstatus" name="currstatus">
 						<option value="Teaching">Teaching</option>
 						<option value="Student">Student</option>
@@ -250,15 +262,18 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Current Institution (If any)</span>
-					<input
-						class="input"
-						type="text"
-						id="currins"
-						name="currins"
-						placeholder="Enter Your Current institution"
-						bind:value={$form.currins}
-					/>
+					<span class="font-semibold">Current Institution (If any)</span>
+					
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							type="text"
+							id="currins"
+							name="currins"
+							placeholder="Enter Your Current institution"
+							bind:value={$form.currins}
+						/>
+						<span class="underline-animation"></span></div>
 				</label>
 				<label class="label text-left">
 					<span>Highest Degree*</span>
@@ -314,7 +329,7 @@
 					</select>
 				</label>
 			</div>
-			<div class="space-y-6">
+			<div class="space-y-1">
 				<legend class="flex items-center font-bold text-xl mb-4"
 					><img
 						src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/email-blue.svg"
@@ -323,13 +338,14 @@
 					/>
 					Contact Information</legend
 				>
-
+				
 				<label class="label text-left">
-					<span>Contact Number</span>
-					<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+					<span class="font-semibold">Contact Number</span>
+					<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]  border-0 rounded-lg ">
 						<div class="input-group-shim">+88</div>
+
 						<input
-							class="input"
+							class="input border-0 rounded-sm hover:border-b-2"
 							title="Input (number)"
 							type="text"
 							name="mobile"
@@ -345,17 +361,21 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Email</span>
-					<input
-						class="input"
-						title="Input (email)"
-						type="email"
-						placeholder="name@example.com"
-						autocomplete="email"
-						name="email"
-						id="email"
-						bind:value={$form.email}
-					/>
+					<span class="font-semibold">Email</span>
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							title="Input (email)"
+							type="email"
+							placeholder="name@example.com"
+							autocomplete="email"
+							name="email"
+							id="email"
+							bind:value={$form.email}
+						/>
+						<span class="underline-animation"></span>
+					</div>
+					
 					{#if $errors.email}
 						<div>
 							<small class="text-red-500">{$errors.email}</small>
@@ -363,16 +383,20 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Password</span>
-					<input
-						class="input"
-						title="Input (email)"
-						type="password"
-						name="password"
-						placeholder="Enter your password"
-						bind:value={$form.password}
-						id="password"
-					/>
+					<span class="font-semibold">Password</span>
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							title="Input (email)"
+							type="password"
+							name="password"
+							placeholder="Enter your password"
+							bind:value={$form.password}
+							id="password"
+						/>
+						<span class="underline-animation"></span>
+					</div>
+					
 					{#if $errors.password}
 						<div>
 							<small class="text-red-500">{$errors.password}</small>
@@ -380,16 +404,20 @@
 					{/if}
 				</label>
 				<label class="label text-left">
-					<span>Confirm Password</span>
-					<input
-						class="input"
-						title="Input (password)"
-						type="password"
-						name="confirmPassword"
-						placeholder="Confirm your password"
-						bind:value={$form.confirmPassword}
-						id="confirmPassword"
-					/>
+					<span class="font-semibold">Confirm Password</span>
+					<div class="input-name">
+						<input
+							class="input border-0 rounded-sm hover:border-b-2"
+							title="Input (password)"
+							type="password"
+							name="confirmPassword"
+							placeholder="Confirm your password"
+							bind:value={$form.confirmPassword}
+							id="confirmPassword"
+						/>
+						<span class="underline-animation"></span>
+					</div>
+					
 					{#if $errors.confirmPassword}
 						<div>
 							<small class="text-red-500">{$errors.confirmPassword}</small>
@@ -397,7 +425,7 @@
 					{/if}
 				</label>
 			</div>
-			<div class="space-y-6">
+			<div class="space-y-1">
 				<legend class="flex items-center font-bold text-xl mb-4"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/teach-svgrepo-com.svg"
@@ -440,7 +468,7 @@
 					{/if}
 				</label>
 			</div>
-			<div class="space-y-6">
+			<div class="space-y-1">
 				<legend class="flex items-center font-bold text-xl mb-4"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/confirm-svgrepo-com.svg"
@@ -499,8 +527,8 @@
 						{$form.interest}
 					</p>
 				</div>
-				<div>
-					<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+				<div class="py-3">
+					<button type="submit" class="w-1/2 btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg ">
 						⚡Sign Up⚡
 					</button>
 				</div>
@@ -518,5 +546,30 @@
 		font-size: 2rem; /* Adjust font size as needed */
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.input-name{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		width: 100%;
+	}
+	.input-name > input{
+		border: none;
+		border-bottom: 1px solid rgb(255, 255, 255);
+		outline: none;
+	}
+
+	.underline-animation{
+		transition: all 0.5s;
+		display: inline-block;
+		bottom: 0;
+		left: -100%;
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		background-color: #000000;
+	}
+	.input-name > input:focus + .underline-animation{
+	    left: 0;
 	}
 </style>

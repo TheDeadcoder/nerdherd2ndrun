@@ -8,7 +8,7 @@
 	import { InputChip } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
-	export let data;
+	export let data
 
 	let { session, supabase, blog } = data;
 	$: ({ session, supabase, blog } = data);
@@ -78,119 +78,123 @@
 
 <main>
 	<div>
-		<nav class="appbar">
-			<div class="logo-container">
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-					class="transform transition duration-300 hover:rotate-12"
-					alt="title"
-					width={60}
-				/>
-				<span class="company-name text-2xl font-extrabold">NerD</span><span
-					class="company-name white-text text-2xl font-extrabold">Herd</span
-				>
-			</div>
-			<ul class="links">
-				<li>
-					<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Home</a
-					>
-				</li>
-				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Library</a
-					>
-				</li>
-				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Class</a
-					>
-				</li>
-				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Compete</a
-					>
-				</li>
-
-				<li>
-					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Chatbot</a
-					>
-				</li>
-
-				<li>
-					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Planner</a
-					>
-				</li>
-
-				<LightSwitch class="mr-3" />
-				<div use:popup={popupClick}>
-					<Avatar
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
-						width="w-10"
-						rounded="rounded-full"
+		<div class="navbar">
+			<nav class="appbar">
+				<div class="logo-container">
+					<img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+						class="transform transition duration-300 hover:rotate-12"
+						alt="title"
+						width={60}
 					/>
+					<span class="company-name text-2xl font-extrabold">NerD</span><span
+						class="company-name white-text text-2xl font-extrabold">Herd</span
+					>
 				</div>
-
-				<div data-popup="popupClick">
-					<ul class="text-lg font-semibold bg-sky-300 ml-0">
-						<li class="mt-2 mb-3">
-							<a href="/trainerverified/profile" class="flex items-center font-bold"
-								><img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-7 mr-1 hover:rotate-12"
-								/>
-								Profile</a
-							>
-						</li>
-						<li class="mb-2">
-							<a href="/library" class="flex items-center font-bold"
-								><img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-7 mr-1 hover:rotate-12"
-								/>
-								Logout</a
-							>
-						</li>
-					</ul>
-				</div>
-			</ul>
-		</nav>
+				<ul class="links">
+					<li>
+						<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Home</a
+						>
+					</li>
+					<li>
+						<a href="/library" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Library</a
+						>
+					</li>
+					<li>
+						<a href="/library" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Class</a
+						>
+					</li>
+					<li>
+						<a href="/library" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Compete</a
+						>
+					</li>
+	
+					<li>
+						<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Chatbot</a
+						>
+					</li>
+	
+					<li>
+						<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Planner</a
+						>
+					</li>
+	
+					<LightSwitch class="mr-3" />
+					<div use:popup={popupClick}>
+						<Avatar
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
+							width="w-10"
+							rounded="rounded-full"
+						/>
+					</div>
+	
+					<div data-popup="popupClick">
+						<ul class="text-lg font-semibold bg-sky-300 ml-0">
+							<li class="mt-2 mb-3">
+								<a href="/trainerverified/profile" class="flex items-center font-bold"
+									><img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1 hover:rotate-12"
+									/>
+									Profile</a
+								>
+							</li>
+							<li class="mb-2">
+								<a href="/library" class="flex items-center font-bold"
+									><img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1 hover:rotate-12"
+									/>
+									Logout</a
+								>
+							</li>
+						</ul>
+					</div>
+				</ul>
+			</nav>
+		</div>
+		
+		<!-- <TrainerNavBar></TrainerNavBar> -->
 	</div>
-	<div class="w-full h-screen flex flex-row ">
+	<div class="w-full h-screen flex flex-row mt-[80px]">
 		<div>
 			<AppRail class="w-fit overflow-hidden ">
 				<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
@@ -358,15 +362,45 @@
 		border-bottom: 1px solid #ccc;
 	}
 
-	.logo-container {
-		display: flex;
-		align-items: center;
-	}
+	
 
 	.logo-container img {
 		width: 50px;
 		margin-right: 1rem;
 	}
+
+	.links li {
+		margin-left: 2rem;
+	}
+
+	
+
+	.links a:hover {
+		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.white-text {
+		color: red;
+	}
+	.company-name {
+		font-size: 2rem; /* Adjust font size as needed */
+		margin-top: 1rem; /* Add spacing if necessary */
+		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+    .navbar{
+        overflow: hidden;
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        z-index: 5;
+        background-color: rgb(188, 223, 253);
+    }
+	
+
+	.logo-container {
+		display: flex;
+		align-items: center;
+	}
+
 
 	.links {
 		display: flex;
@@ -374,9 +408,6 @@
 		margin: 0;
 	}
 
-	.links li {
-		margin-left: 2rem;
-	}
 
 	.links a {
 		text-decoration: none;
@@ -384,7 +415,5 @@
 		transition: color 0.2s ease-in-out;
 	}
 
-	.links a:hover {
-		color: #007bff; /* Accent color from Skeleton UI */
-	}
+	
 </style>
