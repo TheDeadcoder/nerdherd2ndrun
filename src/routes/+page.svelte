@@ -101,7 +101,7 @@
 			<div class="flex flex-col w-1/2 z-[2]">
 				<h1 class="text-5xl font-bold font-heading mb-1">Reimagine your study life with us</h1>
 				
-				<p class="text-l font-semibold mb-9 text-white w-4/5">
+				<p class="text-l font-semibold mb-9 text-[#ffffff] w-4/5">
 					<!-- The NerDHerd ecosystem is designed to help you quench your thirst for knowledge, keep you up
 					to date, saving you from distractions. Engage yourself in class activities in a way you have
 					never seen before. Avail your mentor from anywhere. Read the blogs. Visualize with our
@@ -462,7 +462,7 @@
 				</div>
 			</div>
 			
-			<div class=" pl-8  ">
+			<div class=" pl-20 ">
 				<div class="flex items-center  h-[100%]">
 					<div class="flex flex-col w-3/5">
 						<div class="mb-8">
