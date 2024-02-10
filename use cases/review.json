@@ -1,0 +1,97 @@
+[
+    {
+        "usecase": {
+            "name": "Review and Rating Check",
+            "description": [
+                "Only who has taken the class can review the class",
+                "The review should be a maximum of 50 characters",
+                "The rating should be between 1 and 5"
+            ],
+            "preconditions": [
+                "Learner is logged in",
+                "Learner has taken the class"
+            ],
+            "steps": [
+                "Learner clicks on the review button",
+                "Learner writes the review",
+                "Learner submits the review"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Unenrolled student gives review of the class",
+                "description": "Verify that the learner has taken the class",
+                "input": {
+                    "Review": "This is a Bad class",
+                    "rating": "2", 
+                    "enrolled": "No"
+                },
+                "expected": {
+                    "outcome":"The Learner has not taken the class, hence he is not authorized to review the class",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Enrolled student gives review of the class", 
+                "description": "Verify that the learner has taken the class",
+                "input": {
+                    "Review": "This is a Good class",
+                    "rating": "4",
+                    "enrolled": "Yes"
+                },
+                "expected": {
+                    "outcome":"The Learner has taken the class, hence he is authorized to review the class",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "Review given with more than 50 characters",
+                "description": "Verify that the review is a maximum of 50 characters",
+                "input": {
+                    "Review": "This is a Bad class, I did not like it at all, I would not recommend it to anyone, it was a waste of time and money",
+                    "rating": "2"
+                },
+                "expected": {
+                    "outcome":"The review is more than 50 characters",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Review given with less than 50 characters",
+                "description": "Verify that the review is a maximum of 50 characters",
+                "input": {
+                    "Review": "This is a Bad class",
+                    "rating": "2"
+                },
+                "expected": {
+                    "outcome":"The review is less than 50 characters",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "Negative rating given",
+                "description": "Verify that the rating is between 1 and 5",
+                "input": {
+                    "Review": "This is a Bad class",
+                    "rating": "-5"
+                },
+                "expected": {
+                    "outcome":"The rating is not between 1 and 5",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Valid rating given",
+                "description": "Verify that the rating is between 1 and 5",
+                "input": {
+                    "Review": "This is a Good class",
+                    "rating": "4"
+                },
+                "expected": {
+                    "outcome":"The rating is between 1 and 5",
+                    "status": "Pass"
+                }
+            }
+        ]
+    }
+]

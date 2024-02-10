@@ -1,0 +1,50 @@
+[
+    {
+        "usecase": {
+            "name": "Trainer Add Blogs",
+            "description": "Trainer should be able to add blogs", 
+            "preconditions": [
+                "Trainer should be logged in",
+                "The blog post should not exceed 1000 words"
+            ],       
+            "steps": [
+                "Trainer will click My Articles from the left menu",
+                "Trainer will click Add New Post",
+                "Trainer will fill the required fields",
+                "Trainer will click Done With Editing"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Large blog post added",
+                "description": "The length of the blog post should not 1000 words",
+                "input": {
+                    "title": "Test Blog",
+                    "short description": "This is a test blog",
+                    "time to read": "5",
+                    "tags": "test, blog",
+                    "content": "This is a test .... 5000 words"
+                },
+                "expected": {
+                    "outcome":"The blog post exceeds 1000 words",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Valid blog post added",
+                "description": "The length of the blog post should not 1000 words",
+                "input": {
+                    "title": "Test Blog",
+                    "short description": "This is a test blog",
+                    "time to read": "5",
+                    "tags": "test, blog",
+                    "content": "This is a test .... 500 words"
+                },
+                "expected": {
+                    "outcome":"The blog post is added successfully",
+                    "status": "Pass"
+                }
+            }
+        ]
+    }
+]

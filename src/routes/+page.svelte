@@ -54,7 +54,11 @@
 	typeText();
 </script>
 
-<nav class="fixed top-0 z-50 w-full py-6 backdrop-blur-md">
+
+
+<section class="">
+	
+	
 	<div class="flex justify-between mx-6">
 		<div class="flex">
 			<img
@@ -69,13 +73,20 @@
 		</div>
 
 		<div class="flex space-x-3">
-			<LightSwitch />
+			<!-- <LightSwitch /> -->
 			<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
 				About us
 			</a>
 		</div>
 	</div>
-</nav>
+	<div class="relative">
+		<div class="wave-header">
+			<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+				<path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+			</svg>
+		</div>
+	</div>
+</section>
 <!-- <div class="flex justify-center mt-28 mb-153">
 	<div class="space-y-10 text-center flex flex-col">
 		<div class="flex typing-text">{typingText}</div>
@@ -86,7 +97,7 @@
 		<div class="flex flex-col w-1/2">
 			<h1 class="text-5xl font-bold font-heading mb-1">Reimagine your study life with us</h1>
 			
-			<p class="text-l font-semibold mb-9">
+			<p class="text-l font-semibold mb-9 text-white w-4/5">
 				<!-- The NerDHerd ecosystem is designed to help you quench your thirst for knowledge, keep you up
 				to date, saving you from distractions. Engage yourself in class activities in a way you have
 				never seen before. Avail your mentor from anywhere. Read the blogs. Visualize with our
@@ -618,4 +629,28 @@
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
 	}
+	.wave-header {
+		position: absolute;
+		top: -50px;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		line-height: 0;
+		transform: rotate(180deg);
+		z-index: -1;
+		
+	}
+
+	.wave-header svg {
+		position: relative;
+		display: block;
+		width: calc(181% + 1.3px);
+		height: 644px;
+		
+	}
+
+	.wave-header .shape-fill {
+		fill: #869fd4;
+	}
+
 </style>

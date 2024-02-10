@@ -1,0 +1,255 @@
+[
+    {
+        "usecase": {
+            "name": "Sign Up as a Trainer",
+            "scenario": "A trainer has to give his details to sign up",
+            "actors": "Trainer",
+            "preconditions": [
+                "The trainer is not signed in.",
+                "The trainer should have access to the internet.",
+                "The trainer should have a valid email id and a contact number", 
+                "The learner has not used the same email or account to sign up before"
+            ],
+            "steps": [
+                "The trainer has to go to the sign up page",
+                "The trainer has to fill in the details",
+                "The trainer has to verify the email",
+                "The trainer has to wait for the approval"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Extremely Short name given",
+                "description": "Verify that the name is of at least 3 characters",
+                "input": {
+                    "Name": "AB"
+                },
+                "expected": {
+                    "outcome": "Name is required and at least of length 3",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Name given correclty",
+                "description": "Verify that the name is of at least 3 characters",
+                "input": {
+                    "Name": "Raihan"
+                },
+                "expected": {
+                    "outcome": "Name is of correct length",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Date of Birth is in the future",
+                "description": "Verify that the date of birth is in the past",
+                "input": {
+                    "Date of Birth ": [
+                        "01/01/2025"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth must be in the past",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Empty Date of Birth",
+                "description": "Verify that the date of birth is not empty",
+                "input": {
+                    "Date of Birth": [
+                        "Not Selected"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth is required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Date of birth is in the past and not 18 years ago", 
+                "description": "Verify that the date of birth is in the past and the trainer is at least 18 years old",
+                "input": {
+                    "Date of Birth": [
+                        "01/01/2021"
+                    ]
+                },
+                "expected": {
+                    "outcome": "The trainer is less than 18 years old",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Date of birth is in the past and 18 years ago", 
+                "description": "Verify that the date of birth is in the past and the trainer is at least 18 years old",
+                "input": {
+                    "Date of Birth": [
+                        "01/01/2003"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Date of birth is in the past and the trainer is at least 18 years old",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Empty Gender Selection",
+                "description": "Verify that the trainer has selected his/her gender",
+                "input": {
+                    "Gender": [
+                        "Not Selected"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Correct gender selection", 
+                "description": "Verify that the trainer has selected his/her gender",
+                "input": {
+                    "Gender": "male"
+                },
+                "expected": {
+                    "outcome": "Correct",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Contact number format invalid",
+                "description": "Verify the format of the contact number, it should be of 11 digits and should start with 01",
+                "input": {
+                    "Contact Number": [
+                        "1234567"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Phone number must be exactly 11 digits and start with 01",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Contact number format valid",
+                "description": "Verify the format of the contact number, it should be of 11 digits and should start with 01",
+                "input": {
+                    "Contact Number": [
+                        "01853320911"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Phone number is exactly 11 digits and start with 01",
+                    "status": "Approved"
+                }
+            },
+
+            {
+                "name": "Empty or Invalid Email",
+                "description": "Verify that the email is not empty and is in the correct format",
+                "input": {
+                    "Email": [
+                        "abc.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Invalid email address, email address is required",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Valid Email",
+                "description": "Verify that the email is not empty and is in the correct format",
+                "input": {
+                    "Email": [
+                        "abc@gmail.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Valid email address",
+                    "status": "Approved"
+                }
+            },
+
+            {
+                "name": "Empty or Invalid Password",
+                "description": "Verify that the password is not empty and is of at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number",
+                "input": {
+                    "Password": [
+                        "abc"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password must be at least 7 characters long and contain at least 1 uppercase letter, 1 special character, 1 number",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Valid Password",
+                "description": "Verify that the password is not empty and is of at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number",
+                "input": {
+                    "Password": [
+                        "xxx@xx2342Ax"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password is valid",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Empty or Invalid Confirm Password",
+                "description": "Verify that the confirm password is not empty and is same as the password",
+                "input": {
+                    "Confirm Password": [
+                        "abc"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password and confirm password must match",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Valid Confirm Password",
+                "description": "Verify that the confirm password is not empty and is same as the password",
+                "input": {
+                    "Confirm Password": [
+                        "xxx@xx2342Ax"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Password and confirm password match",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "old mail given ",
+                "description": "Verify that the email is not previously used",
+                "input": {
+                    "Email": [
+                        "raihan@gmail.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Email already exists",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "new mail given",
+                "description": "Verify that the email is not previously used",
+                "input": {
+                    "Email": [
+                        "raihsssan@gmail.com"
+                    ]
+                },
+                "expected": {
+                    "outcome": "Email valid",
+                    "status": "Approved"
+                }
+            }
+
+
+        ]
+    }
+]

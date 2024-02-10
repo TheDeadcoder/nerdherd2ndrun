@@ -1,0 +1,104 @@
+[
+    {
+        "usecase": {
+            "name": "Add a new task in To Do list",
+            "description": "User should be able to add a new task", 
+            "preconditions": "User should be logged in",
+            "steps": [
+                "User should be logged in",
+                "User should be on the To Do list page",
+                "User should click on the Add button",
+                "User should enter the task name and description",
+                "User should choose the Deadline", 
+                "User should set the importance of the task on a scale of 1 to 10",
+                "User should click on the Submit button"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Correctly add a new task",
+                "description": "User should be able to add a new task",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-31",
+                    "importance": "5"
+                },
+                "expected": {
+                    "outcome":"The task is added to the list",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "Given Deadline is in the past",
+                "description": "User should not be able to set the deadline in the past",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2021-01-01",
+                    "importance": "5"
+                },
+                "expected": {
+                    "outcome":"The deadline is in the past",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The Deadline is in the future",
+                "description": "User should be able to set the deadline in the future",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "5"
+                },
+                "expected": {
+                    "outcome":"The task is added to the list",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name": "The Importance is set to negative",
+                "description": "User should not be able to set the importance to a negative value",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "-5"
+                },
+                "expected": {
+                    "outcome":"The importance is set to a negative value",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The Importance is set to 0",
+                "description": "User should not be able to set the importance to 0",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "0"
+                },
+                "expected": {
+                    "outcome":"The importance is set to 0",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "The Importance is set to 1 to 10",
+                "description": "User should be able to set the importance to a value between 1 to 10",
+                "input": {
+                    "taskName": "Task 1",
+                    "taskDescription": "Task 1 description",
+                    "deadline": "2024-12-12",
+                    "importance": "10"
+                },
+                "expected": {
+                    "outcome":"The task is added to the list",
+                    "status": "Pass"
+                }
+            }
+        ]
+    }
+]

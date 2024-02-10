@@ -1,0 +1,95 @@
+[
+    {
+        "usecase": {
+            "name": "Learner Sign Up",
+            "description": "A learner can sign up to the platform, by mail and password, or by Google or by Discord",
+            "preconditions": [
+                "The learner is not signed in", 
+                "The learner has access to the internet",
+                "The learner has a valid email id or Google account or Discrod account",
+                "The learner has not used the same email or account to sign up before"
+            ],
+            "steps": [
+                "The learner opens the platform",
+                "The learner clicks on the sign up button",
+                "The learner chooses the sign up method",
+                "The learner enters the email id and password or selects the Google or Discord account",
+                "The learner clicks on the sign up button",
+                "The learner verifies the email id or Google or Discord account",
+                "The learner is registered to the platform",
+                "The learner is signed in to the platform"
+            ]
+            
+        },
+        "testcases": [
+            {
+                "name": "Sign Up by previously used email id",
+                "description": "A learner has to use a email id that is not used before to sign up",
+                "input": {
+                    "email": "raihan@gmail.com",
+                    "password": "123456"
+                },
+                "expected": {
+                    "outcome": "The email was used before",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Learner Sign Up unique email id",
+                "description": "A learner has to use a email id that is not used before to sign up",
+                "input": {
+                    "email": "random12@gmail.com", 
+                    "password": "123456"
+                },
+                "expected": {
+                    "outcome": "The email was not used before",
+                    "status": "Accepted"
+                }
+            },
+            {
+                "name": "Learner Sign Up by previously used Google account",
+                "description": "A learner has to use a Google account that is not used before to sign up",
+                "input": {
+                    "gmail": "raihan@gmail.com"
+                },  
+                "expected": {
+                    "outcome": "The gmail was used before",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Learner Sign Up by unique Google Account",
+                "description": "A learner has to use a Google account that is not used before to sign up",
+                "input": {
+                    "gmail": "random1234@gmail.com"
+                }, 
+                "expected": {
+                    "outcome": "The gmail was not used before",
+                    "status": "Accepted"
+                }
+            },
+            {
+                "name": "Learner Sign Up by previously used Google account",
+                "description": "A learner has to use a Discord account that is not used before to sign up",
+                "input": {
+                    "discord account": "random#1234"
+                },
+                "expected": {
+                    "outcome": "The discord account was used before",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Learner Sign Up by unique Discord Account",
+                "description": "A learner has to use a Discord account that is not used before to sign up",
+                "input": {
+                    "discord account": "random#12345"
+                },
+                "expected": {
+                    "outcome": "The discord account was not used before",
+                    "status": "Accepted"
+                }
+            }
+        ]
+    }
+]

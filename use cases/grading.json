@@ -1,0 +1,78 @@
+[
+    {
+        "usecase": {
+            "name": "Grading the student after completion of the quiz",
+            "description": "The trainer should be able to grade the student after the completion of the quiz", 
+            "preconditions":[
+                "The student has completed the quiz",
+                "The student has submitted the quiz",
+                "The trainer is logged in and has access to the quiz"
+            ],
+            "steps": [
+                "The trainer should be able to view the student's answers",
+                "The trainer should be able to grade the student's answers",
+                "The trainer should be able to view the student's score",
+                "The trainer should be able to edit the student's performance"
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Over grading",
+                "description": "The grade shoudln't exceed the maximum grade",
+                "input": {
+                    "grade": "4.25"
+                },
+                "expected": {
+                    "outcome":" The grade should not be greater than 4.00",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Under grading",
+                "description": "The grade shoudln't be less than the minimum grade",
+                "input": {
+                    "grade": "1.25"
+                },
+                "expected": {
+                    "outcome":" The grade should not be less than 2.00",
+                    "status": "Fail"
+                }
+            },
+            {
+                "name": "Correct grading",
+                "description": "The grade should be within the range of 2.00 to 4.00",
+                "input": {
+                    "grade": "3.25"
+                },
+                "expected": {
+                    "outcome":"The grade is within the range of 2.00 to 4.00",
+                    "status": "Pass"
+                }
+            },
+            {
+                "name":"Grading the student after completion of the quiz",
+                "description":"The trainer should be able to grade the student after the completion of the quiz",
+                "input": {
+                    "grade": "3.25",
+                    "status": "Contest is Running"
+                },
+                "expected": {
+                    "outcome":"The quiz has not been completed yet",
+                    "status": "Fail"
+                }
+            }, 
+            {
+                "name":"Grading the student after completion of the quiz",
+                "description":"The trainer should be able to grade the student after the completion of the quiz",
+                "input": {
+                    "grade": "3.25", 
+                    "status": "Completed"
+                },
+                "expected": {
+                    "outcome":"Successfully graded the student",
+                    "status": "Pass"
+                }
+            }
+        ]
+    }
+]

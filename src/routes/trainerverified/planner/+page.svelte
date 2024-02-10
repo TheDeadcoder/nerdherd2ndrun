@@ -1,13 +1,22 @@
-<script>
+<script lang='ts'>
 	// @ts-nocheck
 
-	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
+	import { Ratings, popup } from '@skeletonlabs/skeleton';
+	import type { PopupSettings } from '@skeletonlabs/skeleton';
+	import { Avatar } from '@skeletonlabs/skeleton';
+	import {clickOutside} from '../../../stores/clickOutside'
 
 	export let data;
+	let value = { current: 0, max: 10 };
+	function iconClick(event: CustomEvent<{index:number}>): void {
+		value.current = event.detail.index;
+	}
 
 	let { session, supabase, todo } = data;
 	$: ({ session, supabase, todo } = data);
+
+	$: console.log("value",value.current)
 
 	let selectedTodo = null;
 
@@ -15,6 +24,9 @@
 	let description;
 	let deadline;
 	let importancescale;
+
+	$: importancescale = value.current
+	$: console.log("import",importancescale)
 
 	function markCompleted(todoItem) {
 		// Implementation to mark a todo as completed
@@ -59,6 +71,16 @@
 			}
 		}
 	}
+	const handleClickOutside = (e)=>{
+         closeform()
+    }
+
+
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
 
 	function getStatusColor(todoItem) {
 		return todoItem.status ? 'text-green-600' : 'text-red-600';
@@ -66,84 +88,122 @@
 </script>
 
 <div>
-	<nav class="appbar">
-		<div class="logo-container">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-				class="transform transition duration-300 hover:rotate-12"
-				alt="title"
-				width={60}
-			/>
-			<span class="company-name text-2xl font-extrabold">NerD</span><span
-				class="company-name white-text text-2xl font-extrabold">Herd</span
-			>
-		</div>
-		<ul class="links">
-			<li>
-				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Home</a
+	<div class="navbar">
+		<nav class="appbar">
+			<div class="logo-container flex items-center">
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+					class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
+					alt="title"
+					width={50}
+					
+				/>
+				<span class="company-name text-2xl font-extrabold">NerD</span><span
+					class="company-name white-text text-2xl font-extrabold">Herd</span
 				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Class</a
-				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Compete</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Chatbot</a
-				>
-			</li>
+			</div>
+			<ul class="links">
+				<li>
+					<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Home</a
+					>
+				</li>
+				<li>
+					<a href="/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Library</a
+					>
+				</li>
+				<li>
+					<a href="/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Class</a
+					>
+				</li>
+				<li>
+					<a href="/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Compete</a
+					>
+				</li>
 
-			<li>
-				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Planner</a
-				>
-			</li>
+				<li>
+					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Chatbot</a
+					>
+				</li>
 
-			<LightSwitch class="mr-3" />
-		</ul>
-	</nav>
+				<li>
+					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Planner</a
+					>
+				</li>
+
+				<!-- <LightSwitch class="mr-3" /> -->
+				<div use:popup={popupClick}>
+					<Avatar
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
+						width="w-10"
+						rounded="rounded-full"
+					/>
+				</div>
+
+				<div data-popup="popupClick" class="h-32 absolute">
+					<ul class="text-lg font-semibold bg-sky-300 ml-0">
+						<li class="mt-2 mb-3 p-2">
+							<a href="/trainerverified/profile" class="flex items-center font-bold"
+								><img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+									alt="Dashboard Icon"
+									class="h-7 mr-1 hover:rotate-12"
+								/>
+								Profile</a
+							>
+						</li>
+						<li class="mb-2 p-2">
+							<a href="/library" class="flex items-center font-bold"
+								><img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
+									alt="Dashboard Icon"
+									class="h-7 mr-1 hover:rotate-12"
+								/>
+								Logout</a
+							>
+						</li>
+					</ul>
+				</div>
+			</ul>
+		</nav>
+		
+		
+	</div>
 </div>
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="container mx-auto mt-8">
@@ -238,10 +298,10 @@
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
-			on:click={closeform}
+			
 		>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="bg-sky-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4" on:click|stopPropagation>
+			<div class="bg-[#ecebeb] p-6 rounded-lg shadow-lg max-w-md w-full m-4" on:click|stopPropagation use:clickOutside on:click_outside={handleClickOutside}>
 				<form
 					use:enhance
 					action="?/upload"
@@ -251,7 +311,7 @@
 					}}
 				>
 					<label class="label text-left mb-3">
-						<span>Task Name</span>
+						<span class="font-semibold">Task Name</span>
 
 						<input
 							class="input"
@@ -263,9 +323,9 @@
 						/>
 					</label>
 					<label class="label text-left">
-						<span>Task Description</span>
+						<span class="font-semibold">Task Description</span>
 						<textarea
-							class="textarea"
+							class="textarea bg-white"
 							rows="4"
 							placeholder="Your motivation..."
 							id="description"
@@ -274,22 +334,22 @@
 						/>
 					</label>
 					<label class="label text-left mb-3">
-						<span>Deadline</span>
+						<span class="font-semibold">Deadline</span>
 
 						<input class="input" type="date" id="deadline" name="deadline" bind:value={deadline} />
 					</label>
 					<label class="label text-left mb-3">
-						<span>On a scale from 1 to 10, how important is your task?</span>
+						 <span>On a scale from 1 to 10, how important is your task?</span>
 
-						<input
-							class="input"
-							type="number"
-							id="importancescale"
-							name="importancescale"
-							bind:value={importancescale}
-						/>
+						 
+						<Ratings id="importancescale" type="number" name="importancescale" bind:value={value.current} max={value.max} interactive on:icon={iconClick} >
+							<svelte:fragment slot="empty">(icon)</svelte:fragment>
+							<!-- <svelte:fragment slot="half">(icon)</svelte:fragment> -->
+							<svelte:fragment slot="full">B</svelte:fragment>
+						</Ratings>
 					</label>
-					<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+					
+					<button type="submit" class="font-bold text-lg  p-3 m-2 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center"					>
 						Submit
 					</button>
 				</form>
@@ -306,6 +366,10 @@
 		font-size: 2rem; /* Adjust font size as needed */
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.navbar{
+		background-color: rgb(188, 223, 253);
+
 	}
 	.appbar {
 		display: flex;
