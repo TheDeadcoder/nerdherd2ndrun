@@ -218,7 +218,7 @@
 <div class="container mx-auto mt-8">
 	<h2 class="text-3xl font-bold text-center mb-4">Todo List</h2>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="card ml-8 mt-4 w-1/4 hover:scale-105 border-2 mb-4" on:click={openAddForm}>
+	<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
 		<div class="flex flex-row items-center space-x-3 p-5">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg"
@@ -226,33 +226,31 @@
 				class="h-5 mr-1 hover:rotate-12"
 			/>
 			<h1 class="text-lg">Add  New Task</h1>
-		</div>
-		
+		</div>	
 	</div>
 	<hr>
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8">
 		{#each todo as todoItem}
-			<div class="todo-item p-4 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
-				<div class="flex justify-between mb-2">
-					<span class="text-2xl font-bold">{todoItem.taskname}</span>
+			<div class="todo-item p-3 py-1 m-1 mr-3 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
+				<div class="flex justify-between">
+					<span class="text-xl font-bold">{todoItem.taskname}</span>
 					<span class="text-base text-gray-500">{todoItem.importancescale}</span>
 				</div>
-				<div class="flex justify-between mb-2">
-					<span class="text-base font-bold">{todoItem.deadline}</span>
+				<div class="flex justify-between  mb-1">
+					<div>
+						<p class="text-base font-semibold">{todoItem.deadline}</p>
+					</div>
+					
 				</div>
-				<div class="flex justify-between mt-4">
-					<button
-						type="button"
-						class="btn variant-outline-primary"
-						on:click={() => viewDetails(todoItem)}>View Details</button
-					>
-					<div class="flex flex-row space-x-3">
+				<div class="flex justify-between items-center ">
+					
+					<div class="flex flex-row">
 						<form action="?/deleteTodo&id={todoItem.id}" method="POST">
 							<button type="submit">
 								<img
 									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/delete-svgrepo-com%20(1).svg"
 									alt="Dashboard Icon"
-									class="h-6 mr-1 hover:rotate-12"
+									class="h-5 mr-2 hover:rotate-12"
 								/>
 							</button>
 						</form>
@@ -262,11 +260,18 @@
 									<img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/dialog-complete-svgrepo-com.svg"
 										alt="Dashboard Icon"
-										class="h-6 mr-1 hover:rotate-12"
+										class="h-5 mr-1 hover:rotate-12"
 									/>
 								</button>
 							</form>
 						{/if}
+					</div>
+					<div class="mb-1">
+						<button
+						type="button"
+						class="btn  text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg"
+						on:click={() => viewDetails(todoItem)}><span class=" hover-underline-animation">View Details</span></button
+						>
 					</div>
 				</div>
 			</div>
@@ -429,5 +434,28 @@
 
 	.links a:hover {
 		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.hover-underline-animation {
+		display: inline-block;
+		position: relative;
+		color: #000000;
+	}
+
+	.hover-underline-animation::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: #000000;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+
+	.hover-underline-animation:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
 	}
 </style>
