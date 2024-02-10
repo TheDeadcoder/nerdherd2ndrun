@@ -493,13 +493,11 @@
 			
 		</div>
 	</section>
-	<footer class="py-20 mt-12 z-10">
-		<div class="max-w-screen-xl mx-auto flex justify-between space-x-14">
-			<div class="flex flex-col space-y-6 w-1/4">
-				<div>
-					<span class="company-name text-2xl font-extrabold">NerD</span><span
-						class="company-name white-text text-2xl font-extrabold">Herd</span
-					>
+	<div class="py-12 mt-12 relative bg-[#e2e6e9]">
+		<div class="flex justify-between  bg-white z-[2]">
+			<div class="flex flex-col justify-center space-y-6 pl-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40">
+				<div >
+					<span class="company-name text-[50px] font-extrabold">NerD</span><span class="company-name white-text text-[20px] font-extrabold">Herd</span>
 				</div>
 				<div class="flex space-x-4">
 					<img
@@ -514,8 +512,8 @@
 					/>
 				</div>
 			</div>
-			<div class="flex flex-col space-y-6 w-1/4">
-				<h6 class="font-semibold font-heading">Contact Info</h6>
+			<div class="flex flex-col justify-center space-y-6 p-4 py-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40">
+				<h6 class="font-bold font-heading">Contact Info</h6>
 				<div class="flex items-start space-x-2">
 					<img
 						src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/location.svg"
@@ -538,7 +536,7 @@
 					<p>sakibbuet2k19@gmail.com</p>
 				</div>
 			</div>
-			<div class="flex flex-col space-y-6 w-1/2">
+			<div class="flex flex-col space-y-6 p-12 w-1/2 z-[2] bg-[#e2e6e9] bg-opacity-40">
 				<h6 class="font-heading font-semibold">Get in touch</h6>
 				<form class="flex flex-col space-y-6">
 					<input class="input" title="Input (text)" type="text" placeholder="Your Name" />
@@ -551,14 +549,14 @@
 					/>
 					<textarea class="textarea" rows="4" placeholder="Your message" />
 					<div>
-						<button class="btn variant-filled-secondary">Send</button>
+						<button class="btn w-1/2 font-bold text-xl p-4 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg">Send</button>
 					</div>
 				</form>
 			</div>
 		</div>
-	</footer>
+	</div>
 	
-	<div class="relative">
+	<div class="relative z-0">
 		<div class="footer-wave">
 			<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
 				<path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
@@ -569,7 +567,11 @@
 		</div>
 		
 	</div>
-	<Footer />
+	<div class="relative w-full flex justify-center border-t-[1px]">
+		<div class="absolute  text-center py-4 top-[-60px] ">
+			<p>©2023 NerDHerd 🏆</p>
+		</div>
+	</div>
 	
 </main>
 
@@ -681,13 +683,14 @@
 		overflow: hidden;
 		line-height: 0;
 		transform: rotate(180deg);
+		z-index: 0;
 	}
 
 	.footer-wave svg {
 		position: relative;
 		display: block;
 		width: calc(160% + 1.3px);
-		height: 400px;
+		height: 350px;
 	}
 
 	.footer-wave .shape-fill {

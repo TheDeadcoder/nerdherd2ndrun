@@ -162,7 +162,9 @@
 				<!-- {/if} -->
 			</div>
 			
-			<Footer />
+			<div>
+				<Footer></Footer>
+			</div>
 		{/if}
 	</section>
 </div>

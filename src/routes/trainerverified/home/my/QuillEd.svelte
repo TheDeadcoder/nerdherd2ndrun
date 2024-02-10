@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import 'quill/dist/quill.snow.css';
 	import type { SupabaseClient } from '@supabase/supabase-js';
+	import {createEventDispatcher} from 'svelte'
 
 	export let url;
 	export let supabase: SupabaseClient;
@@ -11,6 +12,8 @@
 	let content;
 	let showEditor = true; // Reactive variable to control editor display
 	let savedContent = ''; // Variable to store saved content
+
+	const dispatch = createEventDispatcher();
 
 	function contentToBlob(content) {
 		return new Blob([content], { type: 'text/html' });
@@ -60,17 +63,21 @@
 		url = res2.publicUrl;
 		console.log(url);
 		console.log('Upload done');
+
+		dispatch('editBtnOpen',showEditor)
 	}
 
 	function editPost() {
 		showEditor = true; // Show the editor for editing
+		dispatch('editBtnOpen',showEditor)
+
 	}
 </script>
 
 {#if showEditor}
 	<div bind:this={editor} class="editor"></div>
 	<input type="hidden" name="content" value={url} />
-	<button type="submit" class="btn variant-filled-success text-xl font-semibold" on:click={savePost}
+	<button type="submit" class="font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/4 text-center" on:click={savePost}
 		>Done with Editing</button
 	>
 {:else}
