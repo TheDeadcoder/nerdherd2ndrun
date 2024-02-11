@@ -31,13 +31,17 @@
     function togglePasswordVisibility() {
         showPassword = !showPassword;
         const passwordInput = document.getElementById('password');
-        passwordInput.type = showPassword ? 'text' : 'password';
+		if (passwordInput instanceof HTMLInputElement) {
+    		passwordInput.type = showPassword ? 'text' : 'password';
+		}
     }
 
     onMount(() => {
         // Ensure password input type is set correctly on mount
         const passwordInput = document.getElementById('password');
-        passwordInput.type = 'password';
+		if (passwordInput instanceof HTMLInputElement) {
+			passwordInput.type = 'password';
+		}
     });
 
 </script>
@@ -114,7 +118,7 @@
                         <div>
                             <label class="label text-left">
                                 <span class="text-left">Password</span>
-                                <div class="input-name">
+                                <div class="input-name" style="position: relative;">
                                     <input
                                         class="input border-0 rounded-sm hover:border-b-2"
                                         type="password"
@@ -123,53 +127,54 @@
                                         bind:value={$form.password}
                                         placeholder="type your password here"
                                     />
-                                    <span class="password-toggle" on:click={togglePasswordVisibility}>
-                                        {#if showPassword}
-                                            <!-- Use an icon for show password -->
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="2"
-                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                                />
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="2"
-                                                    d="M4.7 4.7l14.6 14.6M5.66 16.66l.88.88M19.07 5.99l.88.88M18 12a6 6 0 11-12 0 6 6 0 0112 0z"
-                                                />
-                                            </svg>
-                                        {:else}
-                                            <!-- Use an icon for hide password -->
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="2"
-                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                                />
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="2"
-                                                    d="M4 4.5l16 16"
-                                                />
-                                            </svg>
-                                        {/if}
-                                    </span>
+									<span class="underline-animation"></span>
+									<button class="password-toggle" tabindex="0" on:click={togglePasswordVisibility} style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">
+										{#if showPassword}
+											<!-- Use an icon for show password -->
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+												/>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M4.7 4.7l14.6 14.6M5.66 16.66l.88.88M19.07 5.99l.88.88M18 12a6 6 0 11-12 0 6 6 0 0112 0z"
+												/>
+											</svg>
+										{:else}
+											<!-- Use an icon for hide password -->
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+												/>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M4 4.5l16 16"
+												/>
+											</svg>
+										{/if}
+									</button>
                                 </div>
 
                             </label>
@@ -199,7 +204,7 @@
 
 
                     <div>
-                        <button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
+                        <button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]"  tabindex="0">
                             Sign In
                         </button>
                     </div>
