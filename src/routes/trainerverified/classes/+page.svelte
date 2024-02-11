@@ -1,8 +1,11 @@
-<script>
+<script lang="ts">
 	// @ts-nocheck
 
 	export let data;
 	import { enhance } from '$app/forms';
+	import { Avatar } from '@skeletonlabs/skeleton';
+	import type { PopupSettings } from '@skeletonlabs/skeleton';
+
 
 	let { session, supabase, teacher, classes } = data;
 	$: ({ session, supabase, teacher, classes } = data);
@@ -15,6 +18,13 @@
 	let start;
 	let image;
 	let showaddmodal = false;
+
+
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
 
 	function viewDetails(todoItem) {
 		selectedClass = todoItem;
@@ -40,82 +50,126 @@
 	}
 </script>
 
-<nav class="appbar">
-	<div class="logo-container">
-		<img
-			src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-			class="transform transition duration-300 hover:rotate-12"
-			alt="title"
-			width={60}
-		/>
-		<span class="company-name text-2xl font-extrabold">NerD</span><span
-			class="company-name white-text text-2xl font-extrabold">Herd</span
-		>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
+<div class="navbar">
+	<nav class="appbar">
+		<div class="logo-container flex items-center">
+			<img
+				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+				class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
+				alt="title"
+				width={50}
+				
+			/>
+			<span class="company-name text-2xl font-extrabold">NerD</span><span
+				class="company-name white-text text-2xl font-extrabold">Herd</span
 			>
-		</li>
-		<li>
-			<a href="/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
+		</div>
+		<ul class="links">
+			<li>
+				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Home</a
+				>
+			</li>
+			<li>
+				<a href="/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Library</a
+				>
+			</li>
+			<li>
+				<a href="/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Class</a
+				>
+			</li>
+			<li>
+				<a href="/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Compete</a
+				>
+			</li>
 
-		<li>
-			<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
+			<li>
+
+				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+
+					Chatbot</a
+				>
+
+			</li>
+
+			<li>
+
+				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Planner</a
+				>
+
+			</li>
+
+			<!-- <LightSwitch class="mr-3" /> -->
+			<div use:popup={popupClick}>
+				<Avatar
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
+					width="w-10"
+					rounded="rounded-full"
 				/>
-				Planner</a
-			>
-		</li>
-	</ul>
-</nav>
+			</div>
+
+			<div data-popup="popupClick" class="h-32 absolute">
+				<ul class="text-lg font-semibold bg-sky-300 ml-0">
+					<li class="mt-2 mb-3 p-2">
+						<a href="/trainerverified/profile" class="flex items-center font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-7 mr-1 hover:rotate-12"
+							/>
+							Profile</a
+						>
+					</li>
+					<li class="mb-2 p-2">
+						<a href="/library" class="flex items-center font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-7 mr-1 hover:rotate-12"
+							/>
+							Logout</a
+						>
+					</li>
+				</ul>
+			</div>
+		</ul>
+	</nav>
+
+</div>
 
 <div class="card ml-8 mt-4 w-1/4 hover:scale-105 bg-blue-300">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -129,26 +183,45 @@
 		<h1>Add a New Class</h1>
 	</div>
 </div>
-<h1 class="text-2xl font-bold mt-4 ml-8 mb-4">Upcoming Classes</h1>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
-	{#each classes as currClass}
-		{#if classifyClass(currClass.start)}
-			<div class="card p-2">
-				<img src={currClass.image} alt="Dashboard Icon" class="w-96 object-contain object-center" />
-				<h1 class="text-xl font-bold mt-4">
-					{currClass.title}
-				</h1>
-				<div class="flex justify-between mt-2">
-					<p class="text-sm">Span: {currClass.duration} weeks</p>
-					<p class="text-sm">Starting: {currClass.start}</p>
-				</div>
 
-				<button class="btn variant-filled mt-2" on:click={() => viewDetails(currClass)}>
-					View Details
-				</button>
-			</div>
-		{/if}
-	{/each}
+
+<div>
+	<div>
+		<h1 class="text-2xl font-bold mt-4 ml-8 mb-4">Upcoming Classes</h1>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
+		
+		{#each classes as currClass}
+			{#if classifyClass(currClass.start)}
+				<div class="p-2 bg-[#e2e6e9]">
+
+					<img src={currClass.image} alt="Dashboard Icon" class="w-96 object-contain object-center" />
+					<h1 class="text-xl font-bold mt-4">
+						{currClass.title}
+					</h1>
+					<div class="flex justify-between items-center">
+
+						<div class="mt-2">
+							<div>
+								<p class="text-sm"><span class="font-semibold">Duration: </span>  {currClass.duration} weeks</p>
+							</div>
+							<div>
+								<p class="text-sm"><span class="font-semibold">Start : </span>{currClass.start}</p>
+							</div>
+						</div>
+		
+						<div>
+							<button class="btn variant-filled mt-2" on:click={() => viewDetails(currClass)}>
+								View Details
+							</button>
+						</div>
+
+					</div>
+
+				</div>
+			{/if}
+		{/each}
+	</div>
 </div>
 <h1 class="text-2xl font-bold mt-4 ml-8 mb-4">Running Classes</h1>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
@@ -324,6 +397,10 @@
 		font-size: 2rem; /* Adjust font size as needed */
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.navbar{
+		background-color: rgb(188, 223, 253);
+
 	}
 	.appbar {
 		display: flex;
