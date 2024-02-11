@@ -14,6 +14,12 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.39.3
     version: 2.39.3
+  agora-rtc-sdk-ng:
+    specifier: ^4.20.0
+    version: 4.20.0
+  agora-token:
+    specifier: ^2.0.3
+    version: 2.0.3
   gpt3-tokenizer:
     specifier: ^1.1.5
     version: 1.1.5
@@ -116,6 +122,37 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /@agora-js/media@4.20.0:
+    resolution: {integrity: sha512-cprH3BmxiM2fEbbdSORCv0/LMl+7R4Zq5MUbCCRV4/BWDoDL+Fdp5otUi1GOoVV4jWNepDl7pkOOH64IfJ1n0Q==}
+    dependencies:
+      '@agora-js/report': 4.20.0
+      '@agora-js/shared': 4.20.0
+      agora-rte-extension: 1.2.4
+      axios: 0.27.2
+      pako: 2.1.0
+      webrtc-adapter: 8.2.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /@agora-js/report@4.20.0:
+    resolution: {integrity: sha512-TaY+4M1qEdAtM4xmYDUlmzQdGmao23ljnrcBGtS1BXdTrDTH/GbN6+/NAng5Zp5TmBniYwpMHvfPwfVW9LX8Gg==}
+    dependencies:
+      '@agora-js/shared': 4.20.0
+      axios: 0.27.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /@agora-js/shared@4.20.0:
+    resolution: {integrity: sha512-+Em8k8MJsYlZ5ItqJidXHdNbn/vmQi3/P0hjh0jsHsMZLwz0l9kETbo5Q7Lq/so8IyrHQw4DoK5Jen0/B4uW4w==}
+    dependencies:
+      axios: 0.27.2
+      ua-parser-js: 0.7.37
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -862,6 +899,33 @@ packages:
       humanize-ms: 1.2.1
     dev: false
 
+  /agora-rtc-sdk-ng@4.20.0:
+    resolution: {integrity: sha512-jgMn6NXuFKQ0nVkLP2hGn+Asxbx+DSV0gn5PY6X0iF7LC2xqsqEzGhehLASxliS81JjhMNKE72hHEzrQn0qtvQ==}
+    dependencies:
+      '@agora-js/media': 4.20.0
+      '@agora-js/report': 4.20.0
+      '@agora-js/shared': 4.20.0
+      agora-rte-extension: 1.2.4
+      axios: 0.27.2
+      formdata-polyfill: 4.0.10
+      ua-parser-js: 0.7.37
+      webrtc-adapter: 8.2.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /agora-rte-extension@1.2.4:
+    resolution: {integrity: sha512-0ovZz1lbe30QraG1cU+ji7EnQ8aUu+Hf3F+a8xPml3wPOyUQEK6CTdxV9kMecr9t+fIDrGeW7wgJTsM1DQE7Nw==}
+    dev: false
+
+  /agora-token@2.0.3:
+    resolution: {integrity: sha512-2+iWWKNb/Rd7afPbWhkK5K/N8RMb10CVEgtPxuI35URQvpI4aFw9aL9s02NSP24BDrIJZ0k5CTH3fGrjmFcloA==}
+    dependencies:
+      crc-32: 1.2.2
+      cuint: 0.2.2
+      md5: 2.3.0
+    dev: false
+
   /ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
     dependencies:
@@ -951,6 +1015,15 @@ packages:
       postcss: 8.4.31
       postcss-value-parser: 4.2.0
     dev: true
+
+  /axios@0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.5
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
@@ -1135,6 +1208,12 @@ packages:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
 
+  /crc-32@1.2.2:
+    resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
+    engines: {node: '>=0.8'}
+    hasBin: true
+    dev: false
+
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -1160,6 +1239,10 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
+
+  /cuint@0.2.2:
+    resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
+    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -1525,6 +1608,14 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fetch-blob@3.2.0:
+    resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
+    engines: {node: ^12.20 || >= 14.13}
+    dependencies:
+      node-domexception: 1.0.0
+      web-streams-polyfill: 3.3.2
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -1560,6 +1651,16 @@ packages:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
     dev: true
 
+  /follow-redirects@1.15.5:
+    resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /form-data-encoder@1.7.2:
     resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
     dev: false
@@ -1579,6 +1680,13 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 4.0.0-beta.3
+    dev: false
+
+  /formdata-polyfill@4.0.10:
+    resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
+    engines: {node: '>=12.20.0'}
+    dependencies:
+      fetch-blob: 3.2.0
     dev: false
 
   /fraction.js@4.3.7:
@@ -2282,6 +2390,10 @@ packages:
       p-limit: 3.1.0
     dev: true
 
+  /pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+    dev: false
+
   /parchment@1.1.4:
     resolution: {integrity: sha512-J5FBQt/pM2inLzg4hEWmzQx/8h8D0CiDxaG3vyp9rKrQRSDgBlhjdP5jQGgosEajXPSQouXGHOmVdgo7QmJuOg==}
     dev: false
@@ -2633,6 +2745,10 @@ packages:
   /saos@1.3.1:
     resolution: {integrity: sha512-7e2v9yIlyWy29ADHAzukknnzNHIq4oh1mB8uymxzx538B+SFT8/GpRjFa4YwPioe1Ox7qExyV6SFfMvtrSA4EQ==}
     dev: true
+
+  /sdp@3.2.0:
+    resolution: {integrity: sha512-d7wDPgDV3DDiqulJjKiV2865wKsJ34YI+NDREbm+FySq6WuKOikwyNQcm+doLAZ1O6ltdO0SeKle2xMpN3Brgw==}
+    dev: false
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -3065,6 +3181,10 @@ packages:
     hasBin: true
     dev: true
 
+  /ua-parser-js@0.7.37:
+    resolution: {integrity: sha512-xV8kqRKM+jhMvcHWUKthV9fNebIzrNy//2O9ZwWcfiBFR5f25XVZPLlEajk/sf3Ra15V92isyQqnIEXRDaZWEA==}
+    dev: false
+
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
@@ -3162,6 +3282,13 @@ packages:
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
     requiresBuild: true
+    dev: false
+
+  /webrtc-adapter@8.2.0:
+    resolution: {integrity: sha512-umxCMgedPAVq4Pe/jl3xmelLXLn4XZWFEMR5Iipb5wJ+k1xMX0yC4ZY9CueZUU1MjapFxai1tFGE7R/kotH6Ww==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      sdp: 3.2.0
     dev: false
 
   /whatwg-url@5.0.0:

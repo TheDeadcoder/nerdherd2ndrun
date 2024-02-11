@@ -101,7 +101,7 @@
 		} lg:translate-x-0 lg:static lg:block`}
 	>
 		<div class="flex flex-col p-4 mt-4">
-			<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item active mb-2">
+			<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
@@ -131,7 +131,7 @@
 					Credentials
 				</div>
 			</a>
-			<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item mb-2">
+			<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item active mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"

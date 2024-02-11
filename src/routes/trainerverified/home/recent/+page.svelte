@@ -286,66 +286,47 @@
 				<!-- Tab Panels --->
 				<svelte:fragment slot="panel"></svelte:fragment>
 			</TabGroup>
-<<<<<<< HEAD
-
-			<div class={searchBarShow ? 'p-2 bg-slate-200' : 'hidden p-2'}>
-				<div class=" flex flex-row mb-1 justify-center">
-					<div class="flex flex-row">
-						<div class="md:w-1/3 lg:w-1/3 mr-3">
-							<label class="label">
-								<span class="pl-1">Search By Title</span>
-								<input
-									class="input rounded-xl border-[1px] bg-slate-200"
-									type="text"
-									placeholder="Enter Name of the Article"
-								/>
-=======
-		
-			
 		</div>
 	</div>
 
-	<div class="relative mt-[140px] z-10 w-full ">
+	<div class="relative mt-[140px] z-10 w-full">
 		<div class="absolute w-full flex justify-center">
-			<div class={searchBarShow?"p-2 bg-[#ebf2f5]  h-[150px] flex items-center rounded-lg":"hidden"}>
+			<div
+				class={searchBarShow
+					? 'p-2 bg-[#ebf2f5]  h-[150px] flex items-center rounded-lg'
+					: 'hidden'}
+			>
 				<div class=" flex flex-row mb-1 justify-center">
-					<div class="flex flex-row ">
+					<div class="flex flex-row">
 						<div class="md:w-1/3 lg:w-1/3 mr-3 bg-white">
 							<label class="label">
 								<span class="pl-1">Search By Title</span>
-								<input class="input  border-0 border-b-[1px] bg-red" type="text" placeholder="Enter Name of the Article" />
->>>>>>> 2ac04e5b2892b1b9727aeef6e041fe41485bfba9
+								<input
+									class="input border-0 border-b-[1px] bg-red"
+									type="text"
+									placeholder="Enter Name of the Article"
+								/>
 							</label>
 						</div>
 						<div class="md:w-1/3 lg:w-1/3 mr-3 bg-white">
 							<label class="label">
 								<span class="pl-1">Search By Author</span>
-<<<<<<< HEAD
 								<input
-									class="input rounded-xl border-[1px] bg-slate-200"
+									class="input border-0 border-b-[1px]"
 									type="text"
 									placeholder="Enter Name of the Author"
 								/>
 							</label>
 						</div>
-						<div class=" md:w-1/3 lg:w-1/3 mr-3">
+						<div class=" md:w-1/3 lg:w-1/3 mr-3 bg-white">
 							<label class="label">
 								<span class="">Search By Tag</span>
 								<InputChip
 									bind:value={list}
-									class="input rounded-full border-[1px] bg-slate-200"
+									class="input border-0 border-b-[1px] bg-slate-200"
 									name="chips"
 									placeholder="Enter Tags..."
 								/>
-=======
-								<input class="input border-0 border-b-[1px] " type="text" placeholder="Enter Name of the Author" />
-							</label>
-						</div>
-						<div class=" md:w-1/3 lg:w-1/3 mr-3 bg-white">
-							<label class="label ">
-								<span class="">Search By Tag</span>
-								<InputChip bind:value={list} class="input border-0 border-b-[1px] bg-slate-200" name="chips" placeholder="Enter Tags..." />
->>>>>>> 2ac04e5b2892b1b9727aeef6e041fe41485bfba9
 							</label>
 						</div>
 					</div>
@@ -368,13 +349,8 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 
-	<div class="w-full h-screen flex flex-row mt-[120px] justify-center">
-=======
-	
 	<div class="w-full h-screen flex flex-row justify-center">
->>>>>>> 2ac04e5b2892b1b9727aeef6e041fe41485bfba9
 		<div class="w-4/5">
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
