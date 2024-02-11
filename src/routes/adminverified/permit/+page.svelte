@@ -67,7 +67,7 @@
 					email: myemail as string,
 					password: mypass as string,
 					options: {
-						emailRedirectTo: `http://localhost:5173/trainerlogin`
+						emailRedirectTo: `https://nerdherd-iota.vercel.app/trainerlogin`
 					}
 				});
 			}
