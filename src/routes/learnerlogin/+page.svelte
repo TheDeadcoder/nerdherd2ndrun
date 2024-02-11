@@ -118,7 +118,7 @@
                         <div>
                             <label class="label text-left">
                                 <span class="text-left">Password</span>
-                                <div class="input-name">
+                                <div class="input-name" style="position: relative;">
                                     <input
                                         class="input border-0 rounded-sm hover:border-b-2"
                                         type="password"
@@ -127,7 +127,8 @@
                                         bind:value={$form.password}
                                         placeholder="type your password here"
                                     />
-									<button class="password-toggle" tabindex="0" on:click={togglePasswordVisibility}>
+									<span class="underline-animation"></span>
+									<button class="password-toggle" tabindex="0" on:click={togglePasswordVisibility} style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">
 										{#if showPassword}
 											<!-- Use an icon for show password -->
 											<svg
