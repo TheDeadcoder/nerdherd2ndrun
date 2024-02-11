@@ -17,6 +17,8 @@
 
 	$: calculateCountdown();
 
+	export let data;
+
 	let nextDonationDate: Date = new Date('2024-1-23');
 	let daysLeft: number = 0;
 	let hoursLeft: number = 0;
@@ -84,6 +86,10 @@
 		calculateCountdown();
 		setInterval(calculateCountdown, 1000);
 	});
+	const handleSignOut = async () => {
+		await data.supabase.auth.signOut();
+		window.open('/learnerlogin', '_self');
+	};
 </script>
 
 <main>
@@ -163,18 +169,17 @@
 								Profile</a
 							>
 						</li>
-						<li class="mb-2">
-							<a href="/library" class="flex items-center font-bold"
-								><img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-7 mr-1 hover:rotate-12"
-								/>
-								Logout</a
-							>
-						</li>
 					</ul>
 				</div>
+				<li>
+					<button on:click={handleSignOut}>
+						<img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-7 mr-1 hover:rotate-12"
+						/>
+					</button>
+				</li>
 			</ul>
 		</nav>
 	</div>

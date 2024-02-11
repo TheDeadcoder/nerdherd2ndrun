@@ -1,7 +1,6 @@
 <script>
 	// @ts-nocheck
 
-	import { LightSwitch } from '@skeletonlabs/skeleton';
 	export let data;
 	import { enhance } from '$app/forms';
 
@@ -115,8 +114,6 @@
 				Planner</a
 			>
 		</li>
-
-		<LightSwitch class="mr-3" />
 	</ul>
 </nav>
 
