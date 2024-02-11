@@ -11,6 +11,7 @@
 	let value = { current: 0, max: 10 };
 	function iconClick(event: CustomEvent<{index:number}>): void {
 		value.current = event.detail.index;
+		
 	}
 
 	let { session, supabase, todo } = data;
@@ -85,6 +86,14 @@
 	function getStatusColor(todoItem) {
 		return todoItem.status ? 'text-green-600' : 'text-red-600';
 	}
+
+	function handleSvgClick(event,index) {
+    	// const index = parseInt(event.target.dataset.index);
+		importancescale = index+1
+    	console.log("Clicked on div #" + (index + 1));
+		event?.stopPropagation
+  	}
+
 </script>
 
 <div>
@@ -209,39 +218,39 @@
 <div class="container mx-auto mt-8">
 	<h2 class="text-3xl font-bold text-center mb-4">Todo List</h2>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="card ml-8 mt-4 w-1/4 hover:scale-105 bg-blue-300" on:click={openAddForm}>
-		<div class="flex flex-row space-x-3 p-5">
+	<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
+		<div class="flex flex-row items-center space-x-3 p-5">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg"
 				alt="Dashboard Icon"
 				class="h-5 mr-1 hover:rotate-12"
 			/>
-			<h1>Add a New Task</h1>
-		</div>
+			<h1 class="text-lg">Add  New Task</h1>
+		</div>	
 	</div>
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
+	<hr>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8">
 		{#each todo as todoItem}
-			<div class="todo-item p-4 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
-				<div class="flex justify-between mb-2">
-					<span class="text-2xl font-bold">{todoItem.taskname}</span>
+			<div class="todo-item p-3 py-1 m-1 mr-3 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
+				<div class="flex justify-between">
+					<span class="text-xl font-bold">{todoItem.taskname}</span>
 					<span class="text-base text-gray-500">{todoItem.importancescale}</span>
 				</div>
-				<div class="flex justify-between mb-2">
-					<span class="text-base font-bold">{todoItem.deadline}</span>
+				<div class="flex justify-between  mb-1">
+					<div>
+						<p class="text-base font-semibold">{todoItem.deadline}</p>
+					</div>
+					
 				</div>
-				<div class="flex justify-between mt-4">
-					<button
-						type="button"
-						class="btn variant-outline-primary"
-						on:click={() => viewDetails(todoItem)}>View Details</button
-					>
-					<div class="flex flex-row space-x-3">
+				<div class="flex justify-between items-center ">
+					
+					<div class="flex flex-row">
 						<form action="?/deleteTodo&id={todoItem.id}" method="POST">
 							<button type="submit">
 								<img
 									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/delete-svgrepo-com%20(1).svg"
 									alt="Dashboard Icon"
-									class="h-6 mr-1 hover:rotate-12"
+									class="h-5 mr-2 hover:rotate-12"
 								/>
 							</button>
 						</form>
@@ -251,11 +260,18 @@
 									<img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/dialog-complete-svgrepo-com.svg"
 										alt="Dashboard Icon"
-										class="h-6 mr-1 hover:rotate-12"
+										class="h-5 mr-1 hover:rotate-12"
 									/>
 								</button>
 							</form>
 						{/if}
+					</div>
+					<div class="mb-1">
+						<button
+						type="button"
+						class="btn  text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg"
+						on:click={() => viewDetails(todoItem)}><span class=" hover-underline-animation">View Details</span></button
+						>
 					</div>
 				</div>
 			</div>
@@ -297,11 +313,11 @@
 	{#if openForm}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
-			class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
+			class="fixed inset-0 bg-gray-600 bg-opacity-60 flex justify-center items-center z-50 transition-opacity"
 			
 		>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="bg-[#ecebeb] p-6 rounded-lg shadow-lg max-w-md w-full m-4" on:click|stopPropagation use:clickOutside on:click_outside={handleClickOutside}>
+			<div class="bg-[#e1edf7] p-6 rounded-lg shadow-lg max-w-md w-full m-4" on:click|stopPropagation use:clickOutside on:click_outside={handleClickOutside}>
 				<form
 					use:enhance
 					action="?/upload"
@@ -314,7 +330,7 @@
 						<span class="font-semibold">Task Name</span>
 
 						<input
-							class="input"
+							class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base"
 							type="text"
 							id="taskname"
 							name="taskname"
@@ -325,7 +341,7 @@
 					<label class="label text-left">
 						<span class="font-semibold">Task Description</span>
 						<textarea
-							class="textarea bg-white"
+							class="textarea border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base"
 							rows="4"
 							placeholder="Your motivation..."
 							id="description"
@@ -335,20 +351,30 @@
 					</label>
 					<label class="label text-left mb-3">
 						<span class="font-semibold">Deadline</span>
-
-						<input class="input" type="date" id="deadline" name="deadline" bind:value={deadline} />
+						<input class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base" type="date" id="deadline" name="deadline" bind:value={deadline} />
 					</label>
+					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label class="label text-left mb-3">
-						 <span>On a scale from 1 to 10, how important is your task?</span>
-
-						 
-						<Ratings id="importancescale" type="number" name="importancescale" bind:value={value.current} max={value.max} interactive on:icon={iconClick} >
-							<svelte:fragment slot="empty">(icon)</svelte:fragment>
-							<!-- <svelte:fragment slot="half">(icon)</svelte:fragment> -->
-							<svelte:fragment slot="full">B</svelte:fragment>
-						</Ratings>
+						<span class="font-semibold">Scale priority from 1 to 10</span>
+						<input class="hidden" type="number" id="importancescale" name="importancescale" bind:value={importancescale}>
 					</label>
 					
+					<div class="flex justify-center" >
+						{#each Array.from({ length: 10 }, (_, i) => i) as index}
+						  {#if index < importancescale}
+						  		<div data-index={index} class="flex flex-col">
+									<div><svg on:click={()=>importancescale=index+1} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-point-filled" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z" stroke-width="0" fill="currentColor" /></svg></div>
+									<div>{index+1}</div>
+								</div> 
+						  {:else}
+						  		<div data-index={index} class="flex flex-col justify-center items-center">
+									<div><svg on:click={()=>importancescale=index+1} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-point" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /></svg></div>
+									<div>{index+1}</div>
+								</div>
+						  {/if}
+						{/each}
+					</div>
+						
 					<button type="submit" class="font-bold text-lg  p-3 m-2 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center"					>
 						Submit
 					</button>
@@ -408,5 +434,28 @@
 
 	.links a:hover {
 		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.hover-underline-animation {
+		display: inline-block;
+		position: relative;
+		color: #000000;
+	}
+
+	.hover-underline-animation::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: #000000;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+
+	.hover-underline-animation:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
 	}
 </style>
