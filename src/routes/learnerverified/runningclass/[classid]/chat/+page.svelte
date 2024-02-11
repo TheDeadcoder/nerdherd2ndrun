@@ -2,8 +2,10 @@
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	// import Message from './Message.svelte';
 	export let data;
+	const { classid } = $page.params;
 
 	let { session, supabase, classNow, studclass, studentNow } = data;
 	$: ({ session, supabase, classNow, studclass, studentNow } = data);
@@ -18,9 +20,9 @@
 
 	async function loadInitialMessages() {
 		const { data: dt, error } = await supabase
-			.from('clsmessage')
+			.from('classmessage')
 			.select('*')
-
+			.eq('classid', classid)
 			.limit(8); // Adjust limit as needed
 
 		if (dt) {
@@ -37,8 +39,9 @@
 		loadingOlderMessages = true;
 
 		const { data: dtt, error } = await supabase
-			.from('clsmessage')
+			.from('classmessage')
 			.select('*')
+			.eq('classid', classid)
 			.lt('id', oldestMessageId)
 
 			.limit(5);
@@ -62,7 +65,7 @@
 			.channel('custom-insert-channel')
 			.on(
 				'postgres_changes',
-				{ event: 'INSERT', schema: 'public', table: 'clsmessage' },
+				{ event: 'INSERT', schema: 'public', table: 'classmessage' },
 				(payload) => {
 					console.log('Change received!', payload);
 					// Update your messages array to reflect the new message
@@ -79,8 +82,8 @@
 	async function sendMessage() {
 		if (!newMessage.trim()) return;
 		const { data, error } = await supabase
-			.from('clsmessage')
-			.insert([{ username: username, body: newMessage, createdat: new Date() }]);
+			.from('classmessage')
+			.insert([{ username: username, body: newMessage, createdat: new Date(), classid: classid }]);
 		if (error) {
 			console.error('Error sending message:', error.message);
 		}

@@ -68,7 +68,7 @@ export const actions = {
             email,
             password,
             options: {
-                emailRedirectTo: `http://localhost:5173/learnerlogin`,
+                emailRedirectTo: `https://nerdherd-iota.vercel.app/learnerlogin`,
             },
         })
 
