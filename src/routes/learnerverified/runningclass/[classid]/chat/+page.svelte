@@ -2,16 +2,14 @@
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
-	const { classid } = $page.params;
 	// import Message from './Message.svelte';
 	export let data;
 
-	let { session, supabase, classNow, studclass, teacherNow } = data;
-	$: ({ session, supabase, classNow, studclass, teacherNow } = data);
+	let { session, supabase, classNow, studclass, studentNow } = data;
+	$: ({ session, supabase, classNow, studclass, studentNow } = data);
 	let isSidebarOpen = false;
 
-	let username = teacherNow.name; // Get username from user session or login form
+	let username = studentNow.name; // Get username from user session or login form
 	let messages = [];
 	let loading = true;
 	let newMessage = '';
@@ -123,7 +121,7 @@
 	</div>
 	<ul class="links">
 		<li>
-			<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+			<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
 				><img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
 					alt="Dashboard Icon"
@@ -143,7 +141,7 @@
 			>
 		</li>
 		<li>
-			<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
+			<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
 				><img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 					alt="Dashboard Icon"
@@ -163,7 +161,7 @@
 			>
 		</li>
 		<li>
-			<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+			<a href="/ll" class="flex items-center p-1 font-bold"
 				><img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
 					alt="Dashboard Icon"
@@ -192,7 +190,7 @@
 		} lg:translate-x-0 lg:static lg:block`}
 	>
 		<div class="flex flex-col p-4 mt-4">
-			<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item active mb-2">
+			<a href="/chat" class="sidebar-item active mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
@@ -202,7 +200,7 @@
 					Chat
 				</div>
 			</a>
-			<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item mb-2">
+			<a href="/chat" class="sidebar-item mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
@@ -212,7 +210,7 @@
 					Assignments
 				</div>
 			</a>
-			<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item mb-2">
+			<a href="/chat" class="sidebar-item mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
@@ -222,7 +220,7 @@
 					Credentials
 				</div>
 			</a>
-			<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item mb-2">
+			<a href="/chat" class="sidebar-item mb-2">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
@@ -242,7 +240,7 @@
 			<!-- Messages List -->
 			<div class="flex flex-col-reverse w-full space-y-2 overflow-y-auto" on:scroll={handleScroll}>
 				{#each messages as message (message.id)}
-					<div class="message {message.username === teacherNow.name ? 'me' : 'other'}">
+					<div class="message {message.username === studentNow.name ? 'me' : 'other'}">
 						<p class="timestamp">{formatTimestamp(message.createdat)}</p>
 						<p><strong>{message.username}:</strong> {message.body}</p>
 					</div>
@@ -258,7 +256,7 @@
 				<button type="submit">Send</button>
 			</form>
 		</div>
-		<pre>{JSON.stringify(messages, null, 2)}</pre>
+		<!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 	</div>
 </main>
 
