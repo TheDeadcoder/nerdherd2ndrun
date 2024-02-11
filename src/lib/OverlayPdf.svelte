@@ -1,5 +1,5 @@
 <script>
-	import PdfViewer from "svelte-pdf";
+	// import PdfViewer from "svelte-pdf";
     import {clickOutside} from '../stores/clickOutside'
     import {isOverlayPdf} from '../stores/OverlayPdf.js'
 

@@ -49,7 +49,6 @@
     "gpt3-tokenizer": "^1.1.5",
     "openai": "^4.26.0",
     "quill": "^1.3.7",
-    "sse.js": "^2.2.0",
-    "svelte-pdf": "^1.0.20"
+    "sse.js": "^2.2.0"
   }
 }
