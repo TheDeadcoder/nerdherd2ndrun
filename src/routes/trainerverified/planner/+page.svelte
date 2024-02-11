@@ -1,6 +1,6 @@
 <script lang='ts'>
 	// @ts-nocheck
-
+    import { writable } from 'svelte/store';
 	import { enhance } from '$app/forms';
 	import { Ratings, popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
@@ -93,6 +93,42 @@
     	console.log("Clicked on div #" + (index + 1));
 		event?.stopPropagation
   	}
+	  let sortClicked = writable(true ); // Make sortClicked a writable store
+
+	function sortTodos() {
+		sortClicked.update(value => !value); // Toggle the value of sortClicked
+	}
+
+	function sortTodoItems(todoItems) {
+    let sorted = [];
+    const unsubscribe = sortClicked.subscribe(value => {
+        if (value) {
+            sorted = [...todoItems].sort((a, b) => {
+                // First, check if both tasks have the same completion status
+                if (a.status === b.status) {
+                    // If both tasks are incomplete, sort them based on their importance scale
+                    if (!a.status) {
+                        return b.importancescale - a.importancescale;
+                    }
+                    // If both tasks are completed, maintain their relative order
+                    else {
+                        return new Date(b.deadline) - new Date(a.deadline);
+                    }
+                }
+                // Incomplete tasks come before completed ones
+                else {
+                    return a.status ? 1 : -1;
+                }
+            });
+        } else {
+            // Return todo items as it is
+            sorted = [...todoItems];
+        }
+    });
+    unsubscribe();
+    return sorted;
+}
+
 
 </script>
 
@@ -217,21 +253,20 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="container mx-auto mt-8">
 	<h2 class="text-3xl font-bold text-center mb-4">Todo List</h2>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
-		<div class="flex flex-row items-center space-x-3 p-5">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg"
-				alt="Dashboard Icon"
-				class="h-5 mr-1 hover:rotate-12"
-			/>
-			<h1 class="text-lg">Add  New Task</h1>
-		</div>	
+	<div class="flex justify-between items-center mb-4"> <!-- Added flex container with justify-between -->
+		<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
+			<div class="flex flex-row items-center space-x-3 p-5">
+				<img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg" alt="Dashboard Icon" class="h-5 mr-1 hover:rotate-12" />
+				<h1 class="text-lg">Add New Task</h1>
+			</div>    
+		</div>
+		<!-- <button class="btn text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg mr-3" on:click={sortTodos}>Sort</button>	 -->
 	</div>
 	<hr>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8">
-		{#each todo as todoItem}
+		{#each sortTodoItems(todo) as todoItem}
 			<div class="todo-item p-3 py-1 m-1 mr-3 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
+			<!-- Your existing code for rendering todoItem goes here -->
 				<div class="flex justify-between">
 					<span class="text-xl font-bold">{todoItem.taskname}</span>
 					<span class="text-base text-gray-500">{todoItem.importancescale}</span>
@@ -240,43 +275,30 @@
 					<div>
 						<p class="text-base font-semibold">{todoItem.deadline}</p>
 					</div>
-					
 				</div>
-				<div class="flex justify-between items-center ">
-					
+				<div class="flex justify-between items-center">
 					<div class="flex flex-row">
 						<form action="?/deleteTodo&id={todoItem.id}" method="POST">
 							<button type="submit">
-								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/delete-svgrepo-com%20(1).svg"
-									alt="Dashboard Icon"
-									class="h-5 mr-2 hover:rotate-12"
-								/>
+								<img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/delete-svgrepo-com%20(1).svg" alt="Dashboard Icon" class="h-5 mr-2 hover:rotate-12"/>
 							</button>
 						</form>
 						{#if todoItem.status === false}
 							<form action="?/updateTodo&id={todoItem.id}" method="POST">
 								<button type="submit">
-									<img
-										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/dialog-complete-svgrepo-com.svg"
-										alt="Dashboard Icon"
-										class="h-5 mr-1 hover:rotate-12"
-									/>
+									<img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/dialog-complete-svgrepo-com.svg" alt="Dashboard Icon" class="h-5 mr-1 hover:rotate-12"/>
 								</button>
 							</form>
 						{/if}
 					</div>
 					<div class="mb-1">
-						<button
-						type="button"
-						class="btn  text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg"
-						on:click={() => viewDetails(todoItem)}><span class=" hover-underline-animation">View Details</span></button
-						>
+						<button type="button" class="btn text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg" on:click={() => viewDetails(todoItem)}><span class=" hover-underline-animation">View Details</span></button>
 					</div>
 				</div>
 			</div>
 		{/each}
 	</div>
+	
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	{#if selectedTodo}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
