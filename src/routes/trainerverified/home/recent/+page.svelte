@@ -354,13 +354,14 @@
 		<div class="w-4/5">
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
-					<div
+					<a
+						href="/commonverified/article/{currblog.id}"
 						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer"
 					>
 						<div class="hover:scale-105">
 							<div class="mb-3 p-3 rounded-full">
 								<img
-									src="https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/thumbnail.jpg"
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
 									alt="User "
 									class=" w-[100%] items-center justify-center object-contain object-center"
 								/>
@@ -380,6 +381,7 @@
 									<p class="text-sm text-justify font-light">
 										{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
 									</p>
+
 									<!-- <img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
 										alt="User "
@@ -395,7 +397,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				{/each}
 			</div>
 		</div>
