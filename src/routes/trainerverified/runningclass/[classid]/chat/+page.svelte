@@ -115,6 +115,11 @@
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
+	const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    };
 </script>
 
 <div class="">
@@ -260,8 +265,8 @@
 						<div class="message {message.username === teacherNow.name ? 'me' : 'other'}">
 							 <p class=""><strong>{message.username}:</strong></p>
 							
-							<div class="w-[100px] overflow-scroll" >
-								<p>{message.body}</p>
+							<div  >
+								<p class="break-words">{message.body}</p>
 							</div>
 							<p class="timestamp">{formatTimestamp(message.createdat)}</p>
 							
@@ -274,7 +279,7 @@
 	
 				<!-- Input Form -->
 				<form class="mb-2" on:submit|preventDefault={sendMessage}>
-					<input type="text" bind:value={newMessage} placeholder="Type a message..." />
+					<input type="text" bind:value={newMessage} placeholder="Type a message..." on:keydown={handleKeyDown} />
 					<button type="submit">Send</button>
 				</form>
 			</div>
