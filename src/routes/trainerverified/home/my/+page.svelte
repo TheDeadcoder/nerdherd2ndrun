@@ -380,29 +380,37 @@
 					</div>
 				</div>
 			</div>
-			<div class="h-screen flex flex-col mt-6 p-6 w-full">
+			<div class=" grid grid-rows-4  mt-6 p-6 w-full">
 				{#each blog as currblog, i}
-					<div class="flex flex-row space-x-4">
-						<div class="mr-24 hover:scale-105 w-1/2">
-							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blog5.png"
-								alt="User Image"
-								class="w-1/2 h-1/2 items-center justify-center object-contain object-center"
-							/>
+					<div class="flex flex-row space-x-4  border-black overflow-hidden w-1/4"> 
+						<div class="mr-24 hover:scale-105">
 
-							<div class="flex flex-row">
+							<div class="">
 								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
 									alt="User Image"
-									class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									class=" items-center justify-center object-contain object-center w-[250px]"
 								/>
-								<p class="text-sm mr-6">{formatDate(currblog.createdat)}</p>
-								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
-									alt="User Image"
-									class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
-								/>
-								<p class="text-sm">{currblog.timetoread} minutes read</p>
+
+							</div>
+							<div class="grid grid-cols-2">
+								<div class="flex ">
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+										alt="User Image"
+										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									/>
+									<p class="text-sm mr-6">{formatDate(currblog.createdat)}</p>
+								</div>
+								<div class="flex">
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
+										alt="User Image"
+										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
+									/>
+									<p class="text-sm">{currblog.timetoread} minutes read</p>
+								</div>
+								
 							</div>
 							<h1 class="text-xl font-semibold mr-10">
 								{currblog.title}
