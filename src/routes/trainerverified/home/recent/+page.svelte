@@ -10,8 +10,8 @@
 
 	export let data;
 
-	let { session, supabase, blog } = data;
-	$: ({ session, supabase, blog } = data);
+	let { session, supabase, blog, teacherNow } = data;
+	$: ({ session, supabase, blog, teacherNow } = data);
 
 	let list: string[] = [];
 	let tagsofPost: string[] = ['web development', 'javascript'];
@@ -160,11 +160,7 @@
 
 					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
-							width="w-10"
-							rounded="rounded-full"
-						/>
+						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 					</div>
 
 					<div data-popup="popupClick" class="h-32 absolute">
