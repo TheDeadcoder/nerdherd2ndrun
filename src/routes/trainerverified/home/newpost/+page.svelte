@@ -276,6 +276,14 @@
 </div>
 
 <style>
+	.white-text {
+		color: red;
+	}
+	.company-name {
+		font-size: 2rem; /* Adjust font size as needed */
+		margin-top: 1rem; /* Add spacing if necessary */
+		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
 	.appbar {
 		display: flex;
 		justify-content: space-between;
@@ -301,6 +309,23 @@
 
 	.links a:hover {
 		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.white-text {
+		color: red;
+	}
+	.company-name {
+		border: 1px solid black;
+		font-size: 2rem; /* Adjust font size as needed */
+		margin-top: 0.5rem; /* Add spacing if necessary */
+		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.navbar {
+		overflow: hidden;
+		position: absolute; /* Set the navbar to fixed position */
+		top: 0; /* Position the navbar at the top of the page */
+		width: 100%; /* Full width */
+		z-index: 5;
+		background-color: rgb(188, 223, 253);
 	}
 
 	.logo-container {
