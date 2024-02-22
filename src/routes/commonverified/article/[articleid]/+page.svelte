@@ -37,18 +37,7 @@
 		];
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
-	async function fetchContent(url) {
-		try {
-			const response = await fetch(url);
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			return await response.text();
-		} catch (e) {
-			console.error('Failed to fetch content:', e);
-			return 'Failed to load content';
-		}
-	}
+
 	const handleSignOut = async () => {
 		console.log('logout start');
 		await data.supabase.auth.signOut();
@@ -76,21 +65,6 @@
 		});
 	}
 
-	// function subscribeToReactionState() {
-	// 	const channels = supabase
-	// 		.channel('custom-insert-channel')
-	// 		.on('postgres_changes', { event: '*', schema: 'public', table: 'reaction' }, (payload) => {
-	// 			console.log('Change received!', payload);
-	// 			// Update your messages array to reflect the new message
-	// 			// Ensure the new message is added in a way that doesn't duplicate it if you've already optimistically added it to the UI
-	// 			const newReaction = payload.new;
-	// 			console.log(newReaction);
-	// 			// if (!messages.some((message) => message.id === newMessage.id)) {
-	// 			// 	messages = [newMessage, ...messages];
-	// 			// }
-	// 		})
-	// 		.subscribe();
-	// }
 	function subscribeToReactionState() {
 		const channels = supabase
 			.channel('custom-insert-channel')
@@ -144,7 +118,7 @@
 	onMount(async () => {
 		loadInitialLikeandDislike();
 		subscribeToReactionState();
-		articleNow.fetchedContent = await fetchContent(articleNow.content);
+		// articleNow.fetchedContent = await fetchContent(articleNow.content);
 	});
 </script>
 
@@ -319,26 +293,7 @@
 		</div>
 
 		<div class="mt-16 ml-24 mr-24">
-			{#if articleNow.fetchedContent}
-				{@html articleNow.fetchedContent}
-			{:else}
-				<section class="card w-full">
-					<div class="p-4 space-y-4">
-						<div class="placeholder" />
-						<div class="grid grid-cols-3 gap-8">
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-						</div>
-						<div class="grid grid-cols-4 gap-4">
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-						</div>
-					</div>
-				</section>
-			{/if}
+			{@html articleNow.content}
 		</div>
 		<div class="mt-6 flex flex-row space-x-8">
 			{#if reacted}

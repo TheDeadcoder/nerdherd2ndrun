@@ -1,43 +1,40 @@
 <script lang="ts">
 	import { AppRail, AppRailTile, AppRailAnchor, TabGroup, Tab } from '@skeletonlabs/skeleton';
-	import Quill from './QuillEd.svelte';
+	import Quill from '$lib/QuillEditor.svelte';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { popup } from '@skeletonlabs/skeleton';
-	import type { PopupSettings } from '@skeletonlabs/skeleton';
+	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { InputChip } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import QuillEd from './QuillEd.svelte';
+
+	export let data;
+
+	let { session, supabase, teacherNow, blog } = data;
+	$: ({ session, supabase, teacherNow, blog } = data);
 
 	let list: string[] = [];
 
 	let currentTile: number = 1;
+
+	$: calculateCountdown();
+
+	let nextDonationDate: Date = new Date('2024-1-23');
+	let daysLeft: number = 0;
+	let hoursLeft: number = 0;
+	let minutesLeft: number = 0;
+	let secondsLeft: number = 0;
 	let searchBarShow: number = 0;
-	let edited: boolean = true;
 
-	export let data;
-	export let form;
-	let { session, supabase, teacher, blog } = data;
-	$: ({ session, supabase, teacher, blog } = data);
+	function calculateCountdown() {
+		const now: Date = new Date();
+		const timeDifference: number = nextDonationDate - now; // Difference in milliseconds
 
-	let profileForm: HTMLFormElement;
-	let title;
-	let description;
-	let content;
-	let timetoread;
-	let tags;
-
-	let isEditing = false;
-	function handleopeneditor() {
-		isEditing = true;
+		daysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+		hoursLeft = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+		secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
 	}
-
-	const popupClick: PopupSettings = {
-		event: 'click',
-		target: 'popupClick',
-		placement: 'top'
-	};
-
 	function formatDate(dateString) {
 		const dateObj = new Date(dateString);
 		const monthNames = [
@@ -56,43 +53,32 @@
 		];
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
-	async function fetchContent(url) {
-		try {
-			const response = await fetch(url);
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			return await response.text();
-		} catch (e) {
-			console.error('Failed to fetch content:', e);
-			return 'Failed to load content';
-		}
-	}
-	let contents = [];
-	// Function to update the blog content after fetching
-	async function updateContent(blog) {
-		let currcontent = await fetchContent(blog.content);
-		contents.push(currcontent);
-	}
+
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
+	const popupHover1: PopupSettings = {
+		event: 'hover',
+		target: 'popupHover1',
+		placement: 'top'
+	};
+	let currentDate = new Date().toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric'
+	});
 
 	const handleSignOut = async () => {
+		console.log('logout start');
 		await data.supabase.auth.signOut();
+		console.log('logout done');
 		window.open('/trainerlogin', '_self');
-	};
-	onMount(async () => {
-		for (let i = 0; i < blog.length; i++) {
-			blog[i].fetchedContent = await fetchContent(blog[i].content);
-			console.log(`Content for blog ${i}:`, blog[i].fetchedContent); // Log fetched content
-		}
-		blog = blog.slice(); // Trigger reactivity
-	});
-	const showUpdateBtn = (event) => {
-		console.log('event:', event);
-		edited = event.detail;
 	};
 </script>
 
-<main>
+<main class="bg-[#f4f6f7]">
 	<div>
 		<div class="navbar">
 			<nav class="appbar">
@@ -173,11 +159,7 @@
 
 					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
-							width="w-10"
-							rounded="rounded-full"
-						/>
+						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 					</div>
 
 					<div data-popup="popupClick" class="h-32 absolute">
@@ -192,18 +174,17 @@
 									Profile</a
 								>
 							</li>
-							<li class="mb-2 p-2">
-								<a href="/library" class="flex items-center font-bold"
-									><img
-										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-svgrepo-com.svg"
-										alt="Dashboard Icon"
-										class="h-7 mr-1 hover:rotate-12"
-									/>
-									Logout</a
-								>
-							</li>
 						</ul>
 					</div>
+					<li>
+						<button on:click={handleSignOut}>
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-7 mr-1 hover:rotate-12"
+							/>
+						</button>
+					</li>
 				</ul>
 			</nav>
 			<TabGroup class="w-full h-14 bg-[#e6f5ff]  mt-2 flex justify-center">
@@ -363,125 +344,61 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-full h-screen">
-		{#if isEditing === false}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="p-4">
-				<div class="card w-1/4 fill-emerald-300" on:click={handleopeneditor}>
-					<div
-						class="flex flex-row p-4 mx-10 my-4 items-center border-2 hover:shadow-xl hover:scale-105"
-					>
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-10 w-10 mr-4 hover:rotate-12 hover:scale-105"
-						/>
-						<h1 class="font-bold">Add New Post</h1>
-					</div>
-				</div>
-			</div>
-			<div class=" grid grid-rows-4  mt-6 p-6 w-full">
+
+	<div class="w-full h-screen flex flex-row justify-center">
+		<div class="w-4/5">
+			<a href="/trainerverified/home/newpost" class="mt-8 btn variant-filled">
+				Write a New Article
+			</a>
+			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
-					<div class="flex flex-row space-x-4  border-black overflow-hidden w-1/4"> 
-						<div class="mr-24 hover:scale-105">
-
-							<div class="">
+					<a
+						href="/commonverified/article/{currblog.id}"
+						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer"
+					>
+						<div class="hover:scale-105">
+							<div class="mb-3 p-3 rounded-full">
 								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-									alt="User Image"
-									class=" items-center justify-center object-contain object-center w-[250px]"
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
+									alt="User "
+									class=" w-[100%] items-center justify-center object-contain object-center"
 								/>
-
 							</div>
-							<div class="grid grid-cols-2">
-								<div class="flex ">
-									<img
+							<div class="px-4">
+								<div>
+									<h1 class="text-2xl font-semibold mb-2">
+										{currblog.title}
+									</h1>
+								</div>
+								<div class="flex flex-row">
+									<!-- <img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
-										alt="User Image"
+										alt="User "
 										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
-									/>
-									<p class="text-sm mr-6">{formatDate(currblog.createdat)}</p>
-								</div>
-								<div class="flex">
-									<img
+									/> -->
+									<p class="text-sm text-justify font-light">
+										{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
+									</p>
+
+									<!-- <img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
-										alt="User Image"
+										alt="User "
 										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
-									/>
-									<p class="text-sm">{currblog.timetoread} minutes read</p>
+									/> -->
+									<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
 								</div>
-								
+
+								<div>
+									<p class="text-md text-justify">
+										{currblog.description.slice(0, 100)} ...
+									</p>
+								</div>
 							</div>
-							<h1 class="text-xl font-semibold mr-10">
-								{currblog.title}
-							</h1>
-							<p class="text-sm font-semibold mr-10">
-								{currblog.description}
-							</p>
-							<p>
-								{#if currblog.fetchedContent}
-									{@html currblog.fetchedContent}
-								{:else}
-									Loading...
-								{/if}
-							</p>
 						</div>
-					</div>
+					</a>
 				{/each}
 			</div>
-		{:else}
-			<form class="w-4/5 p-6 space-y-3" method="POST" action="?/upload">
-				<div>
-					<label for="title" class="font-semibold">Title of the Article</label>
-					<input id="title" name="title" type="text" value={title} />
-				</div>
-				<div>
-					<label for="description" class="font-semibold"
-						>Short Description of the Article within 30 words</label
-					>
-					<input id="description" name="description" type="text" value={description} />
-				</div>
-				<div>
-					<label for="timetoread" class="font-semibold">Time Required to Read</label>
-					<input id="timetoread" name="timetoread" type="text" value={timetoread} />
-				</div>
-
-				<div>
-					<label for="tags">Tags of the Article</label>
-					<input id="tags" name="tags" type="text" value={tags} />
-				</div>
-				<div>
-					<input type="hidden" name="content" value={content} />
-				</div>
-				<div>
-					<QuillEd
-						{supabase}
-						bind:url={content}
-						on:upload={() => {
-							profileForm.requestSubmit();
-						}}
-						on:editBtnOpen={showUpdateBtn}
-					/>
-				</div>
-				{#if !edited}
-					<div class="flex flex-row space-x-3">
-						<button
-							type="submit"
-							class="font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/4 text-center"
-						>
-							⚡Upload Blog⚡
-						</button>
-					</div>
-					<div class="flex flex-row space-x-3">
-						<button
-							class="font-bold text-xl p-4 bg-[#C5FFBF] rounded-xl shadow-md hover:bg-[#77FF69] hover:text-[21px] hover:shadow-lg w-1/4 text-center"
-						>
-							Go Back Editing
-						</button>
-					</div>
-				{/if}
-			</form>
-		{/if}
+		</div>
 	</div>
 </main>
 
@@ -490,9 +407,8 @@
 		color: red;
 	}
 	.company-name {
-		border: 1px solid black;
 		font-size: 2rem; /* Adjust font size as needed */
-		margin-top: 0.5rem; /* Add spacing if necessary */
+		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
 	}
 	.appbar {
@@ -502,6 +418,33 @@
 		padding: 1rem;
 
 		border-bottom: 1px solid #ccc;
+	}
+
+	.links {
+		display: flex;
+		list-style: none;
+		margin: 0;
+	}
+
+	.links li {
+		margin-left: 2rem;
+	}
+	.links a {
+		text-decoration: none;
+		transition: color 0.2s ease-in-out;
+	}
+
+	.links a:hover {
+		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.white-text {
+		color: red;
+	}
+	.company-name {
+		border: 1px solid black;
+		font-size: 2rem; /* Adjust font size as needed */
+		margin-top: 0.5rem; /* Add spacing if necessary */
+		font-family: 'CustomFont', sans-serif; /* Use your custom font */
 	}
 	.navbar {
 		overflow: hidden;
@@ -515,30 +458,5 @@
 	.logo-container {
 		display: flex;
 		align-items: center;
-	}
-
-	.logo-container img {
-		width: 50px;
-		margin-right: 1rem;
-	}
-
-	.links {
-		display: flex;
-		list-style: none;
-		margin: 0;
-	}
-
-	.links li {
-		margin-left: 2rem;
-	}
-
-	.links a {
-		text-decoration: none;
-
-		transition: color 0.2s ease-in-out;
-	}
-
-	.links a:hover {
-		color: #007bff; /* Accent color from Skeleton UI */
 	}
 </style>

@@ -157,7 +157,7 @@
 			Add book
 		</button>
 	</div>
-	<div class="grid grid-cols-7 ml-8 mt-16">
+	<div class="ml-8 mt-16">
 		<div class="mt-2">
 			{#each Object.entries(tagsToBooksMap) as [tag, books]}
 				<BookCategory categoryName={tag} {books} bind:url></BookCategory>
