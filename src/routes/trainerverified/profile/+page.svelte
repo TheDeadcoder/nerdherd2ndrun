@@ -73,7 +73,7 @@
 					>
 				</li>
 				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
+					<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
 							alt="Dashboard Icon"
@@ -83,7 +83,7 @@
 					>
 				</li>
 				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
+					<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 							alt="Dashboard Icon"

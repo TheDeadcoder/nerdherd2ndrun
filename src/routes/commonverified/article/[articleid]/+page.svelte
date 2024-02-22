@@ -173,14 +173,24 @@
 				>
 			</li>
 			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
+				{#if commonuserNow.istrainer === true}
+					<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Library</a
+					>
+				{:else}
+					<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Library</a
+					>{/if}
 			</li>
 			<li>
 				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
@@ -242,7 +252,7 @@
 		<h1 class="font-extrabold text-5xl">
 			{articleNow.title}
 		</h1>
-		<p class="text-2xl font-light mt-2 ml-16 mr-16">
+		<p class="text-2xl font-light mt-2 ml-24 mr-24">
 			{articleNow.description}
 		</p>
 		<a href="/viewonly/teacher/{teacherNow.id}" class="flex flex-row space-x-4 mt-4 text-left">

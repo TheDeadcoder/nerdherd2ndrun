@@ -4,20 +4,20 @@ import { error } from '@sveltejs/kit';
 
 
 export const load = async ({ locals: { supabase, getSession } }) => {
-    const session = await getSession()
+  const session = await getSession()
 
-    if (!session) {
-        throw redirect(303, '/')
-    }
-    
+  if (!session) {
+    throw redirect(303, '/')
+  }
 
 
-    let { data: book, error:err } = await supabase
-  .from('book')
-  .select('*')
+
+  let { data: book, error: err } = await supabase
+    .from('book')
+    .select('*')
 
   console.log(err);
 
 
-    return { book }
+  return { book }
 }
