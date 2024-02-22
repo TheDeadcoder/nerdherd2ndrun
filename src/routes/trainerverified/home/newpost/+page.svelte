@@ -243,7 +243,7 @@
 			id="timetoread"
 			name="timetoread"
 			bind:value={timetoread}
-			placeholder="Minutes required to read"
+			placeholder="Time required to read (minutes)"
 		/>
 		<label for="tags" class="label text-left mb-1">
 			<span>Tags</span>
