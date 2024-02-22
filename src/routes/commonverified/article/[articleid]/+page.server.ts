@@ -41,8 +41,24 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     teacherNow = teacher[0];
 
+    let commentsMod;
+    const { data: dtt, error: err5 } = await supabase
+        .from('comment')
+        .select('*')
+        .eq('blogid', articleNow.id);
+
+    if (err) console.log('failed to load');
+    commentsMod = dtt?.reverse();
+    for (let i = 0; i < commentsMod.length; i++) {
+        let uid = commentsMod[i].userid;
+        let { data: dttt, error: err } = await supabase.from('commonuser').select('*').eq('id', uid);
+        commentsMod[i].user = dttt[0];
+    }
+    // console.log(commentsMod);
+    //commentCnt = dtt?.length;
 
 
-    return { articleNow, teacherNow, commonuserNow };
+
+    return { articleNow, teacherNow, commonuserNow, commentsMod };
 
 }

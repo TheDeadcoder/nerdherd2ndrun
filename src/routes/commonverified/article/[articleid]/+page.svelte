@@ -13,8 +13,12 @@
 	let reacted = false;
 	let reactionval = false;
 
-	let { session, supabase, articleNow, teacherNow, commonuserNow } = data;
-	$: ({ session, supabase, articleNow, teacherNow, commonuserNow } = data);
+	let { session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data;
+	$: ({ session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data);
+
+	let comments = commentsMod;
+	let commentBody;
+	let commentCnt = comments?.length;
 
 	let values = articleNow.tags.split(',');
 
@@ -36,6 +40,39 @@
 			'Dec'
 		];
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+	}
+
+	const refresh = async () => {
+		window.location.href = `/commonverified/article/${articleNow.id}`;
+	};
+	async function sendComment() {
+		const { data, error: err } = await supabase.from('comment').insert([
+			{
+				userid: commonuserNow.id,
+				blogid: articleNow.id,
+				body: commentBody,
+				createdat: new Date()
+			}
+		]);
+		if (err) {
+			console.error('Error sending Comment:', err.message);
+		} else {
+			commentBody = '';
+			refresh();
+		}
+	}
+	function formatTimestamp(timestamp: string): string {
+		const date = new Date(timestamp);
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'short',
+			day: '2-digit',
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false // Use 24-hour clock
+		};
+
+		return new Intl.DateTimeFormat('en-US', options).format(date);
 	}
 
 	const handleSignOut = async () => {
@@ -115,9 +152,27 @@
 		} else reacted = false;
 	}
 
+	async function loadInitialComments() {
+		const { data: dtt, error: err } = await supabase
+			.from('comment')
+			.select('*')
+			.eq('blogid', articleNow.id);
+
+		if (err) console.log('failed to load');
+		comments = dtt?.reverse();
+		for (let i = 0; i < comments.length; i++) {
+			let uid = comments[i].userid;
+			let { data: dttt, error: err } = await supabase.from('commonuser').select('*').eq('id', uid);
+			comments[i].user = dttt[0];
+		}
+		console.log(comments);
+		commentCnt = dtt?.length;
+	}
+
 	onMount(async () => {
 		loadInitialLikeandDislike();
 		subscribeToReactionState();
+		// loadInitialComments();
 		// articleNow.fetchedContent = await fetchContent(articleNow.content);
 	});
 </script>
@@ -273,7 +328,7 @@
 					class="w-5 h-5 mt-1 hover:scale-105 hover:rotate-12"
 				/>
 				<p class="text-base">
-					{likeval} Commented
+					{commentCnt} Commented
 				</p>
 			</div>
 		</div>
@@ -346,10 +401,47 @@
 				</button>
 			{/if}
 		</div>
+		<div class="w-full mt-8 ml-24 mr-10 flex-col-reverse">
+			<div class="w-full mt-6 flex flex-row space-x-8">
+				<textarea
+					class="textarea w-5/6"
+					rows="1"
+					placeholder="Write a Comment ..."
+					id="commentBody"
+					name="commentBody"
+					bind:value={commentBody}
+				/>
+				<button class="w-1/6 btn bg-green-400" on:click={sendComment}> Send </button>
+			</div>
+			<h1 class="text-xl font-bold">Previous Comments</h1>
+			{#each comments as comment}
+				<div class="grid grid-cols-[auto_1fr] gap-2 mt-4">
+					<Avatar
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/defaultuser.jpg"
+						width="w-12"
+					/>
+					<div class="card p-4 variant-soft rounded-tl-none space-y-2">
+						<header class="flex justify-between items-center">
+							{#if comment.user.istrainer}
+								<a href="/viewonly/teacher/{comment.user.id}">
+									Teacher: {comment.user?.email.split('@')[0]}
+								</a>
+							{:else}
+								<a href="/viewonly/student/{comment.user.id}">
+									Student: {comment.user?.email.split('@')[0]}
+								</a>
+							{/if}
+							<small class="opacity-50">{formatTimestamp(comment.createdat)}</small>
+						</header>
+						<p>{comment.body}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
 	</div>
-	<pre>{JSON.stringify(articleNow, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(articleNow, null, 2)}</pre>
 	<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
-	<pre>{JSON.stringify(commonuserNow, null, 2)}</pre>
+	<pre>{JSON.stringify(commonuserNow, null, 2)}</pre> -->
 </main>
 
 <style>
