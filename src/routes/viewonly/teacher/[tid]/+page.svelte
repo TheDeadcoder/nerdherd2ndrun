@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let data;
 
-	let { session, supabase, teacherNow } = data;
-	$: ({ session, supabase, teacherNow } = data);
+	let { session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data;
+	$: ({ session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data);
 </script>
 
 <div>
@@ -106,9 +106,13 @@
 					</div>
 				</div>
 				<div class="flex m-3">
-					<div>
+					<!-- <div>
 						<p class="max-h-12 m-1">{teacherNow.skillset}</p>
-					</div>
+					</div> 
+					Avro, the skill and educational quaLifications have changed
+					look pre
+					-->
+
 					<div>
 						<!-- <p class="font-medium"> {teacherNow.eduqual[0].institute}</p>
 						<p class="leading-3">{teacherNow.eduqual[0].gpa}</p> -->
@@ -120,6 +124,10 @@
 </div>
 
 <pre>{JSON.stringify(teacherNow, null, 2)}</pre>
+<pre>{JSON.stringify(blog, null, 2)}</pre>
+<pre>{JSON.stringify(classes, null, 2)}</pre>
+<pre>{JSON.stringify(teacherqual, null, 2)}</pre>
+<pre>{JSON.stringify(teacherskills, null, 2)}</pre>
 
 <style>
 	.navbar {
