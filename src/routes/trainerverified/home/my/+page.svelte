@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppRail, AppRailTile, AppRailAnchor, TabGroup, Tab } from '@skeletonlabs/skeleton';
-	import Quill from '$lib/QuillEditor.svelte';
+
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
