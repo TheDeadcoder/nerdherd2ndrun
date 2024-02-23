@@ -50,7 +50,7 @@
 				const countdown = calculateCountdown(classLive.start);
 				return { ...classLive, countdown };
 			} else {
-				let countdown;
+				let countdown = 0;
 				return { ...classLive, countdown };
 			}
 			return classLive;
@@ -226,11 +226,13 @@
 							{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
 								.countdown.minutes}m : {currsession.countdown.seconds}s
 						</p>
-					{:else}
+					{:else if currsession.countdown === 0}
 						<button
 							class="bg-blue-500 text-white px-4 py-2 rounded"
 							on:click={() => goLive(currsession.id)}>Go Live</button
 						>
+					{:else}
+						<div class="placeholder" />
 					{/if}
 				</div>
 			{/each}
