@@ -4,6 +4,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { page } from '$app/stores';
 	import { Avatar } from '@skeletonlabs/skeleton';
+
 	const { classid } = $page.params;
 	let { session, supabase, classNow, studclass, teacherNow, classlive } = data;
 	$: ({ session, supabase, classNow, studclass, teacherNow, classlive } = data);
@@ -14,6 +15,32 @@
 
 	let start;
 	let topic;
+
+	let selectedSession;
+	let attendance;
+
+	async function selectSession(val) {
+		let { data: attendances, error } = await supabase
+			.from('attendance')
+			.select('*')
+			.eq('liveid', val.id);
+
+		attendance = await Promise.all(
+			attendances.map(async (curr) => {
+				let { data: dtt, error } = await supabase.from('student').select('*').eq('id', curr.sid);
+				let student = dtt[0];
+				return { ...curr, student };
+			})
+		);
+
+		selectedSession = val;
+		console.log(attendance);
+	}
+
+	function closeSession() {
+		selectedSession = null;
+		attendance = null;
+	}
 
 	let addliveModal = false;
 	function openliveModal() {
@@ -204,42 +231,102 @@
 		</div>
 	</div>
 	<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
-		<button
-			class="btn bg-emerald-400 mt-6 p-4 rounded-md flex flex-row space-x-2"
-			on:click={openliveModal}
-		>
-			<img
-				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
-				alt="Dashboard Icon"
-				class="h-6 hover:rotate-12"
-			/>
-			<h4 class="font-semibold">Schedule a new Class</h4>
-		</button>
-
-		<div class="mt-9 flex flex-col space-y-4">
-			<h1 class="text-2xl font-extrabold"><u>All Classes</u></h1>
-			{#each classlive as currsession, i}
-				<div class=" mr-40 flex flex-row space-x-8">
-					<h1 class="font-bold text-xl">
-						{i + 1}. {currsession.topic}
-					</h1>
-					{#if currsession.done}
-						<button class="btn bg-teal-500"> Check Stat </button>
-					{:else if currsession.countdown}
-						<p class="font-semibold">
-							{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
-								.countdown.minutes}m : {currsession.countdown.seconds}s
-						</p>
-					{:else if currsession.countdown === 0}
-						<button
-							class="bg-blue-500 text-white px-4 py-2 rounded"
-							on:click={() => goLive(currsession.id)}>Go Live</button
-						>
-					{:else}
-						<div class="placeholder" />
-					{/if}
+		<div class="mt-4 flex flex-row space-x-20">
+			<div class="w-1/3">
+				<button
+					class="btn bg-emerald-400 p-4 rounded-md flex flex-row space-x-2"
+					on:click={openliveModal}
+				>
+					<img
+						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-6 hover:rotate-12"
+					/>
+					<h4 class="font-semibold">Schedule a new Class</h4>
+				</button>
+				<h1 class="text-2xl font-extrabold mt-9"><u>All Classes</u></h1>
+				<div class="flex flex-col space-y-4 mt-4">
+					{#each classlive as currsession, i}
+						<div class=" flex flex-row space-x-8">
+							<h1 class="font-bold text-xl">
+								{i + 1}. {currsession.topic}
+							</h1>
+							{#if currsession.done}
+								<button
+									class="btn bg-teal-500 rounded-lg"
+									on:click={() => selectSession(currsession)}
+								>
+									Check Stat
+								</button>
+							{:else if currsession.countdown}
+								<p class="font-semibold">
+									{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
+										.countdown.minutes}m : {currsession.countdown.seconds}s
+								</p>
+							{:else if currsession.countdown === 0}
+								<button
+									class="bg-blue-500 text-white px-4 py-2 rounded"
+									on:click={() => goLive(currsession.id)}>Go Live</button
+								>
+							{:else}
+								<div class="placeholder" />
+							{/if}
+						</div>
+					{/each}
 				</div>
-			{/each}
+			</div>
+			<div class="w-2/3">
+				{#if selectedSession}
+					{#if attendance}
+						<button class="btn bg-rose-400 rounded-lg" on:click={closeSession}> X Close </button>
+						<div class="flex flex-row justify-between mt-4">
+							<h1 class="text-2xl font-bold">{selectedSession.topic}</h1>
+							<h1 class="text-xl font-semibold">Duration: {selectedSession.duration}seconds</h1>
+						</div>
+						<h1 class="text-lg font-semibold mt-8">Participants Records</h1>
+						<div class="flex flex-col space-y-3 mt-4">
+							{#each attendance as currAtt}
+								<div class="flex flex-row space-x-10">
+									<a href="/viewonly/student/{currAtt.student.id}" class="flex flex-row space-x-2">
+										<img
+											src={currAtt.student.image}
+											alt="Dashboard Icon"
+											class="h-6 hover:rotate-12"
+										/>
+										<p>
+											{currAtt.student.name}
+										</p>
+									</a>
+									<p>
+										Join duration: {currAtt.time} seconds
+									</p>
+								</div>
+							{/each}
+						</div>
+					{:else}
+						<h1>Loading ...</h1>
+					{/if}
+				{:else}
+					<h1 class="text-xl">No Session to Show</h1>
+
+					<section class="card w-full">
+						<div class="p-4 space-y-4">
+							<div class="placeholder" />
+							<div class="grid grid-cols-3 gap-8">
+								<div class="placeholder" />
+								<div class="placeholder" />
+								<div class="placeholder" />
+							</div>
+							<div class="grid grid-cols-4 gap-4">
+								<div class="placeholder" />
+								<div class="placeholder" />
+								<div class="placeholder" />
+								<div class="placeholder" />
+							</div>
+						</div>
+					</section>
+				{/if}
+			</div>
 		</div>
 
 		<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
