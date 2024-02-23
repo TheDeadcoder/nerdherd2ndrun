@@ -48,9 +48,13 @@
 
 	async function endClass() {
 		//console.log('Rejoin e aschi');
+
+		let curr = new Date();
+		let timespent = (Date.parse(curr) - Date.parse(data.classLive.joined)) / 1000;
+
 		const { data: dt2, error: err2 } = await data.supabase
 			.from('classlive')
-			.update({ done: true })
+			.update({ done: true, duration: timespent })
 			.eq('id', data.classLive.id);
 
 		window.location.href = `/trainerverified/runningclass/${data.classNow.id}/live`;

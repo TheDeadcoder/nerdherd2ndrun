@@ -24,7 +24,11 @@
 		addliveModal = false;
 	}
 
-	function goLive(val) {
+	async function goLive(val) {
+		const { data: dt2, error: err2 } = await supabase
+			.from('classlive')
+			.update({ joined: new Date() })
+			.eq('id', val);
 		window.location.href = `/commonverified/call/${val}?uid=${teacherNow.id}`;
 	}
 
