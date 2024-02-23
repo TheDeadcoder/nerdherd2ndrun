@@ -12,6 +12,8 @@
 	const channel = data.channel;
 	const uid = parseInt(data.uid);
 	const token = data.token;
+	const name = data.userNow.name;
+	const isTrainer = data.isTrainer;
 	console.log(data);
 
 	let users: IAgoraRTCRemoteUser[] = [];
@@ -88,7 +90,7 @@
 		{/each}
 		<div class="cell">
 			<div class="video" id="me" />
-			<p class="uid">me</p>
+			<p class="uid">Me</p>
 		</div>
 	</div>
 </div>
