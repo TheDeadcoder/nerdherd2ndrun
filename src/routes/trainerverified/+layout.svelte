@@ -18,16 +18,19 @@
                 >
             </div>
 
-            <div>
-                <LightSwitch></LightSwitch>
+            <div class="p-5 ">
+                
+                <div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+                    <LightSwitch class=''/>
+                </div>
             </div>
         </div>
     </div>
 
 
 
-    <div class="grid grid-cols-[15%_auto]">
-        <div class=" dark:bg-[#070707]">
+    <div class="grid grid-cols-[17%_auto]">
+        <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 <Sidebar></Sidebar>
             </div>

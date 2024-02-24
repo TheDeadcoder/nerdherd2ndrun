@@ -53,7 +53,7 @@
 </script>
 
 
-<div class="bg-[#f2f3f4] ">
+<div class="bg-[#f2f3f4]  dark:bg-[#212020] min-h-screen">
 	
 	<!-- <div class="navbar">
 		<nav class="appbar">
@@ -191,13 +191,13 @@
 	
 	<div>
 		<div>
-			<h1 class="text-2xl font-bold mt-4 ml-8 ">Upcoming Classes</h1>
+			<h1 class="text-2xl font-bold mt-4 ml-8 dark:text-[#f3f2f2] ">Upcoming Classes</h1>
 		</div>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
 			
 			{#each classes as currClass}
 				{#if classifyClass(currClass.start)}
-					<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl">
+					<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
 	
 						<div class="h-[200px] overflow-hidden">
 							<img src={currClass.image} alt="Dashboard Icon" class="object-cover  max-h-[200px] w-[100%] hover:scale-105" />
@@ -221,7 +221,7 @@
 								</div>
 				
 								<div>
-									<button class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg" on:click={() => viewDetails(currClass)}>
+									<button class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]" on:click={() => viewDetails(currClass)}>
 										View Details
 									</button>
 								</div>
@@ -234,12 +234,12 @@
 			{/each}
 		</div>
 	</div>
-	<h1 class="text-2xl font-bold mt-4 ml-8">Running Classes</h1>
+	<h1 class="text-2xl font-bold mt-4 ml-8 dark:text-[#f3f2f2]">Running Classes</h1>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
 		{#each classes as currClass}
 			{#if classifyClass(currClass.start) === false}
 			
-				<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl">
+				<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
 	
 					<div class="h-[200px] overflow-hidden">
 						<img src={currClass.image} alt="Dashboard Icon" class="object-cover  max-h-[200px] w-[100%] hover:scale-105"/>
@@ -265,7 +265,7 @@
 							<div>
 								<a
 									href="/trainerverified/runningclass/{currClass.id}/chat"
-									class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg"
+									class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 									data-sveltekit-prefetch
 								>
 									Go to Class
@@ -347,10 +347,10 @@
 	{/if}
 	{#if showaddmodal}
 		<div
-			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
+			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity dark:text-[#e1e1e1]  "
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
-				<div class="flex justify-between items-center mb-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 dark:bg-[#212020]">
+				<div class="flex justify-between items-center mb-3">
 					<h2 class="text-2xl font-bold">Add a new class</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
 				</div>
@@ -363,12 +363,12 @@
 						closeclassmodal();
 					}}
 				>
-					<div class="space-y-6">
-						<label class="label text-left mb-3">
+					<div >
+						<label class="label text-left mb-2">
 							<span>Class Title</span>
 	
 							<input
-								class="input"
+								class="input dark:placeholder:text-[#ffffff9e]"
 								type="text"
 								id="title"
 								name="title"
@@ -379,7 +379,7 @@
 						<label class="label text-left">
 							<span>Syllabus</span>
 							<textarea
-								class="textarea"
+								class="textarea dark:placeholder:text-[#ffffff9e]"
 								rows="4"
 								placeholder="Topics you are gonna cover..."
 								id="syllabus"
@@ -387,29 +387,30 @@
 								bind:value={syllabus}
 							/>
 						</label>
-						<label class="label text-left mb-3">
-							<span>Class Duration</span>
-	
-							<input
-								class="input"
-								type="number"
-								id="duration"
-								name="duration"
-								bind:value={duration}
-								placeholder="How many weeks are gonna take?"
-							/>
-						</label>
-						<label class="label text-left mb-3">
-							<span>Approx Start date</span>
-	
-							<input class="input" type="date" id="start" name="start" bind:value={start} />
-						</label>
+						<div class=" ">
+							<label class="label text-left mb-2">
+								<span>Class Duration</span>
+								<input
+									class="input dark:placeholder:text-[#ffffff9e]"
+									type="number"
+									id="duration"
+									name="duration"
+									bind:value={duration}
+									placeholder="How many weeks are gonna take?"
+								/>
+							</label>
+							<label class="label text-left mb-3">
+								<span>Approx Start date</span>
+		
+								<input class="input dark:placeholder:text-[#ffffff9e]" type="date" id="start" name="start" bind:value={start} />
+							</label>
+						</div>
 						<label class="label text-left mb-3">
 							<span>Photo (optional)</span>
 	
-							<input class="input" type="file" id="image" name="image" bind:value={image} />
+							<input class="input dark:placeholder:text-[#ffffff9e]" type="file" id="image" name="image" bind:value={image} />
 						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button type="submit" class="btn text-xl font-semibold dark:text-[#e1e1e1] dark:bg-[#3b6f8e]  bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] dark:hover:bg-[#36647e]">
 							Submit
 						</button>
 					</div>
