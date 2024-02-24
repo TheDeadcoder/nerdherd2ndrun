@@ -132,7 +132,7 @@
 
 </script>
 
-<div>
+<!-- <div>
 	<div class="navbar">
 		<nav class="appbar">
 			<div class="logo-container flex items-center">
@@ -211,7 +211,6 @@
 					>
 				</li>
 
-				<!-- <LightSwitch class="mr-3" /> -->
 				<div use:popup={popupClick}>
 					<Avatar
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
@@ -249,20 +248,21 @@
 		
 		
 	</div>
-</div>
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="container mx-auto mt-8">
-	<h2 class="text-3xl font-bold text-center mb-4">Todo List</h2>
-	<div class="flex justify-between items-center mb-4"> <!-- Added flex container with justify-between -->
-		<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
+</div> -->
+
+<div class="container mx-auto">
+	<h2 class="text-3xl font-bold p-3 px-6">Todo List</h2>
+	<div class="flex justify-between items-center mb-2"> <!-- Added flex container with justify-between -->
+		<div class="card mx-9 my-4 hover:scale-105 border-2 " on:click={openAddForm}>
 			<div class="flex flex-row items-center space-x-3 p-5">
 				<img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg" alt="Dashboard Icon" class="h-5 mr-1 hover:rotate-12" />
-				<h1 class="text-lg">Add New Task</h1>
-			</div>    
+		    	<h1 class="text-lg">Add New Task</h1>
+			</div>
 		</div>
-		<!-- <button class="btn text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg mr-3" on:click={sortTodos}>Sort</button>	 -->
 	</div>
+
 	<hr>
+
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8">
 		{#each sortTodoItems(todo) as todoItem}
 			<div class="todo-item p-3 py-1 m-1 mr-3 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">

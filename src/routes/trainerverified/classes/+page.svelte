@@ -55,7 +55,7 @@
 
 <div class="bg-[#f2f3f4] ">
 	
-	<div class="navbar">
+	<!-- <div class="navbar">
 		<nav class="appbar">
 			<div class="logo-container flex items-center">
 				<img
@@ -138,16 +138,15 @@
 
 				</li>
 
-				<!-- <LightSwitch class="mr-3" /> -->
-				<!-- <div use:popup={popupClick}>
+				<div use:popup={popupClick}>
 					<Avatar
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
 						width="w-10"
 						rounded="rounded-full"
 					/>
-				</div> -->
+				</div>
 
-				<!-- <div data-popup="popupClick" class="h-32 absolute">
+				<div data-popup="popupClick" class="h-32 absolute">
 					<ul class="text-lg font-semibold bg-sky-300 ml-0">
 						<li class="mt-2 mb-3 p-2">
 							<a href="/trainerverified/profile" class="flex items-center font-bold"
@@ -170,12 +169,12 @@
 							>
 						</li>
 					</ul>
-				</div> -->
+				</div> 
 			</ul>
 		</nav>
 
 
-	</div>
+	</div> -->
 	<div class="ml-8 mt-6 w-[23%] mr-8  bg- shadow-md bg-[#f0f4f6] overflow-hidden">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->

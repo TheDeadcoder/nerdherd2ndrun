@@ -402,9 +402,11 @@
 			{/if}
 		</div>
 		<div class="w-full mt-8 ml-24 mr-10 flex-col-reverse">
-			<div class="w-full mt-6 flex flex-row space-x-8">
+			<h1 class="text-xl font-bold">Post a Comment :</h1>
+			<div class="w-full mt-2 mb-2 flex flex-row space-x-8">
+				
 				<textarea
-					class="textarea w-5/6"
+					class="textarea w-5/6 border-[.5px] rounded-sm shadow-amber-100"
 					rows="1"
 					placeholder="Write a Comment ..."
 					id="commentBody"
@@ -412,15 +414,19 @@
 					bind:value={commentBody}
 				/>
 				<button class="w-1/6 btn bg-green-400" on:click={sendComment}> Send </button>
+
 			</div>
 			<h1 class="text-xl font-bold">Previous Comments</h1>
 			{#each comments as comment}
 				<div class="grid grid-cols-[auto_1fr] gap-2 mt-4">
-					<Avatar
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/defaultuser.jpg"
-						width="w-12"
-					/>
-					<div class="card p-4 variant-soft rounded-tl-none space-y-2">
+					<div class="border-2 ">
+						<Avatar
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/defaultuser.jpg"
+							width="w-12"
+							class="border-2 "
+						/>
+					</div>
+					<div class="card p-4 variant-soft rounded-tl-none space-y-2 border-2">
 						<header class="flex justify-between items-center">
 							{#if comment.user.istrainer}
 								<a href="/viewonly/teacher/{comment.user.id}">

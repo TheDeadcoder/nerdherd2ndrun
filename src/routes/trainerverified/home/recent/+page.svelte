@@ -80,7 +80,7 @@
 </script>
 
 <main class="bg-[#f4f6f7]">
-	<div>
+	<!-- <div>
 		<div class="navbar">
 			<nav class="appbar">
 				<div class="logo-container flex items-center">
@@ -158,7 +158,6 @@
 						>
 					</li>
 
-					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
 						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 					</div>
@@ -195,9 +194,7 @@
 					value={0}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment>
-					<span>(label 1)</span>
-			 -->
+					
 					<a
 						href="/trainerverified/home/recent"
 						class="flex items-center justify-center p-2 font-semibold"
@@ -279,7 +276,6 @@
 						Search
 					</button>
 				</Tab>
-				<!-- Tab Panels --->
 				<svelte:fragment slot="panel"></svelte:fragment>
 			</TabGroup>
 		</div>
@@ -344,10 +340,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="w-full h-screen flex flex-row justify-center">
-		<div class="w-4/5">
+		<div class="">
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
 					<a
