@@ -1,11 +1,9 @@
 <script lang="ts">
 	export let data;
 
-	let { session, supabase, teacherNow } = data;
-	$: ({ session, supabase, teacherNow } = data);
+	let { session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data;
+	$: ({ session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data);
 </script>
-
-
 
 <div>
 	<div class="navbar">
@@ -16,7 +14,6 @@
 					class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
 					alt="title"
 					width={50}
-					
 				/>
 				<span class="company-name text-2xl font-extrabold">NerD</span><span
 					class="company-name white-text text-2xl font-extrabold">Herd</span
@@ -34,7 +31,7 @@
 					>
 				</li>
 				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
+					<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
 							alt="Dashboard Icon"
@@ -44,7 +41,7 @@
 					>
 				</li>
 				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
+					<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -63,23 +60,20 @@
 						Compete</a
 					>
 				</li>
-	
+
 				<li>
-	
 					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
 							alt="Dashboard Icon"
 							class="h-5 mr-1 hover:rotate-12"
 						/>
-	
+
 						Chatbot</a
 					>
-	
 				</li>
-	
+
 				<li>
-	
 					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
@@ -88,23 +82,17 @@
 						/>
 						Planner</a
 					>
-	
 				</li>
-	
-				
 			</ul>
 		</nav>
-	
-	
 	</div>
 
 	<div class="h-screen flex justify-center">
 		<div class=" grid grid-rows-2 justify-center w-3/5 p-16">
 			<div class="mb-14">
-				<div class="flex justify-center ">
-					<img src={teacherNow.image} alt="" class="h-[200px] rounded-full border object-contain">
+				<div class="flex justify-center">
+					<img src={teacherNow.image} alt="" class="h-[200px] rounded-full border object-contain" />
 				</div>
-				
 			</div>
 
 			<div class="mb-8 grid grid-cols-2">
@@ -113,15 +101,19 @@
 					<p class="font-thin">{teacherNow.email}</p>
 					<p class="font-thin">{teacherNow.address}</p>
 					<!-- <p class="font-thin">{teacherNow.institute}</p> -->
-					<div class="my-3 ">
+					<div class="my-3">
 						<p>{teacherNow.about}</p>
 					</div>
 				</div>
-				<div class="flex m-3 ">
+				<div class="flex m-3">
+					<!-- <div>
+						<p class="max-h-12 m-1">{teacherNow.skillset}</p>
+					</div> 
+					Avro, the skill and educational quaLifications have changed
+					look pre
+					-->
+
 					<div>
-						<p  class="max-h-12 m-1">{teacherNow.skillset}</p> 
-					</div>
-					<div >
 						<!-- <p class="font-medium"> {teacherNow.eduqual[0].institute}</p>
 						<p class="leading-3">{teacherNow.eduqual[0].gpa}</p> -->
 					</div>
@@ -132,18 +124,20 @@
 </div>
 
 <pre>{JSON.stringify(teacherNow, null, 2)}</pre>
+<pre>{JSON.stringify(blog, null, 2)}</pre>
+<pre>{JSON.stringify(classes, null, 2)}</pre>
+<pre>{JSON.stringify(teacherqual, null, 2)}</pre>
+<pre>{JSON.stringify(teacherskills, null, 2)}</pre>
 
 <style>
-	.navbar{
+	.navbar {
 		background-color: rgb(188, 223, 253);
-
 	}
 	.appbar {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 1rem;
-
 	}
 
 	.logo-container {

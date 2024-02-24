@@ -116,10 +116,10 @@
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
 	const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
-    };
+		if (event.key === 'Enter') {
+			sendMessage();
+		}
+	};
 </script>
 
 <div class="">
@@ -140,7 +140,7 @@
 				>
 			</li>
 			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
+				<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
 						alt="Dashboard Icon"
@@ -179,7 +179,7 @@
 					Chatbot</a
 				>
 			</li>
-	
+
 			<li>
 				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
 					><img
@@ -192,7 +192,7 @@
 			</li>
 		</ul>
 	</nav>
-	<div class="grid grid-cols-[15%_auto] ">
+	<div class="grid grid-cols-[15%_auto]">
 		<div
 			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -200,7 +200,7 @@
 		>
 			<div class="flex flex-col mt-6">
 				<div>
-					<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item active ">
+					<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item active">
 						<div class="flex flex-row">
 							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
@@ -212,7 +212,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item ">
+					<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item">
 						<div class="flex flex-row">
 							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
@@ -220,12 +220,11 @@
 								class="h-6 mr-3 hover:rotate-12"
 							/>
 							<p class="text-black font-bold">Assignments</p>
-							
 						</div>
 					</a>
 				</div>
 				<div>
-					<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item ">
+					<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item">
 						<div class="flex flex-row">
 							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
@@ -233,12 +232,11 @@
 								class="h-6 mr-3 hover:rotate-12"
 							/>
 							<p class="text-black font-bold">Credentials</p>
-							
 						</div>
 					</a>
 				</div>
 				<div>
-					<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item ">
+					<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item">
 						<div class="flex flex-row">
 							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
@@ -251,42 +249,44 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<!-- <div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> -->
-			<!-- Your content here -->
-		<div >
-
+		<!-- Your content here -->
+		<div>
 			<!-- Chat Messages Display -->
-			<div class=" flex flex-col chat-window  ">
+			<div class=" flex flex-col chat-window">
 				<!-- Messages List -->
-				<div class="flex flex-col-reverse " on:scroll={handleScroll}>
-
+				<div class="flex flex-col-reverse" on:scroll={handleScroll}>
 					{#each messages as message (message.id)}
 						<div class="message {message.username === teacherNow.name ? 'me' : 'other'}">
-							 <p class=""><strong>{message.username}:</strong></p>
-							
-							<div  >
+							<p class=""><strong>{message.username}:</strong></p>
+
+							<div>
 								<p class="break-words">{message.body}</p>
 							</div>
 							<p class="timestamp">{formatTimestamp(message.createdat)}</p>
-							
 						</div>
 					{/each}
 					{#if loadingOlderMessages}
 						<div class="loading-older-messages">Loading older messages...</div>
 					{/if}
 				</div>
-	
+
 				<!-- Input Form -->
 				<form class="mb-2" on:submit|preventDefault={sendMessage}>
-					<input type="text" bind:value={newMessage} placeholder="Type a message..." on:keydown={handleKeyDown} />
+					<input
+						type="text"
+						bind:value={newMessage}
+						placeholder="Type a message..."
+						on:keydown={handleKeyDown}
+					/>
 					<button type="submit">Send</button>
 				</form>
 			</div>
-			
 		</div>
 	</div>
 </div>
+
 <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 <style>
 	.appbar {
@@ -330,7 +330,7 @@
 	.sidebar-item {
 		display: block;
 		padding: 0.75rem 1rem;
-		border-bottom: .5px solid rgb(175, 174, 174);
+		border-bottom: 0.5px solid rgb(175, 174, 174);
 		text-decoration: none;
 		transition:
 			background-color 0.2s,

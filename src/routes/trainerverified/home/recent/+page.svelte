@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppRail, AppRailTile, AppRailAnchor, TabGroup, Tab } from '@skeletonlabs/skeleton';
-	import Quill from '$lib/QuillEditor.svelte';
+
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
@@ -10,8 +10,8 @@
 
 	export let data;
 
-	let { session, supabase, blog } = data;
-	$: ({ session, supabase, blog } = data);
+	let { session, supabase, blog, teacherNow } = data;
+	$: ({ session, supabase, blog, teacherNow } = data);
 
 	let list: string[] = [];
 	let tagsofPost: string[] = ['web development', 'javascript'];
@@ -106,7 +106,7 @@
 						>
 					</li>
 					<li>
-						<a href="/library" class="flex items-center p-1 font-bold"
+						<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
 								alt="Dashboard Icon"
@@ -160,11 +160,7 @@
 
 					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
-							width="w-10"
-							rounded="rounded-full"
-						/>
+						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 					</div>
 
 					<div data-popup="popupClick" class="h-32 absolute">

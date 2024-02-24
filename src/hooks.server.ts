@@ -53,6 +53,13 @@ async function authorization({ event, resolve }) {
             throw redirect(303, '/')
         }
     }
+    if (event.url.pathname.startsWith('/commonverified') && event.request.method === 'GET') {
+        const session = await event.locals.getSession()
+        if (!session) {
+            // the user is not signed in
+            throw redirect(303, '/')
+        }
+    }
 
     // protect POST requests to all routes that start with /protected-posts
     if (event.url.pathname.startsWith('/learnerverified') && event.request.method === 'POST') {
@@ -76,6 +83,14 @@ async function authorization({ event, resolve }) {
             throw error(303, '/')
         }
     }
+    if (event.url.pathname.startsWith('/commonverified') && event.request.method === 'POST') {
+        const session = await event.locals.getSession()
+        if (!session) {
+            // the user is not signed in
+            throw error(303, '/')
+        }
+    }
+
 
 
     return resolve(event)

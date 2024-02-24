@@ -18,9 +18,43 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         .select("*")
         .eq('id', params.tid)
 
+    console.log("err", err);
+
 
     teacherNow = teacher[0];
+    let { data: blog, error: err1 } = await supabase
+        .from('blog')
+        .select("*")
+        .eq('teacherid', teacher[0].id)
+        .limit(2)
 
-    return { teacherNow };
+    console.log("err1", err1);
+
+
+    let { data: classes, error: err5 } = await supabase
+        .from('classes')
+        .select("*")
+        .eq('teacherid', teacher[0].id)
+    console.log("err5", err5);
+
+    let { data: teacherqual, error: err6 } = await supabase
+        .from('teacherqual')
+        .select("*")
+        .eq('teacherid', teacherNow.id)
+
+    console.log("err6", err6);
+
+    let { data: teacherskills, error: err7 } = await supabase
+        .from('teacherskills')
+        .select("*")
+        .eq('teacherid', teacherNow.id)
+
+    console.log("err7", err7);
+
+
+
+    return { teacherNow, blog, classes, teacherqual, teacherskills }
+
+
 
 }

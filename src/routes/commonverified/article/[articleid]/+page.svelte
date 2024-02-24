@@ -13,8 +13,12 @@
 	let reacted = false;
 	let reactionval = false;
 
-	let { session, supabase, articleNow, teacherNow, commonuserNow } = data;
-	$: ({ session, supabase, articleNow, teacherNow, commonuserNow } = data);
+	let { session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data;
+	$: ({ session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data);
+
+	let comments = commentsMod;
+	let commentBody;
+	let commentCnt = comments?.length;
 
 	let values = articleNow.tags.split(',');
 
@@ -37,18 +41,40 @@
 		];
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
-	async function fetchContent(url) {
-		try {
-			const response = await fetch(url);
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
+
+	const refresh = async () => {
+		window.location.href = `/commonverified/article/${articleNow.id}`;
+	};
+	async function sendComment() {
+		const { data, error: err } = await supabase.from('comment').insert([
+			{
+				userid: commonuserNow.id,
+				blogid: articleNow.id,
+				body: commentBody,
+				createdat: new Date()
 			}
-			return await response.text();
-		} catch (e) {
-			console.error('Failed to fetch content:', e);
-			return 'Failed to load content';
+		]);
+		if (err) {
+			console.error('Error sending Comment:', err.message);
+		} else {
+			commentBody = '';
+			refresh();
 		}
 	}
+	function formatTimestamp(timestamp: string): string {
+		const date = new Date(timestamp);
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'short',
+			day: '2-digit',
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false // Use 24-hour clock
+		};
+
+		return new Intl.DateTimeFormat('en-US', options).format(date);
+	}
+
 	const handleSignOut = async () => {
 		console.log('logout start');
 		await data.supabase.auth.signOut();
@@ -76,21 +102,6 @@
 		});
 	}
 
-	// function subscribeToReactionState() {
-	// 	const channels = supabase
-	// 		.channel('custom-insert-channel')
-	// 		.on('postgres_changes', { event: '*', schema: 'public', table: 'reaction' }, (payload) => {
-	// 			console.log('Change received!', payload);
-	// 			// Update your messages array to reflect the new message
-	// 			// Ensure the new message is added in a way that doesn't duplicate it if you've already optimistically added it to the UI
-	// 			const newReaction = payload.new;
-	// 			console.log(newReaction);
-	// 			// if (!messages.some((message) => message.id === newMessage.id)) {
-	// 			// 	messages = [newMessage, ...messages];
-	// 			// }
-	// 		})
-	// 		.subscribe();
-	// }
 	function subscribeToReactionState() {
 		const channels = supabase
 			.channel('custom-insert-channel')
@@ -141,10 +152,28 @@
 		} else reacted = false;
 	}
 
+	async function loadInitialComments() {
+		const { data: dtt, error: err } = await supabase
+			.from('comment')
+			.select('*')
+			.eq('blogid', articleNow.id);
+
+		if (err) console.log('failed to load');
+		comments = dtt?.reverse();
+		for (let i = 0; i < comments.length; i++) {
+			let uid = comments[i].userid;
+			let { data: dttt, error: err } = await supabase.from('commonuser').select('*').eq('id', uid);
+			comments[i].user = dttt[0];
+		}
+		console.log(comments);
+		commentCnt = dtt?.length;
+	}
+
 	onMount(async () => {
 		loadInitialLikeandDislike();
 		subscribeToReactionState();
-		articleNow.fetchedContent = await fetchContent(articleNow.content);
+		// loadInitialComments();
+		// articleNow.fetchedContent = await fetchContent(articleNow.content);
 	});
 </script>
 
@@ -173,14 +202,24 @@
 				>
 			</li>
 			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
+				{#if commonuserNow.istrainer === true}
+					<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Library</a
+					>
+				{:else}
+					<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+							alt="Dashboard Icon"
+							class="h-5 mr-1 hover:rotate-12"
+						/>
+						Library</a
+					>{/if}
 			</li>
 			<li>
 				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
@@ -242,7 +281,7 @@
 		<h1 class="font-extrabold text-5xl">
 			{articleNow.title}
 		</h1>
-		<p class="text-2xl font-light mt-2 ml-16 mr-16">
+		<p class="text-2xl font-light mt-2 ml-24 mr-24">
 			{articleNow.description}
 		</p>
 		<a href="/viewonly/teacher/{teacherNow.id}" class="flex flex-row space-x-4 mt-4 text-left">
@@ -289,7 +328,7 @@
 					class="w-5 h-5 mt-1 hover:scale-105 hover:rotate-12"
 				/>
 				<p class="text-base">
-					{likeval} Commented
+					{commentCnt} Commented
 				</p>
 			</div>
 		</div>
@@ -309,26 +348,7 @@
 		</div>
 
 		<div class="mt-16 ml-24 mr-24">
-			{#if articleNow.fetchedContent}
-				{@html articleNow.fetchedContent}
-			{:else}
-				<section class="card w-full">
-					<div class="p-4 space-y-4">
-						<div class="placeholder" />
-						<div class="grid grid-cols-3 gap-8">
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-						</div>
-						<div class="grid grid-cols-4 gap-4">
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-							<div class="placeholder" />
-						</div>
-					</div>
-				</section>
-			{/if}
+			{@html articleNow.content}
 		</div>
 		<div class="mt-6 flex flex-row space-x-8">
 			{#if reacted}
@@ -381,10 +401,47 @@
 				</button>
 			{/if}
 		</div>
+		<div class="w-full mt-8 ml-24 mr-10 flex-col-reverse">
+			<div class="w-full mt-6 flex flex-row space-x-8">
+				<textarea
+					class="textarea w-5/6"
+					rows="1"
+					placeholder="Write a Comment ..."
+					id="commentBody"
+					name="commentBody"
+					bind:value={commentBody}
+				/>
+				<button class="w-1/6 btn bg-green-400" on:click={sendComment}> Send </button>
+			</div>
+			<h1 class="text-xl font-bold">Previous Comments</h1>
+			{#each comments as comment}
+				<div class="grid grid-cols-[auto_1fr] gap-2 mt-4">
+					<Avatar
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/defaultuser.jpg"
+						width="w-12"
+					/>
+					<div class="card p-4 variant-soft rounded-tl-none space-y-2">
+						<header class="flex justify-between items-center">
+							{#if comment.user.istrainer}
+								<a href="/viewonly/teacher/{comment.user.id}">
+									Teacher: {comment.user?.email.split('@')[0]}
+								</a>
+							{:else}
+								<a href="/viewonly/student/{comment.user.id}">
+									Student: {comment.user?.email.split('@')[0]}
+								</a>
+							{/if}
+							<small class="opacity-50">{formatTimestamp(comment.createdat)}</small>
+						</header>
+						<p>{comment.body}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
 	</div>
-	<pre>{JSON.stringify(articleNow, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(articleNow, null, 2)}</pre>
 	<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
-	<pre>{JSON.stringify(commonuserNow, null, 2)}</pre>
+	<pre>{JSON.stringify(commonuserNow, null, 2)}</pre> -->
 </main>
 
 <style>
