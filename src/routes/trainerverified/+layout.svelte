@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import Sidebar from "$lib/sidebar.svelte";
+    import ClassSideBar from "$lib/classSideBar.svelte"
     import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
     import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
     import {isRunningClass} from '../../stores/isRunningClass'
@@ -70,7 +71,7 @@
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 {#if $isRunningClass.isClass}
-                    <p class="text-white text-[23px]">Hello </p>
+                    <ClassSideBar></ClassSideBar>
                 {:else}
                     <Sidebar></Sidebar>
                 {/if}
