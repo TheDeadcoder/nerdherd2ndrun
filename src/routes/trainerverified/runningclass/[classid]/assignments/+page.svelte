@@ -1,9 +1,254 @@
 <script lang="ts">
+	import { LightSwitch } from '@skeletonlabs/skeleton';
+	import { Avatar } from '@skeletonlabs/skeleton';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	const { classid } = $page.params;
+	// import Message from './Message.svelte';
 	export let data;
 
-	let { session, supabase, classNow, studclass } = data;
-	$: ({ session, supabase, classNow, studclass } = data);
+	let { session, supabase, classNow, studclass, teacherNow } = data;
+	$: ({ session, supabase, classNow, studclass, teacherNow } = data);
+	let isSidebarOpen = false;
+
+	// Timestamp formatting function
+	function formatTimestamp(timestamp) {
+		const date = new Date(timestamp);
+		const hours = date.getHours();
+		const minutes = '0' + date.getMinutes();
+		const day = '0' + date.getDate();
+		const month = '0' + (date.getMonth() + 1);
+		const year = date.getFullYear();
+
+		// Format: HH:MM, MM/DD/YYYY
+		return `${hours}:${minutes.substr(-2)}, ${month.substr(-2)}/${day.substr(-2)}/${year}`;
+	}
+
+	// Close sidebar when clicking outside, for mobile responsiveness
+	onMount(() => {
+		function handleOutsideClick(event) {
+			if (!event.target.closest('.sidebar')) {
+				isSidebarOpen = false;
+			}
+		}
+		document.addEventListener('click', handleOutsideClick);
+		return () => document.removeEventListener('click', handleOutsideClick);
+	});
 </script>
 
-<pre>{JSON.stringify(classNow, null, 2)}</pre>
-<pre>{JSON.stringify(studclass, null, 2)}</pre>
+<div class="">
+	<nav class="appbar">
+		<div class="logo-container">
+			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
+			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
+		</div>
+		<ul class="links">
+			<li>
+				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Home</a
+				>
+			</li>
+			<li>
+				<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Library</a
+				>
+			</li>
+			<li>
+				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Class</a
+				>
+			</li>
+			<li>
+				<a href="/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Compete</a
+				>
+			</li>
+			<li>
+				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Chatbot</a
+				>
+			</li>
+
+			<li>
+				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Planner</a
+				>
+			</li>
+		</ul>
+	</nav>
+	<div class="grid grid-cols-[15%_auto]">
+		<div
+			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
+				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+			} lg:translate-x-0 lg:static lg:block`}
+		>
+			<div class="flex flex-col mt-6">
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Chat</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item active">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Assignments</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Credentials</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Go Live</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> -->
+		<!-- Your content here -->
+		<div class="mt-6 ml-6">
+			<!-- Chat Messages Display -->
+			<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
+			<pre>{JSON.stringify(classNow, null, 2)}</pre>
+			<pre>{JSON.stringify(studclass, null, 2)}</pre>
+		</div>
+	</div>
+</div>
+
+<!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
+<style>
+	.appbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+
+		border-bottom: 1px solid #ccc;
+	}
+
+	.logo-container {
+		display: flex;
+		align-items: center;
+	}
+
+	.logo-container img {
+		width: 50px;
+		margin-right: 1rem;
+	}
+
+	.links {
+		display: flex;
+		list-style: none;
+		margin: 0;
+	}
+
+	.links li {
+		margin-left: 2rem;
+	}
+
+	.links a {
+		text-decoration: none;
+
+		transition: color 0.2s ease-in-out;
+	}
+
+	.links a:hover {
+		color: #007bff; /* Accent color from Skeleton UI */
+	}
+	.sidebar-item {
+		display: block;
+		padding: 0.75rem 1rem;
+		border-bottom: 0.5px solid rgb(175, 174, 174);
+		text-decoration: none;
+		transition:
+			background-color 0.2s,
+			color 0.2s;
+		/* border-radius: 0.375rem; Tailwind's rounded-md */
+	}
+	.sidebar-item.active,
+	.sidebar-item:hover {
+		background-color: #ebebeb; /* Tailwind's gray-100 */
+	}
+
+	.sidebar-item:active {
+		background-color: #d4d4d4; /* Tailwind's gray-200 */
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.sidebar-item {
+			color: #d1d5db; /* Tailwind's gray-300 */
+		}
+
+		.sidebar-item:hover {
+			background-color: #a6c8e7; /* Tailwind's gray-700 */
+			color: #ffffff; /* White text for better contrast */
+		}
+
+		.sidebar-item:active {
+			background-color: #cbcbcb; /* Tailwind's gray-600 */
+		}
+	}
+	/* Chat Window Styles */
+
+	/* Input Form Styles */
+</style>

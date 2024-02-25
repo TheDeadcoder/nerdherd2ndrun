@@ -16,10 +16,12 @@
 	let currentTile: number = 0;
 	let searchBarShow: number = 0;
 
-
 	$: calculateCountdown();
 
 	export let data;
+
+	let { session, supabase, blogwithTeacherName, studentNow } = data;
+	$: ({ session, supabase, blogwithTeacherName, studentNow } = data);
 
 	let nextDonationDate: Date = new Date('2024-1-23');
 	let daysLeft: number = 0;
@@ -69,6 +71,25 @@
 		day: 'numeric'
 	});
 
+	function formatDate(dateString) {
+		const dateObj = new Date(dateString);
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
+		];
+		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+	}
+
 	function navigateToRecent() {
 		window.open('/studentblogs/recent', '_self');
 	}
@@ -84,9 +105,80 @@
 	function navigateToSaved() {
 		window.open('/studentblogs/saved', '_self');
 	}
+
+	async function loadInitialSaved() {
+		let { data: savedblog, error } = await supabase
+			.from('savedblog')
+			.select('*')
+			.eq('commonuserid', studentNow.id);
+
+		for (let i = 0; i < savedblog.length; i++) {
+			for (let j = 0; j < blogwithTeacherName.length; j++) {
+				if (savedblog[i].blogid === blogwithTeacherName[j].id) {
+					blogwithTeacherName[j].saved = true;
+				}
+			}
+		}
+	}
+	function subscribesaved() {
+		const channels = supabase
+			.channel('custom-insert-channel')
+			.on(
+				'postgres_changes',
+				{ event: 'INSERT', schema: 'public', table: 'savedblog' },
+				(payload) => {
+					const newSsaved = payload.new;
+					// console.log('Ekahen asi');
+					console.log(newSsaved);
+					for (let i = 0; i < blogwithTeacherName.length; i++) {
+						if (
+							blogwithTeacherName[i].id === newSsaved.blogid &&
+							newSsaved.commonuserid === studentNow.id
+						) {
+							blogwithTeacherName[i].saved = true;
+						}
+					}
+				}
+			)
+			.subscribe();
+	}
+	// function subscribeDeleted() {
+	// 	const channels = supabase
+	// 		.channel('custom-insert-channel')
+	// 		.on(
+	// 			'postgres_changes',
+	// 			{ event: 'DELETE', schema: 'public', table: 'savedblog' },
+	// 			(payload) => {
+	// 				const newSsaved = payload.new;
+	// 				console.log('Ekahen asi');
+	// 				console.log(newSsaved);
+	// 			}
+	// 		)
+	// 		.subscribe();
+	// }
+
+	async function sendSaved(val) {
+		const { data, error } = await supabase
+			.from('savedblog')
+			.insert([{ commonuserid: studentNow.id, blogid: val }]);
+	}
+
+	async function RemovedSaved(val) {
+		const { error } = await supabase
+			.from('savedblog')
+			.delete()
+			.eq('commonuserid', studentNow.id)
+			.eq('blogid', val.id);
+		val.saved = false;
+		window.location.href = '/learnerverified/home/recent';
+	}
+
 	onMount(() => {
 		calculateCountdown();
 		setInterval(calculateCountdown, 1000);
+		loadInitialSaved();
+		subscribesaved();
+		//subscribeDeleted();
 	});
 	const handleSignOut = async () => {
 		await data.supabase.auth.signOut();
@@ -217,10 +309,7 @@
 					<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment>
 					<span>(label 1)</span>
 			 -->
-					<a
-						href="/learnerverified/home/recent"
-						class="flex items-center p-1 font-bold mr-3"
-					>
+					<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold mr-3">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -235,9 +324,7 @@
 					value={1}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/recommended"
-						class="flex items-center p-1 font-bold mr-3"
+					<a href="/learnerverified/home/recommended" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/recommended-like-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -253,10 +340,7 @@
 					value={2}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/popular"
-						class="flex items-center p-1 font-bold mr-3"
-					>
+					<a href="/learnerverified/home/popular" class="flex items-center p-1 font-bold mr-3">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -271,9 +355,7 @@
 					value={3}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/favourites"
-						class="flex items-center p-1 font-bold mr-3"
+					<a href="/learnerverified/home/favourites" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/star-gold-orange-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -287,10 +369,8 @@
 					name="tab3"
 					value={4}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
-					>
-					<a
-						href="/learnerverified/home/saved"
-						class="flex items-center p-1 font-bold mr-3"
+				>
+					<a href="/learnerverified/home/saved" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -384,101 +464,70 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="w-full h-screen flex flex-row">
-		
 		<div class="w-3/4 p-6">
-			
 			<div class="mt-10 ml-4 mr-4">
-				<div class="mb-14">
-					<div class="flex flex-row space-x-3">
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/ashrafulsir.jpg"
-							width="w-9"
-							rounded="rounded-full"
-						/>
-						<h1 class="text-lg">Md Ashraful Islam</h1>
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/green-circle-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6"
-						/>
-						<h1 class="text-lg">{currentDate}</h1>
-					</div>
-					<a href="/studentblogs/id" class="flex flex-col mt-4">
-						<h1 class="text-2xl font-extrabold">15 Killer Websites for Web Developers</h1>
-						<p class="mt-2">
-							99.9% of developers don’t know all of them. — As a front-end development engineer, you
-							must have used many tools to increase your productivity. They can be websites,
-							documentation, or a JavaScript...
-						</p>
-					</a>
-					<div class="mt-6 flex flex-row justify-between">
-						<div class="text-left space-x-3">
-							{#each tagsofPost as tag}
-								<span class="chip variant-filled">{tag}</span>
-							{/each}
-						</div>
-
-						<div class="text-left space-x-3 mr-6">
+				{#each blogwithTeacherName as currBlog}
+					<div class="mb-14">
+						<div class="flex flex-row space-x-3">
+							<a href="/viewonly/teacher/{currBlog.currTeacher.id}" class="flex flex-row space-x-2">
+								<Avatar src={currBlog.currTeacher.image} width="w-9" rounded="rounded-full" />
+								<h1 class="text-lg">{currBlog.currTeacher.name}</h1>
+							</a>
 							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-svgrepo-com.svg"
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/green-circle-svgrepo-com.svg"
 								alt="Dashboard Icon"
-								class="h-7 mr-1"
-								use:popup={popupHover1}
+								class="h-6"
 							/>
-							<div class="card p-4 variant-filled-secondary" data-popup="popupHover1">
-								<p>Save Post</p>
-								<div class="arrow variant-filled-secondary" />
-							</div>
-						</div>
-					</div>
-				</div>
+							<h1 class="text-lg">{formatDate(currBlog.createdat)}</h1>
 
-				<div>
-					<div class="flex flex-row space-x-3">
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/410571370_664464969186025_5000311216694977499_n.jpg"
-							width="w-9"
-							rounded="rounded-full"
-						/>
-						<h1 class="text-lg">Ms Mashiat Mushtaq</h1>
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/green-circle-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6"
-						/>
-						<h1 class="text-lg">{currentDate}</h1>
-					</div>
-					<a href="/studentblogs/id" class="flex flex-col mt-4">
-						<h1 class="text-2xl font-extrabold">React Native vs. Flutter: 2023</h1>
-						<p class="mt-2">
-							Almost two years later, there is a CLEAR winner — Almost two years ago, I wrote a blog
-							post comparing React Native and Flutter at a time when I was still somewhat new to
-							Flutter. I had spoken very highly of...
-						</p>
-					</a>
-					<div class="mt-6 flex flex-row justify-between">
-						<div class="text-left space-x-3">
-							{#each tagsofPost1 as tag}
-								<span class="chip variant-filled">{tag}</span>
-							{/each}
-						</div>
-
-						<div class="text-left space-x-3 mr-6">
 							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-svgrepo-com.svg"
+								src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
 								alt="Dashboard Icon"
-								class="h-7 mr-1"
-								use:popup={popupHover1}
+								class="h-6"
 							/>
-							<div class="card p-4 variant-filled-secondary" data-popup="popupHover1">
-								<p>Save Post</p>
-								<div class="arrow variant-filled-secondary" />
+							<h1 class="text-lg">{currBlog.timetoread} minutes</h1>
+						</div>
+						<a href="/commonverified/article/{currBlog.id}" class="flex flex-col mt-4">
+							<h1 class="text-2xl font-extrabold">{currBlog.title}</h1>
+							<p class="mt-2">
+								{currBlog.description.slice(0, 100)}...
+							</p>
+						</a>
+						<div class="mt-6 flex flex-row justify-between">
+							<div class="text-left flex flex-row space-x-2">
+								{#each currBlog.tags as tag}
+									<div class="chipi flex flex-row space-x-1">
+										<img
+											src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/tag-svgrepo-com.svg"
+											alt="Dashboard Icon"
+											class="h-6"
+										/>
+										<p>{tag}</p>
+									</div>
+								{/each}
 							</div>
+							{#if currBlog.saved}
+								<button class="text-left space-x-3 mr-6" on:click={() => RemovedSaved(currBlog)}>
+									<img
+										src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/save-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1"
+									/>
+								</button>
+							{:else}
+								<button class="text-left space-x-3 mr-6" on:click={() => sendSaved(currBlog.id)}>
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1"
+									/>
+								</button>
+							{/if}
 						</div>
 					</div>
-				</div>
+				{/each}
 			</div>
 		</div>
 		<div class="w-fit overflow-hidden mt-6">
@@ -541,6 +590,8 @@
 			</div>
 		</div>
 	</div>
+	<pre>{JSON.stringify(studentNow, null, 2)}</pre>
+	<pre>{JSON.stringify(blogwithTeacherName, null, 2)}</pre>
 </main>
 
 <style>
@@ -597,6 +648,15 @@
 	}
 
 	.logo-container {
+		display: flex;
+		align-items: center;
+	}
+	.chipi {
+		background-color: #c1d4e3;
+
+		padding: 0.5rem;
+		margin-right: 0.5rem;
+		border-radius: 0.25rem;
 		display: flex;
 		align-items: center;
 	}
