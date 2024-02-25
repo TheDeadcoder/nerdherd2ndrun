@@ -234,48 +234,52 @@
 			{/each}
 		</div>
 	</div>
-	<h1 class="text-2xl font-bold mt-4 ml-8 dark:text-[#f3f2f2]">Running Classes</h1>
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
-		{#each classes as currClass}
-			{#if classifyClass(currClass.start) === false}
-			
-				<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
-	
-					<div class="h-[200px] overflow-hidden">
-						<img src={currClass.image} alt="Dashboard Icon" class="object-cover  max-h-[200px] w-[100%] hover:scale-105"/>
-					</div>	
-	
-					<div class="px-4 pb-4">
-						<div >
-							<h1 class="text-xl font-bold mt-4">
-								{currClass.title}
-							</h1>
-						</div>
+	<div>
+		<div>
+			<h1 class="text-2xl font-bold mt-4 ml-8 dark:text-[#f3f2f2]">Running Classes</h1>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
+			{#each classes as currClass}
+				{#if classifyClass(currClass.start) === false}
+				
+					<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
 		
-						<div class="flex justify-between items-center ">
-							<div class="mt-2">
-								<div>
-									<p class="text-sm"><span class="font-semibold">Duration : </span>  {currClass.duration} weeks</p>
-								</div>
-								<div>
-									<p class="text-sm"><span class="font-semibold">Start : </span>{currClass.start}</p>
-								</div>
+						<div class="h-[200px] overflow-hidden">
+							<img src={currClass.image} alt="Dashboard Icon" class="object-cover  max-h-[200px] w-[100%] hover:scale-105"/>
+						</div>	
+		
+						<div class="px-4 pb-4">
+							<div >
+								<h1 class="text-xl font-bold mt-4">
+									{currClass.title}
+								</h1>
 							</div>
 			
-							<div>
-								<a
-									href="/trainerverified/runningclass/{currClass.id}/chat"
-									class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
-									data-sveltekit-prefetch
-								>
-									Go to Class
-								</a>
+							<div class="flex justify-between items-center ">
+								<div class="mt-2">
+									<div>
+										<p class="text-sm"><span class="font-semibold">Duration : </span>  {currClass.duration} weeks</p>
+									</div>
+									<div>
+										<p class="text-sm"><span class="font-semibold">Start : </span>{currClass.start}</p>
+									</div>
+								</div>
+				
+								<div>
+									<a
+										href="/trainerverified/runningclass/{currClass.id}/chat"
+										class="btn  font-semibold text-base p-2 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[17px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
+										data-sveltekit-prefetch
+									>
+										Go to Class
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			{/if}
-		{/each}
+				{/if}
+			{/each}
+		</div>
 	</div>
 	{#if selectedClass}
 		<div

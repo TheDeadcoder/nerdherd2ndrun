@@ -3,7 +3,6 @@
 
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	// import Message from './Message.svelte';
 	export let data;
@@ -15,7 +14,6 @@
 
 	
 	import {isRunningClass} from '../../../../../stores/isRunningClass'
-	import { page } from '$app/stores';
 
 	onMount(()=>{
 		isRunningClass.set({classid:classid,isClass:true})
