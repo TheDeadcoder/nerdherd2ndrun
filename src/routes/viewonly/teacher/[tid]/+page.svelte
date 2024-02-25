@@ -1,5 +1,19 @@
 <script lang="ts">
+	import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
+    import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
+
 	export let data;
+
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
+	const popupHover1: PopupSettings = {
+		event: 'hover',
+		target: 'popupHover1',
+		placement: 'top'
+	};
 
 	let {
 		session,
@@ -47,141 +61,75 @@
 </script>
 
 <div>
-	<div class="navbar">
-		<nav class="appbar">
-			<div class="logo-container flex items-center">
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-					class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-					alt="title"
-					width={50}
-				/>
-				<span class="company-name text-2xl font-extrabold">NerD</span><span
-					class="company-name white-text text-2xl font-extrabold">Herd</span
-				>
-			</div>
-			<ul class="links">
-				<li>
-					<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Home</a
-					>
-				</li>
-				<li>
-					<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Library</a
-					>
-				</li>
-				<li>
-					<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Class</a
-					>
-				</li>
-				<li>
-					<a href="/library" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Compete</a
-					>
-				</li>
+	<div class="w-full bg-[#97c2db] self-start sticky top-0 dark:bg-[#070707] dark:text-[#a7afb4] z-10">
+        <div class="flex justify-between">
+            <div class="flex p-4 flex-row text-center">
+                <img
+                    src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+                    class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
+                    alt="title"
+                    width={50}
+                />
+                <span class="company-name text-2xl font-extrabold">NerD</span><span
+                    class="company-name white-text text-2xl text-red-700 font-extrabold">Herd</span
+                >
+            </div>
 
-				<li>
-					<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
+            <div class="p-5 ">
+                <div class="flex justify-center align-middle">
+                    <div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full h-6  m-2">
+                        <LightSwitch/>
+                    </div>
+                    <div use:popup={popupClick}>
+                        <Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
+                        <div data-popup="popupClick" class="h-32 absolute">
+                            <ul class="text-lg font-semibold bg-[#b7dbf6] ml-0 dark:text-[#e1e1e1] dark:bg-[#070707]">
+                                <li class="mt-2 mb-3 p-2">
+                                    <a href="/trainerverified/profile" class="flex items-center font-bold"
+                                        ><img
+                                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+                                            alt="Dashboard Icon"
+                                            class="h-7 mr-1 hover:rotate-12"
+                                        />
+                                        Profile</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-						Chatbot</a
-					>
-				</li>
-
-				<li>
-					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-5 mr-1 hover:rotate-12"
-						/>
-						Planner</a
-					>
-				</li>
-			</ul>
-		</nav>
-	</div>
-
-	<div class="h-screen flex justify-center">
-		<div class=" grid grid-rows-2 justify-center w-3/5 p-16">
-			<div class="mb-14">
+	<div class="h-screen flex justify-center mt-5">
+		<div class="grid grid-cols-[30%_auto] w-4/5 ">
+			<div class="w-1/4 border-none border-r-2 border-black">
+				
 				<div class="flex justify-center">
-					<img src={teacherNow.image} alt="" class="h-[200px] rounded-full border object-contain" />
+					<img src={teacherNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
 				</div>
-			</div>
-
-			<div class="mb-8 grid grid-cols-2">
-				<div class="pr-2 pl-6 border-r-2 border-black">
-					{#if follower.length > 0}
-						<div class="flex flex-row space-x-2">
-							<p class="text-2xl font-semibold">{teacherNow.name}</p>
-							<button on:click={unfriend}>
-								<img
-									src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/star-alt-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-5 mr-1 hover:rotate-12"
-								/>
-							</button>
-						</div>
-					{:else}
-						<div class="flex flex-row space-x-2">
-							<p class="text-2xl font-semibold">{teacherNow.name}</p>
-							<button on:click={makefriend}>
-								<img
-									src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/star-svgrepo-com.svg"
-									alt="Dashboard Icon"
-									class="h-5 mr-1 hover:rotate-12"
-								/>
-							</button>
-						</div>
-					{/if}
-
+				<div class="p-3 m-3 ">
+					<p class="text-2xl font-semibold">{teacherNow.name}</p>
 					<p class="font-thin">{teacherNow.email}</p>
-					<p class="font-thin">{teacherNow.address}</p>
-					<!-- <p class="font-thin">{teacherNow.institute}</p> -->
-					<div class="my-3">
+					<p class="font-thin">{teacherNow.institute}</p>
+					<div class="mt-3">
 						<p>{teacherNow.about}</p>
 					</div>
 				</div>
-				<div class="flex m-3">
-					<!-- <div>
-						<p class="max-h-12 m-1">{teacherNow.skillset}</p>
-					</div> 
-					Avro, the skill and educational quaLifications have changed
-					look pre
-					-->
 
-					<div>
-						<!-- <p class="font-medium"> {teacherNow.eduqual[0].institute}</p>
-						<p class="leading-3">{teacherNow.eduqual[0].gpa}</p> -->
-					</div>
+				<div>
+					<ul class="">
+						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold">Qualification</li>
+						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold">Blog</li>
+						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold">Classes</li>
+						
+					</ul>
 				</div>
+			</div>
+
+			<div>
+
 			</div>
 		</div>
 	</div>
