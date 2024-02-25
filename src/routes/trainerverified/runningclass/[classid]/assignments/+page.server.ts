@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 let classNow;
+let teacherNow;
 
 export const load = async ({ params, locals: { supabase, getSession } }) => {
     console.log(params.classid);
@@ -20,6 +21,12 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     classNow = classes[0];
 
+    let { data: teacher, error: err3 } = await supabase
+        .from('teacher')
+        .select("*")
+        .eq('id', classes[0].teacherid)
+
+    teacherNow = teacher[0];
 
     let { data: studclass, error: err2 } = await supabase
         .from('studclass')
@@ -27,6 +34,7 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         .eq('cid', classNow.id)
         .eq('joined', true)
 
-    return { classNow, studclass };
+
+    return { classNow, studclass, teacherNow };
 
 }
