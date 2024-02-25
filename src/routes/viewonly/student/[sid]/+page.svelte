@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let data;
 
-	let { session, supabase, studentNow } = data;
-	$: ({ session, supabase, studentNow } = data);
+	let { session, supabase, studentNow, studentqual } = data;
+	$: ({ session, supabase, studentNow, studentqual } = data);
 </script>
 
 <div>
@@ -139,12 +139,40 @@
 					</div>
 				</div>
 				<div class="flex m-3">
-					<div>
+					<!-- <div>
 						<img src={studentNow.eduqual[0].img} alt="" class="max-h-12 m-1" />
 					</div>
 					<div>
 						<p class="font-medium">{studentNow.eduqual[0].institute}</p>
 						<p class="leading-3">{studentNow.eduqual[0].gpa}</p>
+					</div> -->
+					<div class="flex flex-col space-y-2">
+						{#each studentqual as currentqual}
+							<div class="flex flex-row space-x-2">
+								<img
+									src={currentqual.image}
+									alt="Dashboard Icon"
+									class="h-12 mr-1 hover:rotate-12"
+								/>
+								<div class="flex flex-col space-y-2">
+									<h1 class="text-xl font-bold">
+										{currentqual.institute}
+									</h1>
+									<div class="flex flex-row space-x-4">
+										<h1 class="text-lg font-semibold">
+											{currentqual.name}
+										</h1>
+										<h1 class="text-lg font-semibold">
+											Result: {currentqual.gpa} /{currentqual.gpabase}
+										</h1>
+									</div>
+
+									<p class="font-light text-sm">
+										{currentqual.from} - {currentqual.to}
+									</p>
+								</div>
+							</div>
+						{/each}
 					</div>
 				</div>
 			</div>
