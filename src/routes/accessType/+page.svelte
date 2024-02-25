@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import Switch from '$lib/Switch.svelte'
@@ -19,14 +19,38 @@
 		window.open('/trainerlogin', '_self');
 	}
 
+		
 	onMount(() => {
-		setTimeout(() => {
-			isLoading = false;
-		}, 1500); // Simulating an async load for the image.
+		// setTimeout(() => {
+		isLoading = false;
+        
+		
+		// }, 1500); 
+	
 	});
+
+	// $:	{ isDark?
+	// 		element.style.backgroundImage = "url('../../lib/svgs/access-type-bg-dark.svg')":
+	// 		element.style.backgroundImage = "url('../../lib/svgs/access-type-bg.svg')"
+	// 	}
+	const modeSwitch=()=>{
+		let isDark = document.documentElement.classList.contains('dark')
+		const element = document.getElementById("accessContainer_id");
+
+		if(element!==null){
+			if(isDark===true){
+				element.style.backgroundImage = "url('src/lib/svgs/access-type-bg-dark.svg')"
+			}
+			else{
+				element.style.backgroundImage = "url('src/lib/svgs/access-type-bg.svg')"
+			}
+		}
+	}
+		
+
 </script>
 
-<div class="accessTypeContainer">
+<div id="accessContainer_id" class="accessTypeContainer">
 	<nav class=" w-full py-6">
 		<div class="flex justify-between mx-6">
 			<div class="flex">
@@ -36,13 +60,18 @@
 					alt="title"
 					width={60}
 				/>
-				<span class="company-name text-2xl font-extrabold">NerD</span><span
+				<span class="company-name text-2xl font-extrabold dark:text-[#e1e1e1]">NerD</span><span
 					class="company-name white-text text-2xl font-extrabold">Herd</span
 				>
 			</div>
 	
-			<div >
+			<div class="flex space-x-3">
 				<!-- <LightSwitch /> -->
+				<div class=" ">
+					<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+						<LightSwitch class='' on:click={modeSwitch}/>
+					</div>
+				</div>
 				<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
 					About us
 				</a>
@@ -59,7 +88,7 @@
 		{:else}
 			<div class=" mx-auto flex  justify-center items-center space-x-8 mb-5 mt-5">
 				<!-- {#if isLearner === 'ON'} -->
-					<div class="flex flex-col space-y-6 w-1/3 items-center justify-center bg-[#f8f8f8]">
+					<div class="flex flex-col space-y-6 w-1/3 items-center justify-center bg-[#f8f8f8] dark:bg-[#212020] dark:text-[#e1e1e1]">
 						<div class="text-center flex flex-col items-center">
 							<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
 								<!-- Photo on the left side of the card -->
@@ -91,7 +120,7 @@
 									<div class="w-[100%] mt-5">
 										<button
 											type="submit"
-											class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/2"
+											class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 											on:click={handleSignInTrainer}
 										>
 											Sign In
@@ -100,7 +129,7 @@
 	
 									<div class="flex flex-col items-center justify-between mt-3">
 										<p>
-											Don't have account? <a  href="/trainersignup" target="_blank" class="font-medium"><span class="hover-underline-animation">Sign up</span></a>
+											Don't have account? <a  href="/trainersignup" target="_blank" class="font-medium"><span class="hover-underline-animation dark:text-[#e1e1e1] text-black">Sign up</span></a>
 										</p>
 									</div>
 								</div>
@@ -108,7 +137,7 @@
 						</div>
 					</div>
 				<!-- {:else} -->
-					<div class="flex flex-col space-y-6 w-1/3 items-center justify-center bg-[#f8f8f8]">
+					<div class="flex flex-col space-y-6 w-1/3 items-center justify-center bg-[#f8f8f8] dark:bg-[#212020] dark:text-[#f2f2f2]">
 						<div class="text-center flex flex-col items-center">
 							<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
 								<!-- Photo on the left side of the card -->
@@ -142,7 +171,7 @@
 									<div class="w-[100%] mt-5">
 										<button
 											type="submit"
-											class=" btn font-bold text-xl p-4 bg-[#CF9261] rounded-xl shadow-md hover:bg-[#e39b5f] hover:text-[21px] hover:shadow-lg w-1/2"
+											class=" btn font-bold text-xl p-4 bg-[#e89858] rounded-xl shadow-md hover:bg-[#CF9261] hover:text-[21px] hover:shadow-lg w-1/2"
 											on:click={handleSignInUser}
 										>
 											Sign In
@@ -151,7 +180,7 @@
 	
 									<div class="flex flex-col items-center justify-between mt-3">
 										<p>
-											Don't have account?<a href="/learnersignup" target="_blank" class="font-medium"> <span class="hover-underline-animation">Sign up</span> </a>
+											Don't have account?<a href="/learnersignup" target="_blank" class="font-medium"> <span class="hover-underline-animation dark:text-[#e1e1e1] text-black">Sign up</span> </a>
 											
 										</p>
 									</div>
@@ -176,8 +205,10 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
-		background-image: url("../../lib/svgs/access-type-bg.svg");
+		background-image: url('../../lib/svgs/access-type-bg.svg');
 	}
+	
+
 	.white-text {
 		color: red;
 	}
@@ -189,7 +220,6 @@
 	.hover-underline-animation {
 		display: inline-block;
 		position: relative;
-		color: #000000;
 	}
 
 	.hover-underline-animation::after {

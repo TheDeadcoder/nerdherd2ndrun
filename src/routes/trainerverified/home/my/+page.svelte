@@ -79,7 +79,7 @@
 </script>
 
 <main class="bg-[#f4f6f7]">
-	<div>
+	<!-- <div>
 		<div class="navbar">
 			<nav class="appbar">
 				<div class="logo-container flex items-center">
@@ -157,7 +157,6 @@
 						>
 					</li>
 
-					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
 						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 					</div>
@@ -194,9 +193,7 @@
 					value={0}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment>
 					<span>(label 1)</span>
-			 -->
 					<a
 						href="/trainerverified/home/recent"
 						class="flex items-center justify-center p-2 font-semibold"
@@ -278,7 +275,6 @@
 						Search
 					</button>
 				</Tab>
-				<!-- Tab Panels --->
 				<svelte:fragment slot="panel"></svelte:fragment>
 			</TabGroup>
 		</div>
@@ -343,21 +339,23 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
-	<div class="w-full h-screen flex flex-row justify-center">
-		<div class="w-4/5">
-			<a href="/trainerverified/home/newpost" class="mt-8 btn variant-filled">
-				Write a New Article
-			</a>
+	<div class="w-full min-h-screen flex flex-row justify-center dark:bg-[#212020]">
+		<div class="w-full mx-5">
+			<div>
+				<a href="/trainerverified/home/newpost" class="mt-8 btn font-semibold text-xl p-4 bg-[#8ad4ff] rounded-lg shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
+					Write New Article
+				</a>
+			</div>
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
 					<a
 						href="/commonverified/article/{currblog.id}"
-						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer"
+						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
 						<div class="hover:scale-105">
-							<div class="mb-3 p-3 rounded-full">
+							<div class="mb-3 rounded-full">
 								<img
 									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
 									alt="User "
@@ -400,6 +398,7 @@
 			</div>
 		</div>
 	</div>
+
 </main>
 
 <style>

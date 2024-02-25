@@ -102,282 +102,225 @@
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
+	const avro = ()=>{
+		window.open("/trainerverified/library",'_self')
+	}
 </script>
 
-<nav class="appbar">
-	<div class="logo-container">
-		<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
-		<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
-
-		<li>
-			<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Planner</a
-			>
-		</li>
-	</ul>
-</nav>
-<main class="min-h-screen grid grid-cols-[15%_auto]">
-	<div
-		class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
-			isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-		} lg:translate-x-0 lg:static lg:block`}
-	>
-		<div class="flex flex-col mt-6">
-			<div>
-				<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Chat</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Assignments</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Credentials</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item active">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Go Live</p>
-					</div>
-				</a>
-			</div>
+<div>
+	<nav class="appbar">
+		<div class="logo-container">
+			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
+			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
 		</div>
-	</div>
-	<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
-		<div class="mt-4 flex flex-row space-x-20">
-			<div class="w-1/3">
-				<button
-					class="btn bg-emerald-400 p-4 rounded-md flex flex-row space-x-2"
-					on:click={openliveModal}
-				>
-					<img
-						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-6 hover:rotate-12"
-					/>
-					<h4 class="font-semibold">Schedule a new Class</h4>
-				</button>
-				<h1 class="text-2xl font-extrabold mt-9"><u>All Classes</u></h1>
-				<div class="flex flex-col space-y-4 mt-4">
-					{#each classlive as currsession, i}
-						<div class=" flex flex-row space-x-8">
-							<h1 class="font-bold text-xl">
-								{i + 1}. {currsession.topic}
-							</h1>
-							{#if currsession.done}
-								<button
-									class="btn bg-teal-500 rounded-lg"
-									on:click={() => selectSession(currsession)}
-								>
-									Check Stat
-								</button>
-							{:else if currsession.countdown}
-								<p class="font-semibold">
-									{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
-										.countdown.minutes}m : {currsession.countdown.seconds}s
-								</p>
-							{:else if currsession.countdown === 0}
-								<button
-									class="bg-blue-500 text-white px-4 py-2 rounded"
-									on:click={() => goLive(currsession.id)}>Go Live</button
-								>
-							{:else}
-								<div class="placeholder" />
-							{/if}
-						</div>
-					{/each}
-				</div>
-			</div>
-			<div class="w-2/3">
-				{#if selectedSession}
-					{#if attendance}
-						<button class="btn bg-rose-400 rounded-lg" on:click={closeSession}> X Close </button>
-						<div class="flex flex-row justify-between mt-4">
-							<h1 class="text-2xl font-bold">{selectedSession.topic}</h1>
-							<h1 class="text-xl font-semibold">Duration: {selectedSession.duration}seconds</h1>
-						</div>
-						<h1 class="text-lg font-semibold mt-8">Participants Records</h1>
-						<div class="flex flex-col space-y-3 mt-4">
-							{#each attendance as currAtt}
-								<div class="flex flex-row space-x-10">
-									<a href="/viewonly/student/{currAtt.student.id}" class="flex flex-row space-x-2">
-										<img
-											src={currAtt.student.image}
-											alt="Dashboard Icon"
-											class="h-6 hover:rotate-12"
-										/>
-										<p>
-											{currAtt.student.name}
-										</p>
-									</a>
-									<p>
-										Join duration: {currAtt.time} seconds
-									</p>
-								</div>
-							{/each}
-						</div>
-					{:else}
-						<h1>Loading ...</h1>
-					{/if}
-				{:else}
-					<h1 class="text-xl">No Session to Show</h1>
-
-					<section class="card w-full">
-						<div class="p-4 space-y-4">
-							<div class="placeholder" />
-							<div class="grid grid-cols-3 gap-8">
-								<div class="placeholder" />
-								<div class="placeholder" />
-								<div class="placeholder" />
-							</div>
-							<div class="grid grid-cols-4 gap-4">
-								<div class="placeholder" />
-								<div class="placeholder" />
-								<div class="placeholder" />
-								<div class="placeholder" />
-							</div>
-						</div>
-					</section>
-				{/if}
-			</div>
-		</div>
-
-		<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
-		<pre>{JSON.stringify(studclass, null, 2)}</pre>
-		<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
-	</div>
-	{#if addliveModal}
+		
+	</nav>
+	<main class="min-h-screen grid grid-cols-[15%_auto]">
 		<div
-			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
+				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+			} lg:translate-x-0 lg:static lg:block`}
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
-				<div class="flex justify-between items-center mb-4">
-					<h2 class="text-2xl font-bold">Schedule for a new Class</h2>
-					<button class=" text-lg" on:click={closeliveModal}>&times;</button>
-				</div>
-
-				<form
-					use:enhance
-					action="?/addLive"
-					method="POST"
-					on:submit={() => {
-						closeliveModal();
-					}}
-				>
-					<div class="flex flex-col space-y-6">
-						<label class="label text-left mb-3">
-							<span>Topic to be Covered</span>
-
-							<input class="input" type="text" id="topic" name="topic" bind:value={topic} />
-						</label>
-						<label class="label text-left mb-3">
-							<span>Starting time</span>
-
-							<input
-								class="input"
-								type="datetime-local"
-								id="start"
-								name="start"
-								bind:value={start}
+			<div class="flex flex-col mt-6">
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
 							/>
-						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
-							Submit
-						</button>
-					</div>
-				</form>
+							<p class="text-black font-bold">Chat</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Assignments</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Credentials</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item active">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Go Live</p>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
-	{/if}
-</main>
-
+		<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
+			<div class="mt-4 flex flex-row space-x-20">
+				<div class="w-1/3">
+					<button
+						class="btn bg-emerald-400 p-4 rounded-md flex flex-row space-x-2"
+						on:click={openliveModal}
+					>
+						<img
+							src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-6 hover:rotate-12"
+						/>
+						<h4 class="font-semibold">Schedule a new Class</h4>
+					</button>
+					<h1 class="text-2xl font-extrabold mt-9"><u>All Classes</u></h1>
+					<div class="flex flex-col space-y-4 mt-4">
+						{#each classlive as currsession, i}
+							<div class=" flex flex-row space-x-8">
+								<h1 class="font-bold text-xl">
+									{i + 1}. {currsession.topic}
+								</h1>
+								{#if currsession.done}
+									<button
+										class="btn bg-teal-500 rounded-lg"
+										on:click={() => selectSession(currsession)}
+									>
+										Check Stat
+									</button>
+								{:else if currsession.countdown}
+									<p class="font-semibold">
+										{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
+											.countdown.minutes}m : {currsession.countdown.seconds}s
+									</p>
+								{:else if currsession.countdown === 0}
+									<button
+										class="bg-blue-500 text-white px-4 py-2 rounded"
+										on:click={() => goLive(currsession.id)}>Go Live</button
+									>
+								{:else}
+									<div class="placeholder" />
+								{/if}
+							</div>
+						{/each}
+					</div>
+				</div>
+				<div class="w-2/3">
+					{#if selectedSession}
+						{#if attendance}
+							<button class="btn bg-rose-400 rounded-lg" on:click={closeSession}> X Close </button>
+							<div class="flex flex-row justify-between mt-4">
+								<h1 class="text-2xl font-bold">{selectedSession.topic}</h1>
+								<h1 class="text-xl font-semibold">Duration: {selectedSession.duration}seconds</h1>
+							</div>
+							<h1 class="text-lg font-semibold mt-8">Participants Records</h1>
+							<div class="flex flex-col space-y-3 mt-4">
+								{#each attendance as currAtt}
+									<div class="flex flex-row space-x-10">
+										<a href="/viewonly/student/{currAtt.student.id}" class="flex flex-row space-x-2">
+											<img
+												src={currAtt.student.image}
+												alt="Dashboard Icon"
+												class="h-6 hover:rotate-12"
+											/>
+											<p>
+												{currAtt.student.name}
+											</p>
+										</a>
+										<p>
+											Join duration: {currAtt.time} seconds
+										</p>
+									</div>
+								{/each}
+							</div>
+						{:else}
+							<h1>Loading ...</h1>
+						{/if}
+					{:else}
+						<h1 class="text-xl">No Session to Show</h1>
+	
+						<section class="card w-full">
+							<div class="p-4 space-y-4">
+								<div class="placeholder" />
+								<div class="grid grid-cols-3 gap-8">
+									<div class="placeholder" />
+									<div class="placeholder" />
+									<div class="placeholder" />
+								</div>
+								<div class="grid grid-cols-4 gap-4">
+									<div class="placeholder" />
+									<div class="placeholder" />
+									<div class="placeholder" />
+									<div class="placeholder" />
+								</div>
+							</div>
+						</section>
+					{/if}
+				</div>
+			</div>
+	
+			<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
+			<pre>{JSON.stringify(studclass, null, 2)}</pre>
+			<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
+		</div>
+		{#if addliveModal}
+			<div
+				class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+			>
+				<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-2xl font-bold">Schedule for a new Class</h2>
+						<button class=" text-lg" on:click={closeliveModal}>&times;</button>
+					</div>
+	
+					<form
+						use:enhance
+						action="?/addLive"
+						method="POST"
+						on:submit={() => {
+							closeliveModal();
+						}}
+					>
+						<div class="flex flex-col space-y-6">
+							<label class="label text-left mb-3">
+								<span>Topic to be Covered</span>
+	
+								<input class="input" type="text" id="topic" name="topic" bind:value={topic} />
+							</label>
+							<label class="label text-left mb-3">
+								<span>Starting time</span>
+	
+								<input
+									class="input"
+									type="datetime-local"
+									id="start"
+									name="start"
+									bind:value={start}
+								/>
+							</label>
+							<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		{/if}
+	</main>
+	
+</div>
 <style>
 	.appbar {
 		display: flex;
