@@ -1,8 +1,49 @@
 <script lang="ts">
 	export let data;
 
-	let { session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data;
-	$: ({ session, supabase, teacherNow, blog, classes, teacherqual, teacherskills } = data);
+	let {
+		session,
+		supabase,
+		teacherNow,
+		blog,
+		classes,
+		teacherqual,
+		teacherskills,
+		commonUserNow,
+		follower
+	} = data;
+	$: ({
+		session,
+		supabase,
+		teacherNow,
+		blog,
+		classes,
+		teacherqual,
+		teacherskills,
+		commonUserNow,
+		follower
+	} = data);
+
+	function refresh() {
+		window.open(`/viewonly/teacher/${teacherNow.id}`, '_self');
+	}
+
+	async function unfriend() {
+		const { error } = await supabase
+			.from('follower')
+			.delete()
+			.eq('ifollow', commonUserNow.id)
+			.eq('followu', teacherNow.id);
+
+		refresh();
+	}
+	async function makefriend() {
+		const { data, error } = await supabase
+			.from('follower')
+			.insert([{ ifollow: commonUserNow.id, followu: teacherNow.id }]);
+
+		refresh();
+	}
 </script>
 
 <div>
@@ -97,7 +138,30 @@
 
 			<div class="mb-8 grid grid-cols-2">
 				<div class="pr-2 pl-6 border-r-2 border-black">
-					<p class="text-2xl font-semibold">{teacherNow.name}</p>
+					{#if follower.length > 0}
+						<div class="flex flex-row space-x-2">
+							<p class="text-2xl font-semibold">{teacherNow.name}</p>
+							<button on:click={unfriend}>
+								<img
+									src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/star-alt-svgrepo-com.svg"
+									alt="Dashboard Icon"
+									class="h-5 mr-1 hover:rotate-12"
+								/>
+							</button>
+						</div>
+					{:else}
+						<div class="flex flex-row space-x-2">
+							<p class="text-2xl font-semibold">{teacherNow.name}</p>
+							<button on:click={makefriend}>
+								<img
+									src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/star-svgrepo-com.svg"
+									alt="Dashboard Icon"
+									class="h-5 mr-1 hover:rotate-12"
+								/>
+							</button>
+						</div>
+					{/if}
+
 					<p class="font-thin">{teacherNow.email}</p>
 					<p class="font-thin">{teacherNow.address}</p>
 					<!-- <p class="font-thin">{teacherNow.institute}</p> -->
@@ -128,6 +192,8 @@
 <pre>{JSON.stringify(classes, null, 2)}</pre>
 <pre>{JSON.stringify(teacherqual, null, 2)}</pre>
 <pre>{JSON.stringify(teacherskills, null, 2)}</pre>
+<pre>{JSON.stringify(commonUserNow, null, 2)}</pre>
+<pre>{JSON.stringify(follower, null, 2)}</pre>
 
 <style>
 	.navbar {
