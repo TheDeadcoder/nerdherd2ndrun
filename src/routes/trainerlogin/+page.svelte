@@ -14,7 +14,7 @@
 		password: z
 			.string()
 			.min(7, {
-				message: `Password must be at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number`
+				message: `Password must be at least 7 characters`// containing at least 1 uppercase letter, 1 special character, 1 number`
 			})
 			.regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
 			.regex(/[0-9]/, { message: 'Password must contain at least one number' })

@@ -1,6 +1,25 @@
-<script>
+<script lang='ts'>
 	import Sidebar from "$lib/sidebar.svelte";
-    import { LightSwitch } from '@skeletonlabs/skeleton';
+    import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
+    import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
+    import {isRunningClass} from '../../stores/isRunningClass'
+
+    export let data;
+
+	let { session, supabase, teacherNow } = data;
+	$: ({ session, supabase, teacherNow } = data);
+
+
+    const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
+	const popupHover1: PopupSettings = {
+		event: 'hover',
+		target: 'popupHover1',
+		placement: 'top'
+	};
 </script>
 
 <div class="grid grid-rows-[75px_auto]">
@@ -19,9 +38,27 @@
             </div>
 
             <div class="p-5 ">
-                
-                <div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
-                    <LightSwitch class=''/>
+                <div class="flex justify-center align-middle">
+                    <div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full h-6  m-2">
+                        <LightSwitch class=''/>
+                    </div>
+                    <div use:popup={popupClick}>
+                        <Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
+                        <div data-popup="popupClick" class="h-32 absolute">
+                            <ul class="text-lg font-semibold bg-[#b7dbf6] ml-0 dark:text-[#e1e1e1] dark:bg-[#070707]">
+                                <li class="mt-2 mb-3 p-2">
+                                    <a href="/trainerverified/profile" class="flex items-center font-bold"
+                                        ><img
+                                            src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+                                            alt="Dashboard Icon"
+                                            class="h-7 mr-1 hover:rotate-12"
+                                        />
+                                        Profile</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +69,11 @@
     <div class="grid grid-cols-[17%_auto]">
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
-                <Sidebar></Sidebar>
+                {#if $isRunningClass.isClass}
+                    <p class="text-white text-[23px]">Hello </p>
+                {:else}
+                    <Sidebar></Sidebar>
+                {/if}
             </div>
         </div>
         <slot></slot>

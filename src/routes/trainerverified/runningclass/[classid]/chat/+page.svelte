@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
+	import { onDestroy } from 'svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	const { classid } = $page.params;
@@ -15,8 +16,18 @@
 	let messages = [];
 	let loading = true;
 	let newMessage = '';
-	let loadingOlderMessages = false;
+	let loadingOlderMessages = false; 
 	let oldestMessageId = null; // To track the oldest message loaded
+
+	import {isRunningClass} from '../../../../../stores/isRunningClass'
+
+	onMount(()=>{
+		isRunningClass.set({classid:"",isClass:true})
+	});
+
+	onDestroy(()=>{
+		isRunningClass.set({classid:"",isClass:true})
+	});
 
 	async function loadInitialMessages() {
 		const { data: dt, error } = await supabase
