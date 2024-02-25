@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 let teacherNow;
+let commonUserNow;
 
 export const load = async ({ params, locals: { supabase, getSession } }) => {
     console.log(params.tid);
@@ -11,6 +12,19 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
     if (!session) {
         throw redirect(303, '/')
     }
+
+    const {
+        data: { user }
+    } = await supabase.auth.getUser();
+    //console.log(user);
+
+
+    let { data: commonuser, error: err9 } = await supabase
+        .from('commonuser')
+        .select("*")
+        .eq('email', user.email)
+
+    commonUserNow = commonuser[0];
 
 
     let { data: teacher, error: err } = await supabase
@@ -52,8 +66,17 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
     console.log("err7", err7);
 
 
+    let { data: follower, error } = await supabase
+        .from('follower')
+        .select("*")
+        .eq('ifollow', commonUserNow.id)
+        .eq('followu', teacherNow.id)
 
-    return { teacherNow, blog, classes, teacherqual, teacherskills }
+
+
+
+
+    return { teacherNow, blog, classes, teacherqual, teacherskills, commonUserNow, follower }
 
 
 
