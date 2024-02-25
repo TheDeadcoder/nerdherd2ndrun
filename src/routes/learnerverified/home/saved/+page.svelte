@@ -13,7 +13,7 @@
 	let list: string[] = [];
 	let tagsofPost: string[] = ['web development', 'javascript'];
 	let tagsofPost1: string[] = ['web development', 'mobile app development', 'framework comparison'];
-	let currentTile: number = 0;
+	let currentTile: number = 4;
 	let searchBarShow: number = 0;
 
 	$: calculateCountdown();
@@ -170,7 +170,7 @@
 			.eq('commonuserid', studentNow.id)
 			.eq('blogid', val.id);
 		val.saved = false;
-		window.location.href = '/learnerverified/home/recent';
+		window.location.href = '/learnerverified/home/saved';
 	}
 
 	onMount(() => {
