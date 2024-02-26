@@ -332,7 +332,7 @@
 				>
 					<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
 						<div class="flex justify-between items-center mb-4">
-							<h2 class="text-2xl font-bold">Add a new Assignment</h2>
+							<h2 class="text-2xl font-bold">Add a New Assignment</h2>
 							<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
 						</div>
 
