@@ -14,7 +14,7 @@
 		password: z
 			.string()
 			.min(7, {
-				message: `Password must be at least 7 characters containing at least 1 uppercase letter, 1 special character, 1 number`
+				message: `Password must be at least 7 characters`// containing at least 1 uppercase letter, 1 special character, 1 number`
 			})
 			.regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
 			.regex(/[0-9]/, { message: 'Password must contain at least one number' })
@@ -43,9 +43,23 @@
 			passwordInput.type = 'password';
 		}
     });
+
+	const modeSwitch = ()=>{
+		let isDark = document.documentElement.classList.contains('dark')
+		const element = document.getElementById("login_id");
+
+		if(element!==null){
+			if(isDark===true){
+				element.style.backgroundImage = "url('src/lib/svgs/trainerloginDark.svg')"
+			}
+			else{
+				element.style.backgroundImage = "url('src/lib/svgs/trainerlogin.svg')"
+			}
+		}
+	}
 </script>
 
-<div class="trainerloginContainer">
+<div id='login_id' class="trainerloginContainer">
 	<nav class=" w-full py-6 ">
 		<div class="flex justify-between mx-6">
 			<div class="flex">
@@ -55,23 +69,32 @@
 					alt="title"
 					width={60}
 				/>
-				<span class="company-name text-2xl font-extrabold">NerD</span><span
+				<span class="company-name text-2xl font-extrabold dark:text-[#e1e1e1]">NerD</span><span
 					class="company-name white-text text-2xl font-extrabold">Herd</span
 				>
 			</div>
 	
 			<div class="flex space-x-3">
 				<!-- <LightSwitch /> -->
-				<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
-					About us
-				</a>
+				<div class="flex space-x-3">
+					<!-- <LightSwitch /> -->
+					<div class=" ">
+						<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+							<LightSwitch class='' on:click={modeSwitch}/>
+						</div>
+					</div>
+					<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
+						About us
+					</a>
+				</div>
+				
 			</div>
 		</div>
 	</nav>
 	
 	<div class="container h-full flex justify-center items-center mt-6 mb-16 ">
 		<div class="max-h-screen text-center flex flex-col items-center">
-			<div class="flex bg-[#e2e6e9]  shadow-2xl rounded-xl overflow-hidden max-w-4xl">
+			<div class="flex bg-[#e2e6e9]  shadow-2xl rounded-xl overflow-hidden max-w-4xl dark:text-[#e1e1e1] dark:bg-[#212020]">
 				<!-- Photo on the left side of the card -->
 	
 				<!-- Previous Card Content -->
@@ -197,21 +220,21 @@
 									/>
 									<label for="remember_me" class="ml-2 block text-sm"> Remember me </label>
 								</div>
-								<div class="text-sm">
+								<div class="text-sm ">
 									<a href="#/usersignup" class="font-medium hover:font-bold" > Forgot Password? </a>
 								</div>
 							</div>
 						</div>
 						<div>
-							<button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]">
+							<button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%] dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
 								Sign In
 							</button>
 						</div>
 					</form>
 	
 					<div class="flex flex-col mt-2">
-						<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-5 pt-3">
-							<span class="text-[16px] bg-[#e2e6e9] px-2 py-[10px]">
+						<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-5 pt-3 ">
+							<span class="text-[16px] bg-[#e2e6e9] px-2 py-[10px] dark:text-[#e1e1e1] dark:bg-[#212020]">
 							  Or Continue with <!--Padding is optional-->
 							</span>
 						</div>
@@ -257,7 +280,7 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
-		background-image: url("../../lib/svgs/trainerlogin.svg");
+		/* background-image: url("../../lib/svgs/trainerlogin.svg"); */
 	}
 
 	/* Style "Herd" in red */

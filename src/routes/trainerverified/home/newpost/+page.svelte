@@ -95,113 +95,8 @@
 	}
 </script>
 
-<nav class="appbar">
-	<div class="logo-container flex items-center">
-		<img
-			src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-			class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-			alt="title"
-			width={50}
-		/>
-		<span class="company-name text-2xl font-extrabold">NerD</span><span
-			class="company-name white-text text-2xl font-extrabold">Herd</span
-		>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
 
-		<li>
-			<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
-
-		<li>
-			<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Planner</a
-			>
-		</li>
-
-		<!-- <LightSwitch class="mr-3" /> -->
-		<div use:popup={popupClick}>
-			<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
-		</div>
-
-		<div data-popup="popupClick" class="h-32 absolute">
-			<ul class="text-lg font-semibold bg-sky-300 ml-0">
-				<li class="mt-2 mb-3 p-2">
-					<a href="/trainerverified/profile" class="flex items-center font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-7 mr-1 hover:rotate-12"
-						/>
-						Profile</a
-					>
-				</li>
-			</ul>
-		</div>
-		<li>
-			<button on:click={handleSignOut}>
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-7 mr-1 hover:rotate-12"
-				/>
-			</button>
-		</li>
-	</ul>
-</nav>
-<div class="min-h-screen mt-32 ml-16 mr-16">
+<div class="min-h-screen mt-3 ml-16 mr-16">
 	<h1 class="text-2xl font-extrabold">Creating a New Blog</h1>
 	<form
 		use:enhance
@@ -213,10 +108,10 @@
 		}}
 	>
 		<label for="title" class="label text-left mb-1 flex flex-row">
-			<span>Blog Title</span>
+			<span class="font-semibold">Blog Title</span>
 		</label>
 		<input
-			class="input mb-3"
+			class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
 			type="text"
 			id="title"
 			name="title"
@@ -224,21 +119,21 @@
 			placeholder="Enter The Title of the Blog"
 		/>
 		<label for="description" class="label text-left mb-1">
-			<span>Blog Description</span>
+			<span class="font-semibold">Blog Description</span>
 		</label>
 		<input
-			class="input mb-3"
-			type="text"
+		   class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
+		    type="text"
 			id="description"
 			name="description"
 			bind:value={description}
 			placeholder="Enter Brief Description"
 		/>
 		<label for="timetoread" class="label text-left mb-1">
-			<span>Time</span>
+			<span class="font-semibold">Time</span>
 		</label>
 		<input
-			class="input mb-3"
+			class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
 			type="number"
 			id="timetoread"
 			name="timetoread"
@@ -246,10 +141,10 @@
 			placeholder="Time required to read (minutes)"
 		/>
 		<label for="tags" class="label text-left mb-1">
-			<span>Tags</span>
+			<span class="font-semibold">Tags</span>
 		</label>
 		<input
-			class="input mb-3"
+			class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
 			type="text"
 			id="tags"
 			name="tags"
@@ -258,12 +153,12 @@
 		/>
 		<input hidden id="content" name="content" bind:value={content} />
 		<div class="grid gap-2">
-			<label for="content">Blog Content</label>
+			<label for="content" class="font-semibold">Blog Content</label>
 			<div bind:this={editor} id="editor" />
 		</div>
 		<button
 			type="submit"
-			class="btn btn-accent mt-8 w-full"
+			class="mt-8 btn font-semibold text-xl p-3 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg"
 			disabled={isLoading}
 			on:click={makeStrong}
 		>

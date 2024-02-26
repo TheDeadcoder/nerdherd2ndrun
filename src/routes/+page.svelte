@@ -54,26 +54,31 @@
 	typeText();
 </script>
 
-<main class="bg-[#e2e6e9]">
+<main class="bg-[#e2e6e9] dark:bg-[#070707]">
 
 	<section class="">
 	
-		<div class="relative h-[130px] bg-[#B7DBF6]">
+		<div class="relative h-[130px] bg-[#B7DBF6] dark:bg-[#212020]">
 			<div class="flex justify-between mx-6 p-6 z-[5]">
-				<div class="flex">
+				<div class="flex ">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 						class="transform transition duration-300 hover:rotate-12"
 						alt="title"
 						width={60}
 					/>
-					<span class="company-name text-2xl font-extrabold">NerD</span><span
+					<span class="company-name text-2xl font-extrabold dark:text-[#f0efef]">NerD</span><span
 						class="company-name white-text text-2xl font-extrabold">Herd</span
 					>
 				</div>
 		
 				<div class="flex space-x-3">
 					<!-- <LightSwitch /> -->
+					<div class=" ">
+						<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+							<LightSwitch class=''/>
+						</div>
+					</div>
 					<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
 						About us
 					</a>
@@ -86,7 +91,8 @@
 		<div class="relative">
 			<div class="wave-header">
 				<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-					<path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+					<path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" 
+						  class="fill-[#b7dbf6] dark:fill-[#212020]"></path>
 				</svg>
 			</div>
 		</div>
@@ -99,9 +105,9 @@
 	<section class="mt-[7%] mb-32">
 		<div class="flex justify-center mx-auto space-x-40 max-w-7xl">
 			<div class="flex flex-col w-1/2 z-[2]">
-				<h1 class="text-5xl font-bold font-heading mb-1">Reimagine your study life with us</h1>
+				<h1 class="text-5xl font-bold font-heading mb-1 dark:text-[#e1e1e1]">Reimagine your study life with us</h1>
 				
-				<p class="text-l font-semibold mb-9 text-[#ffffff] w-4/5">
+				<p class="text-l font-semibold mb-9 text-[#ffffffcb] w-4/5">
 					<!-- The NerDHerd ecosystem is designed to help you quench your thirst for knowledge, keep you up
 					to date, saving you from distractions. Engage yourself in class activities in a way you have
 					never seen before. Avail your mentor from anywhere. Read the blogs. Visualize with our
@@ -109,7 +115,7 @@
 	
 					Stay with NerDHerd ecosystem and save you precious time. Get everything in one platform to reduce time in browsing to find your solution
 				</p>
-				<a href="/accessType" target="_blank" class="font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/2 text-center">
+				<a href="/accessType" target="_blank" class="font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/2 text-center dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
 					Get Started For Free
 				</a>
 			</div>
@@ -154,12 +160,12 @@
 	<section class="py-20 max-w-screen-lg mx-auto">
 		<div class="flex justify-center text-center">
 			<div class="flex flex-col space-y-3">
-				<h2 class="text-4xl font-bold font-heading">All-in-one platform</h2>
-				<p>A complete Learning environment in your hand</p>
+				<h2 class="text-4xl font-bold font-heading dark:text-[#e1e1e1]">All-in-one platform</h2>
+				<p class="dark:text-[#e1e1e1]">A complete Learning environment in your hand</p>
 			</div>
 			
 		</div>
-		<div class="grid grid-cols-3 gap-12 mt-20">
+		<div class="grid grid-cols-3 gap-12 mt-20 dark:text-[#e1e1e1]">
 			<div
 				class="flex flex-col p-4 space-y-3 hover:shadow-2xl transition duration-300 cursor-pointer"
 			>
@@ -253,10 +259,10 @@
 				<p>Analyse your Progress & Take steps from Recommendations</p>
 			</div>
 		</div>
-		<div class="flex justify-center mt-12 space-x-8">
+		<div class="flex justify-center mt-12 space-x-8 dark:text-[#e1e1e1]">
 			<a
 				href="https://www.youtube.com/playlist?list=PLW5antMpb-_N__eq2wEo27CQ-e64B8QhP"
-				class="font-bold text-xl  p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center"
+				class="font-bold text-xl  p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 			>
 				Get Demo
 			</a>
@@ -271,7 +277,7 @@
 	</section>
 	<section class="py-20">
 		<div class="">
-			<div class="grid grid-cols-[40%_60%]  justify-center ">
+			<div class="grid grid-cols-[40%_60%]  justify-center dark:text-[#e1e1e1]">
 				
 				<div class="flex flex-col items-end pr-[2%] z-[2] ">
 						<div class=" h-[100%] w-[50%] flex items-center">
@@ -330,7 +336,7 @@
 							</div>
 							
 							<div>
-								<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+								<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
 								<span>Try now</span>
 								<span>
 									<img
@@ -352,7 +358,7 @@
 	</section>
 	
 	<section class="py-40">
-		<div class="grid grid-cols-[65%_35%] justify-center  w-4/5">
+		<div class="grid grid-cols-[65%_35%] justify-center  w-4/5 dark:text-[#e1e1e1]">
 			
 			<div class="flex justify-end  pr-[10%] items-center ">
 				<div class="w-3/5">
@@ -365,7 +371,7 @@
 						</p>
 					</div>
 					<div>
-						<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+						<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
 						<span>Try now</span>
 						<span>
 							<img
@@ -421,7 +427,7 @@
 	</section>
 	
 	<section class="py-40 ">
-		<div class="grid lg:grid-cols-[44%_auto] sm:grid-flow-row ">
+		<div class="grid lg:grid-cols-[44%_auto] sm:grid-flow-row dark:text-[#e1e1e1]">
 			<div class="flex justify-end lg:mr-[-20%]">
 				<div class="relative ">
 					<img
@@ -475,7 +481,7 @@
 							</p>
 						</div>
 						<div>
-							<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4">
+							<button type="button" class=" btn font-bold text-xl p-4 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-3/4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
 								<span class="text-xl font-bold">Try now</span>
 								<span>
 									<img
@@ -493,9 +499,9 @@
 			
 		</div>
 	</section>
-	<div class="py-12 mt-12 relative bg-[#e2e6e9]">
-		<div class="flex justify-between  bg-white z-[2]">
-			<div class="flex flex-col justify-center space-y-6 pl-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40">
+	<div class="py-12 mt-12 relative bg-[#e2e6e9] dark:bg-[#070707] dark:text-[#e1e1e1]">
+		<div class="flex justify-between  bg-white z-[2] dark:bg-[#070707]">
+			<div class="flex flex-col justify-center space-y-6 pl-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40 dark:bg-[#212020] dark:bg-opacity-40">
 				<div >
 					<span class="company-name text-[50px] font-extrabold">NerD</span><span class="company-name white-text text-[20px] font-extrabold">Herd</span>
 				</div>
@@ -512,7 +518,7 @@
 					/>
 				</div>
 			</div>
-			<div class="flex flex-col justify-center space-y-6 p-4 py-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40">
+			<div class="flex flex-col justify-center space-y-6 p-4 py-12 w-1/4 z-[2] bg-[#e2e6e9] bg-opacity-40 dark:bg-[#212020] dark:bg-opacity-40">
 				<h6 class="font-bold font-heading">Contact Info</h6>
 				<div class="flex items-start space-x-2">
 					<img
@@ -536,7 +542,7 @@
 					<p>sakibbuet2k19@gmail.com</p>
 				</div>
 			</div>
-			<div class="flex flex-col space-y-6 p-12 w-1/2 z-[2] bg-[#e2e6e9] bg-opacity-40">
+			<div class="flex flex-col space-y-6 p-12 w-1/2 z-[2] bg-[#e2e6e9] bg-opacity-40 dark:bg-[#212020] dark:bg-opacity-40">
 				<h6 class="font-heading font-semibold">Get in touch</h6>
 				<form class="flex flex-col space-y-6">
 					<input class="input" title="Input (text)" type="text" placeholder="Your Name" />
@@ -549,7 +555,7 @@
 					/>
 					<textarea class="textarea" rows="4" placeholder="Your message" />
 					<div>
-						<button class="btn w-1/2 font-bold text-xl p-4 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg">Send</button>
+						<button class="btn w-1/2 font-bold text-xl p-4 bg-[#8ad4ff] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">Send</button>
 					</div>
 				</form>
 			</div>
@@ -559,16 +565,16 @@
 	<div class="relative z-0">
 		<div class="footer-wave">
 			<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-				<path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
-				<path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
-				<path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+				<path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="fill-[#b7dbf6] dark:fill-[#212020]"></path>
+				<path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="fill-[#b7dbf6] dark:fill-[#212020]"></path>
+				<path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="fill-[#b7dbf6] dark:fill-[#212020]"></path>
 			</svg>
 			
 		</div>
 		
 	</div>
-	<div class="relative w-full flex justify-center border-t-[1px]">
-		<div class="absolute  text-center py-4 top-[-60px] ">
+	<div class="relative w-full flex justify-center">
+		<div class="absolute  text-center py-4 top-[-60px] dark:text-[#e1e1e1] ">
 			<p>©2023 NerDHerd 🏆</p>
 		</div>
 	</div>

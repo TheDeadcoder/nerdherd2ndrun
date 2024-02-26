@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
+	import { onDestroy } from 'svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	const { classid } = $page.params;
@@ -15,8 +16,18 @@
 	let messages = [];
 	let loading = true;
 	let newMessage = '';
-	let loadingOlderMessages = false;
+	let loadingOlderMessages = false; 
 	let oldestMessageId = null; // To track the oldest message loaded
+
+	import {isRunningClass} from '../../../../../stores/isRunningClass'
+
+	onMount(()=>{
+		isRunningClass.set({classid:"",isClass:true})
+	});
+
+	onDestroy(()=>{
+		isRunningClass.set({classid:"",isClass:true})
+	});
 
 	async function loadInitialMessages() {
 		const { data: dt, error } = await supabase
@@ -128,69 +139,7 @@
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
 		</div>
-		<ul class="links">
-			<li>
-				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Home</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Class</a
-				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Compete</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Chatbot</a
-				>
-			</li>
-
-			<li>
-				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Planner</a
-				>
-			</li>
-		</ul>
+		
 	</nav>
 	<div class="grid grid-cols-[15%_auto]">
 		<div

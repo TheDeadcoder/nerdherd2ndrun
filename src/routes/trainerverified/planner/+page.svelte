@@ -64,7 +64,7 @@
 		} else {
 			const importance = parseInt(todoItem.importancescale);
 			if (importance < 2) {
-				return 'bg-red-100 text-red-500';
+				return 'bg-red-100 text-red-500 dark:bg-[#]';
 			} else if (importance < 6) {
 				return 'bg-red-200 text-red-600';
 			} else {
@@ -132,7 +132,7 @@
 
 </script>
 
-<div>
+<!-- <div>
 	<div class="navbar">
 		<nav class="appbar">
 			<div class="logo-container flex items-center">
@@ -211,7 +211,6 @@
 					>
 				</li>
 
-				<!-- <LightSwitch class="mr-3" /> -->
 				<div use:popup={popupClick}>
 					<Avatar
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/avro.jpg"
@@ -249,20 +248,21 @@
 		
 		
 	</div>
-</div>
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="container mx-auto mt-8">
-	<h2 class="text-3xl font-bold text-center mb-4">Todo List</h2>
-	<div class="flex justify-between items-center mb-4"> <!-- Added flex container with justify-between -->
-		<div class="card mx-9 my-4 w-[350px] hover:scale-105 border-2 " on:click={openAddForm}>
+</div> -->
+
+<div class="container mx-auto min-h-screen dark:bg-[#212020]">
+	<h2 class="text-3xl font-bold p-3 px-6 dark:text-[#f0f0f0]">Todo List</h2>
+	<div class="flex justify-between items-center mb-2"> <!-- Added flex container with justify-between -->
+		<div class="card mx-9 my-4 hover:scale-105 border-2 dark:bg-[#141414]" on:click={openAddForm}>
 			<div class="flex flex-row items-center space-x-3 p-5">
 				<img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/plus-add-svgrepo-com.svg" alt="Dashboard Icon" class="h-5 mr-1 hover:rotate-12" />
-				<h1 class="text-lg">Add New Task</h1>
-			</div>    
+		    	<h1 class="text-lg dark:text-[#f0f0f0] font-semibold">Add New Task</h1>
+			</div>
 		</div>
-		<!-- <button class="btn text-gray-600 bg-white p-1 bg-opacity-40 rounded-lg mr-3" on:click={sortTodos}>Sort</button>	 -->
 	</div>
+
 	<hr>
+
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8">
 		{#each sortTodoItems(todo) as todoItem}
 			<div class="todo-item p-3 py-1 m-1 mr-3 rounded-md shadow-md hover:shadow-lg {getColorClass(todoItem)}">
@@ -339,7 +339,7 @@
 			
 		>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="bg-[#e1edf7] p-6 rounded-lg shadow-lg max-w-md w-full m-4" on:click|stopPropagation use:clickOutside on:click_outside={handleClickOutside}>
+			<div class="bg-[#e1edf7] p-6 rounded-lg shadow-lg max-w-md w-full m-4 dark:text-[#e1e1e1] dark:bg-[#212020]" on:click|stopPropagation use:clickOutside on:click_outside={handleClickOutside}>
 				<form
 					use:enhance
 					action="?/upload"
@@ -352,7 +352,7 @@
 						<span class="font-semibold">Task Name</span>
 
 						<input
-							class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base"
+							class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base dark:placeholder:text-[#ffffff9e]"
 							type="text"
 							id="taskname"
 							name="taskname"
@@ -363,7 +363,7 @@
 					<label class="label text-left">
 						<span class="font-semibold">Task Description</span>
 						<textarea
-							class="textarea border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base"
+							class="textarea border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base dark:placeholder:text-[#ffffff9e]"
 							rows="4"
 							placeholder="Your motivation..."
 							id="description"
@@ -373,7 +373,7 @@
 					</label>
 					<label class="label text-left mb-3">
 						<span class="font-semibold">Deadline</span>
-						<input class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base" type="date" id="deadline" name="deadline" bind:value={deadline} />
+						<input class="input border-2 rounded-lg placeholder:font-bold placeholder:text-gray-600 placeholder:text-base dark:text-[#ffffff]" type="date" id="deadline" name="deadline" bind:value={deadline} />
 					</label>
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label class="label text-left mb-3">
@@ -397,7 +397,7 @@
 						{/each}
 					</div>
 						
-					<button type="submit" class="font-bold text-lg  p-3 m-2 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center"					>
+					<button type="submit" class="font-bold text-lg  p-3 m-2 bg-[#77B8De] rounded-xl shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-1/3 text-center dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"					>
 						Submit
 					</button>
 				</form>

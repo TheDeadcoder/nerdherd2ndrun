@@ -45,8 +45,8 @@
 	};
 </script>
 
-<main>
-	<nav class="appbar">
+<main  class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2]">
+	<!-- <nav class="appbar">
 		<div class="logo-container flex items-center">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
@@ -122,7 +122,6 @@
 				>
 			</li>
 
-			<!-- <LightSwitch class="mr-3" /> -->
 			<div use:popup={popupClick}>
 				<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
 			</div>
@@ -151,7 +150,7 @@
 				</button>
 			</li>
 		</ul>
-	</nav>
+	</nav> -->
 	<div>
 		<button class="btn variant-filled-primary text-xl font-semibold mt-10" on:click={addclassmodal}>
 			Add book
