@@ -1,82 +1,99 @@
 import { fail, redirect } from '@sveltejs/kit'
 import { error } from '@sveltejs/kit';
-import type { Actions } from './$types';
 
-let classNow;
+
 let teacherNow;
-
-export const load = async ({ params, locals: { supabase, getSession } }) => {
-    console.log(params.classid);
+export const load = async ({ locals: { supabase, getSession } }) => {
     const session = await getSession()
 
     if (!session) {
         throw redirect(303, '/')
     }
 
+    const {
+        data: { user }
+    } = await supabase.auth.getUser();
+    //console.log(user);
 
-    let { data: classes, error: err1 } = await supabase
-        .from('classes')
-        .select("*")
-        .eq('id', params.classid)
 
-    classNow = classes[0];
-
-    let { data: teacher, error: err3 } = await supabase
+    let { data: teacher, error: err } = await supabase
         .from('teacher')
         .select("*")
-        .eq('id', classes[0].teacherid)
+        .eq('email', user.email)
 
     teacherNow = teacher[0];
 
-    let { data: studclass, error: err2 } = await supabase
-        .from('studclass')
-        .select("*")
-        .eq('cid', classNow.id)
-        .eq('joined', true)
+    let { data: pbcontest, error: err2 } = await supabase
+        .from('pbcontest')
+        .select('*')
+        .eq('teacherid', teacherNow.id)
 
+    const contestwithRegistrants = await Promise.all(pbcontest.map(async (contestItem) => {
 
-    let { data: assignment, error } = await supabase
-        .from('assignment')
-        .select("*")
-        .eq('cid', params.classid)
+        let { data: pbregistrant, error } = await supabase
+            .from('pbregistrant')
+            .select("*")
+            .eq('pbcid', contestItem.id)
 
+        let registrants = pbregistrant;
+        let countdown = -1;
 
+        // Attach pendingclass data to classItem
+        return {
+            ...contestItem,countdown,
+            registrants // This adds the pendingclass array to each classItem
+        };
+    }));
 
-    return { classNow, studclass, teacherNow, assignment };
-
+    console.log(err);
+    return { contestwithRegistrants, teacherNow }
 }
+
 export const actions = {
-    addAssignment: async ({ request, locals: { supabase, getSession } }) => {
+    addContest: async ({ request, locals: { supabase, getSession } }) => {
         const data = await request.formData();
         //console.log("amar add class form holo", data);
 
         let newClass = Object.fromEntries(data.entries()) as any;
+
         let timeNow = new Date();
         let name = teacherNow.id + "_" + timeNow;
 
         //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
 
-        if (newClass.question.size) {
+        if (newClass.image.size) {
             // console.log(newClass.image);
             const { data: res, error: err } = await supabase.storage
-                .from('assignments')
-                .upload(name, newClass.question, {
+                .from('contestcover')
+                .upload(name, newClass.image, {
                     cacheControl: '3600',
                     upsert: false
                 });
 
             const { data: link } = await supabase
                 .storage
-                .from('assignments')
+                .from('contestcover')
                 .getPublicUrl(name)
 
 
             console.log(err, link)
 
             const { data: dt, error: err1 } = await supabase
-                .from('assignment')
+                .from('pbcontest')
                 .insert([
-                    { cid: classNow.id, title: newClass.title, deadline: newClass.deadline, question: link.publicUrl }
+                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, duration: newClass.duration, start: newClass.start, image: link.publicUrl }
+                ])
+
+
+            if (err1) console.log(err1)
+
+        }
+        else {
+
+            const { data: dt, error: err1 } = await supabase
+                .from('pbcontest')
+                .insert([
+                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, duration: newClass.duration, start: newClass.start }
                 ])
 
 
@@ -85,7 +102,8 @@ export const actions = {
         }
 
 
-        throw redirect(303, `/trainerverified/runningclass/${classNow.id}/assignments`);
+
+        throw redirect(303, '/trainerverified/contest');
     },
 
     addSkill: async ({ request, locals: { supabase, getSession } }) => {

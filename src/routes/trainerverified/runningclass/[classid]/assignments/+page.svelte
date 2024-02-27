@@ -2,6 +2,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	import { LightSwitch } from '@skeletonlabs/skeleton';
+	import { enhance } from '$app/forms';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	// import Message from './Message.svelte';
@@ -157,6 +158,70 @@
 			<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
 			<pre>{JSON.stringify(classNow, null, 2)}</pre>
 			<pre>{JSON.stringify(studclass, null, 2)}</pre>
+			<pre>{JSON.stringify(assignment, null, 2)}</pre> -->
+			{#if assignmentModal}
+				<div
+					class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+				>
+					<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+						<div class="flex justify-between items-center mb-4">
+							<h2 class="text-2xl font-bold">Add a New Assignment</h2>
+							<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
+						</div>
+
+						<form
+							use:enhance
+							action="?/addAssignment"
+							method="POST"
+							enctype="multipart/form-data"
+							on:submit={() => {
+								closeclassmodal();
+							}}
+						>
+							<div class="flex flex-col space-y-6">
+								<label class="label text-left mb-3">
+									<span>Title</span>
+
+									<input
+										class="input"
+										type="text"
+										id="title"
+										name="title"
+										bind:value={title}
+										placeholder="Enter The name of Assignment"
+									/>
+								</label>
+								<label class="label text-left mb-3">
+									<span>Deadline</span>
+
+									<input
+										class="input"
+										type="datetime-local"
+										id="deadline"
+										name="deadline"
+										bind:value={deadline}
+									/>
+								</label>
+
+								<label class="label text-left mb-3">
+									<span>Question file</span>
+
+									<input
+										class="input"
+										type="file"
+										id="question"
+										name="question"
+										bind:value={question}
+									/>
+								</label>
+								<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div> -->
@@ -233,6 +298,24 @@
 		.sidebar-item:active {
 			background-color: #cbcbcb; /* Tailwind's gray-600 */
 		}
+	}
+	.chipilive {
+		background-color: #cfffb7;
+
+		padding: 0.5rem;
+		margin-right: 0.5rem;
+		border-radius: 0.25rem;
+		display: flex;
+		align-items: center;
+	}
+	.chipiend {
+		background-color: #ffb7b7;
+
+		padding: 0.5rem;
+		margin-right: 0.5rem;
+		border-radius: 0.25rem;
+		display: flex;
+		align-items: center;
 	}
 	/* Chat Window Styles */
 
