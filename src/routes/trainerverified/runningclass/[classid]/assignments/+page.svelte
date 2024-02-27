@@ -5,19 +5,115 @@
 	import { enhance } from '$app/forms';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
+  	import {isRunningClass} from '../../../../../stores/isRunningClass'
+
 	// import Message from './Message.svelte';
 	export let data;
 	const { classid } = $page.params;
 
 
-	let { session, supabase, classNow, studclass } = data;
-	$: ({ session, supabase, classNow, studclass } = data);
+// 	let { session, supabase, classNow, studclass } = data;
+// 	$: ({ session, supabase, classNow, studclass } = data);
 
 	
-	import {isRunningClass} from '../../../../../stores/isRunningClass'
 
-	onMount(()=>{
-		isRunningClass.set({classid:classid,isClass:true})
+
+	let { session, supabase, classNow, studclass, teacherNow, assignment } = data;
+	$: ({ session, supabase, classNow, studclass, teacherNow, assignment } = data);
+	let isSidebarOpen = false;
+
+	let title;
+	let question;
+	let deadline;
+
+	let assignmentModal = false;
+	function addclassmodal() {
+		assignmentModal = true;
+	}
+
+	function closeclassmodal() {
+		assignmentModal = false;
+	}
+
+	// Timestamp formatting function
+	function formatTimestamp(timestamp) {
+		const date = new Date(timestamp);
+		const hours = date.getHours();
+		const minutes = '0' + date.getMinutes();
+		const day = '0' + date.getDate();
+		const month = '0' + (date.getMonth() + 1);
+		const year = date.getFullYear();
+
+		// Format: HH:MM, MM/DD/YYYY
+		return `${hours}:${minutes.substr(-2)}, ${month.substr(-2)}/${day.substr(-2)}/${year}`;
+	}
+
+	function calculateCountdown(endTime) {
+		const total = Date.parse(endTime) - Date.parse(new Date());
+		const seconds = Math.floor((total / 1000) % 60);
+		const minutes = Math.floor((total / 1000 / 60) % 60);
+		const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+		const days = Math.floor(total / (1000 * 60 * 60 * 24));
+		return {
+			total,
+			days,
+			hours,
+			minutes,
+			seconds
+		};
+	}
+
+	function updateCountdown() {
+		assignment = assignment.map((classLive) => {
+			if (new Date(classLive.deadline) > new Date()) {
+				const countdown = calculateCountdown(classLive.deadline);
+				return { ...classLive, countdown };
+			} else {
+				let countdown = 0;
+				return { ...classLive, countdown };
+			}
+			return classLive;
+		});
+	}
+
+	let selectedAssignment;
+	let allSubmissions = [];
+
+	async function fetchSubmissions(val) {
+		selectedAssignment = val;
+
+		let { data: submissions, error } = await supabase
+			.from('submissions')
+			.select('*')
+			.eq('aid', val.id);
+
+		allSubmissions = await Promise.all(
+			submissions.map(async (curr) => {
+				let { data: dtt, error } = await supabase.from('student').select('*').eq('id', curr.sid);
+				let student = dtt[0];
+				return { ...curr, student };
+			})
+		);
+	}
+
+	function closeSubmissions() {
+		selectedAssignment = null;
+		allSubmissions = [];
+	}
+
+	// Close sidebar when clicking outside, for mobile responsiveness
+	onMount(() => {
+    	isRunningClass.set({classid:classid,isClass:true})
+
+		const interval = setInterval(updateCountdown, 1000);
+		updateCountdown();
+		function handleOutsideClick(event) {
+			if (!event.target.closest('.sidebar')) {
+				isSidebarOpen = false;
+			}
+		}
+		document.addEventListener('click', handleOutsideClick);
+		return () => document.removeEventListener('click', handleOutsideClick);
 	});
 	onDestroy(()=>{
 		isRunningClass.set({classid:"",isClass:false})
@@ -25,8 +121,8 @@
 
 </script>
 
-<!-- <div class="">
-	<nav class="appbar">
+<div class="">
+<!--	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
@@ -151,11 +247,98 @@
 					</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
+	<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
 		<div class="mt-6 ml-6">
-			<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
+
+			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
+				Add a new Assignment
+			</button>
+
+			<section class="mt-10 ml-6 flex flex-row space-x-20">
+				<div>
+					<h1 class="font-extrabold text-3xl mb-4">All Assignments</h1>
+
+					{#each assignment as currAssignment}
+						<div class="flex flex-row space-x-12">
+							<h1 class="font-bold text-xl">
+								{currAssignment.title}
+							</h1>
+							<div class="flex flex-row space-x-2">
+								{#if currAssignment.countdown}
+									<button class="btn p-2 bg-lime-300 rounded-lg">
+										Running: {currAssignment.countdown.days}d : {currAssignment.countdown.hours}h : {currAssignment
+											.countdown.minutes}m : {currAssignment.countdown.seconds}s
+									</button>
+								{:else}
+									<button class="btn p-2 bg-red-300 rounded-lg">Ended</button>
+								{/if}
+								<button
+									class="bg-sky-300 rounded-lg p-2"
+									on:click={() => fetchSubmissions(currAssignment)}
+								>
+									View Details
+								</button>
+							</div>
+						</div>
+					{/each}
+				</div>
+				<div>
+					{#if selectedAssignment}
+						<div class="ml-6">
+							<button class="bg-red-300 rounded-lg p-3" on:click={closeSubmissions}>
+								X close
+							</button>
+							<h1 class="font-extrabold text-3xl">
+								{selectedAssignment.title}
+							</h1>
+							<p>
+								{selectedAssignment.deadline}
+							</p>
+
+							<div class="flex flex-col space-y-3">
+								{#each allSubmissions as submissions}
+									<div class="flex flex-row justify-between mt-6">
+										<a
+											href="/viewonly/student/{submissions.student.id}"
+											class="flex flex-row space-x-2"
+										>
+											<img
+												src={submissions.student.image}
+												alt="Dashboard Icon"
+												class="h-8 mr-3 hover:rotate-12"
+											/>
+											<h1 class="font-semibold">
+												{submissions.student.name}
+											</h1>
+										</a>
+										<div class="flex flex-row space-x-2">
+											<p>
+												submitted at: {submissions.time}
+											</p>
+											<a href={submissions.body} class="flex flex-row space-x-1">
+												<img
+													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/file-2-svgrepo-com.svg"
+													alt="Dashboard Icon"
+													class="h-8 mr-3 hover:rotate-12"
+												/>
+												See submission
+											</a>
+										</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					{:else}
+						<div class="flex flex-row items-center justify-center font-light text-2xl">
+							No Assgnment to show :(
+						</div>
+					{/if}
+				</div>
+			</section>
+			<!-- Chat Messages Display -->
+			<!-- <pre>{JSON.stringify(teacherNow, null, 2)}</pre>
 			<pre>{JSON.stringify(classNow, null, 2)}</pre>
 			<pre>{JSON.stringify(studclass, null, 2)}</pre>
 			<pre>{JSON.stringify(assignment, null, 2)}</pre> -->
@@ -224,7 +407,7 @@
 			{/if}
 		</div>
 	</div>
-</div> -->
+</div> 
 
 <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 <style>
