@@ -61,6 +61,7 @@ export async function load(event: PageServerLoadEvent) {
             userNow = dt1[0];
         }
         else {
+            isTrainer = false;
             let { data: dt1, error: err } = await event.locals.supabase
                 .from('student')
                 .select("*")
@@ -87,7 +88,7 @@ export async function load(event: PageServerLoadEvent) {
 
 
 
-        console.log(userNow, isTrainer);
+        //console.log(userNow, isTrainer);
 
 
 
