@@ -97,18 +97,16 @@
                 </a>
             </div>
 
-            <div class=" cursor-pointer flex-grow px-5 py-5 text-center
-                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
-                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
-            >
-                <button on:click={()=>callParent()}>
-                    <img
-                        src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-                        alt="Dashboard Icon"
-                        class="h-7 mr-1 hover:rotate-12"
-                    />
+            <div class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] mt-20">
+                <button on:click={()=>callParent()} class="flex items-center justify-center">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
+                        alt="Dashboard Icon" 
+                        class="h-7 ml-1 hover:rotate-12"/>
+                    
+                        <p style="color: red; font-size: smaller; text-align: center; margin-left: 0.5cm;">Sign Out</p>
                 </button>
             </div>
+            
      
     </div>
   </div>
