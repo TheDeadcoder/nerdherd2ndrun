@@ -24,6 +24,14 @@
     const returnHome = ()=>{
         window.open('/','_self')
     }
+
+    const handleSignOut = async () => {
+		console.log('logout start');
+		await data.supabase.auth.signOut();
+		console.log('logout done');
+		window.open('/trainerlogin', '_self');
+	};
+
 </script>
 
 <div class="grid grid-rows-[75px_auto]">
@@ -76,7 +84,7 @@
                 {#if $isRunningClass.isClass}
                     <ClassSideBar></ClassSideBar>
                 {:else}
-                    <Sidebar></Sidebar>
+                    <Sidebar on:callParentFunction={handleSignOut}></Sidebar>
                 {/if}
             </div>
         </div>

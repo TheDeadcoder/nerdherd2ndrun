@@ -496,11 +496,11 @@
 								{#each currBlog.tags as tag}
 									<div class="chipi flex flex-row space-x-1">
 										<img
-											src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/tag-svgrepo-com.svg"
+											src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/pin-svgrepo-com.svg"
 											alt="Dashboard Icon"
 											class="h-6"
 										/>
-									
+										
 										<p>{tag}</p>
 									</div>
 								{/each}

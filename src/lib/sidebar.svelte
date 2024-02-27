@@ -2,10 +2,20 @@
 
     let homeVisible = 0;
 
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+    const callParent=()=> {
+        dispatch('callParentFunction');
+    }
+
+    
+
 </script>
 
 <div class="pt-5 w-full mx-auto dark:bg-[#070707]">
-    <div class="p-0 flex flex-col  w-full">
+    <div class="p-0 flex flex-col w-full">
       
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -85,6 +95,19 @@
                     
                     Planner
                 </a>
+            </div>
+
+            <div class=" cursor-pointer flex-grow px-5 py-5 text-center
+                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
+                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
+            >
+                <button on:click={()=>callParent()}>
+                    <img
+                        src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
+                        alt="Dashboard Icon"
+                        class="h-7 mr-1 hover:rotate-12"
+                    />
+                </button>
             </div>
      
     </div>
