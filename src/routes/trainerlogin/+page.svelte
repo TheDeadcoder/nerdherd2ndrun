@@ -37,6 +37,7 @@
     }
 
     onMount(() => {
+		modeSwitch()
         // Ensure password input type is set correctly on mount
         const passwordInput = document.getElementById('password');
 		if (passwordInput instanceof HTMLInputElement) {

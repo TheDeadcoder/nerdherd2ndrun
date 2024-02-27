@@ -29,23 +29,25 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
         .eq('teacherid', teacher[0].id)
 
-    const classesWithPending = await Promise.all(classes.map(async (classItem) => {
-        let { data: studclass, error: pendingError } = await supabase
-            .from('studclass')
-            .select("*")
-            .eq('cid', classItem.id);
+    const classesWithPending = await Promise.all(
+        classes.map(async (classItem) => {
+            let { data: studclass, error: pendingError } = await supabase
+                .from('studclass')
+                .select("*")
+                .eq('cid', classItem.id);
 
-        if (pendingError) {
-            console.error(pendingError.message);
-            // Handle the error as you see fit
+            if (pendingError) {
+                console.error(pendingError.message);
+                // Handle the error as you see fit
+            }
+
+            // Attach pendingclass data to classItem
+            return {
+                ...classItem,
+                studclass // This adds the pendingclass array to each classItem
+            };
         }
-
-        // Attach pendingclass data to classItem
-        return {
-            ...classItem,
-            studclass // This adds the pendingclass array to each classItem
-        };
-    }));
+    ));
 
     return { teacher, classes: classesWithPending };
 

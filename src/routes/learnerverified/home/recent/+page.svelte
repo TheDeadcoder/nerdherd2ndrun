@@ -461,7 +461,7 @@
 		</div>
 	</div>
 
-	<div class="w-full h-screen flex flex-row">
+	<div class="w-full min-h-screen flex flex-row">
 		<div class="w-3/4 p-6">
 			<div class="mt-10 ml-4 mr-4">
 				{#each blogwithTeacherName as currBlog}
@@ -500,6 +500,7 @@
 											alt="Dashboard Icon"
 											class="h-6"
 										/>
+									
 										<p>{tag}</p>
 									</div>
 								{/each}
