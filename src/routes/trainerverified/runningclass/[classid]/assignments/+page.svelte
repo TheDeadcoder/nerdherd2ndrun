@@ -249,7 +249,7 @@
 			</div>
 		</div> -->
 
-		<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
+	<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
 		<div class="mt-6 ml-6">
 
 			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
