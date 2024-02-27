@@ -24,26 +24,25 @@ export const load = async ({ locals: { supabase, getSession } }) => {
     console.log(err);
     teacherNow = teacher[0];
 
-
     return { teacherNow };
 }
 export const actions = {
     create: async (event) => {
-        console.log("Ami blog er backend e asi");
-        const data = await event.request.formData();
-        let newBlog = Object.fromEntries(data.entries()) as any;
-        console.log(newBlog)
+                //console.log("Ami blog er backend e asi");
+                const data = await event.request.formData();
+                let newBlog = Object.fromEntries(data.entries()) as any;
+                //console.log(newBlog)
 
 
-        const { data: dt, error: err1 } = await event.locals.supabase
-            .from('blog')
-            .insert([
-                { teacherid: teacherNow.id, title: newBlog.title, description: newBlog.description, timetoread: newBlog.timetoread, tags: newBlog.tags, content: newBlog.content, createdat: new Date() },
-            ])
-            .select()
+                const { data: dt, error: err1 } = await event.locals.supabase
+                    .from('blog')
+                    .insert([
+                        { teacherid: teacherNow.id, title: newBlog.title, description: newBlog.description, timetoread: newBlog.timetoread, tags: newBlog.tags, content: newBlog.content, createdat: new Date() },
+                    ])
+                    .select()
 
 
-        if (err1) console.log(err1)
-        else throw redirect(303, '/trainerverified/home/my');
-    }
+                if (err1) console.log(err1)
+                else throw redirect(303, '/trainerverified/home/my');
+            }
 } satisfies Actions;

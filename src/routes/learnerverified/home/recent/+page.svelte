@@ -461,7 +461,7 @@
 		</div>
 	</div>
 
-	<div class="w-full h-screen flex flex-row">
+	<div class="w-full min-h-screen flex flex-row">
 		<div class="w-3/4 p-6">
 			<div class="mt-10 ml-4 mr-4">
 				{#each blogwithTeacherName as currBlog}
@@ -496,10 +496,11 @@
 								{#each currBlog.tags as tag}
 									<div class="chipi flex flex-row space-x-1">
 										<img
-											src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/tag-svgrepo-com.svg"
+											src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/pin-svgrepo-com.svg"
 											alt="Dashboard Icon"
 											class="h-6"
 										/>
+										
 										<p>{tag}</p>
 									</div>
 								{/each}

@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import Sidebar from "$lib/sidebar.svelte";
+    import ClassSideBar from "$lib/classSideBar.svelte"
     import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
     import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
     import {isRunningClass} from '../../stores/isRunningClass'
@@ -20,12 +21,23 @@
 		target: 'popupHover1',
 		placement: 'top'
 	};
+    const returnHome = ()=>{
+        window.open('/','_self')
+    }
+
+    const handleSignOut = async () => {
+		console.log('logout start');
+		await data.supabase.auth.signOut();
+		console.log('logout done');
+		window.open('/trainerlogin', '_self');
+	};
+
 </script>
 
 <div class="grid grid-rows-[75px_auto]">
     <div class="w-full bg-[#97c2db] self-start sticky top-0 dark:bg-[#070707] dark:text-[#a7afb4] z-10">
         <div class="flex justify-between">
-            <div class="flex p-4 flex-row text-center">
+            <div class="flex p-4 flex-row text-center" on:click={returnHome}>
                 <img
                     src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
                     class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
@@ -70,9 +82,9 @@
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 {#if $isRunningClass.isClass}
-                    <p class="text-white text-[23px]">Hello </p>
+                    <ClassSideBar></ClassSideBar>
                 {:else}
-                    <Sidebar></Sidebar>
+                    <Sidebar on:callParentFunction={handleSignOut}></Sidebar>
                 {/if}
             </div>
         </div>

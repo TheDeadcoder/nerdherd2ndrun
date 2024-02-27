@@ -22,11 +22,10 @@
 	import {isRunningClass} from '../../../../../stores/isRunningClass'
 
 	onMount(()=>{
-		isRunningClass.set({classid:"",isClass:true})
+		isRunningClass.set({classid:classid,isClass:true})
 	});
-
 	onDestroy(()=>{
-		isRunningClass.set({classid:"",isClass:true})
+		isRunningClass.set({classid:"",isClass:false})
 	});
 
 	async function loadInitialMessages() {
@@ -141,8 +140,8 @@
 		</div>
 		
 	</nav>
-	<div class="grid grid-cols-[15%_auto]">
-		<div
+	<div class="min-h-screen">
+		<!-- <div
 			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
 			} lg:translate-x-0 lg:static lg:block`}
@@ -197,7 +196,7 @@
 					</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- <div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> -->
 		<!-- Your content here -->
