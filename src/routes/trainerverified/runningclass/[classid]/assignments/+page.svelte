@@ -103,7 +103,7 @@
 
 	// Close sidebar when clicking outside, for mobile responsiveness
 	onMount(() => {
-    		isRunningClass.set({classid:classid,isClass:true})
+    	isRunningClass.set({classid:classid,isClass:true})
 
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
@@ -121,8 +121,8 @@
 
 </script>
 
-<!-- <div class="">
-	<nav class="appbar">
+<div class="">
+<!--	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
@@ -249,7 +249,7 @@
 			</div>
 		</div> -->
 
-		<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
+	<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
 		<div class="mt-6 ml-6">
 
 			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
@@ -407,7 +407,7 @@
 			{/if}
 		</div>
 	</div>
-</div> -->
+</div> 
 
 <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 <style>
