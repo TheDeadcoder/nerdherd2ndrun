@@ -53,11 +53,14 @@
 		showWaitingArea = true;
 		let feedbackTime =
 			optionIndex !== null ? currentQuestion.time - timeLeftForAnswer : currentQuestion.time;
-		setTimeout(() => {
-			showWaitingArea = false;
-			currentQuestionIndex++;
-			loadNextQuestion();
-		}, 5000 + timeLeftForAnswer); // Wait for 10 seconds in the waiting area
+		setTimeout(
+			() => {
+				showWaitingArea = false;
+				currentQuestionIndex++;
+				loadNextQuestion();
+			},
+			5000 + timeLeftForAnswer * 1000
+		); // Wait for 10 seconds in the waiting area
 	}
 	let isCorrect;
 	async function handleAnswerSubmit(optionIndex) {
