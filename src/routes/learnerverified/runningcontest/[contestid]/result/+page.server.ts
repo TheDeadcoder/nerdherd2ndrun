@@ -45,17 +45,13 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         let { data: pbregistrant, error: err33 } = await supabase
             .from('pbregistrant')
             .select("*")
-            .eq('sid', studentNow.id)
             .eq('pbcid', contestItem.id)
 
         //let contestEndTime = calculateContestEndTime(contestItem);
-        let registrant;
-        if (pbregistrant.length > 0) {
-            registrant = pbregistrant[0];
-        }
+
         return {
             ...contestItem,
-            registrant
+            pbregistrant
         };
     }));
 

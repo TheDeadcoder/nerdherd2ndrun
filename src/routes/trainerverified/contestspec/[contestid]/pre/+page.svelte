@@ -133,7 +133,7 @@
 			contestNow.countdown = calculateCountdown(contestNow.start);
 		} else {
 			console.log('ok');
-			window.open(`/trainerverified/contestspec/${contestNow.id}/curr`);
+			window.open(`/trainerverified/contest`);
 		}
 	}
 
@@ -147,7 +147,7 @@
 	});
 </script>
 
-<main class="mt-6 ml-6 min-h-screen border-2 w-3/5">
+<main class="mt-6 ml-6 min-h-screen border-2 w-full">
 	<div class="flex flex-col items-center mt-6">
 		<h1 class="text-2xl font-extrabold">
 			{contestNow.title}
@@ -185,7 +185,7 @@
 	<button class="mt-10 ml-8 bg-green-400 rounded-lg p-2" on:click={addQuestionmodal}>
 		+ Add a New Question
 	</button>
-	<div class="grid grid-cols-4 gap-12 mt-8 overflow-hidden ml-8">
+	<div class="grid grid-cols-4 gap-12 mt-8 overflow-hidden ml-8 mr-10">
 		{#each questions as question, i}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -214,7 +214,7 @@
 						{/each}
 					</div>
 					<h1 class="font-semibold mt-6">
-						Right Answer: {question.correct}
+						Right Answer: {question.options[question.correct]}
 					</h1>
 					<div class="flex flex-row space-x-16 mt-2">
 						<div class="flex flex-row space-x-2">

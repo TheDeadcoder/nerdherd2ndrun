@@ -58,7 +58,7 @@
 	let title;
 	let topic;
 	let start;
-	let duration;
+	// let duration;
 	let image;
 
 	let showaddcontest = false;
@@ -84,6 +84,14 @@
 			seconds
 		};
 	}
+	async function endContest(classLive: any) {
+		const { data, error } = await supabase
+			.from('pbcontest')
+			.update({ isover: true })
+			.eq('id', classLive.id);
+
+		window.open('/trainerverified/contest', '_self');
+	}
 
 	// Function to update countdown for each classLive
 	function updateCountdown() {
@@ -92,6 +100,9 @@
 				classLive.countdown = calculateCountdown(classLive.start);
 			} else {
 				classLive.countdown = 0;
+				if (classLive.isover === false && classLive.contestEndTime < new Date()) {
+					endContest(classLive);
+				}
 			}
 			return classLive;
 		});
@@ -131,8 +142,10 @@
 					</p>
 					{#if contest.contdown === -1}
 						<p>Calculating...</p>
-					{:else if contest.contdown === 0}
-						<button class="btn bg-green-400 rounded-lg p-1"> Enter Arena </button>
+					{:else if contest.countdown === 0}
+						<button class="btn bg-green-400 rounded-lg p-1 text-sm" disabled={true}>
+							Contest Running
+						</button>
 					{:else}
 						<button
 							class="btn bg-green-400 rounded-lg p-1"
@@ -147,7 +160,7 @@
 							: {contest.countdown.seconds}s -->
 					{#if contest.contdown === -1}
 						<p>Calculating...</p>
-					{:else if contest.contdown === 0}
+					{:else if contest.countdown === 0}
 						<div>Contest is running</div>
 					{:else}
 						<div class="text-sm">
@@ -212,17 +225,6 @@
 								id="start"
 								name="start"
 								bind:value={start}
-							/>
-						</label>
-						<label class="label text-left mb-3">
-							<span>Duration (in minutes)</span>
-
-							<input
-								class="input"
-								type="number"
-								id="duration"
-								name="duration"
-								bind:value={duration}
 							/>
 						</label>
 
