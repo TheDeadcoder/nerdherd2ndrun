@@ -92,7 +92,7 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('questions')
                 .insert([
-                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct, options: options, time: newClass.time, image: link.publicUrl }
+                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct - 1, options: options, time: newClass.time, image: link.publicUrl }
                 ])
 
 
@@ -104,7 +104,7 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('questions')
                 .insert([
-                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct, options: options, time: newClass.time }
+                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct - 1, options: options, time: newClass.time }
                 ])
 
 
@@ -151,7 +151,7 @@ export const actions = {
 
             const { data, error: err1 } = await supabase
                 .from('questions')
-                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect, options: options, time: newClass.selectedtime, image: link.publicUrl })
+                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect - 1, options: options, time: newClass.selectedtime, image: link.publicUrl })
                 .eq('id', newClass.selectedId);
 
 
@@ -164,7 +164,7 @@ export const actions = {
 
             const { data, error: err1 } = await supabase
                 .from('questions')
-                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect, options: options, time: newClass.selectedtime })
+                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect - 1, options: options, time: newClass.selectedtime })
                 .eq('id', newClass.selectedId);
 
 

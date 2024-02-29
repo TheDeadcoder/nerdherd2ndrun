@@ -28,6 +28,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
         .select('*')
         .eq('teacherid', teacherNow.id)
 
+
     const contestwithRegistrants = await Promise.all(pbcontest.map(async (contestItem) => {
 
         let { data: pbregistrant, error } = await supabase

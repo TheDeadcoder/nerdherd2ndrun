@@ -132,7 +132,7 @@
 		if (new Date(contestNow.start) > new Date()) {
 			contestNow.countdown = calculateCountdown(contestNow.start);
 		} else {
-			// contestNow.countdown = 0;
+			console.log('ok');
 			window.open(`/trainerverified/contestspec/${contestNow.id}/curr`);
 		}
 	}
@@ -147,8 +147,8 @@
 	});
 </script>
 
-<main class="mt-6 ml-6">
-	<div class="flex flex-col items-center">
+<main class="mt-6 ml-6 min-h-screen border-2 w-3/5">
+	<div class="flex flex-col items-center mt-6">
 		<h1 class="text-2xl font-extrabold">
 			{contestNow.title}
 		</h1>
@@ -182,10 +182,10 @@
 			</p>
 		</div>
 	</div>
-	<button class="mt-10 ml-16 bg-green-400 rounded-lg p-2" on:click={addQuestionmodal}>
+	<button class="mt-10 ml-8 bg-green-400 rounded-lg p-2" on:click={addQuestionmodal}>
 		+ Add a New Question
 	</button>
-	<div class="grid grid-cols-4 gap-12 mt-8">
+	<div class="grid grid-cols-4 gap-12 mt-8 overflow-hidden ml-8">
 		{#each questions as question, i}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -479,5 +479,5 @@
 		</div>
 	{/if}
 
-	<pre>{JSON.stringify(questions, null, 2)}</pre>
+	<pre>{JSON.stringify(contestNow, null, 2)}</pre>
 </main>

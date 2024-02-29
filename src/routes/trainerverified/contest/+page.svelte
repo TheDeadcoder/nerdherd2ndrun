@@ -97,17 +97,21 @@
 		});
 	}
 
+	function gotoContestSpec(val) {
+		window.open(`/trainerverified/contestspec/${val}/pre`, '_self');
+	}
+
 	onMount(() => {
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+		// onDestroy(() => {
+		// 	clearInterval(interval);
+		// });
 	});
 </script>
 
-<main class="mt-6 ml-6">
+<main class="mt-6 ml-6 w-3/5">
 	<button class="btn p-4 bg-slate-400 rounded-lg" on:click={addclassmodal}>
 		+ Add a New Public Contest
 	</button>
@@ -118,8 +122,8 @@
 				<h1 class="font-extrabold text-xl">
 					{contest.title}
 				</h1>
-				<p>
-					{contest.topic.slice(0, 100)}...
+				<p class="text-sm">
+					{contest.topic.slice(0, 20)}...
 				</p>
 				<div class="flex flex-row justify-between">
 					<p>
@@ -130,12 +134,12 @@
 					{:else if contest.contdown === 0}
 						<button class="btn bg-green-400 rounded-lg p-1"> Enter Arena </button>
 					{:else}
-						<a
-							href="/trainerverified/contestspec/{contest.id}/pre"
+						<button
 							class="btn bg-green-400 rounded-lg p-1"
+							on:click={() => gotoContestSpec(contest.id)}
 						>
 							Modify Contest
-						</a>
+						</button>
 					{/if}
 				</div>
 				<div class="flex items-center justify-center">

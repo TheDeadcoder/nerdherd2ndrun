@@ -233,7 +233,7 @@
 						>
 					</li>
 					<li>
-						<a href="/library" class="flex items-center p-1 font-bold"
+						<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
 								alt="Dashboard Icon"
@@ -586,8 +586,8 @@
 			</div>
 		</div>
 	</div>
-	<pre>{JSON.stringify(studentNow, null, 2)}</pre>
-	<pre>{JSON.stringify(blogwithTeacherName, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(studentNow, null, 2)}</pre>
+	<pre>{JSON.stringify(blogwithTeacherName, null, 2)}</pre> -->
 </main>
 
 <style>
