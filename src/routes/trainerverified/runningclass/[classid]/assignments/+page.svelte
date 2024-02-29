@@ -1,12 +1,22 @@
 <script lang="ts">
+	import { onDestroy, onMount } from 'svelte';
+
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
 	import { Avatar } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	const { classid } = $page.params;
+  	import {isRunningClass} from '../../../../../stores/isRunningClass'
+
 	// import Message from './Message.svelte';
 	export let data;
+	const { classid } = $page.params;
+
+
+// 	let { session, supabase, classNow, studclass } = data;
+// 	$: ({ session, supabase, classNow, studclass } = data);
+
+	
+
 
 	let { session, supabase, classNow, studclass, teacherNow, assignment } = data;
 	$: ({ session, supabase, classNow, studclass, teacherNow, assignment } = data);
@@ -93,6 +103,8 @@
 
 	// Close sidebar when clicking outside, for mobile responsiveness
 	onMount(() => {
+    	isRunningClass.set({classid:classid,isClass:true})
+
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 		function handleOutsideClick(event) {
@@ -103,10 +115,14 @@
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
+	onDestroy(()=>{
+		isRunningClass.set({classid:"",isClass:false})
+	});
+
 </script>
 
 <div class="">
-	<nav class="appbar">
+<!--	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
@@ -231,11 +247,11 @@
 					</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<!-- <div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> -->
-		<!-- Your content here -->
+	<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
 		<div class="mt-6 ml-6">
+
 			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
 				Add a new Assignment
 			</button>
@@ -391,7 +407,7 @@
 			{/if}
 		</div>
 	</div>
-</div>
+</div> 
 
 <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 <style>

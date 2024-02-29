@@ -21,6 +21,7 @@
 
 		
 	onMount(() => {
+		modeSwitch()
 		// setTimeout(() => {
 		isLoading = false;
         
