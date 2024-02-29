@@ -57,7 +57,7 @@
 			showWaitingArea = false;
 			currentQuestionIndex++;
 			loadNextQuestion();
-		}, 5000); // Wait for 10 seconds in the waiting area
+		}, 5000 + timeLeftForAnswer); // Wait for 10 seconds in the waiting area
 	}
 	let isCorrect;
 	async function handleAnswerSubmit(optionIndex) {
@@ -91,11 +91,12 @@
 
 	function loadNextQuestion() {
 		if (currentQuestionIndex < questions.length) {
+			isCorrect = false;
 			currentQuestion = questions[currentQuestionIndex];
 			timeLeftForAnswer = currentQuestion.time;
 			startQuestionTimer();
 		} else {
-			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`,'_self');
+			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`, '_self');
 		}
 	}
 
@@ -105,7 +106,7 @@
 		if (currentTime >= contestNow.contestEndTime) {
 			clearInterval(contestTimeCheckInterval); // Clear the interval
 			clearInterval(countdownTimer); // Clear any ongoing question timer
-			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`,'_self');
+			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`, '_self');
 		}
 	}
 
