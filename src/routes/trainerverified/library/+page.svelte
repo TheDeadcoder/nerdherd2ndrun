@@ -161,8 +161,8 @@
 		<div
 			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
-				<div class="flex justify-between items-center mb-4">
+        <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
+			<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Resource</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
 				</div>
