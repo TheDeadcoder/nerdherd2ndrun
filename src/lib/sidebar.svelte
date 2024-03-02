@@ -39,8 +39,8 @@
                                 </a>
                             </li>
                             <li class=" cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
-                                <a href="/trainerverified/home/populer" >
-                                    Populer
+                                <a href="/trainerverified/home/popular" >
+                                    Popular
                                 </a>
                             </li>
                             <li class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
