@@ -31,4 +31,27 @@ export const load = async ({ locals: { supabase, getSession } }) => {
     return { teacherNow, blog }
 }
 
+export const actions = {
+
+    deleteBlog: async ({ url, locals: { supabase, getSession } }) => {
+        const blogid = url.searchParams.get("id")
+        //console.log("ami todo delete korte chai ", todoid);
+
+        if (!blogid) {
+            return fail(400, { message: "Invalid request" })
+        }
+
+        const { error: err } = await supabase
+            .from('blog')
+            .delete()
+            .eq("id", blogid)
+
+        if (err) console.log(err)
+        else throw redirect(303, '/trainerverified/home/my');
+
+    },
+
+
+}
+
 

@@ -30,7 +30,7 @@
 		console.log('logout start');
 		await data.supabase.auth.signOut();
 		console.log('logout done');
-		window.open('/login', '_self');
+		window.open('/trainerlogin', '_self');
 	};
 	function navigateToHome() {
 		window.open(`/protected/home`, '_self');
@@ -91,7 +91,7 @@
 	}
 	function makeStrong() {
 		content = quill.root.innerHTML;
-		console.log(content);
+		//console.log(content);
 	}
 </script>
 
