@@ -75,29 +75,3 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         throw redirect(303, '/learnerverified/contest');
     }
 }
-export const actions = {
-
-    register: async ({ url, locals: { supabase, getSession } }) => {
-        const contestid = url.searchParams.get("id")
-        //console.log("ami todo delete korte chai ", todoid);
-
-        if (!contestid) {
-            return fail(400, { message: "Invalid request" })
-        }
-
-
-        const { data, error: err2 } = await supabase
-            .from('pbregistrant')
-            .insert([
-                { pbcid: contestid, sid: studentNow.id },
-            ]);
-
-
-
-        if (err2) console.log(err2)
-        else throw redirect(303, '/learnerverified/contest');
-
-    },
-
-
-}

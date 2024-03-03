@@ -46,6 +46,22 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         .eq('cid', classNow.id)
         .eq('joined', true)
 
-    return { classNow, studclass, teacherNow, classlive };
+    const students = await Promise.all(studclass.map(async (studItem) => {
+        let { data: dttt, error: pendingError } = await supabase
+            .from('student')
+            .select("*")
+            .eq('id', studItem.sid);
+
+
+        let currStudent = dttt[0];
+
+        // Attach pendingclass data to classItem
+        return {
+            ...studItem,
+            currStudent // This adds the pendingclass array to each classItem
+        };
+    }));
+
+    return { classNow, students, teacherNow, classlive };
 
 }
