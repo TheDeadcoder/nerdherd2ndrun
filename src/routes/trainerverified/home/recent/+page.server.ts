@@ -27,6 +27,23 @@ export const load = async ({ locals: { supabase, getSession } }) => {
         .from('blog')
         .select('*')
 
+    const blogwithTeacherName = await Promise.all(blog.map(async (blogItem) => {
+        let { data: teacher, error: pendingError } = await supabase
+            .from('teacher')
+            .select("*")
+            .eq('id', blogItem.teacherid);
+
+        blogItem.tags = blogItem.tags.split(',');
+        blogItem.saved = false;
+        let currTeacher = teacher[0];
+
+        // Attach pendingclass data to classItem
+        return {
+            ...blogItem,
+            currTeacher // This adds the pendingclass array to each classItem
+        };
+    }));
+
     console.log(err);
-    return { blog, teacherNow }
+    return { blogwithTeacherName, teacherNow }
 }

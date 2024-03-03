@@ -134,7 +134,7 @@
 						>
 					</li>
 					<li>
-						<a href="/library" class="flex items-center p-1 font-bold"
+						<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
 								alt="Dashboard Icon"
@@ -210,10 +210,7 @@
 					<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment>
 					<span>(label 1)</span>
 			 -->
-					<a
-						href="/learnerverified/home/recent"
-						class="flex items-center p-1 font-bold mr-3"
-					>
+					<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold mr-3">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -228,9 +225,7 @@
 					value={1}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/recommended"
-						class="flex items-center p-1 font-bold mr-3"
+					<a href="/learnerverified/home/recommended" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/recommended-like-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -246,10 +241,7 @@
 					value={2}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/popular"
-						class="flex items-center p-1 font-bold mr-3"
-					>
+					<a href="/learnerverified/home/popular" class="flex items-center p-1 font-bold mr-3">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -264,9 +256,7 @@
 					value={3}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<a
-						href="/learnerverified/home/favourites"
-						class="flex items-center p-1 font-bold mr-3"
+					<a href="/learnerverified/home/favourites" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/star-gold-orange-svgrepo-com.svg"
 							alt="Dashboard Icon"
@@ -280,10 +270,8 @@
 					name="tab3"
 					value={4}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
-					>
-					<a
-						href="/learnerverified/home/saved"
-						class="flex items-center p-1 font-bold mr-3"
+				>
+					<a href="/learnerverified/home/saved" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
 							alt="Dashboard Icon"

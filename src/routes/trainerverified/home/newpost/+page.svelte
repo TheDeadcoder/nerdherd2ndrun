@@ -1,11 +1,8 @@
 <script lang="ts">
-	// @ts-nocheck
-
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
 	import { popup } from '@skeletonlabs/skeleton';
-	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
-	import { Avatar } from '@skeletonlabs/skeleton';
+
 	import 'quill/dist/quill.snow.css';
 
 	let quill;
@@ -17,57 +14,10 @@
 	let timetoread;
 	let tags;
 
-	const popupClick: PopupSettings = {
-		event: 'click',
-		target: 'popupClick',
-		placement: 'bottom'
-	};
-
 	export let data;
 	let { session, supabase, teacherNow } = data;
 	$: ({ session, supabase, teacherNow } = data);
-	const handleSignOut = async () => {
-		console.log('logout start');
-		await data.supabase.auth.signOut();
-		console.log('logout done');
-		window.open('/login', '_self');
-	};
-	function navigateToHome() {
-		window.open(`/protected/home`, '_self');
-	}
-	function navigateToCommunity() {
-		window.open(`/protected/community`, '_self');
-	}
-	function navigateToLearning() {
-		window.open(`/protected/learning`, '_self');
-	}
-	function navigateToProjects() {
-		window.open(`/protected/projects`, '_self');
-	}
-	function navigateToProfile() {
-		window.open(`/protected/profile`, '_self');
-	}
-	function openAddForm() {
-		window.open(`/protected/community/newpost`, '_self');
-	}
-	function formatDate(dateString) {
-		const dateObj = new Date(dateString);
-		const monthNames = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Oct',
-			'Nov',
-			'Dec'
-		];
-		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
-	}
+
 	onMount(async () => {
 		const Quill = await import('quill');
 		quill = new Quill.default(editor, {
@@ -91,10 +41,9 @@
 	}
 	function makeStrong() {
 		content = quill.root.innerHTML;
-		console.log(content);
+		//console.log(content);
 	}
 </script>
-
 
 <div class="min-h-screen mt-3 ml-16 mr-16">
 	<h1 class="text-2xl font-extrabold">Creating a New Blog</h1>
@@ -122,8 +71,8 @@
 			<span class="font-semibold">Blog Description</span>
 		</label>
 		<input
-		   class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
-		    type="text"
+			class="input mb-3 rounded-lg border-[0.5px] focus:outline-[#8ad4ff] focus:border-0"
+			type="text"
 			id="description"
 			name="description"
 			bind:value={description}
@@ -169,62 +118,3 @@
 		</button>
 	</form>
 </div>
-
-<style>
-	.white-text {
-		color: red;
-	}
-	.company-name {
-		font-size: 2rem; /* Adjust font size as needed */
-		margin-top: 1rem; /* Add spacing if necessary */
-		font-family: 'CustomFont', sans-serif; /* Use your custom font */
-	}
-	.appbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 1rem;
-
-		border-bottom: 1px solid #ccc;
-	}
-
-	.links {
-		display: flex;
-		list-style: none;
-		margin: 0;
-	}
-
-	.links li {
-		margin-left: 2rem;
-	}
-	.links a {
-		text-decoration: none;
-		transition: color 0.2s ease-in-out;
-	}
-
-	.links a:hover {
-		color: #007bff; /* Accent color from Skeleton UI */
-	}
-	.white-text {
-		color: red;
-	}
-	.company-name {
-		border: 1px solid black;
-		font-size: 2rem; /* Adjust font size as needed */
-		margin-top: 0.5rem; /* Add spacing if necessary */
-		font-family: 'CustomFont', sans-serif; /* Use your custom font */
-	}
-	.navbar {
-		overflow: hidden;
-		position: absolute; /* Set the navbar to fixed position */
-		top: 0; /* Position the navbar at the top of the page */
-		width: 100%; /* Full width */
-		z-index: 5;
-		background-color: rgb(188, 223, 253);
-	}
-
-	.logo-container {
-		display: flex;
-		align-items: center;
-	}
-</style>

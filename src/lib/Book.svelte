@@ -16,7 +16,7 @@
 	};
 </script>
 
-<div class="w-[250px] min-w-[200px]">
+<div class="w-[250px] min-w-[200px] shadow-md">
 	<button on:click={() => sendDataToParent(book.content)}>
 		<div class="grid grid-rows-[300px_75px] border-1">
 			<div class="w-100%">
@@ -25,7 +25,14 @@
 			<div>
 				<h1>{book.title}</h1>
 				<h2>{book.author}</h2>
-				<h3 class="font-bold">Price : {book.price}</h3>
+				<div class="flex flex-row space-x-2 items-center justify-center">
+					<img
+						class="w-4 h-4"
+						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/taka-svgrepo-com.svg"
+						alt="taka logo"
+					/>
+					<h2>{book.price}</h2>
+				</div>
 			</div>
 		</div>
 	</button>

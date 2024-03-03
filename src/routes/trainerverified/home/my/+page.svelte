@@ -54,6 +54,14 @@
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
 
+	function gotoEdit(val) {
+		window.open(`/trainerverified/editblog/${val}`, '_self');
+	}
+
+	function openPublicView(val) {
+		window.open(`/commonverified/article/${val}`, '_self');
+	}
+
 	const popupClick: PopupSettings = {
 		event: 'click',
 		target: 'popupClick',
@@ -344,14 +352,16 @@
 	<div class="w-full min-h-screen flex flex-row justify-center dark:bg-[#212020]">
 		<div class="w-full mx-5">
 			<div>
-				<a href="/trainerverified/home/newpost" class="mt-8 btn font-semibold text-xl p-4 bg-[#8ad4ff] rounded-lg shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]">
+				<a
+					href="/trainerverified/home/newpost"
+					class="mt-8 btn font-semibold text-xl p-4 bg-[#8ad4ff] rounded-lg shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
+				>
 					Write New Article
 				</a>
 			</div>
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blog as currblog, i}
-					<a
-						href="/commonverified/article/{currblog.id}"
+					<div
 						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
 						<div class="hover:scale-105">
@@ -363,10 +373,28 @@
 								/>
 							</div>
 							<div class="px-4">
-								<div>
-									<h1 class="text-2xl font-semibold mb-2">
+								<div class="flex flex-row justify-between mb-2">
+									<h1 class="text-2xl font-semibold">
 										{currblog.title}
 									</h1>
+									<div class="flex flex-row space-x-1">
+										<button on:click={() => gotoEdit(currblog.id)}>
+											<img
+												src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+												alt="Dashboard Icon"
+												class="h-8 w-8 m-1 hover:scale-105 hover:rotate-12"
+											/>
+										</button>
+										<form action="?/deleteBlog&id={currblog.id}" method="POST">
+											<button type="submit">
+												<img
+													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/delete-trash-svgrepo-com.svg"
+													alt="Dashboard Icon"
+													class="h-8 w-8 m-1 hover:scale-105 hover:rotate-12"
+												/>
+											</button>
+										</form>
+									</div>
 								</div>
 								<div class="flex flex-row">
 									<!-- <img
@@ -388,17 +416,22 @@
 
 								<div>
 									<p class="text-md text-justify">
-										{currblog.description.slice(0, 100)} ...
+										{currblog.description.slice(0, 40)} ...
 									</p>
 								</div>
+								<button
+									on:click={() => openPublicView(currblog.id)}
+									class="w-full ml-2 mr-2 mt-2 p-2 bg-blue-300 hover:bg-blue-400 rounded-lg"
+								>
+									View As Public
+								</button>
 							</div>
 						</div>
-					</a>
+					</div>
 				{/each}
 			</div>
 		</div>
 	</div>
-
 </main>
 
 <style>

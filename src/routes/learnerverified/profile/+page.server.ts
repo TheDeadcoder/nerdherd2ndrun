@@ -168,6 +168,32 @@ export const actions = {
         throw redirect(303, '/learnerverified/profile');
     },
 
+
+    addPhone: async ({ request, locals: { supabase, getSession } }) => {
+        const data = await request.formData();
+        //console.log("amar add class form holo", data);
+
+        let newClass = Object.fromEntries(data.entries()) as any;
+
+
+
+
+        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
+
+        const { data: dtt, error: err1 } = await supabase
+            .from('student')
+            .update({ mobile: newClass.phone })
+            .eq('id', studentNow.id)
+
+
+
+        if (err1) console.log(err1)
+
+
+
+        throw redirect(303, '/learnerverified/profile');
+    },
+
     addDob: async ({ request, locals: { supabase, getSession } }) => {
         const data = await request.formData();
         //console.log("amar add class form holo", data);
