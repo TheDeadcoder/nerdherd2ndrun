@@ -16,7 +16,7 @@
 	let answerFeedback = '';
 	let showWaitingArea = false;
 	let countdownTimer;
-	let currScore = 0;
+	let currScore = 1;
 
 	const popupClick: PopupSettings = {
 		event: 'click',
