@@ -79,7 +79,7 @@
 
 
 
-    <div class="grid grid-cols-[17%_auto]">
+    <div class="grid grid-cols-[15%_auto]">
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 {#if $isRunningClass.isClass}

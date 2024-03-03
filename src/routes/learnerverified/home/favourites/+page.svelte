@@ -188,7 +188,7 @@
 
 <main>
 	<div>
-		<div class="navbar">
+		<!-- <div class="navbar">
 			<nav class="appbar">
 				<div class="logo-container flex items-center">
 					<img
@@ -265,7 +265,6 @@
 						>
 					</li>
 
-					<!-- <LightSwitch class="mr-3" /> -->
 					<div use:popup={popupClick}>
 						<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
 					</div>
@@ -302,9 +301,7 @@
 					value={0}
 					class="hover:scale-105 hover:bg-[#c8e4f7]"
 				>
-					<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment>
-					<span>(label 1)</span>
-			 -->
+				
 					<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold mr-3">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
@@ -394,10 +391,9 @@
 						Search
 					</button>
 				</Tab>
-				<!-- Tab Panels --->
 				<svelte:fragment slot="panel"></svelte:fragment>
 			</TabGroup>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="relative mt-[140px] z-10 w-full">

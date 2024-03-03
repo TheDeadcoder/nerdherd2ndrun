@@ -69,12 +69,14 @@
               
             >
                 <a href="/trainerverified/library" class="flex items-center ">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-                    alt="Dashboard Icon" 
-                    class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: left; margin-left: 0.5cm;">
-                        Library
-                    </p>
+                    <div class="flex">
+                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+                            alt="Dashboard Icon" 
+                            class="h-7 ml-1 hover:rotate-12"/>
+                        <p class="pl-2">
+                            Library
+                        </p>
+                    </div>
                 </a>
             </div>
             <div
@@ -84,12 +86,12 @@
              
             >
                 <a href="/trainerverified/classes" class="flex items-center">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg" 
-                    alt="Dashboard Icon" 
-                    class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: left; margin-left: 0.5cm;">
-                        Classes
-                    </p>
+                    <div class="flex">
+                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg" 
+                        alt="Dashboard Icon" 
+                        class="h-7 ml-1 hover:rotate-12"/>
+                        <p class="pl-2">Classes</p>
+                    </div>
                 </a>
             </div>
             <div
@@ -99,12 +101,14 @@
                 
             >
                 <a href="/trainerverified/contest" class="flex items-center ">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg" 
-                    alt="Dashboard Icon" 
-                    class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: left; margin-left: 0.5cm;">
-                        Contest
-                    </p>
+                    <div class="flex">
+                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg" 
+                        alt="Dashboard Icon" 
+                        class="h-7 ml-1 hover:rotate-12"/>
+                            <p class="pl-2">
+                                Contest
+                            </p>
+                    </div>
                 </a>
             </div>
 

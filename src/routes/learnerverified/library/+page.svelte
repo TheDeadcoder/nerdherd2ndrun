@@ -24,7 +24,7 @@
 </script>
 
 <div>
-	<div>
+	<!-- <div>
 		<div class="navbar">
 			<nav class="appbar grid grid-cols-2 justify-between">
 				<div class="logo-container">
@@ -84,7 +84,7 @@
 				</div>
 			</nav>
 		</div>
-	</div>
+	</div> -->
 	<div class="grid grid-cols-[8%_auto] mt-[80px]">
 		<div class="">
 			<div class="fixed">
