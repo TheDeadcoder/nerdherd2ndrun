@@ -59,7 +59,7 @@
 				currentQuestionIndex++;
 				loadNextQuestion();
 			},
-			4000 + timeLeftForAnswer * 1000
+			5000 + timeLeftForAnswer * 1000
 		); // Wait for 5 seconds in the waiting area
 	}
 	let isCorrect;
