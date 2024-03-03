@@ -106,8 +106,8 @@
 	};
 </script>
 
-<main>
-	<nav class="appbar">
+<div>
+	<!-- <nav class="appbar">
 		<div class="logo-container flex items-center">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
@@ -183,7 +183,6 @@
 				>
 			</li>
 
-			<!-- <LightSwitch class="mr-3" /> -->
 			<div use:popup={popupClick}>
 				<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
 			</div>
@@ -212,13 +211,13 @@
 				</button>
 			</li>
 		</ul>
-	</nav>
+	</nav> -->
 	<section class="mt-6 ml-10 mr-10">
 		<h1 class="text-4xl font-extrabold">Upcoming Contests</h1>
 		<div class="grid grid-cols-4 gap-12 mt-6">
 			{#each contestWithInfo as contest}
 				{#if contest.isover === false}
-					<div class="card flex flex-col space-y-2 p-2">
+					<div class=" flex flex-col space-y-2 p-2">
 						<img
 							src={contest.image}
 							alt="Dashboard Icon"
@@ -229,22 +228,22 @@
 						</h1>
 						<a href="/viewonly/teacher/{contest.currTeacher.id}">
 							<h1 class="font-semibold text-lg">
-								writer: {contest.currTeacher.name}
+								{contest.currTeacher.name}
 							</h1>
 						</a>
 						<p class="text-sm">
 							{contest.topic.slice(0, 100)}...
 						</p>
 						<p class="text-sm">
-							Time: {contest.duration} minutes
+							Duration: {contest.duration} minutes
 						</p>
 						{#if contest.countdown === 0}
 							{#if contest.isRegistered === true}
-								<button class="btn btn-primary p-2 mt-3" on:click={() => gotocontest(contest.id)}
+								<button class="btn dark:text-[#e1e1e1] dark:bg-[#3b6f8e] p-2 mt-3" on:click={() => gotocontest(contest.id)}
 									>Go To Contest</button
 								>
 							{:else}
-								<button class="btn btn-primary p-2 mt-3" disabled={true}
+								<button class="btn btn-primary p-2 mt-3 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]" disabled={true}
 									>Registration is Closed. Contest Running</button
 								>
 								<!-- <button class="btn btn-primary p-2 mt-3" disabled={true}></button> -->
@@ -311,7 +310,7 @@
 	</section>
 	<pre>{JSON.stringify(studentNow, null, 2)}</pre>
 	<pre>{JSON.stringify(contestWithInfo, null, 2)}</pre>
-</main>
+</div>
 
 <style>
 	.white-text {

@@ -24,8 +24,6 @@
 	let coverimg;
 	let price;
 	let showaddmodal = false;
-//online
-	let price;
 
 	function addclassmodal() {
 		console.log(showaddmodal);
@@ -59,10 +57,10 @@
 	};
 </script>
 
-<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] w-2/3">
+<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] ">
 	<div>
 		<button
-			class="btn bg-green-400 rounded-lg text-xl font-semibold mt-10 ml-6"
+			class="btn bg-green-400 rounded-lg text-2xl font-semibold mt-10 ml-6 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 			on:click={addclassmodal}
 		>
 			+ Add book
