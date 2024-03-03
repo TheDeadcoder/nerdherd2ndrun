@@ -24,6 +24,7 @@
 	let coverimg;
 	let price;
 	let showaddmodal = false;
+
 	function addclassmodal() {
 		console.log(showaddmodal);
 		showaddmodal = true;
@@ -56,10 +57,10 @@
 	};
 </script>
 
-<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] w-2/3">
+<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] ">
 	<div>
 		<button
-			class="btn bg-green-400 rounded-lg text-xl font-semibold mt-10 ml-6"
+			class="btn bg-green-400 rounded-lg text-2xl font-semibold mt-10 ml-6 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 			on:click={addclassmodal}
 		>
 			+ Add book
@@ -159,7 +160,7 @@
 	</div>
 	{#if showaddmodal}
 		<div
-			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
+			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity dark:text-[#e1e1e1] dark:bg-[#07070763]"
 		>
         <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
 			<div class="flex justify-between items-center mb-4">
@@ -181,7 +182,7 @@
 							<span>Resource Title</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								id="title"
 								name="title"
@@ -193,7 +194,7 @@
 						<label class="label text-left mb-2">
 							<span>Resource authors</span>
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								placeholder="Who are the authors... (separate by comma)"
 								id="author"
@@ -218,7 +219,7 @@
 							<span>Resource Edition</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="number"
 								id="edition"
 								name="edition"
@@ -243,7 +244,7 @@
 						<label class="label text-left mb-2">
 							<span>Resource Tags</span>
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								placeholder="What are the tags...(separate by comma)"
 								id="tags"
@@ -277,12 +278,13 @@
 								bind:value={content}
 							/>
 						</label>
+						
 
 						<label class="label text-left mb-2">
 							<span>Cover Photo (optional)</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="file"
 								id="coverimg"
 								name="coverimg"

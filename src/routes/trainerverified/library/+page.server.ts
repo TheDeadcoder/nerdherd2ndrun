@@ -26,7 +26,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 
   let { data: book, error: err } = await supabase
-    .from('book')
+    .from('book_avro')
     .select('*')
 
   console.log(err);
@@ -97,7 +97,7 @@ export const actions = {
     console.log("err:", err1);
 
     const { data: dt, error: err2 } = await supabase
-      .from('book')
+      .from('book_avro')
       .insert([
         { teacherid: teacherNow.id, title: newBook.title, author: newBook.author.split(','), edition: newBook.edition, coverimg: link1.publicUrl, tags: newBook.tags.split(','), content: link.publicUrl, price: newBook.price }
       ])
