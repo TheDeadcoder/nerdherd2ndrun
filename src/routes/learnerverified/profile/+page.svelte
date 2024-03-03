@@ -4,9 +4,14 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
+
+	import { Chart, registerables } from 'chart.js';
+	Chart.register(...registerables);
+
+	let chart = null;
 	export let data;
-	let { session, supabase, studentNow, studentqual } = data;
-	$: ({ session, supabase, studentNow, studentqual } = data);
+	let { session, supabase, studentNow, studentqual, performanceWithContest } = data;
+	$: ({ session, supabase, studentNow, studentqual, performanceWithContest } = data);
 	function formatDate(dateString) {
 		const dateObj = new Date(dateString);
 		const monthNames = [
@@ -139,114 +144,56 @@
 		WorkExperiencesgpa = '';
 		WorkExperiencesgpabase = '';
 	}
+	function createChart(labels, data, maxPosition) {
+		const ctx = document.getElementById('performanceChart').getContext('2d');
+		if (chart) {
+			chart.destroy();
+		}
+		chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels,
+				datasets: [
+					{
+						label: 'Contest Position',
+						data,
+						fill: false,
+						borderColor: 'rgb(75, 192, 192)',
+						tension: 0.1
+					}
+				]
+			},
+			options: {
+				scales: {
+					y: {
+						reverse: true, // Reverse the scale to show 1 as the topmost position
+						max: maxPosition,
+						title: {
+							display: true,
+							text: 'Position'
+						}
+					}
+				}
+			}
+		});
+	}
+
+	onMount(async () => {
+		// Assume `fetchPerformanceData` is a function that fetches data from Supabase
+		// Sort the performances by starttime
+		const sortedPerformances = performanceWithContest.sort(
+			(a, b) => new Date(a.contest.start) - new Date(b.contest.start)
+		);
+		// Prepare the datasets for Chart.js
+		const labels = sortedPerformances.map((performance) =>
+			new Date(performance.contest.start).toLocaleDateString()
+		);
+		const positions = sortedPerformances.map((performance) => performance.result);
+		// Find the worst performance for setting the chart's scale
+		const maxPosition = Math.max(...positions);
+		createChart(labels, positions, maxPosition);
+	});
 </script>
-
-<nav class="appbar">
-	<div class="logo-container flex items-center">
-		<img
-			src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-			class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-			alt="title"
-			width={50}
-		/>
-		<span class="company-name text-2xl font-extrabold">NerD</span><span
-			class="company-name white-text text-2xl font-extrabold">Herd</span
-		>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
-
-		<li>
-			<a href="/learnerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
-
-		<li>
-			<a href="/learnerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Planner</a
-			>
-		</li>
-
-		<!-- <LightSwitch class="mr-3" /> -->
-		<div use:popup={popupClick}>
-			<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
-		</div>
-
-		<div data-popup="popupClick" class="h-32 absolute">
-			<ul class="text-lg font-semibold bg-sky-300 ml-0">
-				<li class="mt-2 mb-3 p-2">
-					<a href="/learnerverified/profile" class="flex items-center font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-7 mr-1 hover:rotate-12"
-						/>
-						Profile</a
-					>
-				</li>
-			</ul>
-		</div>
-		<li>
-			<button on:click={handleSignOut}>
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-7 mr-1 hover:rotate-12"
-				/>
-			</button>
-		</li>
-	</ul>
-</nav>
 
 <section class="min-h-screen ml-16 mr-16">
 	<div class="flex flex-row space-x-24">
@@ -406,14 +353,14 @@
 					class="w-5 h-5 mr-3 hover:scale-105 hover:rotate-12"
 				/>
 				<h1>{studentNow.mobile}</h1>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-					<img
-						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
-						alt="Bout us"
-						class="rounded-full w-6 h-6 object-cover hover:rotate-12"
-						on:click={addphoneModal}
-					/>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+				<img
+					src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+					alt="Bout us"
+					class="rounded-full w-6 h-6 object-cover hover:rotate-12"
+					on:click={addphoneModal}
+				/>
 			</div>
 			<div class="flex flex-row mt-9">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
@@ -463,7 +410,6 @@
 								<h4 class="font-semibold">
 									{currqual.name}
 								</h4>
-								
 							</div>
 							<p class="font-light text-md">
 								Result: {currqual.gpa} / {currqual.gpabase}
@@ -482,6 +428,16 @@
 					+Add a new experience
 				</button>
 			</div>
+			<div class="flex flex-row mt-10">
+				<!-- svelte-ignore a11y-img-redundant-alt -->
+				<img
+					src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/championship-trophy-svgrepo-com.svg"
+					alt="Eduqual Image"
+					class="w-8 h-8 mr-3 hover:scale-105 hover:rotate-12"
+				/>
+				<h1 class="font-extrabold text-xl">Contest Positions</h1>
+			</div>
+			<canvas id="performanceChart" class="w-full h-64"></canvas>
 		</div>
 	</div>
 
@@ -738,8 +694,9 @@
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
-
+			<div
+				class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto"
+			>
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Experience</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
@@ -847,6 +804,7 @@
 			</div>
 		</div>
 	{/if}
+	<!-- <pre>{JSON.stringify(performanceWithContest, null, 2)}</pre> -->
 </section>
 
 <style>
