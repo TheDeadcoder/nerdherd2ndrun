@@ -181,6 +181,7 @@
 </div>
 
 <pre>{JSON.stringify(studentNow, null, 2)}</pre>
+<pre>{JSON.stringify(studentqual, null, 2)} </pre>
 
 <style>
 	.navbar {
