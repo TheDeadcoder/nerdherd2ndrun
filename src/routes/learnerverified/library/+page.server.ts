@@ -13,7 +13,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 
   let { data: book, error: err } = await supabase
-    .from('book_avro')
+    .from('book')
     .select('*')
 
   console.log(err);
