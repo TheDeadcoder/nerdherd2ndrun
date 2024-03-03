@@ -41,13 +41,24 @@ export const load = async ({ locals: { supabase, getSession } }) => {
                 // Handle the error as you see fit
             }
 
+            for (let i = 0; i < studclass?.length; i++) {
+
+                let { data: tempStudent, error: pendingError } = await supabase
+                    .from('student')
+                    .select("*")
+                    .eq('id', studclass[i].sid);
+
+                let studentInfo = tempStudent[0];
+                studclass[i].student = studentInfo;
+            }
+
             // Attach pendingclass data to classItem
             return {
                 ...classItem,
                 studclass // This adds the pendingclass array to each classItem
             };
         }
-    ));
+        ));
 
     return { teacher, classes: classesWithPending };
 

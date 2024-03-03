@@ -121,67 +121,44 @@
 		</nav>
 	</div>
 
-	<div class="h-screen flex justify-center">
-		<div class=" grid grid-rows-2 justify-center w-3/5 p-16">
-			<div class="">
+	<div class="min-h-screen flex justify-center py-5  dark:bg-[#212020] dark:text-[#e1e1e1]">
+		<div class="grid grid-cols-[30%_auto] w-3/4  ">
+			<div class=" self-start sticky top-[105px] overflow-auto">
+				
 				<div class="flex justify-center">
-					<img src={studentNow.image} alt="" class="rounded-full border h-[220px]" />
+					<img src={studentNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
+				</div>
+				<div class="p-3 m-3 ">
+					<p class="text-3xl font-semibold">{studentNow.name}</p>
+					<p class="font-thin">{studentNow.email}</p>
+					<p class="font-thin">{studentNow.mobile}</p>
+					<p class="font-thin">{studentNow.address}</p>
+					<div class="mt-3">
+						<p class="">{studentNow.about}</p>
+					</div>
 				</div>
 			</div>
-
-			<div class="mb-8 grid grid-cols-2">
-				<div class="pr-2 pl-6 border-r-2 border-black">
-					<p class="text-2xl font-semibold">{studentNow.name}</p>
-					<p class="font-thin">{studentNow.email}</p>
-					<p class="font-thin">{studentNow.institute}</p>
-					<div class="my-3">
-						<p>{studentNow.about}</p>
+				
+			<div class="m-4">
+				<p class="font-semibold text-[18px]">Academic Background:</p>
+				{#each studentqual as qual,index}
+					<div class="grid grid-cols-[30%_auto] w-[250px] border ml-4 m-2">
+						<div>
+							<img src={qual.image} class="w-14" alt="">
+						</div>
+						<div>
+							<p>{qual.institute}</p>
+							<p>{qual.from}-{qual.to}</p>
+						</div>
 					</div>
-				</div>
-				<div class="flex m-3">
-					<!-- <div>
-						<img src={studentNow.eduqual[0].img} alt="" class="max-h-12 m-1" />
-					</div>
-					<div>
-						<p class="font-medium">{studentNow.eduqual[0].institute}</p>
-						<p class="leading-3">{studentNow.eduqual[0].gpa}</p>
-					</div> -->
-					<div class="flex flex-col space-y-2">
-						{#each studentqual as currentqual}
-							<div class="flex flex-row space-x-2">
-								<img
-									src={currentqual.image}
-									alt="Dashboard Icon"
-									class="h-12 mr-1 hover:rotate-12"
-								/>
-								<div class="flex flex-col space-y-2">
-									<h1 class="text-xl font-bold">
-										{currentqual.institute}
-									</h1>
-									<div class="flex flex-row space-x-4">
-										<h1 class="text-lg font-semibold">
-											{currentqual.name}
-										</h1>
-										<h1 class="text-lg font-semibold">
-											Result: {currentqual.gpa} /{currentqual.gpabase}
-										</h1>
-									</div>
-
-									<p class="font-light text-sm">
-										{currentqual.from} - {currentqual.to}
-									</p>
-								</div>
-							</div>
-						{/each}
-					</div>
-				</div>
+				{/each}
 			</div>
 		</div>
 	</div>
 </div>
 
-<pre>{JSON.stringify(studentNow, null, 2)}</pre>
-<pre>{JSON.stringify(studentqual, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(studentNow, null, 2)}</pre>
+<pre>{JSON.stringify(studentqual, null, 2)}</pre> -->
 
 <style>
 	.navbar {

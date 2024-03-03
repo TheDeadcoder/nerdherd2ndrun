@@ -23,7 +23,15 @@
                 class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl  border-r-4 hover:text-[27px] text-[#57a8d6]  border-[#57a8d6] hover:bg-[#d8f0fd] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 on:click={() => homeVisible = homeVisible^1}
             >
-                Home
+                <div class="flex items-center ">
+                    <img src=" https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+                    alt="Dashboard Icon" 
+                    class="h-7 ml-1 hover:rotate-12"/>
+                    <p style="text-align: left; margin-left: 0.5cm;">
+                        Home
+                    </p>
+                </div>
+               
 
                 {#if  homeVisible===1 }
                     <div>
@@ -60,8 +68,13 @@
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
               
             >
-                <a href="/trainerverified/library">
-                    Library
+                <a href="/trainerverified/library" class="flex items-center ">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+                    alt="Dashboard Icon" 
+                    class="h-7 ml-1 hover:rotate-12"/>
+                    <p style="text-align: left; margin-left: 0.5cm;">
+                        Library
+                    </p>
                 </a>
             </div>
             <div
@@ -70,8 +83,13 @@
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
              
             >
-                <a href="/trainerverified/classes">
-                    Classes
+                <a href="/trainerverified/classes" class="flex items-center">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg" 
+                    alt="Dashboard Icon" 
+                    class="h-7 ml-1 hover:rotate-12"/>
+                    <p style="text-align: left; margin-left: 0.5cm;">
+                        Classes
+                    </p>
                 </a>
             </div>
             <div
@@ -80,8 +98,13 @@
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 
             >
-                <a href="/trainerverified/contest">
-                    Contest
+                <a href="/trainerverified/contest" class="flex items-center ">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg" 
+                    alt="Dashboard Icon" 
+                    class="h-7 ml-1 hover:rotate-12"/>
+                    <p style="text-align: left; margin-left: 0.5cm;">
+                        Contest
+                    </p>
                 </a>
             </div>
 
@@ -91,9 +114,13 @@
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 
             >
-                <a href="/trainerverified/planner" class="">
-                    
-                    Planner
+                <a href="/trainerverified/planner" class="flex items-center">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg" 
+                    alt="Dashboard Icon" 
+                    class="h-7 ml-1 hover:rotate-12"/>
+                    <p style="text-align: left; margin-left: 0.5cm;">
+                        Planner
+                    </p>
                 </a>
             </div>
 
@@ -104,31 +131,31 @@
                 
             >
             
-                <a href="/trainerverified/ai/gpt" class="flex items-center justify-center">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg" 
+                <a href="/trainerverified/ai/gpt" class="flex items-center ">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bot.png" 
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: center; margin-left: 0.5cm;">
+                    <p style="text-align: left; margin-left: 0.5cm;">
                         ChatBot
                     </p>
                 </a>
             </div>
 
-            <div 
+            <!-- <div 
                 class="cursor-pointer flex-grow px-5 py-5 text-center 
                         font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
                         border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] "
             >
-                <button on:click={()=>callParent()} class="flex items-center justify-center">
+                <button on:click={()=>callParent()} class="flex items-center">
                     <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
                         alt="Dashboard Icon" 
                         class="h-7 ml-1 hover:rotate-12"/>
                     
-                        <p style="color: red; font-size: smaller; text-align: center; margin-left: 0.5cm;">
+                        <p style="color: red; font-size: smaller; text-align: left; margin-left: 0.5cm;">
                             Sign Out
                         </p>
                 </button>
-            </div>
+            </div> -->
             
      
     </div>

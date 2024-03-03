@@ -318,8 +318,19 @@
 						{#each selectedClass.studclass as studentid}
 							{#if studentid.joined === false}
 								<li class="flex flex-row space-x-4">
-									<a href="/viewonly/student/{studentid.sid}" data-sveltekit-prefetch>
-										{studentid.sid}
+									<a
+										href="/viewonly/student/{studentid.sid}"
+										class="flex flex-row space-x-2"
+										data-sveltekit-prefetch
+									>
+										<img
+											src={studentid.student.image}
+											alt="Dashboard Icon"
+											class="h-8 mr-1 hover:rotate-12 rounded-full"
+										/>
+										<h1 class="font-semibold">
+											{studentid.student.name}
+										</h1>
 									</a>
 
 									<form action="?/ApproveRequest&id={studentid.id}" method="POST">
