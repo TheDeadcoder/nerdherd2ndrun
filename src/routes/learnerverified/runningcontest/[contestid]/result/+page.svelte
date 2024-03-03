@@ -176,7 +176,7 @@
 											<td class="whitespace-nowrap px-6 py-2 font-bold flex flex-row items-center">
 												{registrant.score}
 												{#if performance?.length > 0}
-													<button class="p-2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]" disabled={true}> Add To Records </button>
+													<button class="p-2 ml-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]" disabled={true}> Add To Records </button>
 												{:else}
 													<form action="?/deleteTodo&id={i + 1}" method="POST">
 														<button
