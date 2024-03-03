@@ -13,8 +13,8 @@
 	let reacted = false;
 	let reactionval = false;
 
-	let { session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data;
-	$: ({ session, supabase, articleNow, teacherNow, commonuserNow, commentsMod } = data);
+	let { session, supabase, articleNow, teacherNow, commonuserNow, commentsMod, userSpecNow } = data;
+	$: ({ session, supabase, articleNow, teacherNow, commonuserNow, commentsMod, userSpecNow } = data);
 
 	let comments = commentsMod;
 	let commentBody;
@@ -419,22 +419,26 @@
 			<h1 class="text-xl font-bold">Previous Comments</h1>
 			{#each comments as comment}
 				<div class="grid grid-cols-[auto_1fr] gap-2 mt-4">
-					<div class="border-2 ">
-						<Avatar
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/defaultuser.jpg"
-							width="w-12"
-							class="border-2 "
-						/>
+					
+					<div class=" flex items-center">
+						<a href="/viewonly/teacher/{comment.user.id}" class = "flex flex-row">
+							<Avatar
+								src={userSpecNow.image}
+								width="w-16"
+								height="h-16"
+							/>
+						</a>
 					</div>
+
 					<div class="card p-4 variant-soft rounded-tl-none space-y-2 border-2">
 						<header class="flex justify-between items-center">
 							{#if comment.user.istrainer}
-								<a href="/viewonly/teacher/{comment.user.id}">
-									Teacher: {comment.user?.email.split('@')[0]}
+								<a href="/viewonly/teacher/{comment.user.id}" class = "flex flex-row font-semibold">
+									{userSpecNow.name} <span style="opacity: 0.3;">(Teacher) </span>
 								</a>
 							{:else}
-								<a href="/viewonly/student/{comment.user.id}">
-									Student: {comment.user?.email.split('@')[0]}
+								<a href="/viewonly/student/{comment.user.id}" class = "flex flex-row fond-semibold">
+									{userSpecNow.name} <span style="opacity: 0.3;"></span> (Student)
 								</a>
 							{/if}
 							<small class="opacity-50">{formatTimestamp(comment.createdat)}</small>
