@@ -53,14 +53,11 @@
 		showWaitingArea = true;
 		let feedbackTime =
 			optionIndex !== null ? currentQuestion.time - timeLeftForAnswer : currentQuestion.time;
-		setTimeout(
-			() => {
-				showWaitingArea = false;
-				currentQuestionIndex++;
-				loadNextQuestion();
-			},
-			5000 + timeLeftForAnswer * 1000
-		); // Wait for 10 seconds in the waiting area
+		setTimeout(() => {
+			showWaitingArea = false;
+			currentQuestionIndex++;
+			loadNextQuestion();
+		}, 3000); // Wait for 5 seconds in the waiting area + timeLeftForAnswer * 1000
 	}
 	let isCorrect;
 	async function handleAnswerSubmit(optionIndex) {
@@ -94,11 +91,13 @@
 
 	function loadNextQuestion() {
 		if (currentQuestionIndex < questions.length) {
+			console.log('ekhon ' + currentQuestionIndex);
 			isCorrect = false;
 			currentQuestion = questions[currentQuestionIndex];
 			timeLeftForAnswer = currentQuestion.time;
 			startQuestionTimer();
 		} else {
+			console.log('ekhon jawa lagbe');
 			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`, '_self');
 		}
 	}

@@ -95,9 +95,9 @@
 		updateCountdown();
 		//subscribeContest();
 
-		// onDestroy(() => {
-		// 	clearInterval(interval);
-		// });
+		onDestroy(() => {
+			clearInterval(interval);
+		});
 		//subscribeDeleted();
 	});
 	const handleSignOut = async () => {

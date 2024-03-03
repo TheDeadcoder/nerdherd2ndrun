@@ -48,6 +48,7 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
             .eq('pbcid', contestItem.id)
 
         //let contestEndTime = calculateContestEndTime(contestItem);
+        pbregistrant.sort((a, b) => b.score - a.score);
 
         return {
             ...contestItem,

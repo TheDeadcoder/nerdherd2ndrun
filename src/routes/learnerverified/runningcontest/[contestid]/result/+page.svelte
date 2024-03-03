@@ -16,3 +16,6 @@
 	{contestNow.title}
 </h1>
 <h1>{contestNow.registrant.score}</h1>
+<pre>{JSON.stringify(contestNow, null, 2)}</pre>
+<pre>{JSON.stringify(studentNow, null, 2)}</pre>
+<pre>{JSON.stringify(questions, null, 2)}</pre>
