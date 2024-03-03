@@ -132,7 +132,7 @@
 </script>
 
 <main>
-	<nav class="appbar">
+	<!-- <nav class="appbar">
 		<div class="logo-container flex items-center">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
@@ -208,7 +208,6 @@
 				>
 			</li>
 
-			<!-- <LightSwitch class="mr-3" /> -->
 			<div use:popup={popupClick}>
 				<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
 			</div>
@@ -237,7 +236,7 @@
 				</button>
 			</li>
 		</ul>
-	</nav>
+	</nav> -->
 	<section class="mt-6 ml-10 mr-10 items-center justify-center text-center">
 		<h1 class="text-4xl font-extrabold">
 			{contestNow.title}

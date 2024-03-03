@@ -19,8 +19,8 @@
 	};
 </script>
 
-<main>
-	<nav class="appbar">
+<main class="dark:bg-[#212020] dark:text-[#e1e1e1]">
+	<!-- <nav class="appbar">
 		<div class="logo-container flex items-center">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
@@ -96,7 +96,6 @@
 				>
 			</li>
 
-			<!-- <LightSwitch class="mr-3" /> -->
 			<div use:popup={popupClick}>
 				<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
 			</div>
@@ -125,9 +124,9 @@
 				</button>
 			</li>
 		</ul>
-	</nav>
+	</nav> -->
 	<div class="flex flex-col items-center justify-center">
-		<h1 class="font-extrabold text-2xl">
+		<h1 class="font-bold text-[30px] underline mt-4">
 			{contestNow.title}
 		</h1>
 	</div>
@@ -144,9 +143,9 @@
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
 					<div class="overflow-hidden">
-						<table class="min-w-full text-left text-sm font-light">
+						<table class="min-w-full text-left text-sm font-light  dark:text-[#e1e1e1] dark:bg-[#070707]">
 							<thead
-								class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-slate-300 hover:bg-sky-500"
+								class="border-b bg-white font-medium dark:text-[#e1e1e1] dark:bg-[#070707] "
 							>
 								<tr>
 									<th scope="col" class="px-6 py-4">Rank</th>
@@ -154,10 +153,10 @@
 									<th scope="col" class="px-6 py-4">Score</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="">
 								{#each contestNow.pbregistrant as registrant, i}
 									{#if registrant.student.id === studentNow.id}
-										<tr class="border-b dark:border-neutral-500 bg-green-200">
+										<tr class="border-b dark:bg-[#51ab51] bg-[#8cf08c]">
 											<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
 											<td class="whitespace-nowrap px-6 py-4">
 												<a
@@ -174,15 +173,15 @@
 													</h1>
 												</a>
 											</td>
-											<td class="whitespace-nowrap px-6 py-4 flex flex-row">
+											<td class="whitespace-nowrap px-6 py-2 font-bold flex flex-row items-center">
 												{registrant.score}
 												{#if performance?.length > 0}
-													<button class="p-2" disabled={true}> Add To Records </button>
+													<button class="p-2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]" disabled={true}> Add To Records </button>
 												{:else}
 													<form action="?/deleteTodo&id={i + 1}" method="POST">
 														<button
 															type="submit"
-															class="ml-6 p-2 bg-blue-300 hover:bg-blue-400 rounded-xl"
+															class="ml-4 p-2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg"
 														>
 															+ Add To Records
 														</button>
@@ -191,7 +190,7 @@
 											</td>
 										</tr>
 									{:else}
-										<tr class="border-b dark:border-neutral-500 bg-slate-100 hover:bg-sky-200">
+										<tr class="border-b dark:border-neutral-500 bg-slate-100 hover:bg-sky-200 dark:text-[#e1e1e1] dark:bg-[#070707]">
 											<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
 											<td class="whitespace-nowrap px-6 py-4">
 												<a

@@ -219,7 +219,7 @@
 		</ul>
 	</nav> -->
 	<section class="pt-6 pl-10 pr-10 dark:bg-[#212020] dark:text-[#e1e1e1]">
-		<h1 class="text-4xl font-extrabold">Upcoming Contests</h1>
+		<h1 class="text-[30px] font-bold">Upcoming Contests</h1>
 		<div class="grid grid-cols-4 gap-12 mt-6">
 			{#each contestWithInfo as contest}
 				{#if contest.isover === false}
@@ -281,7 +281,7 @@
 				{/if}
 			{/each}
 		</div>
-		<h1 class="text-4xl font-extrabold mt-6">Archieved Contests</h1>
+		<h1 class="text-[30px] font-bold mt-6">Archieved Contests</h1>
 		<div class="grid grid-cols-4 gap-12 mt-6">
 			{#each contestWithInfo as contest}
 				{#if contest.isover === true}

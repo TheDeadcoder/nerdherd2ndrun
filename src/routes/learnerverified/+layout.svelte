@@ -61,7 +61,7 @@
                         <div data-popup="popupClick" class="h-32 absolute">
                             <ul class="text-lg font-semibold bg-[#b7dbf6] ml-0 dark:text-[#e1e1e1] dark:bg-[#070707]">
                                 <li class="mt-2 mb-3 p-2">
-                                    <a href="/trainerverified/profile" class="flex items-center font-bold"
+                                    <a href="/learnerverified/profile" class="flex items-center font-bold"
                                         ><img
                                             src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
                                             alt="Dashboard Icon"
