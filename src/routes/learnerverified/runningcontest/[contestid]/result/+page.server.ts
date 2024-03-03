@@ -63,6 +63,14 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     contestNow = contestWithInfo[0];
 
+
+    let { data: performance, error: err99 } = await supabase
+        .from('performance')
+        .select("*")
+        .eq('sid', studentNow.id)
+        .eq('cid', contestNow.id);
+
+
     if (contestNow.pbregistrant) {
 
         let { data: questions, error } = await supabase
@@ -70,7 +78,7 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
             .select("*")
             .eq('pcid', contestNow.id)
 
-        return { contestNow, studentNow, questions };
+        return { contestNow, studentNow, questions, performance };
     }
     else {
         throw redirect(303, '/learnerverified/contest');
@@ -78,24 +86,24 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 }
 export const actions = {
 
-    register: async ({ url, locals: { supabase, getSession } }) => {
-        const contestid = url.searchParams.get("id")
+    deleteTodo: async ({ url, locals: { supabase, getSession } }) => {
+        const todoid = url.searchParams.get("id")
         //console.log("ami todo delete korte chai ", todoid);
 
-        if (!contestid) {
+        if (!todoid) {
             return fail(400, { message: "Invalid request" })
         }
 
 
-        const { data, error: err2 } = await supabase
-            .from('pbregistrant')
+        const { data, error: err } = await supabase
+            .from('performance')
             .insert([
-                { pbcid: contestid, sid: studentNow.id },
-            ]);
+                { sid: studentNow.id, cid: contestNow.id, result: todoid },
+            ])
+            .select()
 
 
-
-        if (err2) console.log(err2)
+        if (err) console.log(err)
         else throw redirect(303, '/learnerverified/contest');
 
     },

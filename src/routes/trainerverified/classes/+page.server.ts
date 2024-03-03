@@ -84,34 +84,55 @@ export const actions = {
 
         let name = newClass.title + "_" + teacherNow.id;
 
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
+        if (newClass.image.size) {
 
-        const { data: res, error: err } = await supabase.storage
-            .from('classimg')
-            .upload(name, newClass.image, {
-                cacheControl: '3600',
-                upsert: false
-            });
+            const { data: res, error: err } = await supabase.storage
+                .from('classimg')
+                .upload(name, newClass.image, {
+                    cacheControl: '3600',
+                    upsert: false
+                });
 
 
-        const { data: link } = await supabase
-            .storage
-            .from('classimg')
-            .getPublicUrl(name)
+            const { data: link } = await supabase
+                .storage
+                .from('classimg')
+                .getPublicUrl(name)
+
+
+            // console.log(err, link)
+
+            const { data: dt, error: err1 } = await supabase
+                .from('classes')
+                .insert([
+                    { teacherid: teacherNow.id, syllabus: newClass.syllabus, duration: newClass.duration.toString(), start: formatDate(newClass.start), image: link.publicUrl, title: newClass.title }
+                ])
+
+
+            if (err1) console.log(err1)
+
+        }
+        else {
+
+            const { data: dt, error: err1 } = await supabase
+                .from('classes')
+                .insert([
+                    { teacherid: teacherNow.id, syllabus: newClass.syllabus, duration: newClass.duration.toString(), start: formatDate(newClass.start), title: newClass.title }
+                ])
+
+
+            if (err1) console.log(err1)
+
+        }
+
+
 
 
         // console.log(err, link)
 
-        const { data: dt, error: err1 } = await supabase
-            .from('classes')
-            .insert([
-                { teacherid: teacherNow.id, syllabus: newClass.syllabus, duration: newClass.duration.toString(), start: formatDate(newClass.start), image: link.publicUrl, title: newClass.title }
-            ])
 
 
-        if (err1) console.log(err1)
-
-        else throw redirect(303, '/trainerverified/classes');
+        throw redirect(303, '/trainerverified/classes');
     },
     deleteRequest: async ({ url, locals: { supabase, getSession } }) => {
         const requestid = url.searchParams.get("id")

@@ -67,5 +67,5 @@ export const load = async ({ locals: { supabase, getSession } }) => {
     }));
 
 
-    return { blogwithTeacherName, teacherNow };
+    return { blogwithTeacherName, teacherNow }
 }

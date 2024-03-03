@@ -53,11 +53,14 @@
 		showWaitingArea = true;
 		let feedbackTime =
 			optionIndex !== null ? currentQuestion.time - timeLeftForAnswer : currentQuestion.time;
-		setTimeout(() => {
-			showWaitingArea = false;
-			currentQuestionIndex++;
-			loadNextQuestion();
-		}, 3000); // Wait for 5 seconds in the waiting area + timeLeftForAnswer * 1000
+		setTimeout(
+			() => {
+				showWaitingArea = false;
+				currentQuestionIndex++;
+				loadNextQuestion();
+			},
+			4000 + timeLeftForAnswer * 1000
+		); // Wait for 5 seconds in the waiting area
 	}
 	let isCorrect;
 	async function handleAnswerSubmit(optionIndex) {
@@ -97,11 +100,11 @@
 			timeLeftForAnswer = currentQuestion.time;
 			startQuestionTimer();
 		} else {
-			console.log('ekhon jawa lagbe');
+			//console.log('ekhon jawa lagbe');
 			clearInterval(contestTimeCheckInterval); // Clear the interval
-			console.log('clear korsi 1');
+			//console.log('clear korsi 1');
 			clearInterval(countdownTimer); // Clear any ongoing question timer
-			console.log('clear korsi 2');
+			//console.log('clear korsi 2');
 			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`, '_self');
 		}
 	}
@@ -143,7 +146,7 @@
 		</div>
 		<ul class="links">
 			<li>
-				<a href="/studentblogs/recent" class="flex items-center p-1 font-bold"
+				<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
 						alt="Dashboard Icon"
@@ -163,7 +166,7 @@
 				>
 			</li>
 			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
+				<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 						alt="Dashboard Icon"

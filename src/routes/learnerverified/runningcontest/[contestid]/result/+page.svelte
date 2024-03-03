@@ -10,8 +10,8 @@
 		target: 'popupClick',
 		placement: 'top'
 	};
-	let { session, supabase, contestNow, studentNow, questions } = data;
-	$: ({ session, supabase, contestNow, studentNow, questions } = data);
+	let { session, supabase, contestNow, studentNow, questions, performance } = data;
+	$: ({ session, supabase, contestNow, studentNow, questions, performance } = data);
 
 	const handleSignOut = async () => {
 		await data.supabase.auth.signOut();
@@ -34,7 +34,7 @@
 		</div>
 		<ul class="links">
 			<li>
-				<a href="/studentblogs/recent" class="flex items-center p-1 font-bold"
+				<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
 						alt="Dashboard Icon"
@@ -54,7 +54,7 @@
 				>
 			</li>
 			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
+				<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
 					><img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 						alt="Dashboard Icon"
@@ -126,20 +126,27 @@
 			</li>
 		</ul>
 	</nav>
-	<section class="min-h-screen p-4">
-		<div class="flex flex-col items-center justify-center">
-			<h1 class="font-extrabold text-2xl">
-				{contestNow.title}
-			</h1>
-		</div>
-		<h1 class="font-bold text-xl">Result Page</h1>
-		<div class="flex flex-col mt-6">
+	<div class="flex flex-col items-center justify-center">
+		<h1 class="font-extrabold text-2xl">
+			{contestNow.title}
+		</h1>
+	</div>
+	<section class="min-h-screen p-4 flex flex-row space-x-10">
+		<div class="flex flex-col mt-6 w-2/3">
+			<div class="flex flex-row mt-4 space-x-2">
+				<img
+					src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/medal-champion-award-winner-olympic-6-svgrepo-com.svg"
+					alt="Dashboard Icon"
+					class="h-10 mr-1 hover:rotate-12"
+				/>
+				<h1 class="font-bold text-2xl">Ranks</h1>
+			</div>
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
 					<div class="overflow-hidden">
 						<table class="min-w-full text-left text-sm font-light">
 							<thead
-								class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600"
+								class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-slate-300 hover:bg-sky-500"
 							>
 								<tr>
 									<th scope="col" class="px-6 py-4">Rank</th>
@@ -149,25 +156,62 @@
 							</thead>
 							<tbody>
 								{#each contestNow.pbregistrant as registrant, i}
-									<tr class="border-b bg-white dark:border-neutral-500 dark:bg-neutral-700">
-										<td class="whitespace-nowrap px-6 py-4 font-medium">{i}</td>
-										<td class="whitespace-nowrap px-6 py-4">
-											<a
-												href="/viewonly/student/{registrant.student.id}"
-												class="flex flex-row space-x-2"
-											>
-												<img
-													src={registrant.student.image}
-													alt="Dashboard Icon"
-													class="h-5 mr-1 hover:rotate-12"
-												/>
-												<h1 class="font-semibold">
-													{registrant.student.name}
-												</h1>
-											</a>
-										</td>
-										<td class="whitespace-nowrap px-6 py-4">{registrant.score}</td>
-									</tr>
+									{#if registrant.student.id === studentNow.id}
+										<tr class="border-b dark:border-neutral-500 bg-green-200">
+											<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
+											<td class="whitespace-nowrap px-6 py-4">
+												<a
+													href="/viewonly/student/{registrant.student.id}"
+													class="flex flex-row space-x-2"
+												>
+													<img
+														src={registrant.student.image}
+														alt="Dashboard Icon"
+														class="h-5 mr-1 hover:rotate-12"
+													/>
+													<h1 class="font-semibold">
+														{registrant.student.name}
+													</h1>
+												</a>
+											</td>
+											<td class="whitespace-nowrap px-6 py-4 flex flex-row">
+												{registrant.score}
+												{#if performance?.length > 0}
+													<button class="p-2" disabled={true}> Add To Records </button>
+												{:else}
+													<form action="?/deleteTodo&id={i + 1}" method="POST">
+														<button
+															type="submit"
+															class="ml-6 p-2 bg-blue-300 hover:bg-blue-400 rounded-xl"
+														>
+															+ Add To Records
+														</button>
+													</form>
+												{/if}
+											</td>
+										</tr>
+									{:else}
+										<tr class="border-b dark:border-neutral-500 bg-slate-100 hover:bg-sky-200">
+											<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
+											<td class="whitespace-nowrap px-6 py-4">
+												<a
+													href="/viewonly/student/{registrant.student.id}"
+													class="flex flex-row space-x-2"
+												>
+													<img
+														src={registrant.student.image}
+														alt="Dashboard Icon"
+														class="h-5 mr-1 hover:rotate-12"
+													/>
+													<h1 class="font-semibold">
+														{registrant.student.name}
+													</h1>
+												</a>
+											</td>
+											<td class="whitespace-nowrap px-6 py-4">{registrant.score}</td>
+										</tr>
+									{/if}
+
 									<!-- <div class="flex flex-row space-x-10">
 										<h1>
 											{cursession.topic}
@@ -186,17 +230,37 @@
 				</div>
 			</div>
 		</div>
+		<div class="flex flex-col w-1/3 space-y-8 mt-6">
+			<h1 class="font-bold text-2xl">Questions</h1>
+			{#each questions as question, i}
+				<div class="flex flex-col space-y-2">
+					<h1 class="text-left">{i + 1}</h1>
+					{#if question.image}
+						<img src={question.image} alt="Dashboard Icon" class="w-16 mr-1 hover:rotate-12" />
+					{/if}
+					<p class="font-semibold">
+						{question.body}
+					</p>
+					<div class="flex flex-col space-y-1">
+						{#each question.options as option, j}
+							{#if j === question.correct}
+								<p class="font-bold">{j + 1}. {option}</p>
+							{:else}
+								<p>{j + 1}. {option}</p>
+							{/if}
+						{/each}
+					</div>
+				</div>
+			{/each}
+		</div>
 	</section>
 </main>
 
-<h1>Result Page</h1>
-<h1>
-	{contestNow.title}
-</h1>
 <!-- <h1>{contestNow.registrant.score}</h1> -->
-<pre>{JSON.stringify(contestNow, null, 2)}</pre>
-<pre>{JSON.stringify(studentNow, null, 2)}</pre>
-<pre>{JSON.stringify(questions, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(performance, null, 2)}</pre> -->
+
+<!-- <pre>{JSON.stringify(studentNow, null, 2)}</pre>
+<pre>{JSON.stringify(questions, null, 2)}</pre> -->
 
 <style>
 	.white-text {

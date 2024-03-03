@@ -203,7 +203,7 @@
 				</div>
 				<ul class="links">
 					<li>
-						<a href="/studentblogs/recent" class="flex items-center p-1 font-bold"
+						<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
 								alt="Dashboard Icon"
@@ -223,7 +223,7 @@
 						>
 					</li>
 					<li>
-						<a href="/library" class="flex items-center p-1 font-bold"
+						<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
 							><img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
 								alt="Dashboard Icon"
