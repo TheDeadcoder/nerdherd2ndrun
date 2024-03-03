@@ -162,7 +162,7 @@
 		<div
 			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity dark:text-[#e1e1e1] dark:bg-[#07070763]"
 		>
-        <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
+        <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto dark:text-[#e1e1e1] dark:bg-[#070707]">
 			<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Resource</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
@@ -232,7 +232,7 @@
 							<span>Market Price</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="number"
 								id="price"
 								name="price"
@@ -270,7 +270,7 @@
 							<span>Resource Content</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="file"
 								id="content"
 								name="content"
