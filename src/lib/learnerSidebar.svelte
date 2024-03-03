@@ -40,9 +40,14 @@
                                     Recent
                                 </a>
                             </li>
+                            <li class=" cursor-pointer flex-grow px-5 py-1  font-bold hover:text-[23px] text-xl hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                                <a href="/learnerverified/home/favourites" >
+                                    Favourites
+                                </a>
+                            </li>
                             <li class="cursor-pointer flex-grow px-5 py-1 font-bold text-xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"> 
-                                <a href="/learnerverified/home/my" >
-                                    My
+                                <a href="/learnerverified/home/Recommended" >
+                                    Recommended
                                 </a>
                             </li>
                             <li class=" cursor-pointer flex-grow px-5 py-1 font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">

@@ -88,7 +88,7 @@
 </script>
 
 <div>
-	<div class="relative">
+	<div class="mt-12">
 		<div class="mb-5 flex flex-row space-x-2">
 			<img
 				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/category-svgrepo-com.svg"
@@ -97,13 +97,13 @@
 			/>
 			<h1 class="text-xl font-extrabold">{categoryName}:</h1>
 		</div>
-		<div class="scroller" bind:this={slider}>
+		<div class="flex flex-wrap gap-2 ">
 			{#each books as book}
 				<Book {book} bind:url />
 			{/each}
 		</div>
 
-		<div>
+		<!-- <div>
 			<button
 				class={prevDisablesd ? 'hidden' : 'prev border-2 btn-style absolute top-1/2'}
 				on:click={() => slide('prev')}
@@ -114,21 +114,12 @@
 				on:click={() => slide('next')}
 				disabled={nextDisabled}>-&gt;</button
 			>
-		</div>
+		</div> -->
 	</div>
 </div>
 
 <style>
-	.scroller {
-		display: flex;
-		flex: 1 0 auto;
-		gap: 1rem;
-		flex-wrap: nowrap;
-		overflow: scroll;
-	}
-	.scroller::-webkit-scrollbar {
-		display: none;
-	}
+	
 	.btn-style {
 		border: 1px solid white;
 		border-radius: 90%;

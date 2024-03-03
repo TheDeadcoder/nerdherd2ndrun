@@ -16,7 +16,7 @@
 	};
 </script>
 
-<div class="w-[250px] min-w-[200px] shadow-md">
+<div class="w-[250px] min-w-[200px] shadow-lg m-2">
 	<button on:click={() => sendDataToParent(book.content)}>
 		<div class="grid grid-rows-[300px_75px] border-1">
 			<div class="w-100%">

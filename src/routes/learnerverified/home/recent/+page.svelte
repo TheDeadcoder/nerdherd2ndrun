@@ -396,7 +396,7 @@
 		</div>
 	</div> -->
 
-	<div class="relative mt-[140px] z-10 w-full">
+	<div class="relative  z-10 w-full">
 		<div class="absolute w-full flex justify-center">
 			<div
 				class={searchBarShow
