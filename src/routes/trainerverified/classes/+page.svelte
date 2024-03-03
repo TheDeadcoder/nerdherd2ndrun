@@ -236,7 +236,7 @@
 					</div>
 				{/if}
 			{/each}
-		</div>
+		</div> 
 	</div>
 	<div>
 		<div>

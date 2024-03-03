@@ -25,7 +25,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/overview" class="sidebar-item active">
+			<a href="/learnerverified/runningclass/{classid}/overview" class="sidebar-item active">
 				<div class="flex flex-row">
 					<img
 						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/dashboard-svgrepo-com.svg"
@@ -42,7 +42,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/chat" class="sidebar-item active">
+			<a href="/learnerverified/runningclass/{classid}/chat" class="sidebar-item active">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
@@ -58,7 +58,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/assignments" class="sidebar-item">
+			<a href="/learnerverified/runningclass/{classid}/assignments" class="sidebar-item">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
@@ -74,7 +74,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/notes" class="sidebar-item">
+			<a href="/learnerverified/runningclass/{classid}/notes" class="sidebar-item">
 				<div class="flex flex-row">
 					<img
 						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/notebook-svgrepo-com.svg"
@@ -90,7 +90,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/credentials" class="sidebar-item">
+			<a href="/learnerverified/runningclass/{classid}/credentials" class="sidebar-item">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
@@ -107,7 +107,7 @@
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
-			<a href="/trainerverified/runningclass/{classid}/live" class="sidebar-item">
+			<a href="/learnerverified/runningclass/{classid}/live" class="sidebar-item">
 				<div class="flex flex-row">
 					<img
 						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"

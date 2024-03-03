@@ -4,6 +4,7 @@
     import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
     import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
     import {isRunningClass} from '../../stores/isRunningClass'
+	import LernerSidebar from "$lib/learnerSidebar.svelte";
 
     export let data;
 
@@ -11,18 +12,16 @@
 	$: ({ session, supabase, teacherNow } = data);
 
 
-    import { createEventDispatcher } from 'svelte';
-
-
-
-
-
     const popupClick: PopupSettings = {
 		event: 'click',
 		target: 'popupClick',
 		placement: 'bottom'
-	}
-
+	};
+	const popupHover1: PopupSettings = {
+		event: 'hover',
+		target: 'popupHover1',
+		placement: 'top'
+	};
     const returnHome = ()=>{
         window.open('/trainerverified/home/recent','_self')
     }
@@ -31,9 +30,8 @@
 		console.log('logout start');
 		await data.supabase.auth.signOut();
 		console.log('logout done');
-		window.open('/trainerlogin', '_self');
-	}
-    
+		window.open('/learnerlogin', '_self');
+	};
 
 </script>
 
@@ -71,17 +69,6 @@
                                         Profile</a
                                     >
                                 </li>
-                                <li class="mt-2 mb-3 p-2">
-                                    <button on:click={()=>handleSignOut()} class="flex items-center font-bold">
-                                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
-                                            alt="Dashboard Icon" 
-                                            class="h-7 ml-1 hover:rotate-12"
-                                        />
-                                        <p style="text-align: center; margin-left: 0.2cm;">
-                                            Log Out
-                                        </p>
-                                    </button>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -98,7 +85,7 @@
                 {#if $isRunningClass.isClass}
                     <ClassSideBar></ClassSideBar>
                 {:else}
-                    <Sidebar on:callParentFunction={handleSignOut}></Sidebar>
+                    <LernerSidebar on:callParentFunction={handleSignOut}/>
                 {/if}
             </div>
         </div>

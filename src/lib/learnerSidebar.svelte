@@ -14,16 +14,16 @@
 
 </script>
 
-<div class="pt-5 w-full mx-auto dark:bg-[#070707]">
+<div class="pt-5 w-full mx-auto dark:bg-[#070707] overflow-y-auto">
     <div class="p-0 flex flex-col w-full">
       
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl  border-r-4 hover:text-[27px] text-[#57a8d6]  border-[#57a8d6] hover:bg-[#d8f0fd] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
+                class="cursor-pointer flex-grow px-5 py-1  font-bold text-xl  border-r-4 hover:text-[23px] text-[#57a8d6]  border-[#57a8d6] hover:bg-[#d8f0fd] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 on:click={() => homeVisible = homeVisible^1}
             >
-                <div class="flex items-center ">
+                <div class="flex">
                     <img src=" https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
@@ -31,28 +31,32 @@
                         Home
                     </p>
                 </div>
-               
 
                 {#if  homeVisible===1 }
-                    <div>
+                    <div class="ml-10">
                         <ul class="flex flex-col">
-                            <li class=" cursor-pointer flex-grow px-5 py-5 text-center font-bold hover:text-[27px] text-2xl hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
-                                <a href="/trainerverified/home/recent" >
+                            <li class=" cursor-pointer flex-grow px-5 py-1  font-bold hover:text-[23px] text-xl hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                                <a href="/learnerverified/home/recent" >
                                     Recent
                                 </a>
                             </li>
-                            <li class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"> 
-                                <a href="/trainerverified/home/my" >
-                                    My
+                            <li class=" cursor-pointer flex-grow px-5 py-1  font-bold hover:text-[23px] text-xl hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                                <a href="/learnerverified/home/favourites" >
+                                    Favourites
                                 </a>
                             </li>
-                            <li class=" cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
-                                <a href="/trainerverified/home/popular" >
+                            <li class="cursor-pointer flex-grow px-5 py-1 font-bold text-xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"> 
+                                <a href="/learnerverified/home/Recommended" >
+                                    Recommended
+                                </a>
+                            </li>
+                            <li class=" cursor-pointer flex-grow px-5 py-1 font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                                <a href="/learnerverified/home/popular" >
                                     Popular
                                 </a>
                             </li>
-                            <li class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
-                                <a href="/trainerverified/home/saved" >
+                            <li class="cursor-pointer flex-grow px-5 py-1 font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                                <a href="/learnerverified/home/saved" >
                                     Saved
                                 </a>
                             </li>
@@ -63,49 +67,49 @@
             </div>
            
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  
+                class="cursor-pointer flex-grow px-5 py-1 
+                       font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
               
             >
-                <a href="/trainerverified/library" class="flex items-center ">
+                <a href="/learnerverified/library">
                     <div class="flex">
                         <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
                             alt="Dashboard Icon" 
                             class="h-7 ml-1 hover:rotate-12"/>
-                        <p class="pl-2">
+                        <p class="pl-5">
                             Library
                         </p>
                     </div>
                 </a>
             </div>
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  
+                class="cursor-pointer flex-grow px-5 py-1 
+                       font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
              
             >
-                <a href="/trainerverified/classes" class="flex items-center">
+                <a href="/learnerverified/classes">
                     <div class="flex">
                         <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg" 
                         alt="Dashboard Icon" 
                         class="h-7 ml-1 hover:rotate-12"/>
-                        <p class="pl-2">Classes</p>
+                        <p class="pl-5">Classes</p>
                     </div>
                 </a>
             </div>
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]  
+                class="cursor-pointer flex-grow px-5 py-1 
+                       font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd]  
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 
             >
-                <a href="/trainerverified/contest" class="flex items-center ">
+                <a href="/learnerverified/contest">
                     <div class="flex">
                         <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg" 
                         alt="Dashboard Icon" 
                         class="h-7 ml-1 hover:rotate-12"/>
-                            <p class="pl-2">
+                            <p class="pl-5">
                                 Contest
                             </p>
                     </div>
@@ -113,53 +117,56 @@
             </div>
 
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
+                class="cursor-pointer flex-grow px-5 py-1 
+                       font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd] 
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 
             >
-                <a href="/trainerverified/planner" class="flex items-center">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg" 
-                    alt="Dashboard Icon" 
-                    class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: left; margin-left: 0.5cm;">
-                        Planner
-                    </p>
+                <a href="/learnerverified/planner" class="">
+                    
+                   <div class="flex">
+                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg" 
+                        alt="Dashboard Icon" 
+                        class="h-7 ml-1 hover:rotate-12"/>
+                        <p class="pl-5">
+                            Planner
+                        </p>
+                   </div>
                 </a>
             </div>
 
             <div
-                class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
+                class="cursor-pointer flex-grow px-5 py-1
+                       font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd] 
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
                 
             >
             
-                <a href="/trainerverified/ai/gpt" class="flex items-center ">
-                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bot.png" 
+                <a href="/learnerverified/ai/gpt" class="flex items-center ">
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg" 
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
-                    <p style="text-align: left; margin-left: 0.5cm;">
+                    <p style="text-align: center; margin-left: 0.5cm;">
                         ChatBot
                     </p>
                 </a>
             </div>
 
-            <!-- <div 
-                class="cursor-pointer flex-grow px-5 py-5 text-center 
-                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] 
+            <div 
+                class="cursor-pointer flex-grow px-5 py-1 text-center 
+                        font-bold text-xl hover:text-[23px] hover:bg-[#d8f0fd] 
                         border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] "
             >
-                <button on:click={()=>callParent()} class="flex items-center">
+                <button on:click={()=>callParent()} class="flex items-center ">
                     <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
                         alt="Dashboard Icon" 
                         class="h-7 ml-1 hover:rotate-12"/>
                     
-                        <p style="color: red; font-size: smaller; text-align: left; margin-left: 0.5cm;">
+                        <p style="color: red; font-size: 20px; text-align: center; margin-left: 0.5cm;">
                             Sign Out
                         </p>
                 </button>
-            </div> -->
+            </div>
             
      
     </div>

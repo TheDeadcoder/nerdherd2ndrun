@@ -24,7 +24,7 @@
 </script>
 
 <div>
-	<div>
+	<!-- <div>
 		<div class="navbar">
 			<nav class="appbar grid grid-cols-2 justify-between">
 				<div class="logo-container">
@@ -84,10 +84,10 @@
 				</div>
 			</nav>
 		</div>
-	</div>
-	<div class="grid grid-cols-[8%_auto] mt-[80px]">
+	</div> -->
+	<div class="ml-4">
 		<div class="">
-			<div class="fixed">
+			<!-- <div class="fixed">
 				<AppRail class="h-screen w-fit overflow-hidden">
 					<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
 						<a
@@ -139,7 +139,6 @@
 						</a>
 					</AppRailTile>
 
-					<!-- --- -->
 					<svelte:fragment slot="trail">
 						<div class="mb-24 flex flex-col items-center justify-center" on:click={handleSignOut}>
 							<img
@@ -151,7 +150,7 @@
 						</div>
 					</svelte:fragment>
 				</AppRail>
-			</div>
+			</div> -->
 		</div>
 		<div class="mt-2">
 			<BookCategory categoryName="Childrean" books={book} bind:url></BookCategory>

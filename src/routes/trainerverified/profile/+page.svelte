@@ -133,7 +133,7 @@
 </script>
 
 
-<section class="min-h-screen ml-16 mr-16">
+<section class="min-h-screen pl-16 pr-16 dark:text-[#e1e1e1] dark:bg-[#212020]">
 	<div class="flex flex-row space-x-24">
 		<div class="flex flex-col w-1/3 mt-4">
 			<!-- svelte-ignore missing-declaration -->
@@ -361,9 +361,9 @@
 				/>
 				<h1 class="font-extrabold text-xl mb-4">Skills</h1>
 			</div>
-			<div class="mt-2 flex flex-row space-x-3 text-sm">
+			<div class="mt-2 flex flex-row space-x-3 text-sm ">
 				{#each teacherskills as value}
-					<div class="chipi">
+					<div class="chipi dark:text-[#e1e1e1] dark:bg-[#111111] dark:ring-2 dark:ring-[#3f3f3f]">
 						<span>
 							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/pin-svgrepo-com.svg"
@@ -392,7 +392,7 @@
 				{#each blog as currblog, i}
 					<a
 						href="/commonverified/article/{currblog.id}"
-						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer"
+						class=" dark:text-[#e1e1e1] dark:bg-[#070707] m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer"
 					>
 						<div class="hover:scale-105">
 							<div class="mb-3 flex rounded-full items-center justify-center">
@@ -662,7 +662,7 @@
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4  dark:text-[#e1e1e1] dark:bg-[#070707]">
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Gender</h2>
 					<button class=" text-lg" on:click={closegenderModal}>&times;</button>
@@ -684,7 +684,7 @@
 								<option value="female">Female</option>
 							</select>
 						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button type="submit" class="btn dark:text-[#e1e1e1] dark:bg-[#3b6f8e] text-xl font-semibold">
 							Submit
 						</button>
 					</div>
@@ -840,7 +840,6 @@
 		align-items: center;
 	}
 	.chipi {
-		background-color: #c1d4e3;
 
 		padding: 0.5rem;
 		margin-right: 0.5rem;

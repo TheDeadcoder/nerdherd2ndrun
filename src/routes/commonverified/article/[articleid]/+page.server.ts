@@ -5,6 +5,7 @@ import type { Actions } from './$types';
 let articleNow;
 let teacherNow;
 let commonuserNow;
+let userSpecNow;
 
 export const load = async ({ params, locals: { supabase, getSession } }) => {
     console.log(params.articleid);
@@ -26,6 +27,21 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
 
     commonuserNow = dttt[0];
+
+    if(commonuserNow.istrainer){
+        let { data: dtttx, error: err1 } = await supabase
+        .from('teacher')
+        .select("*")
+        .eq('id', commonuserNow.id); 
+        userSpecNow = dtttx[0]; 
+    }
+    else{
+        let { data: dtttx, error: err1 } = await supabase
+        .from('student')
+        .select("*")
+        .eq('id', commonuserNow.id); 
+        userSpecNow = dtttx[0]; 
+    }
 
     let { data: blog, error: err1 } = await supabase
         .from('blog')
@@ -59,6 +75,6 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
 
 
-    return { articleNow, teacherNow, commonuserNow, commentsMod };
+    return { articleNow, teacherNow, commonuserNow, commentsMod , userSpecNow};
 
 }
