@@ -106,6 +106,16 @@
 		picModal = false;
 	}
 
+	let phone;
+	let phoneModal = false;
+	function addphoneModal() {
+		phoneModal = true;
+	}
+
+	function closephoneModal() {
+		phoneModal = false;
+	}
+
 	let WorkExperiencesFrom;
 	let WorkExperiencesTo;
 	let WorkExperiencesInstitute;
@@ -121,6 +131,13 @@
 
 	function closeclassmodal() {
 		showaddWorkExperiences = false;
+		WorkExperiencesFrom = '';
+		WorkExperiencesTo = '';
+		WorkExperiencesInstitute = '';
+		WorkExperiencesPosition = '';
+		WorkExperiencesImage = '';
+		WorkExperiencesgpa = '';
+		WorkExperiencesgpabase = '';
 	}
 </script>
 
@@ -389,6 +406,14 @@
 					class="w-5 h-5 mr-3 hover:scale-105 hover:rotate-12"
 				/>
 				<h1>{studentNow.mobile}</h1>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+					<img
+						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+						alt="Bout us"
+						class="rounded-full w-6 h-6 object-cover hover:rotate-12"
+						on:click={addphoneModal}
+					/>
 			</div>
 			<div class="flex flex-row mt-9">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
@@ -438,10 +463,11 @@
 								<h4 class="font-semibold">
 									{currqual.name}
 								</h4>
-								<p class="font-semibold">
-									Result: {currqual.gpa} / {currqual.gpabase}
-								</p>
+								
 							</div>
+							<p class="font-light text-md">
+								Result: {currqual.gpa} / {currqual.gpabase}
+							</p>
 
 							<p>
 								{currqual.from}-{currqual.to}
@@ -491,6 +517,40 @@
 			</div>
 		</div>
 	{/if}
+
+	{#if phoneModal}
+		<div
+			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+		>
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+				<div class="flex justify-between items-center mb-4">
+					<h2 class="text-2xl font-bold">Edit your phone number</h2>
+					<button class=" text-lg" on:click={closephoneModal}>&times;</button>
+				</div>
+
+				<form
+					use:enhance
+					action="?/addPhone"
+					method="POST"
+					on:submit={() => {
+						closephoneModal();
+					}}
+				>
+					<div class="flex flex-col space-y-6">
+						<label class="label text-left mb-3">
+							<span>Phone</span>
+
+							<input class="input" type="number" id="phone" name="phone" bind:value={phone} />
+						</label>
+						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+							Submit
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	{/if}
+
 	{#if instituteModal}
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
@@ -678,7 +738,8 @@
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
+
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Experience</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
