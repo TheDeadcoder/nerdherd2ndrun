@@ -5,11 +5,7 @@ import { error } from '@sveltejs/kit';
 let studentNow;
 let contestNow;
 
-function calculateContestEndTime(contestNow) {
-    const startTime = new Date(contestNow.start).getTime(); // Convert start time to milliseconds
-    const durationMilliseconds = contestNow.duration * 60000; // Convert duration from minutes to milliseconds
-    return new Date(startTime + durationMilliseconds);
-}
+
 
 export const load = async ({ params, locals: { supabase, getSession } }) => {
     const session = await getSession()
@@ -50,6 +46,15 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         //let contestEndTime = calculateContestEndTime(contestItem);
         pbregistrant.sort((a, b) => b.score - a.score);
 
+        for (let j = 0; j < pbregistrant?.length; j++) {
+            let { data: student, error: err33 } = await supabase
+                .from('student')
+                .select("*")
+                .eq('id', pbregistrant[j].sid);
+
+            pbregistrant[j].student = student[0];
+        }
+
         return {
             ...contestItem,
             pbregistrant
@@ -58,7 +63,7 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     contestNow = contestWithInfo[0];
 
-    if (contestNow.registrant) {
+    if (contestNow.pbregistrant) {
 
         let { data: questions, error } = await supabase
             .from('questions')

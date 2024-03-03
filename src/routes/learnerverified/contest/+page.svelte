@@ -75,30 +75,36 @@
 	}
 
 	// Function to update countdown for each classLive
+	let delcnttem = 0;
 	function updateCountdown() {
 		contestWithInfo = contestWithInfo.map((classLive) => {
 			if (new Date(classLive.start) > new Date()) {
 				classLive.countdown = calculateCountdown(classLive.start);
 			} else {
 				classLive.countdown = 0;
-				if (classLive.isover === false && classLive.contestEndTime < new Date()) {
+				if (
+					classLive.isover === false &&
+					classLive.contestEndTime < new Date() &&
+					delcnttem === 0
+				) {
 					console.log('delete kore dite lagbe');
 					endContest(classLive);
+					delcnttem++;
 				}
 			}
 			return classLive;
 		});
 	}
-
+	let interval;
 	onMount(() => {
-		const interval = setInterval(updateCountdown, 1000);
+		interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 		//subscribeContest();
 
-		onDestroy(() => {
-			clearInterval(interval);
-		});
 		//subscribeDeleted();
+	});
+	onDestroy(() => {
+		clearInterval(interval);
 	});
 	const handleSignOut = async () => {
 		await data.supabase.auth.signOut();

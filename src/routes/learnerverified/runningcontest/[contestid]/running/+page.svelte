@@ -3,7 +3,7 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -98,6 +98,10 @@
 			startQuestionTimer();
 		} else {
 			console.log('ekhon jawa lagbe');
+			clearInterval(contestTimeCheckInterval); // Clear the interval
+			console.log('clear korsi 1');
+			clearInterval(countdownTimer); // Clear any ongoing question timer
+			console.log('clear korsi 2');
 			window.open(`/learnerverified/runningcontest/${contestNow.id}/result`, '_self');
 		}
 	}
