@@ -35,13 +35,13 @@ export const load = async ({ locals: { supabase, getSession } }) => {
   book.forEach(currbook => {
     let values = currbook.tags;
     values.forEach(tag => {
+      let trimmedTag = tag.trim();
       // console.log(tag)
-      if (!tagsToBooksMap[tag]) {
-        tagsToBooksMap[tag] = []; // Initialize the array if the tag is encountered for the first time
+      if (!tagsToBooksMap[trimmedTag]) {
+        tagsToBooksMap[trimmedTag] = []; // Initialize the array if the tag is encountered for the first time
       }
       // Add the book to the array associated with the tag
-      // Assuming you're using the book's ID for identification; adjust as needed
-      tagsToBooksMap[tag].push(currbook);
+      tagsToBooksMap[trimmedTag].push(currbook);
     });
   });
 
@@ -99,7 +99,7 @@ export const actions = {
     const { data: dt, error: err2 } = await supabase
       .from('book')
       .insert([
-        { teacherid: teacherNow.id, title: newBook.title, author: newBook.author.split(','), edition: newBook.edition, coverimg: link1.publicUrl, tags: newBook.tags.split(','), content: link.publicUrl }
+        { teacherid: teacherNow.id, title: newBook.title, author: newBook.author.split(','), edition: newBook.edition, coverimg: link1.publicUrl, tags: newBook.tags.split(','), content: link.publicUrl, price: newBook.price }
       ])
 
 

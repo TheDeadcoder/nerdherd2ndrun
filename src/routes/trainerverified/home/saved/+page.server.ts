@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 
 
 let teacherNow;
+
 export const load = async ({ locals: { supabase, getSession } }) => {
     const session = await getSession()
 
@@ -23,9 +24,30 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
     teacherNow = teacher[0];
 
-    let { data: blog, error: err2 } = await supabase
-        .from('blog')
-        .select('*')
+
+    let { data: savedblog, error: err7 } = await supabase
+        .from('savedblog')
+        .select("*")
+        .eq('commonuserid', teacherNow.id);
+
+    let blog = [];
+
+    for (let i = 0; i < savedblog?.length; i++) {
+        let { data: currBlog, error: err2 } = await supabase
+            .from('blog')
+            .select('*')
+            .eq('id', savedblog[i].blogid);
+
+        blog = [...blog, currBlog[0]];
+
+    }
+
+    // console.log("blogs are");
+    // console.log(blog);
+    // console.log("saved are");
+    // console.log(savedblog);
+
+    // let blogwithTeacherName = blog;
 
     const blogwithTeacherName = await Promise.all(blog.map(async (blogItem) => {
         let { data: teacher, error: pendingError } = await supabase
@@ -34,7 +56,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
             .eq('id', blogItem.teacherid);
 
         blogItem.tags = blogItem.tags.split(',');
-        blogItem.saved = false;
+        blogItem.saved = true;
         let currTeacher = teacher[0];
 
         // Attach pendingclass data to classItem
@@ -44,6 +66,6 @@ export const load = async ({ locals: { supabase, getSession } }) => {
         };
     }));
 
-    console.log(err);
-    return { blogwithTeacherName, teacherNow }
+
+    return { blogwithTeacherName, teacherNow };
 }

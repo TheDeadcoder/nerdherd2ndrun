@@ -72,6 +72,12 @@ export const actions = {
 
         //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
 
+        const tempo = newClass.time;
+
+        let newDuration = contestNow.duration;
+        newDuration += (tempo / 60) + (5 / 60);
+        console.log(contestNow.duration, tempo, newDuration);
+
         if (newClass.image.size) {
             // console.log(newClass.image);
             const { data: res, error: err } = await supabase.storage
@@ -92,7 +98,7 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('questions')
                 .insert([
-                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct, options: options, time: newClass.time, image: link.publicUrl }
+                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct - 1, options: options, time: newClass.time, image: link.publicUrl }
                 ])
 
 
@@ -104,13 +110,20 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('questions')
                 .insert([
-                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct, options: options, time: newClass.time }
+                    { pcid: contestNow.id, body: newClass.body, correct: newClass.correct - 1, options: options, time: newClass.time }
                 ])
 
 
             if (err1) console.log(err1)
 
         }
+
+
+        const { data: dtttt, error: er } = await supabase
+            .from('pbcontest')
+            .update({ duration: newDuration })
+            .eq('id', contestNow.id);
+
 
 
 
@@ -127,7 +140,7 @@ export const actions = {
         let name = teacherNow.id + "_" + timeNow;
         let options = [newClass.selectedoption1, newClass.selectedoption2, newClass.selectedoption3, newClass.selectedoption4];
 
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
+        let newDuration = contestNow.duration + ((newClass.time + 5.0) / 60.0);
 
         if (newClass.selectedimage.size) {
             // console.log(newClass.image);
@@ -151,7 +164,7 @@ export const actions = {
 
             const { data, error: err1 } = await supabase
                 .from('questions')
-                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect, options: options, time: newClass.selectedtime, image: link.publicUrl })
+                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect - 1, options: options, time: newClass.selectedtime, image: link.publicUrl })
                 .eq('id', newClass.selectedId);
 
 
@@ -164,7 +177,7 @@ export const actions = {
 
             const { data, error: err1 } = await supabase
                 .from('questions')
-                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect, options: options, time: newClass.selectedtime })
+                .update({ body: newClass.selectedbody, correct: newClass.selectedcorrect - 1, options: options, time: newClass.selectedtime })
                 .eq('id', newClass.selectedId);
 
 
@@ -173,196 +186,16 @@ export const actions = {
         }
 
 
+        const { data: dt, error: er } = await supabase
+            .from('pbcontest')
+            .update({ duration: newDuration })
+            .eq('id', contestNow.id);
+
+
 
         throw redirect(303, `/trainerverified/contestspec/${contestNow.id}/pre`);
     },
 
-
-    addSkill: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-        const { data: dt, error: err1 } = await supabase
-            .from('teacherskills')
-            .insert([
-                { teacherid: teacherNow.id, body: newClass.skillsbody }
-            ])
-
-
-        if (err1) console.log(err1)
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-    addPic: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-        let timeNow = new Date();
-        let name = teacherNow.id + "_" + timeNow;
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        if (newClass.pic.size) {
-            // console.log(newClass.image);
-            const { data: res, error: err } = await supabase.storage
-                .from('userpics')
-                .upload(name, newClass.pic, {
-                    cacheControl: '3600',
-                    upsert: false
-                });
-
-            const { data: link } = await supabase
-                .storage
-                .from('userpics')
-                .getPublicUrl(name)
-
-
-            console.log(err, link)
-            console.log("okk")
-
-
-            const { data, error: err1 } = await supabase
-                .from('teacher')
-                .update({ image: link.publicUrl })
-                .eq('id', teacherNow.id)
-
-
-
-            if (err1) console.log(err1)
-
-        }
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-
-    addBio: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        const { data: dtt, error: err1 } = await supabase
-            .from('teacher')
-            .update({ bio: newClass.bio })
-            .eq('id', teacherNow.id)
-
-
-
-        if (err1) console.log(err1)
-
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-    addAbout: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        const { data: dtt, error: err1 } = await supabase
-            .from('teacher')
-            .update({ about: newClass.about })
-            .eq('id', teacherNow.id)
-
-
-
-        if (err1) console.log(err1)
-
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-
-    addDob: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        const { data: dtt, error: err1 } = await supabase
-            .from('teacher')
-            .update({ dob: newClass.dob })
-            .eq('id', teacherNow.id)
-
-
-
-        if (err1) console.log(err1)
-
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-    addGender: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        const { data: dtt, error: err1 } = await supabase
-            .from('teacher')
-            .update({ gender: newClass.gender })
-            .eq('id', teacherNow.id)
-
-
-
-        if (err1) console.log(err1)
-
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
-    addAddress: async ({ request, locals: { supabase, getSession } }) => {
-        const data = await request.formData();
-        //console.log("amar add class form holo", data);
-
-        let newClass = Object.fromEntries(data.entries()) as any;
-
-
-
-
-        //console.log(newClass.title, newClass.syllabus, newClass.start, newClass.duration, name)
-
-        const { data: dtt, error: err1 } = await supabase
-            .from('teacher')
-            .update({ address: newClass.address })
-            .eq('id', teacherNow.id)
-
-
-
-        if (err1) console.log(err1)
-
-
-
-        throw redirect(303, '/trainerverified/profile');
-    },
 
 
 

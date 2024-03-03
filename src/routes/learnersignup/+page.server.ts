@@ -50,7 +50,7 @@ export const actions = {
         })
         }
 
-        const { data, error: err1 } = await event.locals.supabase
+        const { data:dttInsert, error: err1 } = await event.locals.supabase
             .from('commonuser')
             .insert([
                 { istrainer: false, email: email },
@@ -76,6 +76,26 @@ export const actions = {
             return message(form, 'Server Error. Sorry ', {
                 status: 500
         })
+        }
+        else{
+                console.log(dttInsert);
+                
+                let { data: commonuser, error } = await event.locals.supabase
+                .from('commonuser')
+                .select("*")
+                .eq('email', email)
+
+                let tempo = commonuser[0];
+
+        
+            
+                const { data:dttx, error:errx } = await event.locals.supabase
+                .from('student')
+                .insert([
+                { id: tempo.id, email: tempo.email, name: tempo.email.split('@')[0] },
+                ])
+                .select()
+        
         }
 
         //return { form }

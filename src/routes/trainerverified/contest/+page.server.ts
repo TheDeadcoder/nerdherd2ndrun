@@ -3,6 +3,11 @@ import { error } from '@sveltejs/kit';
 
 
 let teacherNow;
+function calculateContestEndTime(contestNow) {
+    const startTime = new Date(contestNow.start).getTime(); // Convert start time to milliseconds
+    const durationMilliseconds = contestNow.duration * 60000; // Convert duration from minutes to milliseconds
+    return new Date(startTime + durationMilliseconds);
+}
 export const load = async ({ locals: { supabase, getSession } }) => {
     const session = await getSession()
 
@@ -28,6 +33,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
         .select('*')
         .eq('teacherid', teacherNow.id)
 
+
     const contestwithRegistrants = await Promise.all(pbcontest.map(async (contestItem) => {
 
         let { data: pbregistrant, error } = await supabase
@@ -37,10 +43,11 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
         let registrants = pbregistrant;
         let countdown = -1;
+        let contestEndTime = calculateContestEndTime(contestItem);
 
         // Attach pendingclass data to classItem
         return {
-            ...contestItem, countdown,
+            ...contestItem, countdown, contestEndTime,
             registrants // This adds the pendingclass array to each classItem
         };
     }));
@@ -81,7 +88,7 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('pbcontest')
                 .insert([
-                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, duration: newClass.duration, start: newClass.start, image: link.publicUrl }
+                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, start: newClass.start, image: link.publicUrl }
                 ])
 
 
@@ -93,7 +100,7 @@ export const actions = {
             const { data: dt, error: err1 } = await supabase
                 .from('pbcontest')
                 .insert([
-                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, duration: newClass.duration, start: newClass.start }
+                    { teacherid: teacherNow.id, title: newClass.title, topic: newClass.topic, start: newClass.start }
                 ])
 
 

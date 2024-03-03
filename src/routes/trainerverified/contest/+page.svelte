@@ -58,7 +58,7 @@
 	let title;
 	let topic;
 	let start;
-	let duration;
+	// let duration;
 	let image;
 
 	let showaddcontest = false;
@@ -84,6 +84,14 @@
 			seconds
 		};
 	}
+	async function endContest(classLive: any) {
+		const { data, error } = await supabase
+			.from('pbcontest')
+			.update({ isover: true })
+			.eq('id', classLive.id);
+
+		window.open('/trainerverified/contest', '_self');
+	}
 
 	// Function to update countdown for each classLive
 	function updateCountdown() {
@@ -92,22 +100,29 @@
 				classLive.countdown = calculateCountdown(classLive.start);
 			} else {
 				classLive.countdown = 0;
+				if (classLive.isover === false && classLive.contestEndTime < new Date()) {
+					endContest(classLive);
+				}
 			}
 			return classLive;
 		});
+	}
+
+	function gotoContestSpec(val) {
+		window.open(`/trainerverified/contestspec/${val}/pre`, '_self');
 	}
 
 	onMount(() => {
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+		// onDestroy(() => {
+		// 	clearInterval(interval);
+		// });
 	});
 </script>
 
-<main class="mt-6 ml-6">
+<main class="mt-6 ml-6 w-3/5">
 	<button class="btn p-4 bg-slate-400 rounded-lg" on:click={addclassmodal}>
 		+ Add a New Public Contest
 	</button>
@@ -118,8 +133,8 @@
 				<h1 class="font-extrabold text-xl">
 					{contest.title}
 				</h1>
-				<p>
-					{contest.topic.slice(0, 100)}...
+				<p class="text-sm">
+					{contest.topic.slice(0, 20)}...
 				</p>
 				<div class="flex flex-row justify-between">
 					<p>
@@ -127,15 +142,17 @@
 					</p>
 					{#if contest.contdown === -1}
 						<p>Calculating...</p>
-					{:else if contest.contdown === 0}
-						<button class="btn bg-green-400 rounded-lg p-1"> Enter Arena </button>
+					{:else if contest.countdown === 0}
+						<button class="btn bg-green-400 rounded-lg p-1 text-sm" disabled={true}>
+							Contest Running
+						</button>
 					{:else}
-						<a
-							href="/trainerverified/contestspec/{contest.id}/pre"
+						<button
 							class="btn bg-green-400 rounded-lg p-1"
+							on:click={() => gotoContestSpec(contest.id)}
 						>
 							Modify Contest
-						</a>
+						</button>
 					{/if}
 				</div>
 				<div class="flex items-center justify-center">
@@ -143,7 +160,7 @@
 							: {contest.countdown.seconds}s -->
 					{#if contest.contdown === -1}
 						<p>Calculating...</p>
-					{:else if contest.contdown === 0}
+					{:else if contest.countdown === 0}
 						<div>Contest is running</div>
 					{:else}
 						<div class="text-sm">
@@ -208,17 +225,6 @@
 								id="start"
 								name="start"
 								bind:value={start}
-							/>
-						</label>
-						<label class="label text-left mb-3">
-							<span>Duration (in minutes)</span>
-
-							<input
-								class="input"
-								type="number"
-								id="duration"
-								name="duration"
-								bind:value={duration}
 							/>
 						</label>
 

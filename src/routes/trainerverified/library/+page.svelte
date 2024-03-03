@@ -7,6 +7,7 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
+	import { ProgressBar } from '@skeletonlabs/skeleton';
 
 	const popupClick: PopupSettings = {
 		event: 'click',
@@ -21,6 +22,7 @@
 	let content;
 	let tags;
 	let coverimg;
+	let price;
 	let showaddmodal = false;
 	function addclassmodal() {
 		console.log(showaddmodal);
@@ -28,6 +30,15 @@
 	}
 
 	function closeclassmodal() {
+		showaddmodal = false;
+	}
+
+	let isLoading = false;
+	async function onSubmit() {
+		isLoading = true;
+		setTimeout(() => {
+			isLoading = false;
+		}, 10000);
 		showaddmodal = false;
 	}
 
@@ -45,130 +56,113 @@
 	};
 </script>
 
-<main  class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2]">
-	<!-- <nav class="appbar">
-		<div class="logo-container flex items-center">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-				class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-				alt="title"
-				width={50}
-			/>
-			<span class="company-name text-2xl font-extrabold">NerD</span><span
-				class="company-name white-text text-2xl font-extrabold">Herd</span
-			>
-		</div>
-		<ul class="links">
-			<li>
-				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Home</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Class</a
-				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Compete</a
-				>
-			</li>
-
-			<li>
-				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Chatbot</a
-				>
-			</li>
-
-			<li>
-				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Planner</a
-				>
-			</li>
-
-			<div use:popup={popupClick}>
-				<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
-			</div>
-
-			<div data-popup="popupClick" class="h-32 absolute">
-				<ul class="text-lg font-semibold bg-sky-300 ml-0">
-					<li class="mt-2 mb-3 p-2">
-						<a href="/trainerverified/profile" class="flex items-center font-bold"
-							><img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-								alt="Dashboard Icon"
-								class="h-7 mr-1 hover:rotate-12"
-							/>
-							Profile</a
-						>
-					</li>
-				</ul>
-			</div>
-			<li>
-				<button on:click={handleSignOut}>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-7 mr-1 hover:rotate-12"
-					/>
-				</button>
-			</li>
-		</ul>
-	</nav> -->
+<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] w-2/3">
 	<div>
-		<button class="btn variant-filled-primary text-xl font-semibold mt-10" on:click={addclassmodal}>
-			Add book
+		<button
+			class="btn bg-green-400 rounded-lg text-xl font-semibold mt-10 ml-6"
+			on:click={addclassmodal}
+		>
+			+ Add book
 		</button>
 	</div>
-	<div class="ml-8 mt-16">
-		<div class="mt-2">
-			{#each Object.entries(tagsToBooksMap) as [tag, books]}
-				<BookCategory categoryName={tag} {books} bind:url></BookCategory>
-			{/each}
-		</div>
+	<div class="ml-8 mt-16 blur-xl={isLoading}">
+		{#if isLoading}
+			<div class="items-center justify-center">
+				<div aria-label="Loading..." role="status" class="flex items-center space-x-2">
+					<svg class="h-20 w-20 animate-spin stroke-gray-500" viewBox="0 0 256 256">
+						<line
+							x1="128"
+							y1="32"
+							x2="128"
+							y2="64"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						></line>
+						<line
+							x1="195.9"
+							y1="60.1"
+							x2="173.3"
+							y2="82.7"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						></line>
+						<line
+							x1="224"
+							y1="128"
+							x2="192"
+							y2="128"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						>
+						</line>
+						<line
+							x1="195.9"
+							y1="195.9"
+							x2="173.3"
+							y2="173.3"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						></line>
+						<line
+							x1="128"
+							y1="224"
+							x2="128"
+							y2="192"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						>
+						</line>
+						<line
+							x1="60.1"
+							y1="195.9"
+							x2="82.7"
+							y2="173.3"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						></line>
+						<line
+							x1="32"
+							y1="128"
+							x2="64"
+							y2="128"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						></line>
+						<line
+							x1="60.1"
+							y1="60.1"
+							x2="82.7"
+							y2="82.7"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="24"
+						>
+						</line>
+					</svg>
+					<span class="text-4xl font-medium text-gray-500">Uploading...</span>
+				</div>
+			</div>
+		{:else}
+			<div class="mt-2">
+				{#each Object.entries(tagsToBooksMap) as [tag, books]}
+					<BookCategory categoryName={tag} {books} bind:url></BookCategory>
+				{/each}
+			</div>
+		{/if}
 	</div>
 	{#if showaddmodal}
 		<div
 			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
-				<div class="flex justify-between items-center mb-4">
+        <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
+			<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Resource</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
 				</div>
@@ -177,11 +171,13 @@
 					use:enhance
 					action="?/upload"
 					method="POST"
-					on:submit={closeclassmodal}
+					on:submit={() => {
+						onSubmit();
+					}}
 					enctype="multipart/form-data"
 				>
-					<div class="space-y-6">
-						<label class="label text-left mb-3">
+					<div class="space-y-3">
+						<label class="label text-left mb-2">
 							<span>Resource Title</span>
 
 							<input
@@ -190,10 +186,11 @@
 								id="title"
 								name="title"
 								bind:value={title}
+								disabled={isLoading}
 								placeholder="Enter The Title of the Resource"
 							/>
 						</label>
-						<label class="label text-left">
+						<label class="label text-left mb-2">
 							<span>Resource authors</span>
 							<input
 								class="input"
@@ -202,6 +199,7 @@
 								id="author"
 								name="author"
 								bind:value={author}
+								disabled={isLoading}
 							/>
 							<!-- <div class="mt-2 flex flex-wrap">
 								{#each author as value, i}
@@ -216,7 +214,7 @@
 								{/each}
 							</div> -->
 						</label>
-						<label class="label text-left mb-3">
+						<label class="label text-left mb-2">
 							<span>Resource Edition</span>
 
 							<input
@@ -225,10 +223,24 @@
 								id="edition"
 								name="edition"
 								bind:value={edition}
+								disabled={isLoading}
 								placeholder="What is the Edition"
 							/>
 						</label>
-						<label class="label text-left">
+						<label class="label text-left mb-2">
+							<span>Market Price</span>
+
+							<input
+								class="input"
+								type="number"
+								id="price"
+								name="price"
+								bind:value={price}
+								disabled={isLoading}
+								placeholder="What is the Price of the book"
+							/>
+						</label>
+						<label class="label text-left mb-2">
 							<span>Resource Tags</span>
 							<input
 								class="input"
@@ -236,6 +248,7 @@
 								placeholder="What are the tags...(separate by comma)"
 								id="tags"
 								name="tags"
+								disabled={isLoading}
 								bind:value={tags}
 							/>
 							<!-- <div class="mt-2 flex flex-wrap">
@@ -252,13 +265,20 @@
 							</div> -->
 						</label>
 
-						<label class="label text-left mb-3">
+						<label class="label text-left mb-2">
 							<span>Resource Content</span>
 
-							<input class="input" type="file" id="content" name="content" bind:value={content} />
+							<input
+								class="input"
+								type="file"
+								id="content"
+								name="content"
+								disabled={isLoading}
+								bind:value={content}
+							/>
 						</label>
 
-						<label class="label text-left mb-3">
+						<label class="label text-left mb-2">
 							<span>Cover Photo (optional)</span>
 
 							<input
@@ -266,10 +286,15 @@
 								type="file"
 								id="coverimg"
 								name="coverimg"
+								disabled={isLoading}
 								bind:value={coverimg}
 							/>
 						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button
+							type="submit"
+							class="btn variant-filled-primary text-xl font-semibold"
+							disabled={isLoading}
+						>
 							Submit
 						</button>
 					</div>
@@ -281,7 +306,7 @@
 	{#if $isOverlayPdf}
 		<OverlayPdf {url} />
 	{/if}
-	<pre>{JSON.stringify(tagsToBooksMap, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(tagsToBooksMap, null, 2)}</pre> -->
 	<Footer />
 </main>
 
@@ -341,5 +366,21 @@
 	.logo-container {
 		display: flex;
 		align-items: center;
+	}
+
+	.anim-progress-bar {
+		transform-origin: 0% 50%;
+		animation: anim-progress-bar 2s infinite linear;
+	}
+	@keyframes anim-progress-bar {
+		0% {
+			transform: translateX(50%) scaleX(0.5);
+		}
+		50% {
+			transform: translateX(0) scaleX(0.5);
+		}
+		100% {
+			transform: translateX(50%) scaleX(0.5);
+		}
 	}
 </style>
