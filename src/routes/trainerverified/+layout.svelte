@@ -13,10 +13,6 @@
 
     import { createEventDispatcher } from 'svelte';
 
-
-
-
-
     const popupClick: PopupSettings = {
 		event: 'click',
 		target: 'popupClick',

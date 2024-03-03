@@ -3,8 +3,9 @@
     import ClassSideBar from "$lib/classSideBar.svelte"
     import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
     import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
-    import {isRunningClass} from '../../stores/isRunningClass'
+    import {isLearnerInClass} from '../../stores/isLearnerInClass'
 	import LernerSidebar from "$lib/learnerSidebar.svelte";
+	import LearnerClassSidebar from "$lib/learnerClassSidebar.svelte";
 
     export let data;
 
@@ -82,8 +83,8 @@
     <div class="grid grid-cols-[17%_auto]">
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
-                {#if $isRunningClass.isClass}
-                    <ClassSideBar></ClassSideBar>
+                {#if $isLearnerInClass.isClass}
+                    <LearnerClassSidebar></LearnerClassSidebar>
                 {:else}
                     <LernerSidebar on:callParentFunction={handleSignOut}/>
                 {/if}
