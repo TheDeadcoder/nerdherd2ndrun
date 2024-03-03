@@ -77,6 +77,8 @@
 		console.log('logout done');
 		window.open('/trainerlogin', '_self');
 	};
+
+
 </script>
 
 <main class="bg-[#f4f6f7]">
@@ -404,6 +406,9 @@
 			</div>
 		</div>
 	</div>
+
+
+	  
 </main>
 
 <style>
@@ -463,4 +468,5 @@
 		display: flex;
 		align-items: center;
 	}
+
 </style>
