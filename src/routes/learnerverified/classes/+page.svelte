@@ -76,208 +76,111 @@
 	};
 </script>
 
-<nav class="appbar">
-	<div class="logo-container flex items-center">
-		<img
-			src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-			class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-			alt="title"
-			width={50}
-		/>
-		<span class="company-name text-2xl font-extrabold">NerD</span><span
-			class="company-name white-text text-2xl font-extrabold">Herd</span
-		>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
-
-		<li>
-			<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
-
-		<li>
-			<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Planner</a
-			>
-		</li>
-
-		<!-- <LightSwitch class="mr-3" /> -->
-		<div use:popup={popupClick}>
-			<Avatar src={studentNow.image} width="w-10" rounded="rounded-full" />
-		</div>
-
-		<div data-popup="popupClick" class="h-32 absolute">
-			<ul class="text-lg font-semibold bg-sky-300 ml-0">
-				<li class="mt-2 mb-3 p-2">
-					<a href="/learnerverified/profile" class="flex items-center font-bold"
-						><img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-7 mr-1 hover:rotate-12"
-						/>
-						Profile</a
-					>
-				</li>
-			</ul>
-		</div>
-		<li>
-			<button on:click={handleSignOut}>
-				<img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-7 mr-1 hover:rotate-12"
-				/>
-			</button>
-		</li>
-	</ul>
-</nav>
-<section class="min-h-screen p-6">
-	<div>
-		<h1 class="font-extrabold text-2xl">Upcoming Classes</h1>
-		<div class="grid grid-cols-4 gap-12 mt-6">
-			{#each classWithInfo as currClass}
-				{#if classifyClass(currClass.start)}
-					<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
-						<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
-						<h1 class="font-extrabold text-xl">
-							{currClass.title}
-						</h1>
-						<a href="/viewonly/teacher/{currClass.currTeacher.id}" class="flex flex-row space-x-2">
-							<img
-								src={currClass.currTeacher.image}
-								alt="Dashboard Icon"
-								class="h-9 hover:scale-105 rounded-full"
-							/>
-							<h1 class="font-semibold">
-								{currClass.currTeacher.name}
+<main>
+	<section class="min-h-screen p-6">
+		<div>
+			<h1 class="font-extrabold text-2xl">Upcoming Classes</h1>
+			<div class="grid grid-cols-4 gap-12 mt-6">
+				{#each classWithInfo as currClass}
+					{#if classifyClass(currClass.start)}
+						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
+							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
+							<h1 class="font-extrabold text-xl">
+								{currClass.title}
 							</h1>
-						</a>
+							<a
+								href="/viewonly/teacher/{currClass.currTeacher.id}"
+								class="flex flex-row space-x-2"
+							>
+								<img
+									src={currClass.currTeacher.image}
+									alt="Dashboard Icon"
+									class="h-9 hover:scale-105 rounded-full"
+								/>
+								<h1 class="font-semibold">
+									{currClass.currTeacher.name}
+								</h1>
+							</a>
 
-						<div class="flex flex-row justify-between">
-							<h1 class="font-semibold">
-								Start: {currClass.start}
-							</h1>
-							<h1 class="font-semibold">
-								duration: {currClass.duration} weeks
-							</h1>
+							<div class="flex flex-row justify-between">
+								<h1 class="font-semibold">
+									Start: {currClass.start}
+								</h1>
+								<h1 class="font-semibold">
+									duration: {currClass.duration} weeks
+								</h1>
+							</div>
+
+							{#if currClass.studclass.length > 0}
+								<button
+									class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
+									disabled={true}
+								>
+									Already Registered
+								</button>
+							{:else}
+								<form action="?/joinclass&id={currClass.id}" method="POST">
+									<button
+										type="submit"
+										class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
+									>
+										Join Class
+									</button>
+								</form>
+							{/if}
 						</div>
+					{/if}
+				{/each}
+			</div>
+		</div>
+		<div class="mt-5">
+			<h1 class="font-extrabold text-2xl">Running Classes</h1>
+			<div class="grid grid-cols-4 gap-12 mt-6">
+				{#each classWithInfo as currClass}
+					{#if classifyClass(currClass.start) === false && currClass.studclass.length > 0}
+						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
+							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
+							<h1 class="font-extrabold text-xl">
+								{currClass.title}
+							</h1>
+							<a
+								href="/viewonly/teacher/{currClass.currTeacher.id}"
+								class="flex flex-row space-x-2"
+							>
+								<img
+									src={currClass.currTeacher.image}
+									alt="Dashboard Icon"
+									class="h-9 hover:scale-105 rounded-full"
+								/>
+								<h1 class="font-semibold">
+									{currClass.currTeacher.name}
+								</h1>
+							</a>
 
-						{#if currClass.studclass.length > 0}
+							<div class="flex flex-row justify-between">
+								<h1 class="font-semibold">
+									Start: {currClass.start}
+								</h1>
+								<h1 class="font-semibold">
+									duration: {currClass.duration} weeks
+								</h1>
+							</div>
+
 							<button
 								class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
-								disabled={true}
+								on:click={() => gotoClass(currClass.id)}
 							>
-								Already Registered
+								Go to Class
 							</button>
-						{:else}
-							<form action="?/joinclass&id={currClass.id}" method="POST">
-								<button
-									type="submit"
-									class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
-								>
-									Join Class
-								</button>
-							</form>
-						{/if}
-					</div>
-				{/if}
-			{/each}
-		</div>
-	</div>
-	<div class="mt-5">
-		<h1 class="font-extrabold text-2xl">Running Classes</h1>
-		<div class="grid grid-cols-4 gap-12 mt-6">
-			{#each classWithInfo as currClass}
-				{#if classifyClass(currClass.start) === false && currClass.studclass.length > 0}
-					<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
-						<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
-						<h1 class="font-extrabold text-xl">
-							{currClass.title}
-						</h1>
-						<a href="/viewonly/teacher/{currClass.currTeacher.id}" class="flex flex-row space-x-2">
-							<img
-								src={currClass.currTeacher.image}
-								alt="Dashboard Icon"
-								class="h-9 hover:scale-105 rounded-full"
-							/>
-							<h1 class="font-semibold">
-								{currClass.currTeacher.name}
-							</h1>
-						</a>
-
-						<div class="flex flex-row justify-between">
-							<h1 class="font-semibold">
-								Start: {currClass.start}
-							</h1>
-							<h1 class="font-semibold">
-								duration: {currClass.duration} weeks
-							</h1>
 						</div>
-
-						<button
-							class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
-							on:click={() => gotoClass(currClass.id)}
-						>
-							Go to Class
-						</button>
-					</div>
-				{/if}
-			{/each}
+					{/if}
+				{/each}
+			</div>
 		</div>
-	</div>
-</section>
-<pre>{JSON.stringify(classWithInfo, null, 2)}</pre>
+	</section>
+</main>
+
+<!-- <pre>{JSON.stringify(classWithInfo, null, 2)}</pre> -->
 
 <style>
 	.white-text {
