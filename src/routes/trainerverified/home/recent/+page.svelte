@@ -71,14 +71,86 @@
 		day: 'numeric'
 	});
 
+	async function loadInitialSaved() {
+		let { data: savedblog, error } = await supabase
+			.from('savedblog')
+			.select('*')
+			.eq('commonuserid', teacherNow.id);
+
+		for (let i = 0; i < savedblog.length; i++) {
+			for (let j = 0; j < blogwithTeacherName.length; j++) {
+				if (savedblog[i].blogid === blogwithTeacherName[j].id) {
+					blogwithTeacherName[j].saved = true;
+				}
+			}
+		}
+	}
+	function subscribesaved() {
+		const channels = supabase
+			.channel('custom-insert-channel')
+			.on(
+				'postgres_changes',
+				{ event: 'INSERT', schema: 'public', table: 'savedblog' },
+				(payload) => {
+					const newSsaved = payload.new;
+					// console.log('Ekahen asi');
+					console.log(newSsaved);
+					for (let i = 0; i < blogwithTeacherName.length; i++) {
+						if (
+							blogwithTeacherName[i].id === newSsaved.blogid &&
+							newSsaved.commonuserid === teacherNow.id
+						) {
+							blogwithTeacherName[i].saved = true;
+						}
+					}
+				}
+			)
+			.subscribe();
+	}
+	// function subscribeDeleted() {
+	// 	const channels = supabase
+	// 		.channel('custom-insert-channel')
+	// 		.on(
+	// 			'postgres_changes',
+	// 			{ event: 'DELETE', schema: 'public', table: 'savedblog' },
+	// 			(payload) => {
+	// 				const newSsaved = payload.new;
+	// 				console.log('Ekahen asi');
+	// 				console.log(newSsaved);
+	// 			}
+	// 		)
+	// 		.subscribe();
+	// }
+
+	async function sendSaved(val) {
+		const { data, error } = await supabase
+			.from('savedblog')
+			.insert([{ commonuserid: teacherNow.id, blogid: val }]);
+	}
+
+	async function RemovedSaved(val) {
+		const { error } = await supabase
+			.from('savedblog')
+			.delete()
+			.eq('commonuserid', teacherNow.id)
+			.eq('blogid', val.id);
+		val.saved = false;
+		window.location.href = '/trainerverified/home/recent';
+	}
+
 	const handleSignOut = async () => {
 		console.log('logout start');
 		await data.supabase.auth.signOut();
 		console.log('logout done');
 		window.open('/trainerlogin', '_self');
 	};
-
-
+	onMount(() => {
+		calculateCountdown();
+		setInterval(calculateCountdown, 1000);
+		loadInitialSaved();
+		subscribesaved();
+		//subscribeDeleted();
+	});
 </script>
 
 <main class="bg-[#f4f6f7]">
@@ -348,67 +420,93 @@
 		<div class="">
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blogwithTeacherName as currblog, i}
-					<a
-						href="/commonverified/article/{currblog.id}"
+					<div
 						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
-						<div class="hover:scale-105">
-							<div class="mb-3 rounded-full">
-								<img
-									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
-									alt="User "
-									class=" w-[100%] items-center justify-center object-contain object-center"
-								/>
-							</div>
-							<div class="px-4">
-								<div>
-									<h1 class="text-2xl font-bold mb-2">
-										{currblog.title}
-									</h1>
-								</div>
-								<div class="flex flex-row space-x-2 mb-4">
+						<a href="/commonverified/article/{currblog.id}" class="">
+							<div class="hover:scale-105">
+								<div class="mb-3 rounded-full">
 									<img
-										src={currblog.currTeacher.image}
-										alt="Dashboard Icon"
-										class="h-8 mr-1 hover:scale-105 rounded-full"
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
+										alt="User "
+										class=" w-[100%] items-center justify-center object-contain object-center"
 									/>
-									<h1 class="font-semibold">
-										{currblog.currTeacher.name}
-									</h1>
 								</div>
-								<div class="flex flex-row">
-									<!-- <img
+								<div class="px-4">
+									<div>
+										<h1 class="text-2xl font-bold mb-2">
+											{currblog.title}
+										</h1>
+									</div>
+									<div class="flex flex-row space-x-2 mb-4">
+										<img
+											src={currblog.currTeacher.image}
+											alt="Dashboard Icon"
+											class="h-8 mr-1 hover:scale-105 rounded-full"
+										/>
+										<h1 class="font-semibold">
+											{currblog.currTeacher.name}
+										</h1>
+									</div>
+									<div class="flex flex-row">
+										<!-- <img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
 										alt="User "
 										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
 									/> -->
-									<p class="text-sm text-justify font-light">
-										{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
-									</p>
+										<p class="text-sm text-justify font-light">
+											{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
+										</p>
 
-									<!-- <img
+										<!-- <img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
 										alt="User "
 										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
 									/> -->
-									<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
-								</div>
+										<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
+									</div>
 
-								<div>
-									<p class="text-md text-justify">
-										{currblog.description.slice(0, 100)} ...
-									</p>
+									<div>
+										<p class="text-md text-justify">
+											{currblog.description.slice(0, 100)} ...
+										</p>
+									</div>
 								</div>
 							</div>
+						</a>
+						<div class="flex flex-col space-y-1 p-4">
+							<div class="flex flex-row space-x-2">
+								{#each currblog.tags as tag}
+									<div
+										class="card w-fit p-1 bg-blue-300 text-sm rounded-lg flex flex-col items-center justify-center"
+									>
+										{tag}
+									</div>
+								{/each}
+							</div>
+							{#if currblog.saved}
+								<button class="text-left space-x-3 mr-6" on:click={() => RemovedSaved(currblog)}>
+									<img
+										src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/save-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1"
+									/>
+								</button>
+							{:else}
+								<button class="text-left space-x-3 mr-6" on:click={() => sendSaved(currblog.id)}>
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1"
+									/>
+								</button>
+							{/if}
 						</div>
-					</a>
+					</div>
 				{/each}
 			</div>
 		</div>
 	</div>
-
-
-	  
 </main>
 
 <style>
@@ -468,5 +566,13 @@
 		display: flex;
 		align-items: center;
 	}
+	.chipi {
+		background-color: #c1d4e3;
 
+		padding: 0.25rem;
+		margin-right: 0.25rem;
+		border-radius: 0.15rem;
+		display: flex;
+		align-items: center;
+	}
 </style>

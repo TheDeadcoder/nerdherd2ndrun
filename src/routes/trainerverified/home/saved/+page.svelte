@@ -1,33 +1,31 @@
 <script lang="ts">
 	import { AppRail, AppRailTile, AppRailAnchor, TabGroup, Tab } from '@skeletonlabs/skeleton';
+
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { popup } from '@skeletonlabs/skeleton';
-	import type { PopupSettings } from '@skeletonlabs/skeleton';
+	import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { InputChip } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import { Table } from '@skeletonlabs/skeleton';
-	import type { TableSource } from '@skeletonlabs/skeleton';
-	import { tableMapperValues } from '@skeletonlabs/skeleton';
-
-	let list: string[] = [];
-	let tagsofPost: string[] = ['web development', 'javascript'];
-	let tagsofPost1: string[] = ['web development', 'mobile app development', 'framework comparison'];
-	let currentTile: number = 4;
-	let searchBarShow: number = 0;
-
-	$: calculateCountdown();
 
 	export let data;
 
 	let { session, supabase, blogwithTeacherName, teacherNow } = data;
 	$: ({ session, supabase, blogwithTeacherName, teacherNow } = data);
 
+	let list: string[] = [];
+	let tagsofPost: string[] = ['web development', 'javascript'];
+	let tagsofPost1: string[] = ['web development', 'mobile app development', 'framework comparison'];
+	let currentTile: number = 0;
+
+	$: calculateCountdown();
+
 	let nextDonationDate: Date = new Date('2024-1-23');
 	let daysLeft: number = 0;
 	let hoursLeft: number = 0;
 	let minutesLeft: number = 0;
 	let secondsLeft: number = 0;
+	let searchBarShow: number = 0;
 
 	function calculateCountdown() {
 		const now: Date = new Date();
@@ -38,39 +36,6 @@
 		minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 		secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
 	}
-
-	const sourceData = [
-		{ name: 'Md. Ashraful Islam', point: 176 },
-		{ name: 'Dr. Anindya Iqbal', point: 164 },
-		{ name: 'Dr. Rifat Shahriar', point: 156 },
-		{ name: 'Mr. Azizul Hakim', point: 140 }
-	];
-	const tableSimple: TableSource = {
-		// A list of heading labels.
-		head: ['Name', 'Contribution'],
-		// The data visibly shown in your table body UI.
-		body: tableMapperValues(sourceData, ['name', 'point']),
-		// Optional: The data returned when interactive is enabled and a row is clicked.
-		meta: tableMapperValues(sourceData, ['position', 'name', 'point'])
-		// Optional: A list of footer labels.
-	};
-
-	const popupClick: PopupSettings = {
-		event: 'click',
-		target: 'popupClick',
-		placement: 'top'
-	};
-	const popupHover1: PopupSettings = {
-		event: 'hover',
-		target: 'popupHover1',
-		placement: 'top'
-	};
-	let currentDate = new Date().toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric'
-	});
-
 	function formatDate(dateString) {
 		const dateObj = new Date(dateString);
 		const monthNames = [
@@ -90,27 +55,27 @@
 		return `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 	}
 
-	function navigateToRecent() {
-		window.open('/studentblogs/recent', '_self');
-	}
-	function navigateToRecommended() {
-		window.open('/studentblogs/recommended', '_self');
-	}
-	function navigateToFavourites() {
-		window.open('/studentblogs/favourites', '_self');
-	}
-	function navigateToPopular() {
-		window.open('/studentblogs/popular', '_self');
-	}
-	function navigateToSaved() {
-		window.open('/studentblogs/saved', '_self');
-	}
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'bottom'
+	};
+	const popupHover1: PopupSettings = {
+		event: 'hover',
+		target: 'popupHover1',
+		placement: 'top'
+	};
+	let currentDate = new Date().toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric'
+	});
 
 	async function loadInitialSaved() {
 		let { data: savedblog, error } = await supabase
 			.from('savedblog')
 			.select('*')
-			.eq('commonuserid', studentNow.id);
+			.eq('commonuserid', teacherNow.id);
 
 		for (let i = 0; i < savedblog.length; i++) {
 			for (let j = 0; j < blogwithTeacherName.length; j++) {
@@ -133,7 +98,7 @@
 					for (let i = 0; i < blogwithTeacherName.length; i++) {
 						if (
 							blogwithTeacherName[i].id === newSsaved.blogid &&
-							newSsaved.commonuserid === studentNow.id
+							newSsaved.commonuserid === teacherNow.id
 						) {
 							blogwithTeacherName[i].saved = true;
 						}
@@ -160,19 +125,25 @@
 	async function sendSaved(val) {
 		const { data, error } = await supabase
 			.from('savedblog')
-			.insert([{ commonuserid: studentNow.id, blogid: val }]);
+			.insert([{ commonuserid: teacherNow.id, blogid: val }]);
 	}
 
 	async function RemovedSaved(val) {
 		const { error } = await supabase
 			.from('savedblog')
 			.delete()
-			.eq('commonuserid', studentNow.id)
+			.eq('commonuserid', teacherNow.id)
 			.eq('blogid', val.id);
 		val.saved = false;
-		window.location.href = '/learnerverified/home/saved';
+		window.location.href = '/trainerverified/home/recent';
 	}
 
+	const handleSignOut = async () => {
+		console.log('logout start');
+		await data.supabase.auth.signOut();
+		console.log('logout done');
+		window.open('/trainerlogin', '_self');
+	};
 	onMount(() => {
 		calculateCountdown();
 		setInterval(calculateCountdown, 1000);
@@ -180,13 +151,210 @@
 		subscribesaved();
 		//subscribeDeleted();
 	});
-	const handleSignOut = async () => {
-		await data.supabase.auth.signOut();
-		window.open('/learnerlogin', '_self');
-	};
 </script>
 
-<main>
+<main class="bg-[#f4f6f7]">
+	<!-- <div>
+		<div class="navbar">
+			<nav class="appbar">
+				<div class="logo-container flex items-center">
+					<img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+						class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
+						alt="title"
+						width={50}
+					/>
+					<span class="company-name text-2xl font-extrabold">NerD</span><span
+						class="company-name white-text text-2xl font-extrabold">Herd</span
+					>
+				</div>
+				<ul class="links">
+					<li>
+						<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Home</a
+						>
+					</li>
+					<li>
+						<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Library</a
+						>
+					</li>
+					<li>
+						<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Class</a
+						>
+					</li>
+					<li>
+						<a href="/library" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Compete</a
+						>
+					</li>
+
+					<li>
+						<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Chatbot</a
+						>
+					</li>
+
+					<li>
+						<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+							><img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-5 mr-1 hover:rotate-12"
+							/>
+							Planner</a
+						>
+					</li>
+
+					<div use:popup={popupClick}>
+						<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
+					</div>
+
+					<div data-popup="popupClick" class="h-32 absolute">
+						<ul class="text-lg font-semibold bg-sky-300 ml-0">
+							<li class="mt-2 mb-3 p-2">
+								<a href="/trainerverified/profile" class="flex items-center font-bold"
+									><img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
+										alt="Dashboard Icon"
+										class="h-7 mr-1 hover:rotate-12"
+									/>
+									Profile</a
+								>
+							</li>
+						</ul>
+					</div>
+					<li>
+						<button on:click={handleSignOut}>
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-7 mr-1 hover:rotate-12"
+							/>
+						</button>
+					</li>
+				</ul>
+			</nav>
+			<TabGroup class="w-full h-14 bg-[#e6f5ff]  mt-2 flex justify-center">
+				<Tab
+					bind:group={currentTile}
+					name="tab1"
+					value={0}
+					class="hover:scale-105 hover:bg-[#c8e4f7]"
+				>
+					
+					<a
+						href="/trainerverified/home/recent"
+						class="flex items-center justify-center p-2 font-semibold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/clock-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-6 w-6 m-1 hover:scale-105 hover:bg-[#c8e4f7]"
+						/>
+						Recent
+					</a>
+				</Tab>
+				<Tab
+					bind:group={currentTile}
+					name="tab2"
+					value={1}
+					class="hover:scale-105 hover:bg-[#c8e4f7]"
+				>
+					<a
+						href="/trainerverified/home/my"
+						class="flex items-center justify-center p-2 font-semibold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/personal-account-account-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-6 w-6 m-1 hover:scale-105 hover:bg-[#c8e4f7]"
+						/>
+						My Articles
+					</a>
+				</Tab>
+				<Tab
+					bind:group={currentTile}
+					name="tab3"
+					value={2}
+					class="hover:scale-105 hover:bg-[#c8e4f7]"
+				>
+					<a
+						href="/trainerverified/home/popular"
+						class="flex items-center justify-center p-2 font-semibold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/fire-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-6 w-6 m-1 hover:scale-105 hover:bg-[#c8e4f7]"
+						/>
+						Popular
+					</a>
+				</Tab>
+				<Tab
+					bind:group={currentTile}
+					name="tab3"
+					value={3}
+					class="hover:scale-105 hover:bg-[#c8e4f7]"
+				>
+					<a
+						href="/trainerverified/home/saved"
+						class="flex items-center justify-center p-2 font-semibold"
+						><img
+							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-save-the-document-svgrepo-com.svg"
+							alt="Dashboard Icon"
+							class="h-6 w-6 m-1"
+						/>
+						Saved
+					</a>
+				</Tab>
+				<Tab
+					bind:group={currentTile}
+					name="tab3"
+					value={4}
+					class="hover:scale-105 hover:bg-[#c8e4f7]"
+				>
+					<button
+						class="flex items-center justify-center p-2 font-semibold"
+						on:click={() => (searchBarShow = searchBarShow ^ 1)}
+					>
+						<img
+							src="https://aaitclybvvendvuswytq.supabase.co/storage/v1/object/public/BDeHR/search-new.svg"
+							class="transform transition duration-300 hover:rotate-12 hover:scale-110 h-6 w-6 m-1"
+							alt="Search Icon"
+							style="vertical-align: middle;"
+						/>
+						Search
+					</button>
+				</Tab>
+				<svelte:fragment slot="panel"></svelte:fragment>
+			</TabGroup>
+		</div>
+	</div>
+
 	<div class="relative mt-[140px] z-10 w-full">
 		<div class="absolute w-full flex justify-center">
 			<div
@@ -246,53 +414,78 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
-	<div class="w-full h-screen flex flex-row">
-		<div class="w-3/4 p-6">
-			<div class="mt-10 ml-4 mr-4">
-				{#each blogwithTeacherName as currBlog}
-					<div class="mb-14">
-						<div class="flex flex-row space-x-3">
-							<a href="/viewonly/teacher/{currBlog.currTeacher.id}" class="flex flex-row space-x-2">
-								<Avatar src={currBlog.currTeacher.image} width="w-9" rounded="rounded-full" />
-								<h1 class="text-lg">{currBlog.currTeacher.name}</h1>
-							</a>
-							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/green-circle-svgrepo-com.svg"
-								alt="Dashboard Icon"
-								class="h-6"
-							/>
-							<h1 class="text-lg">{formatDate(currBlog.createdat)}</h1>
-
-							<img
-								src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/clock-svgrepo-com.svg"
-								alt="Dashboard Icon"
-								class="h-6"
-							/>
-							<h1 class="text-lg">{currBlog.timetoread} minutes</h1>
-						</div>
-						<a href="/commonverified/article/{currBlog.id}" class="flex flex-col mt-4">
-							<h1 class="text-2xl font-extrabold">{currBlog.title}</h1>
-							<p class="mt-2">
-								{currBlog.description.slice(0, 100)}...
-							</p>
-						</a>
-						<div class="mt-6 flex flex-row justify-between">
-							<div class="text-left flex flex-row space-x-2">
-								{#each currBlog.tags as tag}
-									<div class="chipi flex flex-row space-x-1">
+	<div class="w-full min-h-screen flex flex-row justify-center dark:bg-[#212020]">
+		<div class="">
+			<div class="grid grid-cols-4 mt-6 p-6 w-full">
+				{#each blogwithTeacherName as currblog, i}
+					<div
+						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
+					>
+						<a href="/commonverified/article/{currblog.id}" class="">
+							<div class="hover:scale-105">
+								<div class="mb-3 rounded-full">
+									<img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
+										alt="User "
+										class=" w-[100%] items-center justify-center object-contain object-center"
+									/>
+								</div>
+								<div class="px-4">
+									<div>
+										<h1 class="text-2xl font-bold mb-2">
+											{currblog.title}
+										</h1>
+									</div>
+									<div class="flex flex-row space-x-2 mb-4">
 										<img
-											src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/tag-svgrepo-com.svg"
+											src={currblog.currTeacher.image}
 											alt="Dashboard Icon"
-											class="h-6"
+											class="h-8 mr-1 hover:scale-105 rounded-full"
 										/>
-										<p>{tag}</p>
+										<h1 class="font-semibold">
+											{currblog.currTeacher.name}
+										</h1>
+									</div>
+									<div class="flex flex-row">
+										<!-- <img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+										alt="User "
+										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+									/> -->
+										<p class="text-sm text-justify font-light">
+											{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
+										</p>
+
+										<!-- <img
+										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
+										alt="User "
+										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
+									/> -->
+										<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
+									</div>
+
+									<div>
+										<p class="text-md text-justify">
+											{currblog.description.slice(0, 100)} ...
+										</p>
+									</div>
+								</div>
+							</div>
+						</a>
+						<div class="flex flex-col space-y-1 p-4">
+							<div class="flex flex-row space-x-2">
+								{#each currblog.tags as tag}
+									<div
+										class="card w-fit p-1 bg-blue-300 text-sm rounded-lg flex flex-col items-center justify-center"
+									>
+										{tag}
 									</div>
 								{/each}
 							</div>
-							{#if currBlog.saved}
-								<button class="text-left space-x-3 mr-6" on:click={() => RemovedSaved(currBlog)}>
+							{#if currblog.saved}
+								<button class="text-left space-x-3 mr-6" on:click={() => RemovedSaved(currblog)}>
 									<img
 										src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/save-svgrepo-com.svg"
 										alt="Dashboard Icon"
@@ -300,7 +493,7 @@
 									/>
 								</button>
 							{:else}
-								<button class="text-left space-x-3 mr-6" on:click={() => sendSaved(currBlog.id)}>
+								<button class="text-left space-x-3 mr-6" on:click={() => sendSaved(currblog.id)}>
 									<img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/save-svgrepo-com.svg"
 										alt="Dashboard Icon"
@@ -313,68 +506,7 @@
 				{/each}
 			</div>
 		</div>
-		<div class="w-fit overflow-hidden mt-6">
-			<div class="card variant-glass-tertiary">
-				<header class="card-header">
-					<div class="flex flex-roe">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-9 w-9 mr-1 hover:rotate-12"
-						/>
-						<h1 class="text-2xl font-bold">Upcoming Contest!</h1>
-					</div>
-				</header>
-				<section class="p-4">
-					<div class="card variant-glass-secondary p-4 mb-3">
-						<div class="flex flex-col items-center justify-center">
-							<h1 class="text-xl font-semibold"><u>NerdHerd Math Quiz</u></h1>
-							<h2>Writer: Md. Ashraful Islam</h2>
-							<h2>Before contest: {hoursLeft}:{minutesLeft}:{secondsLeft}</h2>
-							<a href="/"> <u>Register Now</u> </a>
-						</div>
-					</div>
-				</section>
-				<footer class="card-footer mb-2">
-					<a href="/" class="flex flex-row items-end justify-end p-1 font-bold">
-						<h4 class="mr-2 hover:scale-110">See all</h4>
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-send-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 w-6 hover:scale-125"
-						/>
-					</a>
-				</footer>
-			</div>
-			<div class="card variant-glass-surface">
-				<header class="card-header">
-					<div class="flex flex-roe">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/medal-gold-winner-2-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-9 w-9 mr-1 hover:rotate-12"
-						/>
-						<h1 class="text-2xl font-bold">Top Authors!</h1>
-					</div>
-				</header>
-				<section class="p-4">
-					<Table source={tableSimple} />
-				</section>
-				<footer class="card-footer mb-2">
-					<a href="/" class="flex flex-row items-end justify-end p-1 font-bold">
-						<h4 class="mr-2 hover:scale-110">See all</h4>
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-send-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 w-6 hover:scale-125"
-						/>
-					</a>
-				</footer>
-			</div>
-		</div>
 	</div>
-	<pre>{JSON.stringify(studentNow, null, 2)}</pre>
-	<pre>{JSON.stringify(blogwithTeacherName, null, 2)}</pre>
 </main>
 
 <style>
@@ -437,9 +569,9 @@
 	.chipi {
 		background-color: #c1d4e3;
 
-		padding: 0.5rem;
-		margin-right: 0.5rem;
-		border-radius: 0.25rem;
+		padding: 0.25rem;
+		margin-right: 0.25rem;
+		border-radius: 0.15rem;
 		display: flex;
 		align-items: center;
 	}
