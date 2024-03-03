@@ -11,16 +11,18 @@
 	$: ({ session, supabase, teacherNow } = data);
 
 
+    import { createEventDispatcher } from 'svelte';
+
+
+
+
+
     const popupClick: PopupSettings = {
 		event: 'click',
 		target: 'popupClick',
 		placement: 'bottom'
-	};
-	const popupHover1: PopupSettings = {
-		event: 'hover',
-		target: 'popupHover1',
-		placement: 'top'
-	};
+	}
+
     const returnHome = ()=>{
         window.open('/trainerverified/home/recent','_self')
     }
@@ -30,7 +32,8 @@
 		await data.supabase.auth.signOut();
 		console.log('logout done');
 		window.open('/trainerlogin', '_self');
-	};
+	}
+    
 
 </script>
 
@@ -67,6 +70,17 @@
                                         />
                                         Profile</a
                                     >
+                                </li>
+                                <li class="mt-2 mb-3 p-2">
+                                    <button on:click={()=>handleSignOut()} class="flex items-center font-bold">
+                                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
+                                            alt="Dashboard Icon" 
+                                            class="h-7 ml-1 hover:rotate-12"
+                                        />
+                                        <p style="text-align: center; margin-left: 0.2cm;">
+                                            Log Out
+                                        </p>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
