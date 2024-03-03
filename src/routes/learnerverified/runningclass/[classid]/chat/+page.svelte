@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	// import Message from './Message.svelte';
 	export let data;
@@ -17,6 +17,16 @@
 	let newMessage = '';
 	let loadingOlderMessages = false;
 	let oldestMessageId = null; // To track the oldest message loaded
+
+	import {isLearnerInClass} from '../../../../../stores/isLearnerInClass'
+
+	onMount(()=>{
+		isLearnerInClass.set({classid:classid,isClass:true})
+	});
+	onDestroy(()=>{
+		isLearnerInClass.set({classid:"",isClass:false})
+	});
+
 
 	async function loadInitialMessages() {
 		const { data: dt, error } = await supabase
@@ -117,6 +127,8 @@
 	});
 </script>
 
+<div>
+<!-- 	
 <nav class="appbar">
 	<div class="logo-container">
 		<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -185,9 +197,9 @@
 			>
 		</li>
 	</ul>
-</nav>
+</nav> -->
 <main class="min-h-screen flex overflow-auto">
-	<div
+	<!-- <div
 		class={`transform top-0 left-0 w-64 bg-white  fixed min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 			isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
 		} lg:translate-x-0 lg:static lg:block`}
@@ -234,7 +246,7 @@
 				</div>
 			</a>
 		</div>
-	</div>
+	</div> -->
 	<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
 		<!-- Your content here -->
 
@@ -263,6 +275,7 @@
 	</div>
 </main>
 
+</div>
 <style>
 	.appbar {
 		display: flex;

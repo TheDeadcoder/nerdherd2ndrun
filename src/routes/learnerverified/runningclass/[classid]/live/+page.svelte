@@ -8,6 +8,14 @@
 	let { session, supabase, classNow, studentNow, classlive } = data;
 	$: ({ session, supabase, classNow, studentNow, classlive } = data);
 
+	import {isLearnerInClass} from '../../../../../stores/isLearnerInClass'
+
+	
+	onDestroy(()=>{
+		isLearnerInClass.set({classid:"",isClass:false})
+	});
+
+
 	let isSidebarOpen = false;
 
 	async function goLive(val) {
@@ -49,6 +57,8 @@
 	}
 
 	onMount(() => {
+		isLearnerInClass.set({classid:classid,isClass:true})
+
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 		function handleOutsideClick(event) {
@@ -64,163 +74,165 @@
 	});
 </script>
 
-<nav class="appbar">
-	<div class="logo-container">
-		<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
-		<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
-	</div>
-	<ul class="links">
-		<li>
-			<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Home</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Library</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Class</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Compete</a
-			>
-		</li>
-		<li>
-			<a href="/learnerverified/ai/gpt" class="flex items-center p-1 font-bold"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Chatbot</a
-			>
-		</li>
-
-		<li>
-			<a href="/learnerverified/planner" class="flex items-center p-1 font-bold mr-3"
-				><img
-					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-					alt="Dashboard Icon"
-					class="h-5 mr-1 hover:rotate-12"
-				/>
-				Planner</a
-			>
-		</li>
-	</ul>
-</nav>
-<main class="min-h-screen grid grid-cols-[15%_auto]">
-	<div
-		class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
-			isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-		} lg:translate-x-0 lg:static lg:block`}
-	>
-		<div class="flex flex-col mt-6">
-			<div>
-				<a href="/learnerverified/runningclass/{classid}/chat" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Chat</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/learnerverified/runningclass/{classid}/assignments" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Assignments</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/learnerverified/runningclass/{classid}/credentials" class="sidebar-item">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Credentials</p>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="/learnerverified/runningclass/{classid}/live" class="sidebar-item active">
-					<div class="flex flex-row">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
-							alt="Dashboard Icon"
-							class="h-6 mr-3 hover:rotate-12"
-						/>
-						<p class="text-black font-bold">Go Live</p>
-					</div>
-				</a>
-			</div>
+<div>
+	<!-- <nav class="appbar">
+		<div class="logo-container">
+			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
+			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
 		</div>
-	</div>
-	<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
-		<div class="mt-9 flex flex-col space-y-4">
-			<h1 class="text-2xl font-extrabold"><u>All Classes</u></h1>
-			{#each classlive as currsession, i}
-				<div class=" mr-40 flex flex-row space-x-8">
-					<h1 class="font-bold text-xl">
-						{i + 1}. {currsession.topic}
-					</h1>
-					{#if currsession.done}
-						<button class="btn bg-teal-500"> Check Stat </button>
-					{:else if currsession.countdown}
-						<p class="font-semibold">
-							{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
-								.countdown.minutes}m : {currsession.countdown.seconds}s
-						</p>
-					{:else}
-						<button
-							class="bg-blue-500 text-white px-4 py-2 rounded"
-							on:click={() => goLive(currsession.id)}>Go Live</button
-						>
-					{/if}
+		<ul class="links">
+			<li>
+				<a href="/learnerverified/home/recent" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Home</a
+				>
+			</li>
+			<li>
+				<a href="/learnerverified/library" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Library</a
+				>
+			</li>
+			<li>
+				<a href="/learnerverified/classes" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Class</a
+				>
+			</li>
+			<li>
+				<a href="/learnerverified/contest" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Compete</a
+				>
+			</li>
+			<li>
+				<a href="/learnerverified/ai/gpt" class="flex items-center p-1 font-bold"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Chatbot</a
+				>
+			</li>
+	
+			<li>
+				<a href="/learnerverified/planner" class="flex items-center p-1 font-bold mr-3"
+					><img
+						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
+						alt="Dashboard Icon"
+						class="h-5 mr-1 hover:rotate-12"
+					/>
+					Planner</a
+				>
+			</li>
+		</ul>
+	</nav> -->
+	<main class="min-h-screen grid grid-cols-[15%_auto]">
+		<!-- <div
+			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
+				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+			} lg:translate-x-0 lg:static lg:block`}
+		>
+			<div class="flex flex-col mt-6">
+				<div>
+					<a href="/learnerverified/runningclass/{classid}/chat" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Chat</p>
+						</div>
+					</a>
 				</div>
-			{/each}
+				<div>
+					<a href="/learnerverified/runningclass/{classid}/assignments" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/bell-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Assignments</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/learnerverified/runningclass/{classid}/credentials" class="sidebar-item">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/certify-svgrepo-com.svg"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Credentials</p>
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="/learnerverified/runningclass/{classid}/live" class="sidebar-item active">
+						<div class="flex flex-row">
+							<img
+								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/conference-live-video-svgrepo-com.svg?t=2024-02-09T19%3A53%3A53.776Z"
+								alt="Dashboard Icon"
+								class="h-6 mr-3 hover:rotate-12"
+							/>
+							<p class="text-black font-bold">Go Live</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div> -->
+		<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
+			<div class="mt-9 flex flex-col space-y-4">
+				<h1 class="text-2xl font-extrabold"><u>All Classes</u></h1>
+				{#each classlive as currsession, i}
+					<div class=" mr-40 flex flex-row space-x-8">
+						<h1 class="font-bold text-xl">
+							{i + 1}. {currsession.topic}
+						</h1>
+						{#if currsession.done}
+							<button class="btn bg-teal-500"> Check Stat </button>
+						{:else if currsession.countdown}
+							<p class="font-semibold">
+								{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
+									.countdown.minutes}m : {currsession.countdown.seconds}s
+							</p>
+						{:else}
+							<button
+								class="bg-blue-500 text-white px-4 py-2 rounded"
+								on:click={() => goLive(currsession.id)}>Go Live</button
+							>
+						{/if}
+					</div>
+				{/each}
+			</div>
+	
+			<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
+			<pre>{JSON.stringify(studclass, null, 2)}</pre>
+			<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
 		</div>
-
-		<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
-		<pre>{JSON.stringify(studclass, null, 2)}</pre>
-		<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
-	</div>
-</main>
-
+	</main>
+	
+</div>
 <style>
 	.appbar {
 		display: flex;

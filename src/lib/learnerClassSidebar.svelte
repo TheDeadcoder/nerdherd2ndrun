@@ -1,9 +1,9 @@
 <script>
-	import { isRunningClass } from '../stores/isRunningClass';
+	import { isLearnerInClass } from '../stores/isLearnerInClass';
 
-	let classid = $isRunningClass.classid;
+	let classid = $isLearnerInClass.classid;
 
-	$: classid = $isRunningClass.classid;
+	$: classid = $isLearnerInClass.classid;
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
@@ -21,7 +21,7 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
+			class="cursor-pointer flex-grow px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -32,14 +32,14 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class=" font-bold">Overview</p>
+					<p class=" font-semibold">Overview</p>
 				</div>
 			</a>
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
+			class="cursor-pointer flex-grow px-5 py-2 text-center
+                       font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
 			<a href="/learnerverified/runningclass/{classid}/chat" class="sidebar-item active">
@@ -49,12 +49,12 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class=" font-bold">Chat</p>
+					<p class=" font-semibold">Chat</p>
 				</div>
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
+			class="cursor-pointer flex-grow px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -65,13 +65,13 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class="font-bold">Assignments</p>
+					<p class="font-semibold">Assignments</p>
 				</div>
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
-                       font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
+			class="cursor-pointer flex-grow px-5 py-2 text-center
+                       font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
 			<a href="/learnerverified/runningclass/{classid}/notes" class="sidebar-item">
@@ -81,12 +81,12 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class="font-bold">Notebooks</p>
+					<p class="font-semibold">Notebooks</p>
 				</div>
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
+			class="cursor-pointer flex-grow px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -97,13 +97,13 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class="font-bold">Credentials</p>
+					<p class="font-semibold">Credentials</p>
 				</div>
 			</a>
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center
+			class="cursor-pointer flex-grow px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -114,13 +114,13 @@
 						alt="Dashboard Icon"
 						class="h-6 mr-3 hover:rotate-12"
 					/>
-					<p class="font-bold">Go Live</p>
+					<p class="font-semibold">Go Live</p>
 				</div>
 			</a>
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-5 text-center font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] mt-40"
+			class="cursor-pointer flex-grow px-5 py-2 text-center font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] "
 		>
 			<button on:click={() => callParent()} class="flex items-center justify-center">
 				<img
