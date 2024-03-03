@@ -22,6 +22,9 @@
 	let tags;
 	let coverimg;
 	let showaddmodal = false;
+//online
+	let price;
+
 	function addclassmodal() {
 		console.log(showaddmodal);
 		showaddmodal = true;
@@ -46,117 +49,13 @@
 </script>
 
 <main  class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2]">
-	<!-- <nav class="appbar">
-		<div class="logo-container flex items-center">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-				class="transform transition duration-300 hover:rotate-12 w-[50px] mr-4"
-				alt="title"
-				width={50}
-			/>
-			<span class="company-name text-2xl font-extrabold">NerD</span><span
-				class="company-name white-text text-2xl font-extrabold">Herd</span
-			>
-		</div>
-		<ul class="links">
-			<li>
-				<a href="/trainerverified/home/recent" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Home</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/book-opened-svgrepo-com%20(1).svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Library</a
-				>
-			</li>
-			<li>
-				<a href="/trainerverified/classes" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blackboard-class-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Class</a
-				>
-			</li>
-			<li>
-				<a href="/library" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Compete</a
-				>
-			</li>
-
-			<li>
-				<a href="/trainerverified/ai/gpt" class="flex items-center p-1 font-bold"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/robot.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Chatbot</a
-				>
-			</li>
-
-			<li>
-				<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
-					><img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-5 mr-1 hover:rotate-12"
-					/>
-					Planner</a
-				>
-			</li>
-
-			<div use:popup={popupClick}>
-				<Avatar src={teacherNow.image} width="w-10" rounded="rounded-full" />
-			</div>
-
-			<div data-popup="popupClick" class="h-32 absolute">
-				<ul class="text-lg font-semibold bg-sky-300 ml-0">
-					<li class="mt-2 mb-3 p-2">
-						<a href="/trainerverified/profile" class="flex items-center font-bold"
-							><img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/user-person-profile-block-account-circle-svgrepo-com.svg"
-								alt="Dashboard Icon"
-								class="h-7 mr-1 hover:rotate-12"
-							/>
-							Profile</a
-						>
-					</li>
-				</ul>
-			</div>
-			<li>
-				<button on:click={handleSignOut}>
-					<img
-						src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
-						alt="Dashboard Icon"
-						class="h-7 mr-1 hover:rotate-12"
-					/>
-				</button>
-			</li>
-		</ul>
-	</nav> -->
+	
 	<div>
-		<button class="btn variant-filled-primary text-xl font-semibold mt-10" on:click={addclassmodal}>
+		<button class="btn dark:text-[#e1e1e1] dark:bg-[#3b6f8e] text-xl font-semibold m-10" on:click={addclassmodal}>
 			Add book
 		</button>
 	</div>
-	<div class="ml-8 mt-16">
+	<div class="ml-8 mt-2">
 		<div class="mt-2">
 			{#each Object.entries(tagsToBooksMap) as [tag, books]}
 				<BookCategory categoryName={tag} {books} bind:url></BookCategory>
@@ -165,9 +64,9 @@
 	</div>
 	{#if showaddmodal}
 		<div
-			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
+			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity dark:text-[#e1e1e1] dark:bg-[#07070763]"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 dark:text-[#e1e1e1] dark:bg-[#070707]">
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Resource</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
@@ -185,7 +84,7 @@
 							<span>Resource Title</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								id="title"
 								name="title"
@@ -196,7 +95,7 @@
 						<label class="label text-left">
 							<span>Resource authors</span>
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								placeholder="Who are the authors... (separate by comma)"
 								id="author"
@@ -220,7 +119,7 @@
 							<span>Resource Edition</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="number"
 								id="edition"
 								name="edition"
@@ -231,7 +130,7 @@
 						<label class="label text-left">
 							<span>Resource Tags</span>
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="text"
 								placeholder="What are the tags...(separate by comma)"
 								id="tags"
@@ -255,21 +154,37 @@
 						<label class="label text-left mb-3">
 							<span>Resource Content</span>
 
-							<input class="input" type="file" id="content" name="content" bind:value={content} />
+							<input class="input border-[.5px]" type="file" id="content" name="content" bind:value={content} />
 						</label>
+						
 
 						<label class="label text-left mb-3">
 							<span>Cover Photo (optional)</span>
 
 							<input
-								class="input"
+								class="input border-[.5px]"
 								type="file"
 								id="coverimg"
 								name="coverimg"
 								bind:value={coverimg}
 							/>
 						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+
+						<!-- Online -->
+						<label class="label text-left mb-3">
+							<span>Price : </span>
+
+							<input
+								class="input border-[.5px]"
+								type="number"
+								id="price"
+								name="price"
+								bind:value={price}
+								placeholder="Enter Price"
+							/>
+						</label>
+
+						<button type="submit" class="btn dark:text-[#e1e1e1] dark:bg-[#3b6f8e] text-xl font-semibold">
 							Submit
 						</button>
 					</div>
@@ -281,7 +196,7 @@
 	{#if $isOverlayPdf}
 		<OverlayPdf {url} />
 	{/if}
-	<pre>{JSON.stringify(tagsToBooksMap, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(tagsToBooksMap, null, 2)}</pre> -->
 	<Footer />
 </main>
 

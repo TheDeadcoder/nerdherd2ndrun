@@ -25,6 +25,7 @@
 			<div>
 				<h1>{book.title}</h1>
 				<h2>{book.author}</h2>
+				<h3 class="font-bold">Price : {book.price}</h3>
 			</div>
 		</div>
 	</button>
