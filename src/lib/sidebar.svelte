@@ -14,8 +14,8 @@
 
 </script>
 
-<div class="pt-5 w-full mx-auto dark:bg-[#070707]">
-    <div class="p-0 flex flex-col w-full min-h-[100vh] pb-[100px]">
+<div class="pt-5 w-full min-h-[calc(100vh-85px)] mx-auto dark:bg-[#070707] overflow-y-auto">
+    <div class="p-0 flex flex-col w-full min-h-[calc(100vh-100px)] ">
       
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -24,7 +24,7 @@
                 on:click={() => homeVisible = homeVisible^1}
             >
                 <div class="flex items-center ">
-                    <img src=" https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blogger-color-svgrepo-com.svg"
+                    <img src=" https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
                     <p style="text-align: left; margin-left: 0.5cm;">
@@ -46,11 +46,11 @@
                                     My
                                 </a>
                             </li>
-                            <li class="cursor-pointer  px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                            <!-- <li class="cursor-pointer  px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
                                 <a href="/trainerverified/home/popular" >
                                     Popular
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="cursor-pointer px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
                                 <a href="/trainerverified/home/saved" >
                                     Saved

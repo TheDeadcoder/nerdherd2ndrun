@@ -16,7 +16,7 @@
 </script>
 
 <div class="pt-5 w-full mx-auto dark:bg-[#070707] min-h-[calc(100vh-75px)] ">
-	<div class="p-0 flex flex-col w-full">
+	<div class="p-0 flex flex-col w-full min-h-[calc(100vh-100px)]">
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
@@ -126,11 +126,11 @@
 				<img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg"
 					alt="Dashboard Icon"
-					class="h-7 ml-1 hover:rotate-12"
+					class="h-7 ml-1 rotate-180"
 				/>
 
 				<p style="color: red; font-size: smaller; text-align: center; margin-left: 0.5cm;">
-					Sign Out
+					Go Back
 				</p>
 			</button>
 		</div>
