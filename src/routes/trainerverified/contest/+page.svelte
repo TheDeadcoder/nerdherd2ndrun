@@ -123,7 +123,7 @@
 </script>
 
 <main class="mt-6 ml-6 w-3/5">
-	<button class="btn p-4 bg-slate-400 rounded-lg" on:click={addclassmodal}>
+	<button class="btn p-4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg" on:click={addclassmodal}>
 		+ Add a New Public Contest
 	</button>
 	<div class="grid grid-cols-4 gap-12 mt-8">

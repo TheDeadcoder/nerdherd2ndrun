@@ -250,6 +250,7 @@
 	</div>
 </div> -->
 
+
 <div class="container mx-auto min-h-screen dark:bg-[#212020]">
 	<h2 class="text-3xl font-bold p-3 px-6 dark:text-[#f0f0f0]">Todo List</h2>
 	<div class="flex justify-between items-center mb-2"> <!-- Added flex container with justify-between -->

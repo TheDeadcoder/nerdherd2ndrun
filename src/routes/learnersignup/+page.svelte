@@ -26,155 +26,162 @@
 	});
 </script>
 
-<nav class="fixed top-0 z-50 w-full py-6 backdrop-blur-md">
-	<div class="flex justify-between mx-6">
-		<div class="flex">
-			<img
-				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-				class="transform transition duration-300 hover:rotate-12"
-				alt="title"
-				width={55}
-			/>
-			<span class="company-name text-xl font-extrabold">NerD</span><span
-				class="company-name white-text text-xl font-extrabold">Herd</span
-			>
-		</div>
-
-		<div class="flex space-x-3">
-			<LightSwitch />
-			<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
-				About us
-			</a>
-		</div>
-	</div>
-</nav>
-<div class="container h-full mx-auto flex justify-center items-center mt-7">
-	<div class="max-h-screen text-center flex flex-col items-center">
-		<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
-			<!-- Photo on the left side of the card -->
-
-			<!-- Previous Card Content -->
-			<div class="w-full p-8">
-				<div class="flex flex-col space-y-9">
-					<div class="company-name">
-						<span class="company-name text-xl font-extrabold">NerD</span><span
-							class="company-name white-text text-xl font-extrabold">Herd</span
-						>
+<div>
+	<nav class="fixed top-0 z-50 w-full py-6  bg-[#77B8De] dark:bg-[#212021]">
+		<div class="flex justify-between mx-6">
+			<div class="flex">
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+					class="transform transition duration-300 hover:rotate-12"
+					alt="title"
+					width={60}
+				/>
+				<span class="company-name text-2xl font-extrabold dark:text-[#e1e1e1]">NerD</span><span
+					class="company-name white-text text-2xl font-extrabold">Herd</span
+				>
+			</div>
+	
+			<div class="flex space-x-3">
+				<!-- <LightSwitch /> -->
+				<div class=" ">
+					<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+						<LightSwitch class='' />
 					</div>
-
-					<h2 class="mt-3 text-center text-2xl font-extrabold">🔥Ready to join the Nerds?🔥</h2>
 				</div>
-				<form class="mt-6 space-y-6" method="POST" use:enhance>
-					<div class="rounded-md shadow-sm space-y-2">
-						<div>
-							<label class="label text-left">
-								<div class="text-left font-semibold">Email :</div>
-								<div class="input-name">
-									<input
+				<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
+					About us
+				</a>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container h-full min-h-screen px-auto flex justify-center items-center pt-28 dark:bg-[#212020] pb-5">
+		<div class="max-h-screen text-center flex flex-col items-center">
+			<div class="flex card shadow-2xl rounded-xl overflow-hidden max-w-4xl">
+				<!-- Photo on the left side of the card -->
+	
+				<!-- Previous Card Content -->
+				<div class="w-full p-8 dark:bg-[#292929] shadow-lg dark:text-[#e1e1e1]">
+					<div class="flex flex-col space-y-9">
+						
+	
+						<h2 class="mt-3 text-center text-2xl font-extrabold">🔥Ready to join the Nerds?🔥</h2>
+					</div>
+					<form class="mt-6 space-y-6" method="POST" use:enhance>
+						<div class="rounded-md shadow-sm space-y-2">
+							<div>
+								<label class="label text-left">
+									<div class="text-left font-semibold">Email :</div>
+									<div class="input-name">
+										<input
+											class="input border-0 rounded-md shadow-sm hover-underline-animation"
+											id="email"
+											name="email"
+											type="text"
+											bind:value={$form.email}
+											placeholder="name@domain.com"
+										/>
+										<span class="underline-animation"></span>
+									</div>
+								</label>
+	
+								{#if $errors.email}
+									<div>
+										<small class="text-red-500">{$errors.email}</small>
+									</div>
+								{/if}
+							</div>
+							
+							<div>
+								<label class="label text-left">
+									<div class="text-left font-semibold">Password</div>
+									<div class="input-name ">
+										<input
 										class="input border-0 rounded-md shadow-sm hover-underline-animation"
-										id="email"
-										name="email"
-										type="text"
-										bind:value={$form.email}
-										placeholder="name@domain.com"
+										type="password"
+										id="password"
+										name="password"
+										bind:value={$form.password}
+										placeholder="type your password here"
 									/>
 									<span class="underline-animation"></span>
-								</div>
-							</label>
-
-							{#if $errors.email}
-								<div>
-									<small class="text-red-500">{$errors.email}</small>
-								</div>
-							{/if}
+									</div>
+								</label>
+	
+								{#if $errors.password}
+									<div>
+										<small class="text-red-500">{$errors.password[0]}</small>
+									</div>
+								{/if}
+							</div>
 						</div>
-						
+	
 						<div>
-							<label class="label text-left">
-								<div class="text-left font-semibold">Password</div>
-								<div class="input-name ">
-									<input
-									class="input border-0 rounded-md shadow-sm hover-underline-animation"
-									type="password"
-									id="password"
-									name="password"
-									bind:value={$form.password}
-									placeholder="type your password here"
-								/>
-								<span class="underline-animation"></span>
-								</div>
-							</label>
-
-							{#if $errors.password}
-								<div>
-									<small class="text-red-500">{$errors.password[0]}</small>
-								</div>
-							{/if}
+							<button type="submit" class=" btn font-bold text-xl p-3  rounded-full shadow-md  hover:text-[20px] hover:shadow-lg w-[100%] dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]"
+							>
+								⚡Sign Up⚡
+							</button>
 						</div>
-					</div>
-
-					<div>
-						<button type="submit" class=" btn font-bold text-xl p-3 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[20px] hover:shadow-lg w-[100%] "
-						>
-							⚡Sign Up⚡
+					</form>
+					<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-3 pt-3">
+						<span  class="bg-[#f3f5f6] px-0 py-[10px] text-[16px] dark:bg-[#292929]">
+						  Or Continue with <!--Padding is optional-->
+						</span>
+					  </div>
+					<div class="flex justify-center">
+						<!-- <button type="button" class="btn variant-filled mt-4">
+							<span
+								><img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
+									class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+									alt="title"
+									width={25}
+									height={25}
+								/>
+							</span>
+							<span class="text-xl font-semibold">Continue with Google</span>
 						</button>
-					</div>
-				</form>
-				<div class="my-2 text-center border-b-[1px] border-black h-[25px] w-[100%] leading-3 pt-3">
-					<span style="font-size: 16px; background-color: #F3F5F6; padding: 0 10px; ">
-					  Or Continue with <!--Padding is optional-->
-					</span>
-				  </div>
-				<div class="flex justify-center">
-					<!-- <button type="button" class="btn variant-filled mt-4">
-						<span
-							><img
+						<button type="button" class="btn variant-filled mt-4">
+							<span>
+								<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
+									class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+									alt="title"
+									width={25}
+									height={25}
+								/>
+							</span>
+							<span class="text-xl font-semibold">Continue with Discord</span>
+						</button> -->
+						<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+							<img
+									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
+									class="transform transition duration-300 hover:rotate-45 hover:scale-110"
+									alt="title"
+									width={25}
+									height={25}
+							/>
+						</div>
+						<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
+							<img
 								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
 								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
 								alt="title"
 								width={25}
 								height={25}
 							/>
-						</span>
-						<span class="text-xl font-semibold">Continue with Google</span>
-					</button>
-					<button type="button" class="btn variant-filled mt-4">
-						<span>
-							<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
-								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
-								alt="title"
-								width={25}
-								height={25}
-							/>
-						</span>
-						<span class="text-xl font-semibold">Continue with Discord</span>
-					</button> -->
-					<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
-						<img
-								src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/discord-icon-svgrepo-com.svg"
-								class="transform transition duration-300 hover:rotate-45 hover:scale-110"
-								alt="title"
-								width={25}
-								height={25}
-						/>
-					</div>
-					<div class="border-[1px] border-black p-2 rounded-full shadow-2xl m-2">
-						<img
-							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/google-svgrepo-com.svg"
-							class="transform transition duration-300 hover:rotate-45 hover:scale-110"
-							alt="title"
-							width={25}
-							height={25}
-						/>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<Footer />
+	<div class="dark:bg-[#212020] dark:text-[#e1e1e1]">
+		<Footer />
+	</div>
 
+	
+</div>
 <style>
 	.white-text {
 		color: red;
