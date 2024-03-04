@@ -3,6 +3,11 @@ import { error } from '@sveltejs/kit';
 
 
 let studentNow;
+function calculateContestEndTime(contestNow) {
+    const startTime = new Date(contestNow.start).getTime(); // Convert start time to milliseconds
+    const durationMilliseconds = contestNow.duration * 60000; // Convert duration from minutes to milliseconds
+    return new Date(startTime + durationMilliseconds);
+}
 
 export const load = async ({ locals: { supabase, getSession } }) => {
     const session = await getSession()
@@ -65,6 +70,32 @@ export const load = async ({ locals: { supabase, getSession } }) => {
             currTeacher // This adds the pendingclass array to each classItem
         };
     }));
+
+    let { data: pbcontestx, error } = await supabase
+        .from('pbcontest')
+        .select("*")
+
+        // Filters
+        .eq('isover', false)
+        .limit(2)
+
+    pbcontestx.sort((a, b) => new Date(b.start) - new Date(a.start));
+    //console.log(pbcontestx);
+    let pbcontest = pbcontestx[0];
+
+
+    pbcontest.countdown = 0;
+    pbcontest.contestEndTime = calculateContestEndTime(pbcontest);
+
+    let { data: teacher, error: err88 } = await supabase
+        .from('teacher')
+        .select("*")
+        .eq('id', pbcontest.teacherid)
+    pbcontest.teacher = teacher[0];
+
+    console.log(pbcontest);
+
+    return { blogwithTeacherName, studentNow, pbcontest }
 
 
     return { blogwithTeacherName, studentNow }

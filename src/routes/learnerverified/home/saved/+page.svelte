@@ -20,24 +20,14 @@
 
 	export let data;
 
-	let { session, supabase, blogwithTeacherName, studentNow } = data;
-	$: ({ session, supabase, blogwithTeacherName, studentNow } = data);
+	let { session, supabase, blogwithTeacherName, studentNow, pbcontest } = data;
+	$: ({ session, supabase, blogwithTeacherName, studentNow, pbcontest } = data);
 
 	let nextDonationDate: Date = new Date('2024-1-23');
 	let daysLeft: number = 0;
 	let hoursLeft: number = 0;
 	let minutesLeft: number = 0;
 	let secondsLeft: number = 0;
-
-	function calculateCountdown() {
-		const now: Date = new Date();
-		const timeDifference: number = nextDonationDate - now; // Difference in milliseconds
-
-		daysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-		hoursLeft = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-		secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
-	}
 
 	const sourceData = [
 		{ name: 'Md. Ashraful Islam', point: 176 },
@@ -172,10 +162,49 @@
 		val.saved = false;
 		window.location.href = '/learnerverified/home/saved';
 	}
+	function calculateCountdown(endTime) {
+		const total = Date.parse(endTime) - Date.parse(new Date());
+		const seconds = Math.floor((total / 1000) % 60);
+		const minutes = Math.floor((total / 1000 / 60) % 60);
+		const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+		const days = Math.floor(total / (1000 * 60 * 60 * 24));
+		return {
+			total,
+			days,
+			hours,
+			minutes,
+			seconds
+		};
+	}
 
+	async function endContest(classLive: any) {
+		const { data, error } = await supabase
+			.from('pbcontest')
+			.update({ isover: true })
+			.eq('id', classLive.id);
+
+		window.open('/learnerverified/home/recent', '_self');
+	}
+
+	// Function to update countdown for each classLive
+	let delcnttem = 0;
+	function updateCountdown() {
+		if (new Date(pbcontest.start) > new Date()) {
+			pbcontest.countdown = calculateCountdown(pbcontest.start);
+		} else {
+			pbcontest.countdown = 0;
+			if (pbcontest.isover === false && pbcontest.contestEndTime < new Date() && delcnttem === 0) {
+				console.log('delete kore dite lagbe');
+				endContest(pbcontest);
+				delcnttem++;
+			}
+		}
+	}
+
+	let interval;
 	onMount(() => {
-		calculateCountdown();
-		setInterval(calculateCountdown, 1000);
+		interval = setInterval(updateCountdown, 1000);
+		updateCountdown();
 		loadInitialSaved();
 		subscribesaved();
 		//subscribeDeleted();
@@ -395,7 +424,7 @@
 		</div>
 	</div> -->
 
-	<div class="relative  z-10 w-full">
+	<div class="relative z-10 w-full">
 		<div class="absolute w-full flex justify-center">
 			<div
 				class={searchBarShow
@@ -536,10 +565,25 @@
 				<section class="p-4">
 					<div class="card variant-glass-secondary p-2 mb-2">
 						<div class="flex flex-col items-center justify-center">
-							<h1 class="text-xl font-semibold"><u>NerdHerd Math Quiz</u></h1>
-							<h2>Writer: Md. Ashraful Islam</h2>
-							<h2>Before contest: {hoursLeft}:{minutesLeft}:{secondsLeft}</h2>
-							<a href="/"> <u>Register Now</u> </a>
+							<h1 class="text-xl font-semibold"><u>{pbcontest.title}</u></h1>
+							<a
+								href="/viewonly/teacher/{pbcontest.teacherid}"
+								class="flex flex-row space-x-2 mt-3"
+							>
+								<img
+									src={pbcontest.teacher.image}
+									alt="Dashboard Icon"
+									class="h-7 w-7 mr-1 hover:rotate-12 rounded-full"
+								/>
+								<p class="font-semibold text-lg">
+									{pbcontest.teacher.name}
+								</p>
+							</a>
+							<p class="flex items-center justify-center">
+								{pbcontest.countdown.days}d : {pbcontest.countdown.hours}h : {pbcontest.countdown
+									.minutes}m : {pbcontest.countdown.seconds}s
+							</p>
+							<a href="/learnerverified/contest"> <u>Register Now</u> </a>
 						</div>
 					</div>
 				</section>
@@ -549,7 +593,7 @@
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-send-svgrepo-com.svg"
 							alt="Dashboard Icon"
-							class="h-6 w-6 "
+							class="h-6 w-6"
 						/>
 					</a>
 				</footer>

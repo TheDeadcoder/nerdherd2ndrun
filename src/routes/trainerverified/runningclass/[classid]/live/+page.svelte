@@ -11,9 +11,6 @@
 
 	import { isRunningClass } from '../../../../../stores/isRunningClass';
 
-	onMount(() => {
-		isRunningClass.set({ classid: classid, isClass: true });
-	});
 	onDestroy(() => {
 		isRunningClass.set({ classid: '', isClass: false });
 	});
@@ -110,6 +107,7 @@
 	}
 
 	onMount(() => {
+		isRunningClass.set({ classid: classid, isClass: true });
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
 		function handleOutsideClick(event) {
@@ -117,12 +115,13 @@
 				isSidebarOpen = false;
 			}
 		}
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+		// onDestroy(() => {
+		// 	clearInterval(interval);
+		// });
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
+
 	const avro = () => {
 		window.open('/trainerverified/library', '_self');
 	};

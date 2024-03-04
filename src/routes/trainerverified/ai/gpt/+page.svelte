@@ -88,7 +88,7 @@
 	</div>
 	<form class="flex w-full rounded-md gap-4 p-4" on:submit|preventDefault={() => handleSubmit()}>
 		<input type="text" class="input input-bordered w-full" bind:value={query} />
-		<button type="submit" class="btn variant-filled-success"> Send </button>
+		<button type="submit" class="btn bg-green-300 hover:bg-green-400 rounded-lg"> Send </button>
 	</form>
 </div>
 
