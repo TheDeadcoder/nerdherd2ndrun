@@ -33,7 +33,7 @@
                 </div>
 
                 {#if  homeVisible===1 }
-                    <div class="ml-10">
+                    <div class="ml-8 mt-3">
                         <ul class="flex flex-col">
                             <li class=" cursor-pointer flex-grow px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
                                 <a href="/learnerverified/home/recent" >
@@ -136,13 +136,13 @@
             </div>
 
             <div
-                class="cursor-pointer flex-grow px-5 py-2
-                       font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd] 
-                       border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
-                
+                class=""
             >
             
-                <a href="/learnerverified/ai/gpt" class="flex items-center ">
+                <a href="/learnerverified/ai/gpt" class="flex items-center cursor-pointer flex-grow px-5 py-2
+                font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd] 
+                border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
+            >
                     <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chat-svgrepo-com.svg" 
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
@@ -153,7 +153,7 @@
             </div>
 
             <div 
-                class="cursor-pointer flex-grow px-5 py-2 text-center 
+                class="cursor-pointer flex-none px-5 py-2 text-center mt-auto
                         font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd] 
                         border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4]
                          dark:border-[#a7afb4] dark:hover:bg-[#313b40] "

@@ -29,7 +29,7 @@
 	});
 </script>
 
-<main>
+<main class="dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -44,7 +44,7 @@
 					<div class="overflow-hidden">
 						<table class="min-w-full text-left text-sm font-light">
 							<thead
-								class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-200"
+								class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-[#323232]"
 							>
 								<tr>
 									<th scope="col" class="px-6 py-4 text-xl font-bold">#</th>
@@ -54,7 +54,7 @@
 							</thead>
 							<tbody>
 								{#each studentwithCred as currStudent, i}
-									<tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-300">
+									<tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#070707] ">
 										<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
 
 										<td class="whitespace-nowrap px-6 py-4">

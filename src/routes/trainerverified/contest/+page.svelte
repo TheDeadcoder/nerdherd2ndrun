@@ -122,13 +122,13 @@
 	});
 </script>
 
-<main class="mt-6 ml-6 w-3/5">
+<main class="pt-6 pl-6 min-h-screen dark:text-[#e1e1e1] dark:bg-[#212020]">
 	<button class="btn p-4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg" on:click={addclassmodal}>
 		+ Add a New Public Contest
 	</button>
 	<div class="grid grid-cols-4 gap-12 mt-8">
 		{#each contestwithRegistrants as contest}
-			<div class="card flex flex-col space-y-2 shadow-lg hover:shadow-2xl p-4">
+			<div class="card flex flex-col space-y-2 shadow-lg hover:shadow-2xl p-4 ">
 				<img src={contest.image} alt="contest Icon" class="w-96 mr-1 hover:scale-105" />
 				<h1 class="font-extrabold text-xl">
 					{contest.title}
@@ -176,7 +176,7 @@
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 dark:text-[#e1e1e1] dark:bg-[#070707]">
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Public Contest</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
@@ -233,7 +233,7 @@
 
 							<input class="input" type="file" id="image" name="image" bind:value={image} />
 						</label>
-						<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+						<button type="submit" class="btn text-xl font-semibold dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg">
 							Submit
 						</button>
 					</div>

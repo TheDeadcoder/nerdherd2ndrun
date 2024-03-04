@@ -57,7 +57,7 @@
 	});
 </script>
 
-<main>
+<main class=" dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -66,7 +66,7 @@
 	</nav>
 	<div class="ml-6 mt-6 mr-6">
 		<button
-			class="btn p-2 bg-green-300 hover:bg-green-400 rounded-lg mb-6"
+			class="btn p-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]"
 			on:click={addclassmodal}
 		>
 			+ Add a New Notebook
@@ -111,19 +111,19 @@
 					<img src={getImage(note.lang)} alt="Dashboard Icon" class="h-12 hover:rotate-12" />
 					{#if hasAccess(note)}
 						<button
-							class="btn p-2 bg-cyan-300 hover:bg-cyan-500 rounded-lg"
+							class="btn p-2 px-1 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg"
 							on:click={() => goEditNote(note.id)}
 							>Edit Note
 						</button>
 					{:else if note.owner === teacherNow.id}
 						<button
-							class="btn p-2 bg-cyan-300 hover:bg-cyan-500 rounded-lg"
+							class="btn px-2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg"
 							on:click={() => goEditNote(note.id)}
 							>Edit Note
 						</button>
 					{:else}
 						<button
-							class="btn p-2 bg-cyan-300 hover:bg-cyan-500 rounded-lg"
+							class="btn p-1 px-2 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg"
 							on:click={() => goViewNote(note.id)}
 						>
 							View Only

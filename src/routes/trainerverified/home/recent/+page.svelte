@@ -421,15 +421,15 @@
 			<div class="grid grid-cols-4 mt-6 p-6 w-full">
 				{#each blogwithTeacherName as currblog, i}
 					<div
-						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
+						class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-1 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
 						<a href="/commonverified/article/{currblog.id}" class="">
 							<div class="hover:scale-105">
-								<div class="mb-3 rounded-full">
+								<div class="mb-1 h-[120px] overflow-hidden">
 									<img
 										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
 										alt="User "
-										class=" w-[100%] items-center justify-center object-contain object-center"
+										class=" w-full h-full object-cover items-center justify-center  object-center "
 									/>
 								</div>
 								<div class="px-4">
@@ -442,7 +442,7 @@
 										<img
 											src={currblog.currTeacher.image}
 											alt="Dashboard Icon"
-											class="h-8 mr-1 hover:scale-105 rounded-full"
+											class="h-7 mr-1 hover:scale-105 rounded-full"
 										/>
 										<h1 class="font-semibold">
 											{currblog.currTeacher.name}
@@ -458,27 +458,22 @@
 											{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
 										</p>
 
-										<!-- <img
-										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
-										alt="User "
-										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
-									/> -->
-										<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
+									
 									</div>
 
 									<div>
 										<p class="text-md text-justify">
-											{currblog.description.slice(0, 100)} ...
+											{currblog.description.slice(0, 50)} ...
 										</p>
 									</div>
 								</div>
 							</div>
 						</a>
-						<div class="flex flex-col space-y-1 p-4">
-							<div class="flex flex-row space-x-2">
+						<div class="flex flex-col space-y-1 p-2">
+							<div class="flex flex-row space-x-1 flex-wrap">
 								{#each currblog.tags as tag}
 									<div
-										class="card w-fit p-1 bg-blue-300 text-sm rounded-lg flex flex-col items-center justify-center"
+										class=" m-1 w-fit p-1 bg-blue-300 text-sm rounded-lg flex flex-col items-center justify-center dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 									>
 										{tag}
 									</div>
