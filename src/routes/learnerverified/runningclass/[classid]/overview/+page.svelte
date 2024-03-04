@@ -39,13 +39,13 @@
 				</h1>
 			</section>
 		</div>
-		<div class="flex flex-row space-x-20 mt-6">
-			<div class="flex flex-col space-y-5">
-				<h1 class="font-bold text-xl mb-4">
+		<div class="flex flex-row space-x-10 mt-6">
+			<div class="flex flex-col space-y-5 ">
+				<h1 class="font-bold text-xl mb-4 ">
 					<u>Class Participants</u>
 				</h1>
 				{#each students as student}
-					<a href="/viewonly/student/{student.currStudent.id}" class="flex flex-row space-x-2">
+					<a href="/viewonly/student/{student.currStudent.id}" class="flex flex-row space-x-2 border-b-2 py-1 border-black dark:border-white">
 						<img
 							src={student.currStudent.image}
 							alt="Dashboard Icon"

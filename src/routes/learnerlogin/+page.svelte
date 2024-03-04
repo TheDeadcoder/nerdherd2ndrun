@@ -103,8 +103,8 @@
                 <!-- Photo on the left side of the card -->
     
                 <!-- Previous Card Content -->
-                <div class="w-full p-8">
-                    <div class="flex flex-col space-y-9">
+                <div class="w-full p-8 ">
+                    <div class="flex flex-col space-y-9 ">
                         <div class="company-name">
                             <span class="company-name text-2xl font-extrabold">NerD</span><span
                                 class="company-name white-text text-xl font-extrabold">Herd</span

@@ -15,13 +15,13 @@
 	let homeVisible = 0;
 </script>
 
-<div class="pt-5 w-full mx-auto dark:bg-[#070707]">
+<div class="pt-5 w-full mx-auto dark:bg-[#070707] min-h-[calc(100vh-75px)] ">
 	<div class="p-0 flex flex-col w-full">
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer  px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -38,7 +38,7 @@
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer  px-5 py-2 text-center
                        font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -54,7 +54,7 @@
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -70,7 +70,7 @@
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer px-5 py-2 text-center
                        font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -86,7 +86,7 @@
 			</a>
 		</div>
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer  px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -103,7 +103,7 @@
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center
+			class="cursor-pointer  px-5 py-2 text-center
                        font-bold text-2xl hover:text-[27px] hover:bg-[#d8f0fd]
                        border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
@@ -120,7 +120,7 @@
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
+			class="cursor-pointer  mt-auto px-5 py-2 text-center font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
 			<button on:click={() => callParent()} class="flex items-center justify-center">
 				<img

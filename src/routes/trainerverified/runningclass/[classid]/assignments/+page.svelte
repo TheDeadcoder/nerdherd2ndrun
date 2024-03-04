@@ -270,13 +270,11 @@
 		</div> -->
 
 	<div
-		class={`p-10 ${
-			isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'
-		}`}
+		class={`p-1 min-h-screen dark:bg-[#212020] dark:text-[#e1e1e1]`}
 	>
 		<div class="mt-6 ml-6">
-			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
-				Add a new Assignment
+			<button class="btn p-3 font-semibold dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg" on:click={addclassmodal}>
+				+ Add a new Assignment
 			</button>
 
 			<section class="mt-10 ml-6 flex flex-row space-x-20">
@@ -290,12 +288,12 @@
 							</h1>
 							<div class="flex flex-row space-x-2">
 								{#if currAssignment.countdown}
-									<button class="btn p-2 bg-lime-300 rounded-lg">
+									<button class="btn p-2 bg-[#70e470] dark:bg-[#52a952]  rounded-lg">
 										Running: {currAssignment.countdown.days}d : {currAssignment.countdown.hours}h : {currAssignment
 											.countdown.minutes}m : {currAssignment.countdown.seconds}s
 									</button>
 									<button
-										class="bg-sky-300 rounded-lg p-2"
+										class="dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg p-2"
 										disabled={true}
 										on:click={() => fetchSubmissions(currAssignment)}
 									>
@@ -304,7 +302,7 @@
 								{:else}
 									<button class="btn p-2 bg-red-300 rounded-lg">Ended</button>
 									<button
-										class="bg-sky-300 rounded-lg p-2 hover:bg-sky-400"
+										class="dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg p-2 "
 										on:click={() => fetchSubmissions(currAssignment)}
 									>
 										View Details
@@ -469,7 +467,7 @@
 						</div>
 					{:else}
 						<div class="flex flex-row items-center justify-center font-light text-2xl">
-							No Assgnment to show :(
+							<!-- No Assgnment to show :( -->
 						</div>
 					{/if}
 				</div>
@@ -483,7 +481,7 @@
 				<div
 					class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 				>
-					<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+					<div class="bg-[#77B8De] dark:bg-[#070707] dark:text-[#e1e1e1] p-6 rounded-lg shadow-lg max-w-md w-full m-4">
 						<div class="flex justify-between items-center mb-4">
 							<h2 class="text-2xl font-bold">Add a New Assignment</h2>
 							<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
@@ -534,7 +532,7 @@
 										bind:value={question}
 									/>
 								</label>
-								<button type="submit" class="btn variant-filled-primary text-xl font-semibold">
+								<button type="submit" class="btn text-xl font-semibold dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]">
 									Submit
 								</button>
 							</div>
