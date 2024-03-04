@@ -243,7 +243,7 @@
 		<div
 			class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
 		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto">
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Question</h2>
 					<button class=" text-lg" on:click={closeQuestionmodal}>&times;</button>
