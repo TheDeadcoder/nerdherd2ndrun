@@ -201,7 +201,7 @@
 				</li>
 
 				<li>
-					<a href="/trainerverified/planner" class="flex items-center p-1 font-bold mr-3"
+					<a href="/learnerverified/planner" class="flex items-center p-1 font-bold mr-3"
 						><img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/calendar-svgrepo-com.svg"
 							alt="Dashboard Icon"
