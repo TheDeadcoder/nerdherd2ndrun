@@ -112,7 +112,7 @@
 	};
 </script>
 
-<div>
+<div class="min-h-screen dark:bg-[#212020] pb-5">
 	<!-- <nav class="appbar">
 		<div class="logo-container flex items-center">
 			<img
@@ -218,12 +218,12 @@
 			</li>
 		</ul>
 	</nav> -->
-	<section class="mt-6 ml-10 mr-10">
-		<h1 class="text-4xl font-extrabold">Upcoming Contests</h1>
+	<section class="pt-6 pl-10 pr-10 dark:bg-[#212020] dark:text-[#e1e1e1]">
+		<h1 class="text-[30px] font-bold">Upcoming Contests</h1>
 		<div class="grid grid-cols-4 gap-12 mt-6">
 			{#each contestWithInfo as contest}
 				{#if contest.isover === false}
-					<div class=" flex flex-col space-y-2 p-2">
+					<div class=" flex flex-col p-2 shadow-lg dark:text-[#e1e1e1] dark:bg-[#070707] rounded-lg">
 						<img
 							src={contest.image}
 							alt="Dashboard Icon"
@@ -257,14 +257,15 @@
 						{:else if contest.isRegistered === true}
 							<button class="btn btn-primary p-2 mt-3" disabled={true}> Already Registered </button>
 							<p class="flex items-center justify-center">
-								Before contest: {contest.countdown.days}d : {contest.countdown.hours}h : {contest
+								Before contest:</p>
+								<p class="flex items-center justify-center"> {contest.countdown.days}d : {contest.countdown.hours}h : {contest
 									.countdown.minutes}m : {contest.countdown.seconds}s
 							</p>
 						{:else}
 							<form action="?/register&id={contest.id}" method="POST">
 								<button
 									type="submit"
-									class="btn btn-primary p-2 mt-3 bg-green-400 rounded-lg w-full"
+									class="btn  p-2 mt-3 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg w-full"
 								>
 									Register Now
 								</button>
@@ -280,7 +281,7 @@
 				{/if}
 			{/each}
 		</div>
-		<h1 class="text-4xl font-extrabold mt-6">Archieved Contests</h1>
+		<h1 class="text-[30px] font-bold mt-6">Archieved Contests</h1>
 		<div class="grid grid-cols-4 gap-12 mt-6">
 			{#each contestWithInfo as contest}
 				{#if contest.isover === true}
@@ -307,15 +308,14 @@
 
 						{#if contest.isRegistered === true}
 							<p class="flex items-center justify-center">Your Score:{contest.ireg.score}</p>
-							<!-- <button class="btn btn-primary p-2 mt-3" disabled={true}></button> -->
 						{/if}
 					</div>
 				{/if}
 			{/each}
 		</div>
 	</section>
-	<pre>{JSON.stringify(studentNow, null, 2)}</pre>
-	<pre>{JSON.stringify(contestWithInfo, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(studentNow, null, 2)}</pre>
+	<pre>{JSON.stringify(contestWithInfo, null, 2)}</pre> -->
 </div>
 
 <style>

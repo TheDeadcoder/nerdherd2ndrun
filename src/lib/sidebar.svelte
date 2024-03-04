@@ -28,7 +28,7 @@
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
                     <p style="text-align: left; margin-left: 0.5cm;">
-                        Home
+                        Blogs
                     </p>
                 </div>
                

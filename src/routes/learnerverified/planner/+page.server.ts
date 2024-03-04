@@ -56,7 +56,7 @@ export const actions = {
 
         if (err) console.log(err)
 
-        else throw redirect(303, '/trainerverified/planner');
+        else throw redirect(303, '/learnerverified/planner');
     },
     deleteTodo: async ({ url, locals: { supabase, getSession } }) => {
         const todoid = url.searchParams.get("id")
@@ -72,7 +72,7 @@ export const actions = {
             .eq("id", todoid)
 
         if (err) console.log(err)
-        else throw redirect(303, '/trainerverified/planner');
+        else throw redirect(303, '/learnerverified/planner');
 
     },
     updateTodo: async ({ url, locals: { supabase, getSession } }) => {
@@ -91,7 +91,7 @@ export const actions = {
 
 
         if (err) return fail(400, { message: "Invalid request" })
-        else throw redirect(303, '/trainerverified/planner');
+        else throw redirect(303, '/learnerverified/planner');
 
     },
 
