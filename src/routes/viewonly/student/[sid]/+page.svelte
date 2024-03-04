@@ -1,8 +1,62 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	export let data;
+	import { Chart, registerables } from 'chart.js';
+	Chart.register(...registerables);
 
-	let { session, supabase, studentNow, studentqual } = data;
-	$: ({ session, supabase, studentNow, studentqual } = data);
+	let chart = null;
+
+	let { session, supabase, studentNow, studentqual, performanceWithContest } = data;
+	$: ({ session, supabase, studentNow, studentqual, performanceWithContest } = data);
+	function createChart(labels, data, maxPosition) {
+		const ctx = document.getElementById('performanceChart').getContext('2d');
+		if (chart) {
+			chart.destroy();
+		}
+		chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels,
+				datasets: [
+					{
+						label: 'Contest Position',
+						data,
+						fill: false,
+						borderColor: 'rgb(75, 192, 192)',
+						tension: 0.1
+					}
+				]
+			},
+			options: {
+				scales: {
+					y: {
+						reverse: true, // Reverse the scale to show 1 as the topmost position
+						max: maxPosition,
+						title: {
+							display: true,
+							text: 'Position'
+						}
+					}
+				}
+			}
+		});
+	}
+
+	onMount(async () => {
+		// Assume `fetchPerformanceData` is a function that fetches data from Supabase
+		// Sort the performances by starttime
+		const sortedPerformances = performanceWithContest.sort(
+			(a, b) => new Date(a.contest.start) - new Date(b.contest.start)
+		);
+		// Prepare the datasets for Chart.js
+		const labels = sortedPerformances.map((performance) =>
+			new Date(performance.contest.start).toLocaleDateString()
+		);
+		const positions = sortedPerformances.map((performance) => performance.result);
+		// Find the worst performance for setting the chart's scale
+		const maxPosition = Math.max(...positions);
+		createChart(labels, positions, maxPosition);
+	});
 </script>
 
 <div>
@@ -121,14 +175,13 @@
 		</nav>
 	</div>
 
-	<div class="min-h-screen flex justify-center py-5  dark:bg-[#212020] dark:text-[#e1e1e1]">
-		<div class="grid grid-cols-[30%_auto] w-3/4  ">
+	<div class="min-h-screen flex justify-center py-5 dark:bg-[#212020] dark:text-[#e1e1e1]">
+		<div class="grid grid-cols-[30%_auto] w-3/4">
 			<div class=" self-start sticky top-[105px] overflow-auto">
-				
 				<div class="flex justify-center">
 					<img src={studentNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
 				</div>
-				<div class="p-3 m-3 ">
+				<div class="p-3 m-3">
 					<p class="text-3xl font-semibold">{studentNow.name}</p>
 					<p class="font-thin">{studentNow.email}</p>
 					<p class="font-thin">{studentNow.mobile}</p>
@@ -138,13 +191,13 @@
 					</div>
 				</div>
 			</div>
-				
+
 			<div class="m-4">
 				<p class="font-semibold text-[18px]">Academic Background:</p>
-				{#each studentqual as qual,index}
+				{#each studentqual as qual, index}
 					<div class="grid grid-cols-[30%_auto] w-[250px] border ml-4 m-2">
 						<div>
-							<img src={qual.image} class="w-14" alt="">
+							<img src={qual.image} class="w-14" alt="" />
 						</div>
 						<div>
 							<p>{qual.institute}</p>
@@ -152,6 +205,16 @@
 						</div>
 					</div>
 				{/each}
+				<div class="flex flex-row mt-10">
+					<!-- svelte-ignore a11y-img-redundant-alt -->
+					<img
+						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/championship-trophy-svgrepo-com.svg"
+						alt="Eduqual Image"
+						class="w-8 h-8 mr-3 hover:scale-105 hover:rotate-12"
+					/>
+					<h1 class="font-extrabold text-xl">Contest Positions</h1>
+				</div>
+				<canvas id="performanceChart" class="w-full h-64"></canvas>
 			</div>
 		</div>
 	</div>

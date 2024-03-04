@@ -24,11 +24,11 @@
                 on:click={() => homeVisible = homeVisible^1}
             >
                 <div class="flex">
-                    <img src=" https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/home-house-svgrepo-com.svg"
+                    <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/blogger-color-svgrepo-com.svg"
                     alt="Dashboard Icon" 
                     class="h-7 ml-1 hover:rotate-12"/>
                     <p style="text-align: left; margin-left: 0.5cm;">
-                        Home
+                        Blogs
                     </p>
                 </div>
 
@@ -152,7 +152,7 @@
                 </a>
             </div>
 
-            <div 
+            <!-- <div 
                 class="cursor-pointer flex-grow px-5 py-2 text-center 
                         font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd] 
                         border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4]
@@ -168,7 +168,7 @@
                         </p>
                 </button>
             </div>
-            
+             -->
      
     </div>
   </div>
