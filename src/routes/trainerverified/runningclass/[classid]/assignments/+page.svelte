@@ -5,18 +5,14 @@
 	import { enhance } from '$app/forms';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
-  	import {isRunningClass} from '../../../../../stores/isRunningClass'
+	import { isRunningClass } from '../../../../../stores/isRunningClass';
 
 	// import Message from './Message.svelte';
 	export let data;
 	const { classid } = $page.params;
 
-
-// 	let { session, supabase, classNow, studclass } = data;
-// 	$: ({ session, supabase, classNow, studclass } = data);
-
-	
-
+	// 	let { session, supabase, classNow, studclass } = data;
+	// 	$: ({ session, supabase, classNow, studclass } = data);
 
 	let { session, supabase, classNow, studclass, teacherNow, assignment } = data;
 	$: ({ session, supabase, classNow, studclass, teacherNow, assignment } = data);
@@ -31,8 +27,33 @@
 		assignmentModal = true;
 	}
 
+	function formatDateTime(val) {
+		let timestamp = new Date(val);
+		if (timestamp) {
+			const options = {
+				month: 'short',
+				day: 'numeric',
+				year: 'numeric',
+				hour: 'numeric',
+				minute: 'numeric',
+				hour12: true
+			};
+			let formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(timestamp);
+			return formattedDateTime;
+		}
+	}
+
 	function closeclassmodal() {
 		assignmentModal = false;
+	}
+
+	let score;
+	let scoreModal = false;
+	function addscoremodal() {
+		scoreModal = true;
+	}
+	function closescoremodal() {
+		scoreModal = false;
 	}
 
 	// Timestamp formatting function
@@ -103,7 +124,7 @@
 
 	// Close sidebar when clicking outside, for mobile responsiveness
 	onMount(() => {
-    	isRunningClass.set({classid:classid,isClass:true})
+		isRunningClass.set({ classid: classid, isClass: true });
 
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
@@ -115,14 +136,13 @@
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
-	onDestroy(()=>{
-		isRunningClass.set({classid:"",isClass:false})
+	onDestroy(() => {
+		isRunningClass.set({ classid: '', isClass: false });
 	});
-
 </script>
 
 <div class="">
-<!--	<nav class="appbar">
+	<!--	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
@@ -249,9 +269,12 @@
 			</div>
 		</div> -->
 
-	<div class={`p-10 ${isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'}`}> 
+	<div
+		class={`p-10 ${
+			isSidebarOpen ? 'flex justify-center w-[100%]' : 'flex justify-center w-[100%]'
+		}`}
+	>
 		<div class="mt-6 ml-6">
-
 			<button class="btn p-3 bg-slate-400 rounded-lg" on:click={addclassmodal}>
 				Add a new Assignment
 			</button>
@@ -271,15 +294,22 @@
 										Running: {currAssignment.countdown.days}d : {currAssignment.countdown.hours}h : {currAssignment
 											.countdown.minutes}m : {currAssignment.countdown.seconds}s
 									</button>
+									<button
+										class="bg-sky-300 rounded-lg p-2"
+										disabled={true}
+										on:click={() => fetchSubmissions(currAssignment)}
+									>
+										View Details
+									</button>
 								{:else}
 									<button class="btn p-2 bg-red-300 rounded-lg">Ended</button>
+									<button
+										class="bg-sky-300 rounded-lg p-2 hover:bg-sky-400"
+										on:click={() => fetchSubmissions(currAssignment)}
+									>
+										View Details
+									</button>
 								{/if}
-								<button
-									class="bg-sky-300 rounded-lg p-2"
-									on:click={() => fetchSubmissions(currAssignment)}
-								>
-									View Details
-								</button>
 							</div>
 						</div>
 					{/each}
@@ -287,47 +317,154 @@
 				<div>
 					{#if selectedAssignment}
 						<div class="ml-6">
-							<button class="bg-red-300 rounded-lg p-3" on:click={closeSubmissions}>
+							<button
+								class="bg-red-300 rounded-lg p-3 hover:bg-red-500 hover:scale-95"
+								on:click={closeSubmissions}
+							>
 								X close
 							</button>
 							<h1 class="font-extrabold text-3xl">
 								{selectedAssignment.title}
 							</h1>
-							<p>
-								{selectedAssignment.deadline}
+							<p class="mt-2">
+								Deadline: {formatDateTime(selectedAssignment.deadline)}
 							</p>
 
-							<div class="flex flex-col space-y-3">
-								{#each allSubmissions as submissions}
-									<div class="flex flex-row justify-between mt-6">
-										<a
-											href="/viewonly/student/{submissions.student.id}"
-											class="flex flex-row space-x-2"
-										>
-											<img
-												src={submissions.student.image}
-												alt="Dashboard Icon"
-												class="h-8 mr-3 hover:rotate-12"
-											/>
-											<h1 class="font-semibold">
-												{submissions.student.name}
-											</h1>
-										</a>
-										<div class="flex flex-row space-x-2">
-											<p>
-												submitted at: {submissions.time}
-											</p>
-											<a href={submissions.body} class="flex flex-row space-x-1">
-												<img
-													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/file-2-svgrepo-com.svg"
-													alt="Dashboard Icon"
-													class="h-8 mr-3 hover:rotate-12"
-												/>
-												See submission
-											</a>
+							<div class="flex flex-col space-y-3 mt-6">
+								<div class="flex flex-col">
+									<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+										<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+											<div class="overflow-hidden">
+												<table class="min-w-full text-left text-sm font-light">
+													<thead
+														class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-200"
+													>
+														<tr>
+															<th scope="col" class="px-6 py-4">#</th>
+															<th scope="col" class="px-6 py-4">Student</th>
+															<th scope="col" class="px-6 py-4">Submission Time</th>
+															<th scope="col" class="px-6 py-4">Submission</th>
+															<th scope="col" class="px-6 py-4">Marking</th>
+														</tr>
+													</thead>
+													<tbody>
+														{#each allSubmissions as submissions, i}
+															<tr
+																class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-300"
+															>
+																<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
+																<td class="whitespace-nowrap px-6 py-4">
+																	<a
+																		href="/viewonly/student/{submissions.student.id}"
+																		class="flex flex-row space-x-2"
+																	>
+																		<img
+																			src={submissions.student.image}
+																			alt="Dashboard Icon"
+																			class="h-8 hover:rotate-12"
+																		/>
+																		<h1 class="font-semibold">
+																			{submissions.student.name}
+																		</h1>
+																	</a>
+																</td>
+																<td class="whitespace-nowrap px-6 py-4"
+																	>{formatDateTime(submissions.time)}</td
+																>
+																<td class="whitespace-nowrap px-6 py-4">
+																	<a href={submissions.body} class="flex flex-row space-x-1">
+																		<img
+																			src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/file-2-svgrepo-com.svg"
+																			alt="Dashboard Icon"
+																			class="h-8 hover:rotate-12"
+																		/>
+																		See submission
+																	</a>
+																</td>
+																<td class="whitespace-nowrap px-6 py-4">
+																	<div class="flex flex-row">
+																		<p class="font-semibold text-xl">
+																			{submissions.score}
+																		</p>
+																		<button
+																			class="btn p-1 rounded-lg bg-red-300 hover:bg-red-500 ml-2"
+																			on:click={addscoremodal}
+																		>
+																			<!-- <img
+																				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+																				alt="Dashboard Icon"
+																				class="h-8 hover:rotate-12"
+																			/> -->
+																			Edit
+																		</button>
+																	</div>
+																</td>
+															</tr>
+															<!-- <div class="flex flex-row space-x-10">
+																<h1>
+																	{cursession.topic}
+																</h1>
+																<h1>
+																	{cursession.start}
+																</h1>
+																<h1>
+																	Duration: {cursession.duration} seconds
+																</h1>
+															</div> -->
+															{#if scoreModal}
+																<div
+																	class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+																>
+																	<div
+																		class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4"
+																	>
+																		<div class="flex justify-between items-center mb-4">
+																			<h2 class="text-2xl font-bold">Assign score</h2>
+																			<button class=" text-lg" on:click={closescoremodal}
+																				>&times;</button
+																			>
+																		</div>
+
+																		<form
+																			use:enhance
+																			action="?/update&id={submissions.id}"
+																			method="POST"
+																			on:submit={() => {
+																				closescoremodal();
+																			}}
+																		>
+																			<div class="flex flex-col space-y-6">
+																				<label class="label text-left mb-3">
+																					<span>Score</span>
+
+																					<input
+																						class="input"
+																						type="number"
+																						id="score"
+																						name="score"
+																						bind:value={score}
+																						placeholder="Enter The score"
+																					/>
+																				</label>
+
+																				<button
+																					type="submit"
+																					class="btn bg-green-300 hover:bg-green-500 rounded-lg text-xl font-semibold"
+																				>
+																					Submit
+																				</button>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+															{/if}
+														{/each}
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-								{/each}
+								</div>
 							</div>
 						</div>
 					{:else}
@@ -407,7 +544,7 @@
 			{/if}
 		</div>
 	</div>
-</div> 
+</div>
 
 <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 <style>

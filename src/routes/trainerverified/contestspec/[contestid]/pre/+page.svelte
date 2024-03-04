@@ -479,5 +479,5 @@
 		</div>
 	{/if}
 
-	<pre>{JSON.stringify(contestNow, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(contestNow, null, 2)}</pre> -->
 </main>

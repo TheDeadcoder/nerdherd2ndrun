@@ -67,7 +67,7 @@
 							<div class="overflow-hidden">
 								<table class="min-w-full text-left text-sm font-light">
 									<thead
-										class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600"
+										class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-200"
 									>
 										<tr>
 											<th scope="col" class="px-6 py-4">#</th>
@@ -79,7 +79,7 @@
 									<tbody>
 										{#each classlive as cursession, i}
 											<tr
-												class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700"
+												class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-300"
 											>
 												<td class="whitespace-nowrap px-6 py-4 font-medium">{i}</td>
 												<td class="whitespace-nowrap px-6 py-4">{cursession.topic}</td>
