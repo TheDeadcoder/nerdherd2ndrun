@@ -70,6 +70,17 @@
                                         Profile</a
                                     >
                                 </li>
+                                <li class="mt-2 mb-3 p-2">
+                                    <button on:click={()=>handleSignOut()} class="flex items-center font-bold">
+                                        <img src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/logout-arrows-svgrepo-com.svg" 
+                                            alt="Dashboard Icon" 
+                                            class="h-7 ml-1 hover:rotate-12"
+                                        />
+                                        <p style="text-align: center; margin-left: 0.2cm;">
+                                            Log Out
+                                        </p>
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                     </div>
