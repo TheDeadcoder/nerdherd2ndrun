@@ -251,7 +251,7 @@
 	</div>
 </div> -->
 
-<div class="container mx-auto min-h-screen dark:bg-[#070707]">
+<div class="container mx-auto min-h-screen dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<!-- svelte-ignore missing-declaration -->
 	
 	<h2 class="text-3xl font-bold p-3 px-6 light:text-[#f0f0f0]">Todo List</h2>
