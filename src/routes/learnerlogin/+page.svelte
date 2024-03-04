@@ -9,6 +9,10 @@
 
     export let data: PageData;
 
+    const returnAccessType = ()=>{
+        window.open('/accessType','_self')
+    }
+
     const newSignupSchema = z.object({
         email: z.string().email({ message: 'Invalid email format' }),
         password: z
@@ -63,8 +67,8 @@
 
 <div id="login_id" class="learnerloginContainer">
     <nav class="w-full py-6  ">
-        <div class="flex justify-between mx-6 ">
-			<div class="flex cursor-pointer">
+        <div class="flex justify-between mx-6">
+			<div class="flex"  on:click={returnAccessType}>
 				<img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 					class="transform transition duration-300 hover:rotate-12"

@@ -31,12 +31,20 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
   console.log(err);
 
+
+
+
   let tagsToBooksMap = {};
+  let uniqueTags = []; // Array to hold unique tags
+
   book.forEach(currbook => {
     let values = currbook.tags;
     values.forEach(tag => {
       let trimmedTag = tag.trim();
-      // console.log(tag)
+      // Check if the tag is not already in the uniqueTags array before adding it
+      if (!uniqueTags.includes(trimmedTag)) {
+        uniqueTags.push(trimmedTag);
+      }
       if (!tagsToBooksMap[trimmedTag]) {
         tagsToBooksMap[trimmedTag] = []; // Initialize the array if the tag is encountered for the first time
       }
@@ -48,7 +56,9 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 
 
-  return { tagsToBooksMap, teacherNow }
+
+
+  return { tagsToBooksMap, teacherNow, uniqueTags }
 }
 
 export const actions = {
