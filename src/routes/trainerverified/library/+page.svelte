@@ -195,7 +195,7 @@
 		</div>
 			<div class="mt-2">
 				{#if filterApplied}
-					<button class="btn bg-red-300 hover:bg-red-500 rounded-lg" on:click={resetView}
+					<button class="btn text-semibold bg-red-300 dark:bg-[#e78080] hover:bg-red-500 rounded-lg" on:click={resetView}
 						>X Reset Filter
 					</button>
 					<h1 class="text-xl font-extrabold">Filtered Result</h1>
