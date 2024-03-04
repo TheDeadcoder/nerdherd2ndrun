@@ -73,6 +73,23 @@ export const actions = {
 
         throw redirect(303, `/trainerverified/runningclass/${classNow.id}/live`);
     },
+    edit: async ({ request, locals: { supabase, getSession } }) => {
+
+        const data = await request.formData();
+
+        let newClass = Object.fromEntries(data.entries()) as any;
+        //console.log(newClass.studid, newClass.score);
+
+        //console.log(newClass.sid, newClass.cred);
+        const { data: dtx, error: err2 } = await supabase
+            .from('attendance')
+            .update({ score: newClass.score })
+            .eq('id', newClass.studid);
+
+        if (err2) console.log(err2)
+        else throw redirect(303, `/trainerverified/runningclass/${classNow.id}/live`);
+
+    },
 
 
 

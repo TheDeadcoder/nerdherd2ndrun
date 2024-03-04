@@ -64,12 +64,13 @@
 								<tr>
 									<th scope="col" class="px-6 py-4 text-xl font-bold">#</th>
 									<th scope="col" class="px-6 py-4 text-xl font-bold">Student</th>
+									<th scope="col" class="px-6 py-4 text-xl font-bold">Assesment Scores</th>
 									<th scope="col" class="px-6 py-4 text-xl font-bold">Credential</th>
 								</tr>
 							</thead>
 							<tbody>
 								{#each studentwithCred as currStudent, i}
-									<tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#070707] ">
+									<tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#070707]">
 										<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
 
 										<td class="whitespace-nowrap px-6 py-4">
@@ -86,6 +87,20 @@
 													{currStudent.student.name}
 												</h1>
 											</a>
+										</td>
+										<td class="whitespace-nowrap px-6 py-4">
+											<div class="flex flex-col space-y-1">
+												{#each currStudent.mysubmissions as submission, i}
+													<p class="flex flex-row space-x-2">
+														Assesment no {i + 1}. Score:
+														{#if submission}
+															{submission}
+														{:else}
+															Not Submitted
+														{/if}
+													</p>
+												{/each}
+											</div>
 										</td>
 
 										<td class="whitespace-nowrap px-6 py-4">

@@ -20,6 +20,11 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     classNow = classes[0];
 
+    let { data: assignment, error } = await supabase
+        .from('assignment')
+        .select("*")
+        .eq('cid', classNow.id);
+
 
     let { data: studclass, error: err2 } = await supabase
         .from('studclass')
@@ -34,7 +39,29 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
             .eq('id', studItem.sid);
 
         studItem.student = student[0];
+        let mysubmissions = [];
 
+        for (let j = 0; j < assignment?.length; j++) {
+            let { data: submissions, error: Errorx } = await supabase
+                .from('submissions')
+                .select("*")
+                .eq('aid', assignment[j].id)
+                .eq('sid', studItem.sid);
+
+            //console.log(submissions);
+            if (submissions?.length > 0) {
+                let tempooo = submissions[0];
+                //console.log(tempooo);
+                mysubmissions = [...mysubmissions, tempooo.score];
+
+            }
+            else {
+                mysubmissions = [...mysubmissions, null];
+            }
+        }
+
+
+        console.log('ok', mysubmissions);
 
 
         let { data: credentials, error: crederror } = await supabase
@@ -46,7 +73,8 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         // Attach pendingclass data to classItem
         return {
             ...studItem,
-            credentials
+            credentials,
+            mysubmissions
         };
     }));
 
