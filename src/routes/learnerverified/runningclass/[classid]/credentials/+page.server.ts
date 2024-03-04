@@ -3,6 +3,8 @@ import { error } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 let classNow;
+let studentNow;
+let teacherNow;
 
 export const load = async ({ params, locals: { supabase, getSession } }) => {
     console.log(params.classid);
@@ -12,6 +14,19 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         throw redirect(303, '/')
     }
 
+    const {
+        data: { user }
+    } = await supabase.auth.getUser();
+    //console.log(user);
+
+
+    let { data: student, error: err } = await supabase
+        .from('student')
+        .select("*")
+        .eq('email', user.email)
+
+    studentNow = student[0];
+
 
     let { data: classes, error: err1 } = await supabase
         .from('classes')
@@ -20,13 +35,20 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     classNow = classes[0];
 
+    let { data: teacher, error: err9 } = await supabase
+        .from('teacher')
+        .select("*")
+        .eq('id', classNow.teacherid)
 
-    let { data: studclass, error: err2 } = await supabase
-        .from('studclass')
+    teacherNow = teacher[0];
+
+
+    let { data: credentials, error: err2 } = await supabase
+        .from('credentials')
         .select("*")
         .eq('cid', classNow.id)
-        .eq('joined', true)
+        .eq('sid', studentNow.id)
 
-    return { classNow, studclass };
+    return { classNow, credentials, studentNow, teacherNow };
 
 }

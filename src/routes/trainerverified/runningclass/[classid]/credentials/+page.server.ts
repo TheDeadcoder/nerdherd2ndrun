@@ -55,22 +55,41 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 }
 
 export const actions = {
-    add: async ({ url, request, locals: { supabase, getSession } }) => {
-        const studentid = url.searchParams.get("id");
+    add: async ({ request, locals: { supabase, getSession } }) => {
+
         const data = await request.formData();
 
         let newClass = Object.fromEntries(data.entries()) as any;
 
-        //console.log("ami todo delete korte chai ", todoid);
+        //console.log(newClass.sid, newClass.cred);
 
-        if (!studentid) {
-            return fail(400, { message: "Invalid request" })
-        }
+
         const { data: dtx, error: err2 } = await supabase
             .from('credentials')
             .insert([
-                { sid: studentid, cid: classNow.id, body: newClass.cred },
+                { sid: newClass.sid, cid: classNow.id, body: newClass.cred },
             ]);
+
+        if (err2) console.log(err2)
+        else throw redirect(303, `/trainerverified/runningclass/${classNow.id}/credentials`);
+
+    },
+    edit: async ({ request, locals: { supabase, getSession } }) => {
+
+        const data = await request.formData();
+
+        let newClass = Object.fromEntries(data.entries()) as any;
+
+        //console.log(newClass.sid, newClass.cred);
+
+
+
+        const { data: dtx, error: err2 } = await supabase
+            .from('credentials')
+            .update({ body: newClass.ecred })
+            .eq('sid', newClass.esid)
+            .eq('cid', classNow.id);
+
 
         if (err2) console.log(err2)
         else throw redirect(303, `/trainerverified/runningclass/${classNow.id}/credentials`);
