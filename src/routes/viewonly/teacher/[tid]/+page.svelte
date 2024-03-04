@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
+	import Sidebar from '$lib/sidebar.svelte';
+import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
     import type { PopupSettings, Table } from '@skeletonlabs/skeleton';
 
 	export let data;
@@ -88,6 +89,9 @@
 	const setOption=(value)=>{
 		option = value
 	}
+	const handleGoBack = ()=>{
+		history.back();
+	}
 
 </script>
 
@@ -133,30 +137,38 @@
         </div>
     </div>
 
-	<div class="min-h-screen flex justify-center py-5  dark:bg-[#212020] dark:text-[#e1e1e1]">
-		<div class="grid grid-cols-[30%_auto] w-3/4  ">
-			<div class=" self-start sticky top-[105px] overflow-auto">
-				
-				<div class="flex justify-center">
-					<img src={teacherNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
-				</div>
-				<div class="p-3 m-3 ">
-					<p class="text-3xl font-semibold">{teacherNow.name}</p>
-					<p class="font-thin">{teacherNow.email}</p>
-					<p class="font-thin">{teacherNow.mobile}</p>
-					<p class="font-thin">{teacherNow.address}</p>
-					<div class="mt-3">
-						<p class="">{teacherNow.about}</p>
+	<div class="min-h-[100vh-300px] w-full  flex justify-center   dark:bg-[#212020] dark:text-[#e1e1e1]">
+		
+
+		<div class="grid grid-cols-[17%_auto] w-full ">
+
+			<div class="self-start sticky top-[78px] overflow-auto">
+				<Sidebar on:callParentFunction={handleGoBack}></Sidebar>
+			</div>
+
+			<div class="grid grid-cols-[30%_auto] pl-6">
+				<div class=" self-start sticky top-[105px] overflow-auto ">
+					
+					<div class="flex justify-center">
+						<img src={teacherNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
+					</div>
+					<div class="p-3 m-3 ">
+						<p class="text-3xl font-semibold">{teacherNow.name}</p>
+						<p class="font-thin">{teacherNow.email}</p>
+						<p class="font-thin">{teacherNow.mobile}</p>
+						<p class="font-thin">{teacherNow.address}</p>
+						<div class="mt-3">
+							<p class="">{teacherNow.about}</p>
+						</div>
+					</div>
+					<div>
+						<ul class="mb-4">
+							<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(1)}>Qualification</button></li>
+							<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(2)}>Blog</button></li>
+							<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(3)}>Classes</button></li>
+						</ul>
 					</div>
 				</div>
-				<div>
-					<ul class="mb-4">
-						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(1)}>Qualification</button></li>
-						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(2)}>Blog</button></li>
-						<li class="p-2 border-b-2 pl-4 text-[18px] hover:text-[19px] font-semibold"><button on:click={()=>setOption(3)}>Classes</button></li>
-					</ul>
-				</div>
-			</div>
 				
 			<div>
 				{#if option===1}
@@ -323,29 +335,22 @@
 				{/if}
 			</div>
 		</div>
+		</div>
+		
 	</div>
 
 
 	<!-- go back button -->
-	<div class="fixed top-28 z-10 ">
-		<button class="text-white text-[15px] font-bold ml-5 border rounded-full" on:click={()=>history.back()}>
-			<div class="flex w-14 ">
-				<svg xmlns="http://www.w3.org/2000/svg" class="text-white" viewBox="0 0 448 512">
-					<path stroke="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-				</svg>
-				<!-- <p>Go Back</p> -->
-			</div>
-		</button>
-	</div>
+	
 </div>
 
-<pre>{JSON.stringify(teacherNow, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(teacherNow, null, 2)}</pre> -->
 <!-- <pre>{JSON.stringify(blog, null, 2)}</pre> -->
 <!-- <pre>{JSON.stringify(classes, null, 2)}</pre> -->
 <!-- <pre>{JSON.stringify(teacherqual, null, 2)}</pre> -->
 <!-- <pre>{JSON.stringify(teacherskills, null, 2)}</pre> -->
-<pre>{JSON.stringify(commonUserNow, null, 2)}</pre>
-<pre>{JSON.stringify(follower, null, 2)}</pre>
+<!--<pre>{JSON.stringify(commonUserNow, null, 2)}</pre>
+<pre>{JSON.stringify(follower, null, 2)}</pre> -->
 
 <style>
 	.navbar {

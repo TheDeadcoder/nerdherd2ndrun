@@ -14,7 +14,7 @@
 
 </script>
 
-<div class="pt-5 w-full min-h-[calc(100vh-75px)] mx-auto dark:bg-[#070707] overflow-y-auto">
+<div class="pt-5 w-full min-h-[calc(100vh-85px)] mx-auto dark:bg-[#070707] overflow-y-auto">
     <div class="p-0 flex flex-col w-full min-h-[calc(100vh-100px)] ">
       
             <!-- svelte-ignore a11y-no-static-element-interactions -->

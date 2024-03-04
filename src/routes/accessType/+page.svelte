@@ -40,10 +40,10 @@
 
 		if(element!==null){
 			if(isDark===true){
-				element.style.backgroundImage = "url('src/lib/svgs/access-type-bg-dark.svg')"
+				element.style.backgroundImage = "url('https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/access-type-bg-dark.svg')"
 			}
 			else{
-				element.style.backgroundImage = "url('src/lib/svgs/access-type-bg.svg')"
+				element.style.backgroundImage = "url('https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/access-type-bg.svg')"
 			}
 		}
 	}
