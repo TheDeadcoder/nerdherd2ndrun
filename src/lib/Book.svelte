@@ -16,23 +16,16 @@
 	};
 </script>
 
-<div class="w-[250px] min-w-[200px] shadow-lg m-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#070707]">
+<div class="w-[220px] min-w-[200px] shadow-lg m-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#070707]">
 	<button on:click={() => sendDataToParent(book.content)}>
-		<div class="grid grid-rows-[300px_75px] border-1">
-			<div class="h-[120px]">
-				<img class="w-[100%]" src={book.coverimg} alt="" />
+		<div class="grid grid-rows-[175px_80px] border-1">
+			<div class="h-[170px] overflow-hidden">
+				<img class="w-[100%] object-cover" src={book.coverimg} alt="" />
 			</div>
 			<div>
 				<h1>{book.title}</h1>
 				<h2>{book.author}</h2>
-				<div class="flex flex-row space-x-2 items-center justify-center">
-					<img
-						class="w-4 h-4"
-						src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/taka-svgrepo-com.svg"
-						alt="taka logo"
-					/>
-					
-				</div>
+				
 			</div>
 		</div>
 	</button>
