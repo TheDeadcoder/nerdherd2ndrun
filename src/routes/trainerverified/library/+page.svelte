@@ -43,11 +43,33 @@
 		showaddmodal = false;
 	}
 
-	let { session, supabase, tagsToBooksMap, teacherNow } = data;
-	$: ({ session, supabase, tagsToBooksMap, teacherNow } = data);
+	let { session, supabase, tagsToBooksMap, teacherNow, uniqueTags } = data;
+	$: ({ session, supabase, tagsToBooksMap, teacherNow, uniqueTags } = data);
 
 	// let categoryName = ['Children Book', 'Science', 'Art', 'Finance'];
 	let url = '';
+
+	let filterCategory;
+	let filterBooks = tagsToBooksMap;
+	let filterApplied = false;
+
+	function applyFilters() {
+		filterBooks = tagsToBooksMap;
+		if (filterCategory) {
+			// Filter the books based on the selected tag
+			filterBooks = {
+				[filterCategory]: tagsToBooksMap[filterCategory] // Only include books with the selected tag
+			};
+			filterApplied = true;
+		} else {
+			// If no tag is selected, reset to show all books
+			resetView();
+		}
+	}
+	function resetView() {
+		filterApplied = false;
+		filterBooks = tagsToBooksMap; // Clear filtered products
+	}
 
 	$: console.log(url);
 
@@ -57,14 +79,31 @@
 	};
 </script>
 
-<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2] ">
-	<div>
+<main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2]">
+	<div class="flex flex-row justify-between">
 		<button
 			class="btn bg-green-400 rounded-lg text-2xl font-semibold mt-10 ml-6 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 			on:click={addclassmodal}
 		>
 			+ Add book
 		</button>
+		<div class="flex flex-row space-x-2 mr-6 mt-10">
+			<label class="input flex items-center gap-2">
+				<select
+					bind:value={filterCategory}
+					class="select"
+					id="filterCategory"
+					name="filterCategory"
+				>
+					{#each uniqueTags as tag}
+						<option value={tag}>{tag}</option>
+					{/each}
+				</select>
+			</label>
+			<button class="btn bg-green-300 rounded-lg hover:bg-green-500" on:click={applyFilters}>
+				Submit
+			</button>
+		</div>
 	</div>
 	<div class="ml-8 mt-16 blur-xl={isLoading}">
 		{#if isLoading}
@@ -152,7 +191,13 @@
 			</div>
 		{:else}
 			<div class="mt-2">
-				{#each Object.entries(tagsToBooksMap) as [tag, books]}
+				{#if filterApplied}
+					<button class="btn bg-red-300 hover:bg-red-500 rounded-lg" on:click={resetView}
+						>X Reset Filter
+					</button>
+					<h1 class="text-xl font-extrabold">Filtered Result</h1>
+				{/if}
+				{#each Object.entries(filterBooks) as [tag, books]}
 					<BookCategory categoryName={tag} {books} bind:url></BookCategory>
 				{/each}
 			</div>
@@ -162,8 +207,10 @@
 		<div
 			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity dark:text-[#e1e1e1] dark:bg-[#07070763]"
 		>
-        <div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto dark:text-[#e1e1e1] dark:bg-[#070707]">
-			<div class="flex justify-between items-center mb-4">
+			<div
+				class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4 max-h-screen overflow-y-auto dark:text-[#e1e1e1] dark:bg-[#070707]"
+			>
+				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">Add a new Resource</h2>
 					<button class=" text-lg" on:click={closeclassmodal}>&times;</button>
 				</div>
@@ -278,7 +325,6 @@
 								bind:value={content}
 							/>
 						</label>
-						
 
 						<label class="label text-left mb-2">
 							<span>Cover Photo (optional)</span>

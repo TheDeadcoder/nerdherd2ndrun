@@ -67,11 +67,14 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         }
 
 
-
-
-        // Attach pendingclass data to classItem
+        let { data: access, error: errd } = await supabase
+            .from('access')
+            .select("*")
+            .eq('cuid', teacherNow.id)
+            .eq('noteid', noteItem.id);
         return {
             ...noteItem,
+            access,
             userNow // This adds the pendingclass array to each classItem
         };
     }));
