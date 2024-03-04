@@ -9,6 +9,10 @@
 
     export let data: PageData;
 
+    const returnAccessType = ()=>{
+        window.open('/accessType','_self')
+    }
+
     const newSignupSchema = z.object({
         email: z.string().email({ message: 'Invalid email format' }),
         password: z
@@ -64,27 +68,36 @@
 <div id="login_id" class="learnerloginContainer">
     <nav class="w-full py-6  ">
         <div class="flex justify-between mx-6">
-            <div class="flex">
-                <img
-                    src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
-                    class="transform transition duration-300 hover:rotate-12"
-                    alt="title"
-                    width={60}
-                />
-                <span class="company-name text-2xl font-extrabold">NerD</span><span
-                    class="company-name white-text text-2xl font-extrabold">Herd</span
-                >
-            </div>
-    
-            <div class="flex space-x-3">
-                <LightSwitch on:click={modeSwitch}/>
-                <a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
-                    About us
-                </a>
-            </div>
-        </div>
+			<div class="flex"  on:click={returnAccessType}>
+				<img
+					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
+					class="transform transition duration-300 hover:rotate-12"
+					alt="title"
+					width={60}
+				/>
+				<span class="company-name text-2xl font-extrabold dark:text-[#e1e1e1]">NerD</span><span
+					class="company-name white-text text-2xl font-extrabold">Herd</span
+				>
+			</div>
+	
+			<div class="flex space-x-3">
+				<!-- <LightSwitch /> -->
+				<div class="flex space-x-3">
+					<!-- <LightSwitch /> -->
+					<div class=" ">
+						<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+							<LightSwitch class='' on:click={modeSwitch}/>
+						</div>
+					</div>
+					<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
+						About us
+					</a>
+				</div>
+				
+			</div>
+		</div>
     </nav>
-    <div class="container h-full mx-auto flex justify-center items-center mt-7">
+    <div class="container h-full mx-auto mb-12 flex justify-center items-center mt-7">
         <div class="max-h-screen text-center flex flex-col items-center">
             <div class="flex bg-[#e2e6e9]  shadow-2xl rounded-xl overflow-hidden max-w-4xl dark:text-[#e1e1e1] dark:bg-[#212020]">
                 <!-- Photo on the left side of the card -->
@@ -220,7 +233,7 @@
     
     
                         <div>
-                            <button type="submit" class=" btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg w-[100%]"  tabindex="0">
+                            <button type="submit" class=" btn font-bold text-xl p-2  rounded-full shadow-md  hover:text-[21px] hover:shadow-lg w-[100%]  dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]"  tabindex="0">
                                 Sign In
                             </button>
                         </div>

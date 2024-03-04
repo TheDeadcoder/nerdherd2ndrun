@@ -1,4 +1,5 @@
 <script lang="ts">
+	 import { onMount } from 'svelte';
 	import { Stepper, Step, InputChip, LightSwitch } from '@skeletonlabs/skeleton';
 	import Footer from '$lib/footer.svelte';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -11,6 +12,10 @@
 	const toastStore = getToastStore();
 
 	export let data: PageData;
+
+	const returnAccessType = ()=>{
+        window.open('/accessType','_self')
+    }
 
 	// Define a regex for the password requirements
 	const done = false;
@@ -78,24 +83,41 @@
 		}
 		return age;
 	}
-</script>
 
-<nav class="fixed top-0 z-50 w-full py-6 backdrop-blur-md">
+	onMount(() => {
+		modeSwitch()
+        // Ensure password input type is set correctly on mount
+        
+    });
+
+	const modeSwitch = ()=>{
+		
+	}
+</script>
+<div id='login_id' class="trainersigninContainer">
+
+	
+<nav class="fixed top-0 z-50 w-full py-6  bg-[#77B8De] dark:bg-[#070707]">
 	<div class="flex justify-between mx-6">
-		<div class="flex">
+		<div class="flex" on:click={returnAccessType}>
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 				class="transform transition duration-300 hover:rotate-12"
 				alt="title"
 				width={60}
 			/>
-			<span class="company-name text-2xl font-extrabold">NerD</span><span
+			<span class="company-name text-2xl font-extrabold dark:text-[#e1e1e1]">NerD</span><span
 				class="company-name white-text text-2xl font-extrabold">Herd</span
 			>
 		</div>
 
 		<div class="flex space-x-3">
-			<LightSwitch />
+			<!-- <LightSwitch /> -->
+			<div class=" ">
+				<div class="border-black bg-[#ffffff] dark:bg-[#5e5d5d] rounded-full">
+					<LightSwitch class='' on:click={modeSwitch}/>
+				</div>
+			</div>
 			<a class="btn btn-sm variant-ghost-surface" href="/about" target="_blank" rel="noreferrer">
 				About us
 			</a>
@@ -103,8 +125,8 @@
 	</div>
 </nav>
 
-<section class="flex flex-col items-center justify-center mt-28">
-	<div class="card p-12 w-1/2">
+<section class="flex flex-col items-center justify-center mt-20 dark:text-[#e1e1e1] dark:bg-[#212020]">
+	<div class="card p-12 w-1/2 dark:bg-[#070707] my-5 shadow-lg">
 		<div class="flex flex-col items-center justify-center mb-8">
 			<img
 				src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/teacher.svg"
@@ -528,7 +550,7 @@
 					</p>
 				</div>
 				<div class="py-3">
-					<button type="submit" class="w-1/2 btn font-bold text-xl p-2 bg-[#77B8De] rounded-full shadow-md hover:bg-[#619ecf] hover:text-[21px] hover:shadow-lg ">
+					<button type="submit" class="w-1/2 btn font-bold text-xl p-2  rounded-full shadow-md  hover:text-[21px] hover:shadow-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]">
 						⚡Sign Up⚡
 					</button>
 				</div>
@@ -538,6 +560,7 @@
 	<Footer />
 </section>
 
+</div>
 <style>
 	.white-text {
 		color: red;
@@ -546,6 +569,13 @@
 		font-size: 2rem; /* Adjust font size as needed */
 		margin-top: 1rem; /* Add spacing if necessary */
 		font-family: 'CustomFont', sans-serif; /* Use your custom font */
+	}
+	.trainersigninContainer{
+		z-index: -5;
+		aspect-ratio: 960/300;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
 	}
 	.input-name{
 		position: relative;

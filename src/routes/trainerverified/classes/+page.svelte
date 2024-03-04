@@ -50,7 +50,7 @@
 	}
 </script>
 
-<div class="bg-[#f2f3f4] dark:bg-[#212020] min-h-screen">
+<div class="bg-[#f2f3f4] dark:bg-[#212020]">
 	<!-- <div class="navbar">
 		<nav class="appbar">
 			<div class="logo-container flex items-center">
@@ -478,7 +478,7 @@
 		</div>
 	{/if}
 </div>
-<pre>{JSON.stringify(classes, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(classes, null, 2)}</pre> -->
 
 <style>
 	.white-text {

@@ -524,8 +524,8 @@
 			</div>
 		</div>
 		<div class="w-fit overflow-hidden mt-6">
-			<div class="card variant-glass-tertiary">
-				<header class="card-header">
+			<div class=" shadow-md border-2 mb-4">
+				<div class="p-4 pb-0 mb-0">
 					<div class="flex flex-roe">
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/championship-trophy-svgrepo-com.svg"
@@ -534,9 +534,9 @@
 						/>
 						<h1 class="text-2xl font-bold">Upcoming Contest!</h1>
 					</div>
-				</header>
+				</div>
 				<section class="p-4">
-					<div class="card variant-glass-secondary p-4 mb-3">
+					<div class="card variant-glass-secondary p-2 mb-2">
 						<div class="flex flex-col items-center justify-center">
 							<h1 class="text-xl font-semibold"><u>NerdHerd Math Quiz</u></h1>
 							<h2>Writer: Md. Ashraful Islam</h2>
@@ -545,18 +545,18 @@
 						</div>
 					</div>
 				</section>
-				<footer class="card-footer mb-2">
+				<footer class="mt-0 pt-0 mb-2 mr-2 hover:scale-105">
 					<a href="/" class="flex flex-row items-end justify-end p-1 font-bold">
-						<h4 class="mr-2 hover:scale-110">See all</h4>
+						<h4 class="mr-2">See all</h4>
 						<img
 							src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/right-arrow-send-svgrepo-com.svg"
 							alt="Dashboard Icon"
-							class="h-6 w-6 hover:scale-125"
+							class="h-6 w-6 "
 						/>
 					</a>
 				</footer>
 			</div>
-			<div class="card variant-glass-surface">
+			<div class=" shadow-md border-2">
 				<header class="card-header">
 					<div class="flex flex-roe">
 						<img
