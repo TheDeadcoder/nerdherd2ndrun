@@ -23,7 +23,7 @@
 	};
 </script>
 
-<div>
+<div class="dark:text-[#e1e1e1] dark:bg-[#212020]">
 	<!-- <div>
 		<div class="navbar">
 			<nav class="appbar grid grid-cols-2 justify-between">
