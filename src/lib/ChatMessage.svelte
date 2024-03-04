@@ -5,6 +5,22 @@
 	export let type: ChatCompletionRequestMessageRoleEnum;
 	export let message: string;
 
+	function formatDateTime(val) {
+		let timestamp = new Date(val);
+		if (timestamp) {
+			const options = {
+				month: 'short',
+				day: 'numeric',
+				year: 'numeric',
+				hour: 'numeric',
+				minute: 'numeric',
+				hour12: true
+			};
+			let formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(timestamp);
+			return formattedDateTime;
+		}
+	}
+
 	let gpticon =
 		'https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/chatgpt-icon.svg';
 	let usericon =
@@ -14,10 +30,12 @@
 {#if type === 'user'}
 	<div class="flex flex-col space-y-3 justify-end items-end">
 		<Avatar src={usericon} width="w-12" />
-		<div class="card w-fit p-4 variant-soft rounded-tl-none space-y-2 justify-end">
+		<div
+			class="card w-fit p-4 rounded-tl-none space-y-2 justify-end bg-emerald-200 hover:bg-emerald-300 rounded-xl"
+		>
 			<header class="flex justify-between items-center">
 				<p class="font-bold">Me</p>
-				<small class="opacity-50">{new Date().getTime()}</small>
+				<small class="opacity-50">{formatDateTime(new Date())}</small>
 			</header>
 			<p>{message}</p>
 		</div>
@@ -25,10 +43,12 @@
 {:else}
 	<div class="flex flex-col space-y-3">
 		<Avatar src={gpticon} width="w-12" />
-		<div class="card w-fit p-4 variant-soft rounded-tl-none space-y-2 justify-end">
+		<div
+			class="card w-fit p-4 rounded-tl-none space-y-2 justify-end bg-emerald-200 hover:bg-emerald-300 rounded-xl"
+		>
 			<header class="flex justify-between items-center">
 				<p class="font-bold">Bot</p>
-				<small class="opacity-50">{new Date().getTime()}</small>
+				<small class="opacity-50">{formatDateTime(new Date())}</small>
 			</header>
 			<p>{message}</p>
 		</div>
