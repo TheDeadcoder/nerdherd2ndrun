@@ -206,11 +206,11 @@ import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
 								class="m-3 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 							>
 								<div class="hover:scale-105">
-									<div class="mb-3  rounded-full">
+									<div class="mb-3 h-[120px] overflow-hidden">
 										<img
 											src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
 											alt="User "
-											class=" w-[100%] items-center justify-center object-contain object-center"
+											class=" w-[100%]  items-center justify-center object-contain object-center"
 										/>
 									</div>
 									<div class="px-4">
@@ -248,8 +248,8 @@ import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
 								
 								{#each classes as currClass}
 									{#if classifyClass(currClass.start)}
-										<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
-											<div class="h-[200px] overflow-hidden">
+										<div class=" bg-[#dfedf8] pb-6 grid grid-rows-[120px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]">
+											<div class="h-[120px] overflow-hidden">
 												<img src={currClass.image} alt="Dashboard Icon" class="object-cover  max-h-[200px] w-[100%] hover:scale-105" />
 											</div>
 											<div class="px-4 pb-4">
