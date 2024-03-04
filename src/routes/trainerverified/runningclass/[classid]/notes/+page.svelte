@@ -109,7 +109,7 @@
 				{/if}
 				<div class="flex flex-row justify-between mt-3">
 					<img src={getImage(note.lang)} alt="Dashboard Icon" class="h-12 hover:rotate-12" />
-					{#if hasAccess(note)}
+					{#if note.access.length > 0}
 						<button
 							class="btn p-2 bg-cyan-300 hover:bg-cyan-500 rounded-lg"
 							on:click={() => goEditNote(note.id)}
