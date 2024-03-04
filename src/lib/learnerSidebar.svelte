@@ -14,7 +14,7 @@
 
 </script>
 
-<div class="pt-5 w-full mx-auto dark:bg-[#070707] overflow-y-auto">
+<div class="pt-5 w-full min-h-screen mx-auto dark:bg-[#070707] overflow-y-auto">
     <div class="p-0 flex flex-col w-full">
       
             <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -45,7 +45,7 @@
                                     Favourites
                                 </a>
                             </li>
-                            <li class="cursor-pointer flex-grow px-5 py-2 font-bold text-[22px] hover:text-[27px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"> 
+                            <li class="cursor-pointer flex-grow px-5 py-2 font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"> 
                                 <a href="/learnerverified/home/Recommended" >
                                     Recommended
                                 </a>

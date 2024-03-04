@@ -77,13 +77,13 @@
 </script>
 
 <main>
-	<section class="min-h-screen p-6">
+	<section class="min-h-screen p-6 dark:bg-[#212020] dark:text-[#e1e1e1]">
 		<div>
 			<h1 class="font-extrabold text-2xl">Upcoming Classes</h1>
 			<div class="grid grid-cols-4 gap-12 mt-6">
 				{#each classWithInfo as currClass}
 					{#if classifyClass(currClass.start)}
-						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
+						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3 dark:text-[#e1e1e1] dark:bg-[#070707]">
 							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
 							<h1 class="font-extrabold text-xl">
 								{currClass.title}
@@ -113,7 +113,7 @@
 
 							{#if currClass.studclass.length > 0}
 								<button
-									class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
+									class="btn p-2 hover:bg-[#619ecf] text-semibold bg-[#77B8De] w-full ml-2 mr-2 rounded-lg"
 									disabled={true}
 								>
 									Already Registered
@@ -122,7 +122,7 @@
 								<form action="?/joinclass&id={currClass.id}" method="POST">
 									<button
 										type="submit"
-										class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
+										class="btn p-2 hover:bg-[#619ecf] bg-[#77B8De] text-semibold w-full ml-2 mr-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 									>
 										Join Class
 									</button>
@@ -131,6 +131,7 @@
 						</div>
 					{/if}
 				{/each}
+				
 			</div>
 		</div>
 		<div class="mt-5">
@@ -138,7 +139,7 @@
 			<div class="grid grid-cols-4 gap-12 mt-6">
 				{#each classWithInfo as currClass}
 					{#if classifyClass(currClass.start) === false && currClass.studclass.length > 0}
-						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
+						<div class=" dark:bg-[#070707] card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
 							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
 							<h1 class="font-extrabold text-xl">
 								{currClass.title}
@@ -167,7 +168,7 @@
 							</div>
 
 							<button
-								class="btn p-2 bg-green-300 hover:bg-green-500 w-full ml-2 mr-2 rounded-lg"
+								class="btn p-2 hover:bg-[#619ecf] bg-[#77B8De] w-full ml-2 mr-2 rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
 								on:click={() => gotoClass(currClass.id)}
 							>
 								Go to Class
