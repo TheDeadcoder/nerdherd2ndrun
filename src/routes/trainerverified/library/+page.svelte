@@ -82,28 +82,12 @@
 <main class="dark:bg-[#212020] min-h-screen dark:text-[#f3f2f2]">
 	<div class="flex flex-row justify-between">
 		<button
-			class="btn bg-green-400 rounded-lg text-2xl font-semibold mt-10 ml-6 dark:text-[#e1e1e1] dark:bg-[#3b6f8e]"
+			class="btn  rounded-lg text-2xl font-semibold mt-10 ml-6  dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De]"
 			on:click={addclassmodal}
 		>
 			+ Add book
 		</button>
-		<div class="flex flex-row space-x-2 mr-6 mt-10">
-			<label class="input flex items-center gap-2">
-				<select
-					bind:value={filterCategory}
-					class="select"
-					id="filterCategory"
-					name="filterCategory"
-				>
-					{#each uniqueTags as tag}
-						<option value={tag}>{tag}</option>
-					{/each}
-				</select>
-			</label>
-			<button class="btn bg-green-300 rounded-lg hover:bg-green-500" on:click={applyFilters}>
-				Submit
-			</button>
-		</div>
+		
 	</div>
 	<div class="ml-8 mt-16 blur-xl={isLoading}">
 		{#if isLoading}
@@ -190,6 +174,25 @@
 				</div>
 			</div>
 		{:else}
+		<div class="flex ">
+			<div class="flex flex-row w-[30%] space-x-2 mr-6 mt-10">
+				<label class="input flex items-center gap-2">
+					<select
+						bind:value={filterCategory}
+						class="select border-0 dark:bg-[#070707]"
+						id="filterCategory"
+						name="filterCategory"
+					>
+						{#each uniqueTags as tag}
+							<option value={tag} class="dark:bg-[#070707]">{tag}</option>
+						{/each}
+					</select>
+				</label>
+				<button class="btn  rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] " on:click={applyFilters}>
+					Submit
+				</button>
+			</div>
+		</div>
 			<div class="mt-2">
 				{#if filterApplied}
 					<button class="btn bg-red-300 hover:bg-red-500 rounded-lg" on:click={resetView}
