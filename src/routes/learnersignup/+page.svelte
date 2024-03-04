@@ -29,7 +29,7 @@
 <div>
 	<nav class="fixed top-0 z-50 w-full py-6  bg-[#77B8De] dark:bg-[#212021]">
 		<div class="flex justify-between mx-6">
-			<div class="flex">
+			<div class="flex cursor-pointer">
 				<img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 					class="transform transition duration-300 hover:rotate-12"

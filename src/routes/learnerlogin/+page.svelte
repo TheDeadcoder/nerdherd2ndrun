@@ -63,8 +63,8 @@
 
 <div id="login_id" class="learnerloginContainer">
     <nav class="w-full py-6  ">
-        <div class="flex justify-between mx-6">
-			<div class="flex">
+        <div class="flex justify-between mx-6 ">
+			<div class="flex cursor-pointer">
 				<img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 					class="transform transition duration-300 hover:rotate-12"
@@ -99,8 +99,8 @@
                 <!-- Photo on the left side of the card -->
     
                 <!-- Previous Card Content -->
-                <div class="w-full p-8">
-                    <div class="flex flex-col space-y-9">
+                <div class="w-full p-8 ">
+                    <div class="flex flex-col space-y-9 ">
                         <div class="company-name">
                             <span class="company-name text-2xl font-extrabold">NerD</span><span
                                 class="company-name white-text text-xl font-extrabold">Herd</span

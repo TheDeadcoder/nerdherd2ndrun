@@ -33,6 +33,9 @@
 		console.log('logout done');
 		window.open('/learnerlogin', '_self');
 	};
+    const handleGoBack = async () =>{
+        history.back();
+    }
 
 </script>
 
@@ -95,9 +98,9 @@
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 {#if $isLearnerInClass.isClass}
-                    <LearnerClassSidebar></LearnerClassSidebar>
+                    <LearnerClassSidebar on:callParentFunction={handleGoBack}></LearnerClassSidebar>
                 {:else}
-                    <LernerSidebar on:callParentFunction={handleSignOut}/>
+                    <LernerSidebar on:callParentFunction={handleGoBack}/>
                 {/if}
             </div>
         </div>

@@ -63,7 +63,7 @@
 <div id='login_id' class="trainerloginContainer">
 	<nav class=" w-full py-6 ">
 		<div class="flex justify-between mx-6">
-			<div class="flex">
+			<div class="flex cursor-pointer">
 				<img
 					src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/GeekGlasses.png"
 					class="transform transition duration-300 hover:rotate-12"

@@ -198,7 +198,7 @@
 		</li>
 	</ul>
 </nav> -->
-<main class="min-h-screen flex overflow-auto">
+<main class="min-h-screen  flex overflow-auto dark:bg-[#212020]">
 	<!-- <div
 		class={`transform top-0 left-0 w-64 bg-white  fixed min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 			isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -247,13 +247,13 @@
 			</a>
 		</div>
 	</div> -->
-	<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
+	<div class="flex-1 p-6 flex-grow w-[100%]">
 		<!-- Your content here -->
 
 		<!-- Chat Messages Display -->
-		<div class="min-h-screen flex flex-col chat-window w-full">
+		<div class="min-h-[calc(100vh-120px)] flex flex-col dark:bg-[#070707] p-5 rounded-lg w-full ">
 			<!-- Messages List -->
-			<div class="flex flex-col-reverse w-full space-y-2 overflow-y-auto" on:scroll={handleScroll}>
+			<div class="flex flex-col-reverse  w-full space-y-2 overflow-y-auto" on:scroll={handleScroll}>
 				{#each messages as message (message.id)}
 					<div class="message {message.username === studentNow.name ? 'me' : 'other'}">
 						<p class="timestamp">{formatTimestamp(message.createdat)}</p>
@@ -266,10 +266,12 @@
 			</div>
 
 			<!-- Input Form -->
-			<form class="mb-2" on:submit|preventDefault={sendMessage}>
-				<input type="text" bind:value={newMessage} placeholder="Type a message..." />
-				<button type="submit">Send</button>
-			</form>
+			<div class="flex-none mt-auto">
+				<form class="mb-2" on:submit|preventDefault={sendMessage}>
+					<input type="text" bind:value={newMessage} placeholder="Type a message..." />
+					<button type="submit">Send</button>
+				</form>
+			</div>
 		</div>
 		<!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
 	</div>
