@@ -295,10 +295,8 @@
 		</div>
 	</div>
 	{#if selectedClass}
-		<div
-			class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity"
-		>
-			<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+	<div class="fixed inset-0 bg-sky-200 bg-opacity-50 flex justify-center items-center z-50 transition-opacity">
+		<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-xl w-full m-4 dark:bg-[#212020] dark:text-[#e1e1e1]">
 				<div class="flex justify-between items-center mb-4">
 					<h2 class="text-2xl font-bold">{selectedClass.title}</h2>
 					<button class=" text-lg" on:click={closeModal}>&times;</button>
@@ -314,61 +312,79 @@
 
 				<div class="mt-4">
 					<h1 class="font-semibold text-lg">Requested students</h1>
-					<ul class="mt-4">
-						{#each selectedClass.studclass as studentid}
-							{#if studentid.joined === false}
-								<li class="flex flex-row space-x-4">
-									<a
-										href="/viewonly/student/{studentid.sid}"
-										class="flex flex-row space-x-2"
-										data-sveltekit-prefetch
-									>
-										<img
-											src={studentid.student.image}
-											alt="Dashboard Icon"
-											class="h-8 mr-1 hover:rotate-12 rounded-full"
-										/>
-										<h1 class="font-semibold">
-											{studentid.student.name}
-										</h1>
-									</a>
 
-									<form action="?/ApproveRequest&id={studentid.id}" method="POST">
-										<button type="submit">
-											<img
-												src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/dialog-complete-svgrepo-com.svg"
-												alt="Dashboard Icon"
-												class="h-6 mr-2 hover:rotate-12"
-											/>
-										</button>
-									</form>
-									<form action="?/deleteRequest&id={studentid.id}" method="POST">
-										<button type="submit">
-											<img
-												src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
-												alt="Dashboard Icon"
-												class="h-6 mr-1 hover:rotate-12"
-											/>
-										</button>
-									</form>
-								</li>
-							{/if}
-						{/each}
-					</ul>
+					<table class="min-w-full text-left text-sm font-light">
+						<tbody class ="border-0">
+							{#each selectedClass.studclass as studentid}
+								{#if studentid.joined === false}
+									<tr>
+										<td class="border-0 border-y-2 px-6 py-2 w-[80%]">
+											<a
+												href="/viewonly/student/{studentid.sid}"
+												class="flex flex-row space-x-2"
+												data-sveltekit-prefetch
+											>
+												<img
+													src={studentid.student.image}
+													alt="Dashboard Icon"
+													class="h-8 mr-1 hover:rotate-12 rounded-full"
+												/>
+												<h1 class="font-semibold">
+													{studentid.student.name}
+												</h1>
+											</a>
+										</td>
+										<td class="border-0 border-y-2 px-4 py-2 ">
+											<form action="?/ApproveRequest&id={studentid.id}" method="POST">
+												<button type="submit" class="bg-green-500 dark:bg-green-600 rounded-xl shadow-md hover:bg-green-600 hover:text-[17px] dark:text-gray-300 dark:hover:bg-green-700 p-2">
+													Accept
+												</button>												
+											</form>
+										</td>
+										
+										<td class="border-0 border-y-2 px-4 py-2">
+											<form action="?/deleteRequest&id={studentid.id}" method="POST">
+												<button type="submit" class="bg-[#ff6666] dark:bg-[#e63946] rounded-xl shadow-md hover:bg-[#e63946] hover:text-[17px] dark:text-gray-300 dark:hover:bg-[#ff0000] p-2">
+													Reject
+												</button>
+											</form>
+										</td>
+																		
+									</tr>
+								{/if}
+							{/each}
+						</tbody>
+					</table>
+
 				</div>
 				<div class="mt-4">
 					<h1 class="font-semibold text-lg">Approved students</h1>
-					<ul class="mt-4">
-						{#each selectedClass.studclass as studentid}
-							{#if studentid.joined === true}
-								<li>
-									<a href="/viewonly/student/{studentid.sid}" data-sveltekit-prefetch>
-										{studentid.sid}
-									</a>
-								</li>
-							{/if}
-						{/each}
-					</ul>
+					<table class="min-w-full text-left text-sm font-light">
+						<tbody class="border-0">
+							{#each selectedClass.studclass as studentid}
+								{#if studentid.joined === true}
+									<tr>
+										<td class="border-0 border-y-2 px-4 py-2">
+											<a
+												href="/viewonly/student/{studentid.sid}"
+												class="flex flex-row space-x-2"
+												data-sveltekit-prefetch
+											>
+												<img
+													src={studentid.student.image}
+													alt="Dashboard Icon"
+													class="h-8 mr-1 hover:rotate-12 rounded-full"
+												/>
+												<h1 class="font-semibold">
+													{studentid.student.name}
+												</h1>
+											</a>
+										</td>
+									</tr>
+								{/if}
+							{/each}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -512,4 +528,5 @@
 	.links a:hover {
 		color: #007bff; /* Accent color from Skeleton UI */
 	}
+
 </style>

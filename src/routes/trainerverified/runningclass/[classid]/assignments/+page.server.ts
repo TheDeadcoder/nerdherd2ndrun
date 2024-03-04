@@ -273,6 +273,36 @@ export const actions = {
 
         throw redirect(303, '/trainerverified/profile');
     },
+    update: async ({ url, request, locals: { supabase, getSession } }) => {
+        const submissionId = url.searchParams.get("id");
+        const data = await request.formData();
+
+        let newClass = Object.fromEntries(data.entries()) as any;
+
+        //console.log("ami todo delete korte chai ", todoid);
+
+        if (!submissionId) {
+            return fail(400, { message: "Invalid request" })
+        }
+
+
+
+
+        const { data: dtx, error: err2 } = await supabase
+            .from('submissions')
+            .update({ score: newClass.score })
+            .eq('id', submissionId)
+            .select()
+
+
+
+        if (err2) console.log(err2)
+
+
+
+        else throw redirect(303, `/trainerverified/runningclass/${classNow.id}/assignments`);
+
+    },
 
 
 

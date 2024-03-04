@@ -62,7 +62,15 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     contestNow = contestWithInfo[0];
 
-    if (contestNow.registrant) {
+    if (contestNow.registrant && contestNow.registrant.score === 0) {
+
+
+        const { data, error: errerr } = await supabase
+            .from('pbregistrant')
+            .update({ score: 1 })
+            .eq('id', contestNow.registrant.id)
+            .select()
+
 
         let { data: questions, error } = await supabase
             .from('questions')

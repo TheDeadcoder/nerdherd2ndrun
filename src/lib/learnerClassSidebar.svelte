@@ -4,13 +4,13 @@
 	let classid = $isLearnerInClass.classid;
 
 	$: classid = $isLearnerInClass.classid;
-    import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
-    const callParent=()=> {
-        dispatch('callParentFunction');
-    }
+	const callParent = () => {
+		dispatch('callParentFunction');
+	};
 
 	let homeVisible = 0;
 </script>
@@ -120,7 +120,7 @@
 		</div>
 
 		<div
-			class="cursor-pointer flex-grow px-5 py-2 text-center font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40] "
+			class="cursor-pointer flex-grow px-5 py-2 text-center font-semibold text-2xl hover:text-[27px] hover:bg-[#d8f0fd] border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]"
 		>
 			<button on:click={() => callParent()} class="flex items-center justify-center">
 				<img

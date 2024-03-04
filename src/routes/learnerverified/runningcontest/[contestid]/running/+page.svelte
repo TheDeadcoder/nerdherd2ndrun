@@ -16,7 +16,8 @@
 	let answerFeedback = '';
 	let showWaitingArea = false;
 	let countdownTimer;
-	let currScore = 0;
+	let currScore = 1;
+	let dmy = false;
 
 	const popupClick: PopupSettings = {
 		event: 'click',
@@ -59,7 +60,7 @@
 				currentQuestionIndex++;
 				loadNextQuestion();
 			},
-			4000 + timeLeftForAnswer * 1000
+			5000 + timeLeftForAnswer * 1000
 		); // Wait for 5 seconds in the waiting area
 	}
 	let isCorrect;
@@ -100,7 +101,8 @@
 			timeLeftForAnswer = currentQuestion.time;
 			startQuestionTimer();
 		} else {
-			//console.log('ekhon jawa lagbe');
+			currentQuestion = null;
+			dmy = true;
 			clearInterval(contestTimeCheckInterval); // Clear the interval
 			//console.log('clear korsi 1');
 			clearInterval(countdownTimer); // Clear any ongoing question timer
@@ -289,6 +291,17 @@
 				{/each}
 				<p class="text-lg mt-4 font-semibold text-center">Time left: {timeLeftForAnswer}s</p>
 			</div>
+		</div>
+	{:else if dmy}
+		<div class="flex justify-center items-center h-screen mb-48">
+			<img
+				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/finished-spongebob-squarepantes.gif"
+				alt="Dashboard Icon"
+				class="h-64 w-64 mr-1 hover:rotate-12"
+			/>
+			<h1 class="font-mono font-extrabold text-2xl">
+				Hold Tight. We are calculating your score... 😎
+			</h1>
 		</div>
 	{:else}
 		<div class="flex justify-center items-center h-screen mb-48">
