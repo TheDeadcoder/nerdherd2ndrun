@@ -24,7 +24,7 @@
 		placement: 'top'
 	};
     const returnHome = ()=>{
-        window.open('/trainerverified/home/recent','_self')
+        window.open('/learnerverified/home/recent','_self')
     }
 
     const handleSignOut = async () => {
