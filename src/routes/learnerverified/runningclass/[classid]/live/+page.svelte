@@ -210,7 +210,7 @@
 							{i + 1}. {currsession.topic}
 						</h1>
 						{#if currsession.done}
-							<button class="btn bg-[#8bd68b] dark:bg-[#6bb46b] rounded-lg font-semibold"> Check Stat </button>
+							<button class="btn bg-[#72c472] dark:bg-[#6bb46b] rounded-lg font-semibold"> Check Stat </button>
 						{:else if currsession.countdown}
 							<p class="font-semibold">
 								{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
