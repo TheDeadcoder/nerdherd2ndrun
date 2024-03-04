@@ -46,11 +46,11 @@
                                     My
                                 </a>
                             </li>
-                            <li class="cursor-pointer  px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
+                            <!-- <li class="cursor-pointer  px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
                                 <a href="/trainerverified/home/popular" >
                                     Popular
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="cursor-pointer px-5 py-2  font-bold hover:text-[23px] text-[22px] hover:bg-[#d8f0fd]  border-l-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4] dark:border-[#a7afb4] dark:hover:bg-[#313b40]">
                                 <a href="/trainerverified/home/saved" >
                                     Saved

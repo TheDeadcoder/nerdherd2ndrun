@@ -153,7 +153,15 @@ import { Avatar, LightSwitch, popup } from '@skeletonlabs/skeleton';
 						<img src={teacherNow.image} alt="" class="border-2 border-black rounded-full h-[200px]" />
 					</div>
 					<div class="p-3 m-3 ">
-						<p class="text-3xl font-semibold">{teacherNow.name}</p>
+						<p class="text-2xl font-semibold">{teacherNow.name}
+						
+						{#if follower.length}
+							<span class="text-[15px] cursor-pointer" on:click={unfriend}><img src='https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/star-gold-orange-svgrepo-com.svg' class="h-6"></span>
+						{:else}
+							<span class="text-[15px] cursor-pointer" on:click ={makefriend}><img src='
+								https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/emptystar.png' class="h-6"></span>
+						{/if}
+						</p>
 						<p class="font-thin">{teacherNow.email}</p>
 						<p class="font-thin">{teacherNow.mobile}</p>
 						<p class="font-thin">{teacherNow.address}</p>
