@@ -5,8 +5,10 @@
 
 	export let data;
 
-	let { session, supabase, classNow, students, teacherNow, classlive, studentNow } = data;
-	$: ({ session, supabase, classNow, students, teacherNow, classlive, studentNow } = data);
+	let { session, supabase, classNow, students, teacherNow, classlive, studentNow, assignment } =
+		data;
+	$: ({ session, supabase, classNow, students, teacherNow, classlive, studentNow, assignment } =
+		data);
 
 	import { isLearnerInClass } from '../../../../../stores/isLearnerInClass';
 	const { classid } = $page.params;
@@ -40,12 +42,15 @@
 			</section>
 		</div>
 		<div class="flex flex-row space-x-10 mt-6">
-			<div class="flex flex-col space-y-5 ">
-				<h1 class="font-bold text-xl mb-4 ">
+			<div class="flex flex-col space-y-5">
+				<h1 class="font-bold text-xl mb-4">
 					<u>Class Participants</u>
 				</h1>
 				{#each students as student}
-					<a href="/viewonly/student/{student.currStudent.id}" class="flex flex-row space-x-2 border-b-2 py-1 border-black dark:border-white">
+					<a
+						href="/viewonly/student/{student.currStudent.id}"
+						class="flex flex-row space-x-2 border-b-2 py-1 border-black dark:border-white"
+					>
 						<img
 							src={student.currStudent.image}
 							alt="Dashboard Icon"
@@ -107,8 +112,55 @@
 			</div>
 			<div class="flex flex-col space-y-5">
 				<h1 class="font-bold text-xl mb-4">
-					<u>Class Leaderboard</u>
+					<u>Assesments</u>
 				</h1>
+				<div class="flex flex-col">
+					<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+						<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+							<div class="overflow-hidden">
+								<table class="min-w-full text-left text-sm font-light">
+									<thead
+										class="border-b bg-white dark:bg-[#070707] font-medium dark:border-neutral-500"
+									>
+										<tr>
+											<th scope="col" class="px-6 py-4">#</th>
+											<th scope="col" class="px-6 py-4">Assesment Title</th>
+											<th scope="col" class="px-6 py-4">Question File</th>
+										</tr>
+									</thead>
+									<tbody>
+										{#each assignment as curr, i}
+											<tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#1c1c1c]">
+												<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
+												<td class="whitespace-nowrap px-6 py-4">{curr.title}</td>
+												<td class="whitespace-nowrap px-6 py-4"
+													><a href={curr.question} class="flex flex-row space-x-1">
+														<img
+															src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/file-2-svgrepo-com.svg"
+															alt="Dashboard Icon"
+															class="h-8 hover:rotate-12"
+														/>
+													</a></td
+												>
+											</tr>
+											<!-- <div class="flex flex-row space-x-10">
+												<h1>
+													{cursession.topic}
+												</h1>
+												<h1>
+													{cursession.start}
+												</h1>
+												<h1>
+													Duration: {cursession.duration} seconds
+												</h1>
+											</div> -->
+										{/each}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -35,6 +35,11 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
 
     classNow = classes[0];
 
+    let { data: assignment, error: err69 } = await supabase
+        .from('assignment')
+        .select("*")
+        .eq('cid', classNow.id);
+
     let { data: teacher, error: err7 } = await supabase
         .from('teacher')
         .select("*")
@@ -71,6 +76,6 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         };
     }));
 
-    return { classNow, students, teacherNow, classlive, studentNow };
+    return { classNow, students, teacherNow, classlive, studentNow, assignment };
 
 }

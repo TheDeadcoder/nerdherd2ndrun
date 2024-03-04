@@ -8,13 +8,11 @@
 	let { session, supabase, classNow, studentNow, classlive } = data;
 	$: ({ session, supabase, classNow, studentNow, classlive } = data);
 
-	import {isLearnerInClass} from '../../../../../stores/isLearnerInClass'
+	import { isLearnerInClass } from '../../../../../stores/isLearnerInClass';
 
-	
-	onDestroy(()=>{
-		isLearnerInClass.set({classid:"",isClass:false})
+	onDestroy(() => {
+		isLearnerInClass.set({ classid: '', isClass: false });
 	});
-
 
 	let isSidebarOpen = false;
 
@@ -57,7 +55,7 @@
 	}
 
 	onMount(() => {
-		isLearnerInClass.set({classid:classid,isClass:true})
+		isLearnerInClass.set({ classid: classid, isClass: true });
 
 		const interval = setInterval(updateCountdown, 1000);
 		updateCountdown();
@@ -66,9 +64,9 @@
 				isSidebarOpen = false;
 			}
 		}
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+		// onDestroy(() => {
+		// 	clearInterval(interval);
+		// });
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
@@ -144,7 +142,7 @@
 			</li>
 		</ul>
 	</nav> -->
-	<main >
+	<main>
 		<!-- <div
 			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -202,15 +200,19 @@
 			</div>
 		</div> -->
 		<div class="p-10">
-			<div class="mt-5 flex flex-col space-y-4 ">
+			<div class="mt-5 flex flex-col space-y-4">
 				<h1 class="text-2xl font-extrabold"><u>All Classes</u></h1>
 				{#each classlive as currsession, i}
-					<div class=" mr-40 grid grid-cols-2 border-b-2 dark:border-white border-black py-2 space-x-8 w-[60%]">
+					<div
+						class=" mr-40 grid grid-cols-2 border-b-2 dark:border-white border-black py-2 space-x-8 w-[60%]"
+					>
 						<h1 class="font-semibold text-xl">
 							{i + 1}. {currsession.topic}
 						</h1>
 						{#if currsession.done}
-							<button class="btn bg-[#72c472] dark:bg-[#6bb46b] rounded-lg font-semibold"> Check Stat </button>
+							<button class="btn bg-[#72c472] dark:bg-[#6bb46b] rounded-lg font-semibold">
+								Check Stat
+							</button>
 						{:else if currsession.countdown}
 							<p class="font-semibold">
 								{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
@@ -225,14 +227,14 @@
 					</div>
 				{/each}
 			</div>
-	
+
 			<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
 			<pre>{JSON.stringify(studclass, null, 2)}</pre>
 			<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
 		</div>
 	</main>
-	
 </div>
+
 <style>
 	.appbar {
 		display: flex;

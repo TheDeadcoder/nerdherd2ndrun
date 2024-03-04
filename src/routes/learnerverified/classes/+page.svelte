@@ -25,7 +25,7 @@
 	});
 
 	function gotoClass(val) {
-		window.open(`/learnerverified/runningclass/${val}/chat`, '_self');
+		window.open(`/learnerverified/runningclass/${val}/overview`, '_self');
 	}
 
 	function formatDate(dateString) {
@@ -83,7 +83,9 @@
 			<div class="grid grid-cols-4 gap-12 mt-6">
 				{#each classWithInfo as currClass}
 					{#if classifyClass(currClass.start)}
-						<div class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3 dark:text-[#e1e1e1] dark:bg-[#070707]">
+						<div
+							class="card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3 dark:text-[#e1e1e1] dark:bg-[#070707]"
+						>
 							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
 							<h1 class="font-extrabold text-xl">
 								{currClass.title}
@@ -131,7 +133,6 @@
 						</div>
 					{/if}
 				{/each}
-				
 			</div>
 		</div>
 		<div class="mt-5">
@@ -139,7 +140,9 @@
 			<div class="grid grid-cols-4 gap-12 mt-6">
 				{#each classWithInfo as currClass}
 					{#if classifyClass(currClass.start) === false && currClass.studclass.length > 0}
-						<div class=" dark:bg-[#070707] card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3">
+						<div
+							class=" dark:bg-[#070707] card p-3 shadow-md hover:shadow-2xl flex flex-col space-y-3"
+						>
 							<img src={currClass.image} alt="Dashboard Icon" class="h-32 hover:scale-105" />
 							<h1 class="font-extrabold text-xl">
 								{currClass.title}
