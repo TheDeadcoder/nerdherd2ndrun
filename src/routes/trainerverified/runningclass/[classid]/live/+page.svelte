@@ -9,13 +9,13 @@
 	let { session, supabase, classNow, studclass, teacherNow, classlive } = data;
 	$: ({ session, supabase, classNow, studclass, teacherNow, classlive } = data);
 
-	import {isRunningClass} from '../../../../../stores/isRunningClass'
+	import { isRunningClass } from '../../../../../stores/isRunningClass';
 
-	onMount(()=>{
-		isRunningClass.set({classid:classid,isClass:true})
+	onMount(() => {
+		isRunningClass.set({ classid: classid, isClass: true });
 	});
-	onDestroy(()=>{
-		isRunningClass.set({classid:"",isClass:false})
+	onDestroy(() => {
+		isRunningClass.set({ classid: '', isClass: false });
 	});
 
 	let uid = 100;
@@ -49,6 +49,18 @@
 	function closeSession() {
 		selectedSession = null;
 		attendance = null;
+	}
+
+	let score;
+	let studid;
+	let scoreModal = false;
+
+	function addscoreModal(val) {
+		studid = val;
+		scoreModal = true;
+	}
+	function closescoreModal() {
+		scoreModal = false;
 	}
 
 	let addliveModal = false;
@@ -111,9 +123,9 @@
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
 	});
-	const avro = ()=>{
-		window.open("/trainerverified/library",'_self')
-	}
+	const avro = () => {
+		window.open('/trainerverified/library', '_self');
+	};
 </script>
 
 <div class="dark:bg-[#212020] dark:text-[#e1e1e1]">
@@ -122,7 +134,6 @@
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
 			<h1 class="ml-3 text-4xl font-extrabold">{classNow.title}</h1>
 		</div>
-		
 	</nav>
 	<main class="min-h-screen">
 		<!-- <div
@@ -235,31 +246,129 @@
 								<h1 class="text-xl font-semibold">Duration: {selectedSession.duration}seconds</h1>
 							</div>
 							<h1 class="text-lg font-semibold mt-8">Participants Records</h1>
-							<div class="flex flex-col space-y-3 mt-4">
-								{#each attendance as currAtt}
-									<div class="flex flex-row space-x-10">
-										<a href="/viewonly/student/{currAtt.student.id}" class="flex flex-row space-x-2">
-											<img
-												src={currAtt.student.image}
-												alt="Dashboard Icon"
-												class="h-6 hover:rotate-12"
-											/>
-											<p>
-												{currAtt.student.name}
-											</p>
-										</a>
-										<p>
-											Join duration: {currAtt.time} seconds
-										</p>
+							<div class="flex flex-col">
+								<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+									<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+										<div class="overflow-hidden">
+											<table class="min-w-full text-left text-sm font-light">
+												<thead
+													class="border-b bg-white dark:bg-[#070707] font-medium dark:border-neutral-500"
+												>
+													<tr>
+														<th scope="col" class="px-6 py-4">#</th>
+														<th scope="col" class="px-6 py-4">Student</th>
+														<th scope="col" class="px-6 py-4">Join Duration (seconds)</th>
+														<th scope="col" class="px-6 py-4">Join Percentage(%)</th>
+														<th scope="col" class="px-6 py-4">Attendence Marking</th>
+													</tr>
+												</thead>
+												<tbody>
+													{#each attendance as currAtt, i}
+														<tr
+															class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#1c1c1c]"
+														>
+															<td class="whitespace-nowrap px-6 py-4 font-medium">{i + 1}</td>
+															<td class="whitespace-nowrap px-6 py-4">
+																<a
+																	href="/viewonly/student/{currAtt.student.id}"
+																	class="flex flex-row space-x-2"
+																>
+																	<img
+																		src={currAtt.student.image}
+																		alt="Dashboard Icon"
+																		class="h-6 hover:rotate-12"
+																	/>
+																	<p>
+																		{currAtt.student.name}
+																	</p>
+																</a>
+															</td>
+															<td class="whitespace-nowrap px-6 py-4">{currAtt.time}</td>
+															<td class="whitespace-nowrap px-6 py-4"
+																>{((currAtt.time * 100) / selectedSession.duration).toFixed(2)}</td
+															>
+															<td class="whitespace-nowrap px-6 py-4 flex flex-row">
+																<p>{currAtt.score}</p>
+																<!-- svelte-ignore missing-declaration -->
+																<!-- svelte-ignore a11y-click-events-have-key-events -->
+																<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+																<img
+																	src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+																	alt="Dashboard Icon"
+																	class="h-8 hover:rotate-12"
+																	on:click={() => addscoreModal(currAtt.id)}
+																/>
+															</td>
+														</tr>
+														<!-- <div class="flex flex-row space-x-10">
+															<h1>
+																{cursession.topic}
+															</h1>
+															<h1>
+																{cursession.start}
+															</h1>
+															<h1>
+																Duration: {cursession.duration} seconds
+															</h1>
+														</div> -->
+													{/each}
+												</tbody>
+											</table>
+											{#if scoreModal}
+												<div
+													class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+												>
+													<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+														<div class="flex justify-between items-center mb-4">
+															<h2 class="text-2xl font-bold">Assign Attendence Score</h2>
+															<!-- <h2 class="text-2xl font-bold">{currStudent.student.name}</h2> -->
+															<button class=" text-lg" on:click={closescoreModal}>&times;</button>
+														</div>
+
+														<form
+															use:enhance
+															action="?/edit"
+															method="POST"
+															on:submit={() => {
+																closescoreModal();
+															}}
+														>
+															<div class="flex flex-col space-y-6">
+																<input hidden id="studid" name="studid" bind:value={studid} />
+																<label class="label text-left mb-3">
+																	<span>Score</span>
+
+																	<input
+																		class="input"
+																		type="number"
+																		id="score"
+																		name="score"
+																		bind:value={score}
+																		placeholder="place attendence score here"
+																	/>
+																</label>
+
+																<button
+																	type="submit"
+																	class="btn bg-green-300 hover:bg-green-500 rounded-lg text-xl font-semibold"
+																>
+																	Submit
+																</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											{/if}
+										</div>
 									</div>
-								{/each}
+								</div>
 							</div>
 						{:else}
 							<h1>Loading ...</h1>
 						{/if}
 					{:else}
 						<h1 class="text-xl">No Session to Show</h1>
-	
+
 						<section class="card w-full">
 							<div class="p-4 space-y-4">
 								<div class="placeholder" />
@@ -279,7 +388,7 @@
 					{/if}
 				</div>
 			</div>
-	
+
 			<!-- <pre>{JSON.stringify(classNow, null, 2)}</pre>
 			<pre>{JSON.stringify(studclass, null, 2)}</pre>
 			<pre>{JSON.stringify(classlive, null, 2)}</pre> -->
@@ -293,7 +402,7 @@
 						<h2 class="text-2xl font-bold">Schedule for a new Class</h2>
 						<button class=" text-lg" on:click={closeliveModal}>&times;</button>
 					</div>
-	
+
 					<form
 						use:enhance
 						action="?/addLive"
@@ -305,12 +414,12 @@
 						<div class="flex flex-col space-y-6">
 							<label class="label text-left mb-3">
 								<span>Topic to be Covered</span>
-	
+
 								<input class="input" type="text" id="topic" name="topic" bind:value={topic} />
 							</label>
 							<label class="label text-left mb-3">
 								<span>Starting time</span>
-	
+
 								<input
 									class="input"
 									type="datetime-local"
@@ -328,8 +437,8 @@
 			</div>
 		{/if}
 	</main>
-	
 </div>
+
 <style>
 	.appbar {
 		display: flex;

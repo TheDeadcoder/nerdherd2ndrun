@@ -45,7 +45,11 @@
 			of class "{classNow.title}" by the following message
 		</p>
 		<p class="font-bold font-mono text-xl text-center mt-6">
-			<i>"{credentials[0].body}"</i>
+			{#if credentials?.length > 0}
+				<i>"{credentials[0].body}"</i>
+			{:else}
+				<i>"not issued so far"</i>
+			{/if}
 		</p>
 	</section>
 </main>
