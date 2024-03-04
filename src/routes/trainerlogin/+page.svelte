@@ -54,10 +54,10 @@
 
 		if(element!==null){
 			if(isDark===true){
-				element.style.backgroundImage = "url('src/lib/svgs/trainerloginDark.svg')"
+				element.style.backgroundImage = "url('https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/trainerloginDark.svg')"
 			}
 			else{
-				element.style.backgroundImage = "url('src/lib/svgs/trainerlogin.svg')"
+				element.style.backgroundImage = "url('https://skawbthbjfypoflcurec.supabase.co/storage/v1/object/public/avro012/trainerlogin.svg')"
 			}
 		}
 	}
