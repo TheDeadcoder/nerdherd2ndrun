@@ -116,7 +116,7 @@
 	}
 </script>
 
-<div>
+<div class="dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -185,7 +185,7 @@
 			<div class="mt-4 flex flex-row space-x-20">
 				<div class="w-1/3">
 					<button
-						class="btn bg-emerald-400 p-4 rounded-md flex flex-row space-x-2"
+						class="btn bg-[#70e470] dark:bg-[#52a952] p-4 rounded-md flex flex-row space-x-2"
 						on:click={openliveModal}
 					>
 						<img

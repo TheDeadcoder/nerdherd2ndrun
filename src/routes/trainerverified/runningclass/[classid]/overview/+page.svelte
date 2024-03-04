@@ -19,7 +19,7 @@
 	});
 </script>
 
-<main>
+<main class="dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -27,7 +27,7 @@
 		</div>
 	</nav>
 	<div class="ml-6 mt-6 mr-6">
-		<div class="card mt-3">
+		<div class="card mt-3 dark:bg-[#070707] bg-[#f5f4f4]">
 			<header class="card-header text-xl font-extrabold">Syllabus</header>
 			<section class="p-4"><i>{classNow.syllabus}</i></section>
 			<section class="p-4 flex flex-row justify-between">
@@ -67,7 +67,7 @@
 							<div class="overflow-hidden">
 								<table class="min-w-full text-left text-sm font-light">
 									<thead
-										class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-200"
+										class="border-b bg-white dark:bg-[#070707] font-medium dark:border-neutral-500"
 									>
 										<tr>
 											<th scope="col" class="px-6 py-4">#</th>
@@ -79,7 +79,7 @@
 									<tbody>
 										{#each classlive as cursession, i}
 											<tr
-												class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-300"
+												class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-[#1c1c1c]"
 											>
 												<td class="whitespace-nowrap px-6 py-4 font-medium">{i}</td>
 												<td class="whitespace-nowrap px-6 py-4">{cursession.topic}</td>
