@@ -74,7 +74,7 @@
 	});
 </script>
 
-<div>
+<div class="min-h-[100vh-140px] dark:bg-[#212020] dark:text-[#e1e1e1]">
 	<!-- <nav class="appbar">
 		<div class="logo-container">
 			<Avatar src={classNow.image} width="w-12" rounded="rounded-full" />
@@ -144,7 +144,7 @@
 			</li>
 		</ul>
 	</nav> -->
-	<main class="min-h-screen grid grid-cols-[15%_auto]">
+	<main >
 		<!-- <div
 			class={`transform bg-[#c2d5e7] text-black   min-h-screen overflow-auto ease-in-out transition-all duration-300 z-30 ${
 				isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -201,16 +201,16 @@
 				</div>
 			</div>
 		</div> -->
-		<div class={`p-10 ${isSidebarOpen ? 'flex-1 p-6 flex-grow' : ''}`}>
-			<div class="mt-9 flex flex-col space-y-4">
+		<div class="p-10">
+			<div class="mt-5 flex flex-col space-y-4 ">
 				<h1 class="text-2xl font-extrabold"><u>All Classes</u></h1>
 				{#each classlive as currsession, i}
-					<div class=" mr-40 flex flex-row space-x-8">
-						<h1 class="font-bold text-xl">
+					<div class=" mr-40 grid grid-cols-2 border-b-2 dark:border-white border-black py-2 space-x-8 w-[60%]">
+						<h1 class="font-semibold text-xl">
 							{i + 1}. {currsession.topic}
 						</h1>
 						{#if currsession.done}
-							<button class="btn bg-teal-500"> Check Stat </button>
+							<button class="btn bg-[#8bd68b] dark:bg-[#6bb46b] rounded-lg font-semibold"> Check Stat </button>
 						{:else if currsession.countdown}
 							<p class="font-semibold">
 								{currsession.countdown.days}d : {currsession.countdown.hours}h : {currsession
@@ -218,7 +218,7 @@
 							</p>
 						{:else}
 							<button
-								class="bg-blue-500 text-white px-4 py-2 rounded"
+								class="dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] text-white px-4 py-2 rounded"
 								on:click={() => goLive(currsession.id)}>Go Live</button
 							>
 						{/if}

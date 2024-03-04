@@ -192,9 +192,9 @@
 			{#each classes as currClass}
 				{#if classifyClass(currClass.start)}
 					<div
-						class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]"
+						class=" bg-[#dfedf8] pb-2 grid grid-rows-[120px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
-						<div class="h-[200px] overflow-hidden">
+						<div class="h-[120px] overflow-hidden">
 							<img
 								src={currClass.image}
 								alt="Dashboard Icon"
@@ -246,9 +246,9 @@
 			{#each classes as currClass}
 				{#if classifyClass(currClass.start) === false}
 					<div
-						class=" bg-[#dfedf8] pb-6 grid grid-rows-[200px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]"
+						class=" bg-[#dfedf8] pb-2 grid grid-rows-[120px_auto] rounded-lg shadow-xl dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
-						<div class="h-[200px] overflow-hidden">
+						<div class="h-[120px] overflow-hidden">
 							<img
 								src={currClass.image}
 								alt="Dashboard Icon"

@@ -13,6 +13,8 @@
 
     import { createEventDispatcher } from 'svelte';
 
+
+
     const popupClick: PopupSettings = {
 		event: 'click',
 		target: 'popupClick',
@@ -29,6 +31,10 @@
 		console.log('logout done');
 		window.open('/trainerlogin', '_self');
 	}
+
+    const handleGoBack = async ()=>{
+        history.back();
+    }
     
 
 </script>
@@ -92,9 +98,9 @@
         <div class=" dark:bg-[#070707] ">
             <div class="self-start sticky top-[78px] overflow-auto">
                 {#if $isRunningClass.isClass}
-                    <ClassSideBar></ClassSideBar>
+                    <ClassSideBar on:callParentFunction={handleGoBack}></ClassSideBar>
                 {:else}
-                    <Sidebar on:callParentFunction={handleSignOut}></Sidebar>
+                    <Sidebar on:callParentFunction={handleGoBack}></Sidebar>
                 {/if}
             </div>
         </div>
