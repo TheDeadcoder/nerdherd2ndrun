@@ -13,12 +13,27 @@
 	const { classid } = $page.params;
 
 	let cred;
+	let sid;
 	let credModal = false;
-	function addcredmodal() {
+
+	function addcredmodal(val) {
+		sid = val;
 		credModal = true;
 	}
 	function closecredmodal() {
 		credModal = false;
+	}
+
+	let ecred;
+	let esid;
+	let editCredModal = false;
+
+	function addeditcredmodal(val) {
+		esid = val;
+		editCredModal = true;
+	}
+	function closeeditmodal() {
+		editCredModal = false;
 	}
 
 	onMount(() => {
@@ -75,11 +90,19 @@
 
 										<td class="whitespace-nowrap px-6 py-4">
 											{#if currStudent.credentials.length > 0}
-												<img
-													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
-													alt="Dashboard Icon"
-													class="h-8 hover:rotate-12"
-												/>
+												<div class="flex flex-row space-x-1">
+													<p>
+														{currStudent.credentials[0].body}
+													</p>
+													<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+													<!-- svelte-ignore a11y-click-events-have-key-events -->
+													<img
+														src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
+														alt="Dashboard Icon"
+														class="h-8 hover:rotate-12"
+														on:click={() => addeditcredmodal(currStudent.student.id)}
+													/>
+												</div>
 											{:else}
 												<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 												<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -87,7 +110,7 @@
 													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/plus-cross-svgrepo-com%20(1).svg"
 													alt="Dashboard Icon"
 													class="h-8 hover:rotate-12"
-													on:click={addcredmodal}
+													on:click={() => addcredmodal(currStudent.student.id)}
 												/>
 											{/if}
 										</td>
@@ -98,7 +121,7 @@
 												<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
 													<div class="flex justify-between items-center mb-4">
 														<h2 class="text-2xl font-bold">Assign Credential acknowledgement</h2>
-														<h2 class="text-2xl font-bold">{currStudent.student.name}</h2>
+														<!-- <h2 class="text-2xl font-bold">{currStudent.student.name}</h2> -->
 														<button class=" text-lg" on:click={closecredmodal}>&times;</button>
 													</div>
 
@@ -111,6 +134,7 @@
 														}}
 													>
 														<div class="flex flex-col space-y-6">
+															<input hidden id="sid" name="sid" bind:value={sid} />
 															<label class="label text-left mb-3">
 																<span>Credentials</span>
 
@@ -121,6 +145,51 @@
 																	id="cred"
 																	name="cred"
 																	bind:value={cred}
+																/>
+															</label>
+
+															<button
+																type="submit"
+																class="btn bg-green-300 hover:bg-green-500 rounded-lg text-xl font-semibold"
+															>
+																Submit
+															</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										{/if}
+										{#if editCredModal}
+											<div
+												class="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 transition-opacity backdrop-blur-sm"
+											>
+												<div class="bg-blue-200 p-6 rounded-lg shadow-lg max-w-md w-full m-4">
+													<div class="flex justify-between items-center mb-4">
+														<h2 class="text-2xl font-bold">Edit Credential acknowledgement</h2>
+														<!-- <h2 class="text-2xl font-bold">{currStudent.student.name}</h2> -->
+														<button class=" text-lg" on:click={closeeditmodal}>&times;</button>
+													</div>
+
+													<form
+														use:enhance
+														action="?/edit"
+														method="POST"
+														on:submit={() => {
+															closeeditmodal();
+														}}
+													>
+														<div class="flex flex-col space-y-6">
+															<input hidden id="esid" name="esid" bind:value={esid} />
+															<label class="label text-left mb-3">
+																<span>Credentials</span>
+
+																<textarea
+																	class="textarea"
+																	rows="3"
+																	placeholder="write new response"
+																	id="ecred"
+																	name="ecred"
+																	bind:value={ecred}
 																/>
 															</label>
 

@@ -27,10 +27,30 @@ export const load = async ({ params, locals: { supabase, getSession } }) => {
         .select("*")
         .eq('studentid', studentNow.id)
 
+    let { data: performance, error: err7 } = await supabase
+        .from('performance')
+        .select("*")
+        .eq('sid', studentNow.id);
+
+    const performanceWithContest = await Promise.all(performance.map(async (performanceItem) => {
+        let { data: contest, error: pendingError } = await supabase
+            .from('pbcontest')
+            .select("*")
+            .eq('id', performanceItem.cid);
+
+        performanceItem.contest = contest[0];
+
+
+        // Attach pendingclass data to classItem
+        return {
+            ...performanceItem,
+        };
+    }));
 
 
 
 
-    return { studentNow, studentqual };
+
+    return { studentNow, studentqual, performanceWithContest };
 
 }
