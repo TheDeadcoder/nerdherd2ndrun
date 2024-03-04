@@ -152,7 +152,7 @@
                 </a>
             </div>
 
-            <div 
+            <!-- <div 
                 class="cursor-pointer flex-grow px-5 py-2 text-center 
                         font-bold text-[22px] hover:text-[23px] hover:bg-[#d8f0fd] 
                         border-r-4 text-[#57a8d6] border-[#57a8d6] dark:text-[#a7afb4]
@@ -168,7 +168,7 @@
                         </p>
                 </button>
             </div>
-            
+             -->
      
     </div>
   </div>
