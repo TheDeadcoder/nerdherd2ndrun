@@ -362,9 +362,9 @@
 			<div class="grid grid-cols-4 mt-6 p-5 w-full">
 				{#each blog as currblog, i}
 					<div
-						class="m-2 overflow-hidden bg-white hover:bg-[#efeded] rounded-md shadow-2xl pb-3 cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
+						class="m-2 overflow-hidden  bg-white hover:bg-[#efeded] rounded-md shadow-2xl  cursor-pointer dark:text-[#e1e1e1] dark:bg-[#070707]"
 					>
-						<div class="hover:scale-105">
+						<div class="hover:scale-105  grid grid-rows-[120px_200px]">
 							<div class="mb-3  overflow-hidden h-[120px]">
 								<img
 									src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/istockphoto-1143088863-612x612.jpg"
@@ -372,60 +372,63 @@
 									class=" w-[100%] items-center justify-center object-contain object-center"
 								/>
 							</div>
-							<div class="px-4">
-								<div class="grid grid-cols-[80%_auto] justify-between mb-2 items-center">
-									<h1 class="text-xl font-semibold">
-										{currblog.title}
-									</h1>
-									<div class="flex flex-row space-x-1">
-										<button on:click={() => gotoEdit(currblog.id)}>
-											<img
-												src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
-												alt="Dashboard Icon"
-												class="h-8 w-8 m-1 hover:scale-105 rotate-45 "
-											/>
-										</button>
-										<form action="?/deleteBlog&id={currblog.id}" method="POST">
-											<button type="submit">
+							<div class="px-4 grid grid-rows-[70%_auto] ">
+								<div class = "">
+									<div class="grid grid-cols-[80%_auto] justify-between mb-2 items-center">
+										<h1 class="text-xl font-semibold">
+											{currblog.title}
+										</h1>
+										<div class="flex flex-row space-x-1">
+											<button on:click={() => gotoEdit(currblog.id)}>
 												<img
-													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/delete-trash-svgrepo-com.svg"
+													src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/edit-svgrepo-com.svg"
 													alt="Dashboard Icon"
-													class="h-8 w-8 m-1 hover:scale-105 hover:rotate-12"
+													class="h-8 w-8 m-1 hover:scale-105 rotate-45 "
 												/>
 											</button>
-										</form>
+											<form action="?/deleteBlog&id={currblog.id}" method="POST">
+												<button type="submit">
+													<img
+														src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/delete-trash-svgrepo-com.svg"
+														alt="Dashboard Icon"
+														class="h-8 w-8 m-1 hover:scale-105 hover:rotate-12"
+													/>
+												</button>
+											</form>
+										</div>
 									</div>
+									<div class="flex flex-row">
+										<!-- <img
+											src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
+											alt="User "
+											class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
+										/> -->
+										<p class="text-sm text-justify font-light">
+											{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
+										</p>
+	
+										<!-- <img
+											src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
+											alt="User "
+											class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
+										/> -->
+										<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
+									</div>
+	
+									<div class="my-2 ">
+										<p class="text-md text-justify">
+											{currblog.description.slice(0, 40)} ...
+										</p>
+									</div>
+									
 								</div>
-								<div class="flex flex-row">
-									<!-- <img
-										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/299092_calendar_icon.svg"
-										alt="User "
-										class="w-6 h-6 mr-3 hover:scale-105 hover:rotate-12"
-									/> -->
-									<p class="text-sm text-justify font-light">
-										{formatDate(currblog.createdat)} | {currblog.timetoread} minutes read
-									</p>
-
-									<!-- <img
-										src="https://dxpcgmtdvyvcxbaffqmt.supabase.co/storage/v1/object/public/demo/stopwatch-svgrepo-com.svg"
-										alt="User "
-										class="w-5 h-5 mr-1 hover:scale-105 hover:rotate-12"
-									/> -->
-									<!-- <p class="text-sm">{currblog.timetoread} minutes read</p> -->
-								</div>
-
-								<div>
-									<p class="text-md text-justify">
-										{currblog.description.slice(0, 40)} ...
-									</p>
-								</div>
-								<div>
+								<div class=" ">
 									<button
-									on:click={() => openPublicView(currblog.id)}
-									class=" w-full ml-2 mr-2  p-2  rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] mt-auto"
-								>
-									View As Public
-								</button>
+										on:click={() => openPublicView(currblog.id)}
+										class=" w-full mx-auto p-2  rounded-lg dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] mt-auto"
+									>
+										View As Public
+									</button>
 								</div>
 							</div>
 						</div>
