@@ -122,11 +122,11 @@
 	});
 </script>
 
-<main class="mt-6 ml-6 w-3/5">
+<main class="mt-6 ml-6 min-h-screen">
 	<button class="btn p-4 dark:text-[#e1e1e1] dark:bg-[#3b6f8e] hover:bg-[#619ecf] bg-[#77B8De] rounded-lg" on:click={addclassmodal}>
 		+ Add a New Public Contest
 	</button>
-	<div class="grid grid-cols-4 gap-12 mt-8">
+	<div class="grid grid-cols-3 gap-12 mt-8">
 		{#each contestwithRegistrants as contest}
 			<div class="card flex flex-col space-y-2 shadow-lg hover:shadow-2xl p-4">
 				<img src={contest.image} alt="contest Icon" class="w-96 mr-1 hover:scale-105" />
@@ -241,5 +241,4 @@
 			</div>
 		</div>
 	{/if}
-	<pre>{JSON.stringify(contestwithRegistrants, null, 2)}</pre>
 </main>
