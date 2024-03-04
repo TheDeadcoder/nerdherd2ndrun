@@ -23,6 +23,23 @@
 	AgoraRTC.setLogLevel(2);
 	const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
 
+	let isCameraOn = true;
+	let isMicOn = true;
+
+	const toggleCamera = () => {
+		if (video) {
+			isCameraOn ? video.setEnabled(false) : video.setEnabled(true);
+			isCameraOn = !isCameraOn;
+		}
+	};
+
+	const toggleMic = () => {
+		if (audio) {
+			isMicOn ? audio.setEnabled(false) : audio.setEnabled(true);
+			isMicOn = !isMicOn;
+		}
+	};
+
 	const init = async () => {
 		[audio, video] = await AgoraRTC.createMicrophoneAndCameraTracks();
 		video.play('me');
@@ -76,10 +93,43 @@
 		  : users.length > 1
 		    ? unit.repeat(2)
 		    : unit;
+	console.log('length holo', users.length);
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
+<div class="flex flex-row items-center justify-center space-x-3 mt-4">
+	<button on:click={toggleMic}>
+		{#if isMicOn}
+			<img
+				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/mic-off-solid-svgrepo-com%20(1).svg"
+				alt="Dashboard Icon"
+				class="h-8 mr-1 hover:rotate-12"
+			/>
+		{:else}
+			<img
+				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/mic-solid-svgrepo-com.svg"
+				alt="Dashboard Icon"
+				class="h-8 mr-1 hover:rotate-12"
+			/>
+		{/if}
+	</button>
+	<button on:click={toggleCamera}>
+		{#if isCameraOn}
+			<img
+				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/video-disabled-svgrepo-com.svg"
+				alt="Dashboard Icon"
+				class="h-8 mr-1 hover:rotate-12"
+			/>
+		{:else}
+			<img
+				src="https://rxkhdqhbxkogcnbfvquu.supabase.co/storage/v1/object/public/statics/video-disabled-svgrepo-com%20(1).svg"
+				alt="Dashboard Icon"
+				class="h-8 mr-1 hover:rotate-12"
+			/>
+		{/if}
+	</button>
+</div>
 <div class="container">
 	<div class="grid" style="grid-template-columns: {columnTemplate}">
 		{#each users as user (user.uid)}
@@ -94,6 +144,11 @@
 		</div>
 	</div>
 </div>
+
+<!-- <div class="controls">
+	<button on:click={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
+	<button on:click={toggleMic}>{isMicOn ? 'Mute' : 'Unmute'}</button>
+</div> -->
 
 <style>
 	.cell {
