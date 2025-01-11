@@ -94,7 +94,10 @@ Meet the passionate creators behind NerDHerd:
 
 - **Nazmus Sakib** (ID: 1905061)  
 - **Md. Raihan Sobhan** (ID: 1905095)  
-- **Labid Al Nahiyan Avro** (ID: 1905110)  
+- **Labid Al Nahiyan Avro** (ID: 1905110)
+  
+[![Nazmus Sakib](https://img.shields.io/github/followers/TheDeadcoder?label=Nazmus%20Sakib%20&style=social)](https://github.com/TheDeadcoder) [![Md. Raihan Sobhan](https://img.shields.io/github/followers/MdRaihanSobhan?label=Md.%20Raihan%20Sobhan%20&style=social)](https://github.com/MdRaihanSobhan) [![Labid Al Nahiyan](https://img.shields.io/github/followers/labid-al-nahiyan?label=Labid%20Al%20Nahiyan%20&style=social)](https://github.com/labid-al-nahiyan)
+
 
 [Visit NerDHerd](https://nerdherd-iota.vercel.app)  
 
